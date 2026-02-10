@@ -1,5 +1,9 @@
 <template>
-  <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-secondary-50">
+  <section
+    id="home"
+    ref="heroSection"
+    class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-secondary-50"
+  >
     <!-- Background Decor -->
     <div
       ref="glowPrimary"
@@ -8,6 +12,14 @@
     <div
       ref="glowSecondary"
       class="pointer-events-none absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[560px] h-[560px] blur-3xl opacity-70 bg-[radial-gradient(circle_at_center,rgba(147,197,253,0.35),transparent_70%)]"
+    ></div>
+    <div
+      ref="glowSplitLeft"
+      class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] blur-3xl opacity-0 mix-blend-screen bg-[radial-gradient(circle_at_center,rgba(96,165,250,0.45),transparent_70%)]"
+    ></div>
+    <div
+      ref="glowSplitRight"
+      class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] blur-3xl opacity-0 mix-blend-screen bg-[radial-gradient(circle_at_center,rgba(147,197,253,0.42),transparent_70%)]"
     ></div>
 
     <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
@@ -68,8 +80,11 @@ import { onMounted, onUnmounted, ref } from 'vue'
 import { gsap } from 'gsap'
 import { RouterLink } from 'vue-router'
 
+const heroSection = ref<HTMLElement | null>(null)
 const glowPrimary = ref<HTMLDivElement | null>(null)
 const glowSecondary = ref<HTMLDivElement | null>(null)
+const glowSplitLeft = ref<HTMLDivElement | null>(null)
+const glowSplitRight = ref<HTMLDivElement | null>(null)
 const heroKicker = ref<HTMLElement | null>(null)
 const heroTitle = ref<HTMLElement | null>(null)
 const heroSubtitle = ref<HTMLElement | null>(null)
@@ -81,6 +96,7 @@ const heroTitleName = ref<HTMLElement | null>(null)
 
 let glowTweens: gsap.core.Tween[] = []
 let heroTimeline: gsap.core.Timeline | null = null
+let removeHeroPointerListeners: (() => void) | null = null
 
 const randomBetween = (min: number, max: number) => gsap.utils.random(min, max, 1)
 
@@ -131,6 +147,82 @@ onMounted(() => {
     return
   }
 
+  const heroEl = heroSection.value
+  if (heroEl) {
+    const quickPrimaryX = glowPrimary.value ? gsap.quickTo(glowPrimary.value, 'x', { duration: 0.6, ease: 'sine.out' }) : null
+    const quickPrimaryY = glowPrimary.value ? gsap.quickTo(glowPrimary.value, 'y', { duration: 0.6, ease: 'sine.out' }) : null
+    const quickSecondaryX = glowSecondary.value
+      ? gsap.quickTo(glowSecondary.value, 'x', { duration: 0.7, ease: 'sine.out' })
+      : null
+    const quickSecondaryY = glowSecondary.value
+      ? gsap.quickTo(glowSecondary.value, 'y', { duration: 0.7, ease: 'sine.out' })
+      : null
+    const quickSplitLeftX = glowSplitLeft.value
+      ? gsap.quickTo(glowSplitLeft.value, 'x', { duration: 0.5, ease: 'sine.out' })
+      : null
+    const quickSplitLeftY = glowSplitLeft.value
+      ? gsap.quickTo(glowSplitLeft.value, 'y', { duration: 0.5, ease: 'sine.out' })
+      : null
+    const quickSplitRightX = glowSplitRight.value
+      ? gsap.quickTo(glowSplitRight.value, 'x', { duration: 0.5, ease: 'sine.out' })
+      : null
+    const quickSplitRightY = glowSplitRight.value
+      ? gsap.quickTo(glowSplitRight.value, 'y', { duration: 0.5, ease: 'sine.out' })
+      : null
+
+    const handleMove = (event: MouseEvent) => {
+      const rect = heroEl.getBoundingClientRect()
+      const relativeX = (event.clientX - rect.left) / rect.width - 0.5
+      const relativeY = (event.clientY - rect.top) / rect.height - 0.5
+
+      quickPrimaryX?.(relativeX * 80)
+      quickPrimaryY?.(relativeY * 60)
+      quickSecondaryX?.(relativeX * -60)
+      quickSecondaryY?.(relativeY * -50)
+
+      quickSplitLeftX?.(relativeX * 70 - 90)
+      quickSplitLeftY?.(relativeY * 45 + 30)
+      quickSplitRightX?.(relativeX * 70 + 90)
+      quickSplitRightY?.(relativeY * 45 - 30)
+    }
+
+    const handleEnter = () => {
+      if (glowSplitLeft.value) {
+        gsap.to(glowSplitLeft.value, { opacity: 0.85, scale: 1.05, duration: 0.5, ease: 'sine.out' })
+      }
+      if (glowSplitRight.value) {
+        gsap.to(glowSplitRight.value, { opacity: 0.85, scale: 1.05, duration: 0.5, ease: 'sine.out' })
+      }
+    }
+
+    const handleLeave = () => {
+      quickPrimaryX?.(0)
+      quickPrimaryY?.(0)
+      quickSecondaryX?.(0)
+      quickSecondaryY?.(0)
+      quickSplitLeftX?.(0)
+      quickSplitLeftY?.(0)
+      quickSplitRightX?.(0)
+      quickSplitRightY?.(0)
+
+      if (glowSplitLeft.value) {
+        gsap.to(glowSplitLeft.value, { opacity: 0, scale: 0.9, duration: 0.5, ease: 'sine.out' })
+      }
+      if (glowSplitRight.value) {
+        gsap.to(glowSplitRight.value, { opacity: 0, scale: 0.9, duration: 0.5, ease: 'sine.out' })
+      }
+    }
+
+    heroEl.addEventListener('mousemove', handleMove)
+    heroEl.addEventListener('mouseenter', handleEnter)
+    heroEl.addEventListener('mouseleave', handleLeave)
+    removeHeroPointerListeners = () => {
+      heroEl.removeEventListener('mousemove', handleMove)
+      heroEl.removeEventListener('mouseenter', handleEnter)
+      heroEl.removeEventListener('mouseleave', handleLeave)
+    }
+  }
+
   if (glowPrimary.value) {
     glowTweens.push(
       gsap.to(glowPrimary.value, {
@@ -143,7 +235,7 @@ onMounted(() => {
         repeat: -1,
       })
     )
-    wander(glowPrimary.value, { x: [-40, 40], y: [-30, 30] })
+    wander(glowPrimary.value, { x: [-70, 70], y: [-55, 55] })
   }
 
   if (glowSecondary.value) {
@@ -159,7 +251,34 @@ onMounted(() => {
         delay: 0.4,
       })
     )
-    wander(glowSecondary.value, { x: [-36, 36], y: [-28, 28] })
+    wander(glowSecondary.value, { x: [-62, 62], y: [-50, 50] })
+  }
+
+  if (glowSplitLeft.value) {
+    glowTweens.push(
+      gsap.to(glowSplitLeft.value, {
+        duration: 4.8,
+        scale: 1.04,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      })
+    )
+    wander(glowSplitLeft.value, { x: [-52, 52], y: [-40, 40] })
+  }
+
+  if (glowSplitRight.value) {
+    glowTweens.push(
+      gsap.to(glowSplitRight.value, {
+        duration: 5.4,
+        scale: 1.03,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+        delay: 0.2,
+      })
+    )
+    wander(glowSplitRight.value, { x: [-48, 48], y: [-38, 38] })
   }
 
   const kickerChars = splitCharacters(heroKicker.value)
@@ -194,6 +313,8 @@ onUnmounted(() => {
   glowTweens = []
   heroTimeline?.kill()
   heroTimeline = null
+  removeHeroPointerListeners?.()
+  removeHeroPointerListeners = null
 })
 
 const stats = [
