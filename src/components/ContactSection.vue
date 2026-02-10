@@ -2,11 +2,16 @@
   <section class="py-24 px-6 bg-white">
     <div class="max-w-6xl mx-auto">
       <div class="card-gradient p-10 text-center">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">Contact</p>
-        <h3 class="mt-3 text-3xl md:text-4xl font-bold text-secondary-900">與我聯繫</h3>
-        <p class="mt-4 text-secondary-600 text-lg">
-          想更了解我的背景與作品，歡迎查看 104 或直接下載簡歷。
-        </p>
+        <SectionHeader
+          title="與我聯繫"
+          subtitle="想更了解我的背景與作品，歡迎查看 104 或直接下載簡歷。"
+          title-class="text-3xl md:text-4xl font-bold text-secondary-900"
+          subtitle-class="text-secondary-600 text-lg"
+        >
+          <template #label>
+            <SectionLabel>Contact</SectionLabel>
+          </template>
+        </SectionHeader>
         <div class="mt-6 flex flex-wrap justify-center gap-3">
           <a
             :href="profile104Link"
@@ -31,6 +36,9 @@
 </template>
 
 <script setup lang="ts">
+import SectionHeader from './SectionHeader.vue'
+import SectionLabel from './SectionLabel.vue'
+
 const profile104Link = 'https://www.104.com.tw'
 const resumeLink = '/resume.pdf'
 </script>

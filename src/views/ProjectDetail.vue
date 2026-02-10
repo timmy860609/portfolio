@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-vue-next'
+import SectionLabel from '../components/SectionLabel.vue'
 import { getProjectById, projects } from '../data/projects'
 
 const route = useRoute()
@@ -24,7 +25,7 @@ const nextProject = computed(() =>
     <div class="max-w-6xl mx-auto space-y-10">
       <div class="flex flex-wrap items-start justify-start gap-4">
         <div class="space-y-2">
-          <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">Project</p>
+          <SectionLabel>Project</SectionLabel>
           <h1 class="text-3xl md:text-4xl font-bold text-secondary-900">
             {{ project?.title || '找不到此專案' }}
           </h1>

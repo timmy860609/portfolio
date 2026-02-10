@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import SectionHeader from './SectionHeader.vue'
+import SectionLabel from './SectionLabel.vue'
 import { posts } from '../data/posts'
 </script>
 
 <template>
   <section id="blog" class="py-24 px-6 bg-secondary-50">
     <div class="max-w-7xl mx-auto space-y-12">
-      <div class="text-center space-y-4 max-w-2xl mx-auto">
-        <h2 class="text-primary-600 font-bold tracking-wider uppercase text-sm">Stories</h2>
-        <h3 class="text-4xl md:text-5xl font-bold text-secondary-900">創作記錄</h3>
-        <p class="text-secondary-500 text-lg">
-          分享設計、開發與專案中的實作心得，記錄每一次成長。
-        </p>
-      </div>
+      <SectionHeader title="創作記錄" subtitle="分享設計、開發與專案中的實作心得，記錄每一次成長。">
+        <template #label>
+          <SectionLabel>Stories</SectionLabel>
+        </template>
+      </SectionHeader>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <RouterLink

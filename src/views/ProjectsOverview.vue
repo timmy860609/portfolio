@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import ProjectCard from '../components/ProjectCard.vue'
+import SectionHeader from '../components/SectionHeader.vue'
+import SectionLabel from '../components/SectionLabel.vue'
 import { projects } from '../data/projects'
 
 const featuredProjects = computed(() => projects.slice(0, 3))
@@ -46,22 +48,20 @@ const filteredProjects = computed(() => {
 <template>
   <section class="bg-white py-24 px-6">
     <div class="max-w-7xl mx-auto space-y-12">
-      <div class="space-y-4 text-center max-w-2xl mx-auto">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">Projects</p>
-        <h1 class="text-4xl md:text-5xl font-bold text-secondary-900">專案總覽</h1>
-        <p class="text-secondary-500 text-lg">
-          瀏覽所有專案，點擊卡片進入專案詳情。
-        </p>
-      </div>
+      <SectionHeader title="專案總覽" subtitle="瀏覽所有專案，點擊卡片進入專案詳情。">
+        <template #label>
+          <SectionLabel>Projects</SectionLabel>
+        </template>
+      </SectionHeader>
 
     </div>
   </section>
 
   <section class="bg-secondary-50/60 py-14">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="space-y-6">
+      <div class="space-y-4">
           <div>
-            <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">Featured</p>
+            <SectionLabel>Featured</SectionLabel>
             <h2 class="text-3xl md:text-4xl font-bold text-secondary-900">精選成果</h2>
             <p class="mt-2 text-secondary-500">
               挑選 3 個代表作品，快速了解我的專案特色。
@@ -83,7 +83,7 @@ const filteredProjects = computed(() => {
             </div>
           </div>
 
-          <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-3">
               <button
                 type="button"

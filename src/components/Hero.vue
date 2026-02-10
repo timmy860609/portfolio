@@ -58,12 +58,6 @@
           </RouterLink>
         </div>
         
-        <div ref="heroStats" class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 max-w-3xl mx-auto">
-          <div v-for="stat in stats" :key="stat.label" class="card-compact-soft px-6 py-4">
-            <div class="text-2xl font-bold text-secondary-900">{{ stat.value }}</div>
-            <div class="text-sm text-secondary-500">{{ stat.label }}</div>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -90,7 +84,6 @@ const heroTitle = ref<HTMLElement | null>(null)
 const heroSubtitle = ref<HTMLElement | null>(null)
 const heroBody = ref<HTMLElement | null>(null)
 const heroActions = ref<HTMLElement | null>(null)
-const heroStats = ref<HTMLElement | null>(null)
 const heroTitlePrefix = ref<HTMLElement | null>(null)
 const heroTitleName = ref<HTMLElement | null>(null)
 
@@ -293,7 +286,6 @@ onMounted(() => {
     .from(heroSubtitle.value, { opacity: 0, y: 18, filter: 'blur(8px)' }, '-=0.3')
     .from(heroBody.value, { opacity: 0, y: 12, filter: 'blur(6px)' }, '-=0.35')
     .from(heroActions.value, { opacity: 0, y: 10 }, '-=0.3')
-    .from(heroStats.value, { opacity: 0, y: 10 }, '-=0.25')
 
   if (heroTitleName.value) {
     glowTweens.push(
@@ -317,9 +309,4 @@ onUnmounted(() => {
   removeHeroPointerListeners = null
 })
 
-const stats = [
-  { label: '專案經驗', value: '40+' },
-  { label: '設計經驗', value: '5yrs' },
-  { label: '程式經驗', value: '3 yrs' },
-]
 </script>

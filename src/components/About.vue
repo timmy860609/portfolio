@@ -9,8 +9,15 @@
           <div class="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
             <div class="space-y-6">
               <div class="space-y-3">
-                <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">About Me</p>
+                <SectionLabel>About Me</SectionLabel>
                 <h3 class="text-3xl md:text-4xl font-bold text-secondary-900">熱衷於用程式解決問題，創造價值的開發者。</h3>
+              </div>
+
+              <div class="grid grid-cols-3 gap-3">
+                <div v-for="stat in stats" :key="stat.label" class="card-compact-soft px-4 py-4">
+                  <div class="text-2xl font-bold text-secondary-900">{{ stat.value }}</div>
+                  <div class="text-sm text-secondary-500">{{ stat.label }}</div>
+                </div>
               </div>
 
               <p class="text-secondary-600 text-lg leading-relaxed">
@@ -25,7 +32,7 @@
             <div class="space-y-5">
               <div class="flex items-center justify-between">
                 <div>
-                  <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">Skills</p>
+                  <SectionLabel>Skills</SectionLabel>
                   <h4 class="text-2xl font-bold text-secondary-900">專業能力一覽</h4>
                 </div>
                 <span class="rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold text-primary-600">Tech Stack</span>
@@ -48,18 +55,14 @@
       </div>
 
       <div class="lg:col-span-2 min-w-0">
-        <div class="relative card-glass p-8">
-          <div class="absolute -top-10 left-6 h-24 w-24 rounded-full bg-primary-100/70 blur-2xl"></div>
-          <div class="absolute -bottom-12 right-10 h-28 w-28 rounded-full bg-secondary-200/60 blur-3xl"></div>
-
-          <div class="relative space-y-8">
-            <div class="flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">Experience</p>
-                <h4 class="text-2xl md:text-3xl font-bold text-secondary-900">工作經歷</h4>
-              </div>
-              <span class="rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold text-primary-600">Recent</span>
+        <div class="space-y-8">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <SectionLabel>Experience</SectionLabel>
+              <h4 class="text-2xl md:text-3xl font-bold text-secondary-900">工作經歷</h4>
             </div>
+            <span class="rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold text-primary-600">Recent</span>
+          </div>
 
             <div class="lg:hidden">
               <div class="relative w-full max-w-full overflow-hidden">
@@ -75,9 +78,7 @@
                     <div class="relative w-full card-compact p-6">
                       <div class="flex flex-wrap items-start justify-between gap-4 min-w-0">
                         <div class="min-w-0">
-                          <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">
-                            Phase {{ experiences.length - index }}
-                          </p>
+                          <SectionLabel>Phase {{ experiences.length - index }}</SectionLabel>
                           <h5 class="mt-2 text-lg font-bold text-secondary-900 break-words">{{ item.role }}</h5>
                           <p class="text-secondary-600 font-medium break-words">{{ item.company }}</p>
                         </div>
@@ -90,7 +91,7 @@
                       </div>
 
                       <div class="mt-4 space-y-2">
-                        <div class="text-[11px] font-bold uppercase tracking-[0.3em] text-primary-500">重點專案</div>
+                        <SectionLabel>重點專案</SectionLabel>
                         <div class="flex items-start gap-2 text-secondary-600 min-w-0">
                           <Check :size="16" class="mt-1 text-primary-500" />
                           <div class="min-w-0">
@@ -112,7 +113,7 @@
                       </div>
 
                       <div class="mt-4 card-primary-soft px-4 py-3">
-                        <div class="text-[11px] font-bold uppercase tracking-[0.3em] text-primary-500">工作內容</div>
+                        <SectionLabel>工作內容</SectionLabel>
                         <ul class="mt-2 space-y-2">
                           <li
                             v-for="detail in item.highlights"
@@ -174,9 +175,7 @@
 
                 <div class="flex flex-wrap items-start justify-between gap-4 min-w-0">
                   <div class="min-w-0">
-                    <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">
-                      Phase {{ experiences.length - index }}
-                    </p>
+                    <SectionLabel>Phase {{ experiences.length - index }}</SectionLabel>
                     <h5 class="mt-2 text-lg font-bold text-secondary-900 break-words">{{ item.role }}</h5>
                     <p class="text-secondary-600 font-medium break-words">{{ item.company }}</p>
                   </div>
@@ -189,7 +188,7 @@
                 </div>
 
                 <div class="mt-4 space-y-2">
-                  <div class="text-[11px] font-bold uppercase tracking-[0.3em] text-primary-500">重點專案</div>
+                  <SectionLabel>重點專案</SectionLabel>
                   <div class="flex items-start gap-2 text-secondary-600 min-w-0">
                     <Check :size="16" class="mt-1 text-primary-500" />
                     <div class="min-w-0">
@@ -211,7 +210,7 @@
                 </div>
 
                 <div class="mt-4 card-primary-soft px-4 py-3">
-                  <div class="text-[11px] font-bold uppercase tracking-[0.3em] text-primary-500">工作內容</div>
+                  <SectionLabel>工作內容</SectionLabel>
                   <ul class="mt-2 space-y-2">
                     <li
                       v-for="detail in item.highlights"
@@ -225,7 +224,6 @@
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
 
@@ -236,7 +234,7 @@
 
           <div class="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-start min-w-0">
             <div class="space-y-4 min-w-0">
-              <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">Contact</p>
+              <SectionLabel>Contact</SectionLabel>
               <h4 class="text-2xl md:text-3xl font-bold text-secondary-900">一起把想法做成產品</h4>
               <p class="text-secondary-600 leading-relaxed break-words">
                 歡迎合作、專案諮詢或技術交流。回信速度快，通常 24 小時內回覆。
@@ -287,6 +285,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import SectionLabel from './SectionLabel.vue'
 import { Check, ChevronLeft, ChevronRight, Download, ExternalLink, Mail, MapPin, Phone } from 'lucide-vue-next'
 
 const profile104Link = 'https://www.104.com.tw'
@@ -295,6 +294,12 @@ const resumeLink = '/resume.pdf'
 const skills = [
   { category: '前端開發', items: ['Vue 3 / Vuex / Pinia', 'TypeScript', 'Tailwind CSS', 'Next.js / React'] },
   { category: '後端開發', items: ['Node.js / Express', 'PostgreSQL / MySQL', 'Firebase', 'RESTful API'] },
+]
+
+const stats = [
+  { label: '專案經驗', value: '40+' },
+  { label: '設計經驗', value: '5yrs' },
+  { label: '程式經驗', value: '3 yrs' },
 ]
 
 const experiences = [

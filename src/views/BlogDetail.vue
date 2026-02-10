@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { ArrowLeft } from 'lucide-vue-next'
+import SectionLabel from '../components/SectionLabel.vue'
 import { getPostById } from '../data/posts'
 
 const route = useRoute()
@@ -20,7 +21,7 @@ const post = computed(() => getPostById(postId.value))
 
       <div v-if="post" class="space-y-10">
         <div class="space-y-3">
-          <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">{{ post.tag }}</p>
+          <SectionLabel>{{ post.tag }}</SectionLabel>
           <h1 class="text-3xl md:text-4xl font-bold text-secondary-900">{{ post.title }}</h1>
           <p class="text-secondary-400">{{ post.date }}</p>
         </div>
