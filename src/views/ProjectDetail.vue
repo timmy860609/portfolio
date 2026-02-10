@@ -40,7 +40,7 @@ const nextProject = computed(() =>
 
       <div v-if="project" class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
         <div class="space-y-6">
-          <div class="overflow-hidden rounded-3xl border border-secondary-100 shadow-sm">
+          <div class="card-media">
             <img :src="project.image" :alt="project.title" class="w-full h-full object-cover" />
           </div>
 
@@ -53,7 +53,7 @@ const nextProject = computed(() =>
         </div>
 
         <aside class="space-y-6">
-          <div class="rounded-3xl border border-secondary-100 bg-secondary-50 p-6 space-y-4">
+          <div class="card-muted p-6 space-y-4">
             <h3 class="text-lg font-bold text-secondary-900">使用技術</h3>
             <div class="flex flex-wrap gap-3">
               <span
@@ -66,7 +66,7 @@ const nextProject = computed(() =>
             </div>
           </div>
 
-          <div class="rounded-3xl border border-primary-100 bg-white p-6 space-y-4">
+          <div class="card-primary p-6 space-y-4">
             <h3 class="text-lg font-bold text-secondary-900">專案連結</h3>
             <p class="text-secondary-600">查看專案線上展示或更多細節。</p>
             <a
@@ -84,7 +84,7 @@ const nextProject = computed(() =>
         </aside>
       </div>
 
-      <div v-else class="rounded-3xl border border-secondary-100 bg-secondary-50 p-10 text-center">
+      <div v-else class="card-muted p-10 text-center">
         <p class="text-secondary-600">找不到對應的專案內容，請返回作品集查看。</p>
       </div>
 

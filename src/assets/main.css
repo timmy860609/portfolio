@@ -28,4 +28,56 @@
 	.text-link-nav {
 		@apply font-medium text-secondary-600 transition-colors hover:text-primary-600;
 	}
+
+	.card-base {
+		@apply w-full rounded-3xl border border-secondary-100 bg-white shadow-sm;
+	}
+
+	.card-glass {
+		@apply w-full min-w-0 max-w-full overflow-hidden rounded-3xl border border-secondary-100 bg-white/80 shadow-sm backdrop-blur;
+	}
+
+	.card-glass-lg {
+		@apply w-full min-w-0 max-w-full overflow-hidden rounded-[32px] border border-secondary-100 bg-white/80 shadow-sm backdrop-blur;
+	}
+
+	.card-compact {
+		@apply w-full min-w-0 max-w-full overflow-hidden rounded-2xl border border-secondary-100 bg-white/90 shadow-sm;
+	}
+
+	.card-compact-glass {
+		@apply w-full rounded-2xl bg-white/80 shadow-sm;
+	}
+
+	.card-compact-soft {
+		@apply w-full rounded-2xl border border-secondary-100 bg-white/70 shadow-sm;
+	}
+
+	.card-muted {
+		@apply w-full rounded-3xl border border-secondary-100 bg-secondary-50;
+	}
+
+	.card-primary {
+		@apply w-full rounded-3xl border border-primary-100 bg-white;
+	}
+
+	.card-primary-soft {
+		@apply w-full rounded-2xl border border-primary-100 bg-primary-50/70;
+	}
+
+	.card-gradient {
+		@apply w-full rounded-3xl border border-primary-100 bg-gradient-to-br from-white via-primary-50/60 to-secondary-50 shadow-sm;
+	}
+
+	.card-media {
+		@apply w-full overflow-hidden rounded-3xl border border-secondary-100 shadow-sm;
+	}
+
+	.card-hover-lift {
+		@apply transition hover:-translate-y-1 hover:shadow-xl;
+	}
+
+	.card-hover-lift-strong {
+		@apply transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl;
+	}
 }

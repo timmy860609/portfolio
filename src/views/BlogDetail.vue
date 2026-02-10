@@ -34,7 +34,7 @@ const post = computed(() => getPostById(postId.value))
               v-if="section.type === 'image-left'"
               class="grid gap-8 md:grid-cols-[1.1fr_1fr] items-center"
             >
-              <div class="overflow-hidden rounded-3xl border border-secondary-100 shadow-sm">
+              <div class="card-media">
                 <img :src="section.image" :alt="section.title" class="h-full w-full object-cover" />
               </div>
               <div class="space-y-3">
@@ -51,13 +51,13 @@ const post = computed(() => getPostById(postId.value))
                 <h2 class="text-2xl font-bold text-secondary-900">{{ section.title }}</h2>
                 <p class="text-secondary-600 leading-relaxed">{{ section.body }}</p>
               </div>
-              <div class="overflow-hidden rounded-3xl border border-secondary-100 shadow-sm order-1 md:order-2">
+              <div class="card-media order-1 md:order-2">
                 <img :src="section.image" :alt="section.title" class="h-full w-full object-cover" />
               </div>
             </div>
 
             <div v-else-if="section.type === 'full-image'" class="space-y-4">
-              <div class="overflow-hidden rounded-3xl border border-secondary-100 shadow-sm">
+              <div class="card-media">
                 <img :src="section.image" :alt="section.title" class="h-full w-full object-cover" />
               </div>
               <div class="space-y-2">
@@ -66,10 +66,7 @@ const post = computed(() => getPostById(postId.value))
               </div>
             </div>
 
-            <div
-              v-else-if="section.type === 'quote'"
-              class="rounded-3xl border border-secondary-100 bg-secondary-50 px-8 py-10 text-center"
-            >
+            <div v-else-if="section.type === 'quote'" class="card-muted px-8 py-10 text-center">
               <p class="text-xl md:text-2xl font-semibold text-secondary-800">“{{ section.quote }}”</p>
               <p class="mt-4 text-sm font-semibold text-secondary-500">— {{ section.author }}</p>
             </div>
@@ -77,7 +74,7 @@ const post = computed(() => getPostById(postId.value))
         </div>
       </div>
 
-      <div v-else class="rounded-3xl border border-secondary-100 bg-secondary-50 p-10 text-center">
+      <div v-else class="card-muted p-10 text-center">
         <p class="text-secondary-600">找不到對應的文章內容。</p>
       </div>
     </div>

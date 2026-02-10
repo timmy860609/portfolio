@@ -1,10 +1,8 @@
 <template>
   <section id="about" class="py-24 px-6 bg-secondary-50 overflow-x-hidden">
     <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-      <div class="lg:col-span-2">
-        <div
-          class="relative overflow-hidden rounded-[32px] border border-secondary-100 bg-white/80 p-8 shadow-sm backdrop-blur"
-        >
+      <div class="lg:col-span-2 min-w-0">
+        <div class="relative card-glass-lg p-8">
           <div class="absolute -top-8 right-6 h-24 w-24 rounded-full bg-primary-100/70 blur-2xl"></div>
           <div class="absolute -bottom-10 left-10 h-28 w-28 rounded-full bg-secondary-200/50 blur-3xl"></div>
 
@@ -49,10 +47,8 @@
         </div>
       </div>
 
-      <div class="lg:col-span-2">
-        <div
-          class="relative overflow-hidden rounded-3xl border border-secondary-100 bg-white/80 p-8 shadow-sm backdrop-blur"
-        >
+      <div class="lg:col-span-2 min-w-0">
+        <div class="relative card-glass p-8">
           <div class="absolute -top-10 left-6 h-24 w-24 rounded-full bg-primary-100/70 blur-2xl"></div>
           <div class="absolute -bottom-12 right-10 h-28 w-28 rounded-full bg-secondary-200/60 blur-3xl"></div>
 
@@ -66,9 +62,9 @@
             </div>
 
             <div class="lg:hidden">
-              <div class="relative w-full overflow-hidden">
+              <div class="relative w-full max-w-full overflow-hidden">
                 <div
-                  class="flex w-full transition-transform duration-500 ease-out"
+                  class="flex w-full max-w-full transition-transform duration-500 ease-out"
                   :style="{ transform: `translateX(-${currentExperienceIndex * 100}%)` }"
                 >
                   <div
@@ -76,16 +72,16 @@
                     :key="item.role + item.company"
                     class="w-full shrink-0 box-border px-1"
                   >
-                    <div class="relative w-full rounded-2xl border border-secondary-100 bg-white/90 p-6 shadow-sm">
-                      <div class="flex flex-wrap items-start justify-between gap-4">
-                        <div>
+                    <div class="relative w-full card-compact p-6">
+                      <div class="flex flex-wrap items-start justify-between gap-4 min-w-0">
+                        <div class="min-w-0">
                           <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">
                             Phase {{ experiences.length - index }}
                           </p>
-                          <h5 class="mt-2 text-lg font-bold text-secondary-900">{{ item.role }}</h5>
-                          <p class="text-secondary-600 font-medium">{{ item.company }}</p>
+                          <h5 class="mt-2 text-lg font-bold text-secondary-900 break-words">{{ item.role }}</h5>
+                          <p class="text-secondary-600 font-medium break-words">{{ item.company }}</p>
                         </div>
-                        <div class="text-sm font-semibold text-primary-600">{{ item.period }}</div>
+                        <div class="text-sm font-semibold text-primary-600 break-words">{{ item.period }}</div>
                       </div>
 
                       <div class="mt-3 flex items-center gap-2 text-sm text-secondary-500">
@@ -95,11 +91,13 @@
 
                       <div class="mt-4 space-y-2">
                         <div class="text-[11px] font-bold uppercase tracking-[0.3em] text-primary-500">重點專案</div>
-                        <div class="flex items-start gap-2 text-secondary-600">
+                        <div class="flex items-start gap-2 text-secondary-600 min-w-0">
                           <Check :size="16" class="mt-1 text-primary-500" />
-                          <div>
-                            <div class="text-sm font-semibold text-secondary-900">{{ item.featuredProject.title }}</div>
-                            <p class="mt-1 text-sm text-secondary-600">{{ item.featuredProject.summary }}</p>
+                          <div class="min-w-0">
+                            <div class="text-sm font-semibold text-secondary-900 break-words">
+                              {{ item.featuredProject.title }}
+                            </div>
+                            <p class="mt-1 text-sm text-secondary-600 break-words">{{ item.featuredProject.summary }}</p>
                             <div class="mt-2 flex flex-wrap gap-2">
                               <span
                                 v-for="tag in item.featuredProject.tags"
@@ -113,16 +111,16 @@
                         </div>
                       </div>
 
-                      <div class="mt-4 rounded-2xl border border-primary-100 bg-primary-50/70 px-4 py-3">
+                      <div class="mt-4 card-primary-soft px-4 py-3">
                         <div class="text-[11px] font-bold uppercase tracking-[0.3em] text-primary-500">工作內容</div>
                         <ul class="mt-2 space-y-2">
                           <li
                             v-for="detail in item.highlights"
                             :key="detail"
-                            class="flex items-start gap-2 text-secondary-600"
+                            class="flex items-start gap-2 text-secondary-600 min-w-0"
                           >
                             <Check :size="16" class="mt-1 text-primary-500" />
-                            <span>{{ detail }}</span>
+                            <span class="break-words">{{ detail }}</span>
                           </li>
                         </ul>
                       </div>
@@ -165,7 +163,7 @@
               <div
                 v-for="(item, index) in experiences"
                 :key="item.role + item.company"
-                class="relative w-full rounded-2xl border border-secondary-100 bg-white/90 p-6 shadow-sm lg:pt-10"
+                class="relative w-full card-compact p-6 lg:pt-10"
               >
                 <div class="absolute left-8 -top-10 flex flex-col items-center">
                   <div
@@ -174,15 +172,15 @@
                   <div class="mt-3 h-10 w-2 rounded-full bg-gradient-to-b from-primary-500/70 to-transparent"></div>
                 </div>
 
-                <div class="flex flex-wrap items-start justify-between gap-4">
-                  <div>
+                <div class="flex flex-wrap items-start justify-between gap-4 min-w-0">
+                  <div class="min-w-0">
                     <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">
                       Phase {{ experiences.length - index }}
                     </p>
-                    <h5 class="mt-2 text-lg font-bold text-secondary-900">{{ item.role }}</h5>
-                    <p class="text-secondary-600 font-medium">{{ item.company }}</p>
+                    <h5 class="mt-2 text-lg font-bold text-secondary-900 break-words">{{ item.role }}</h5>
+                    <p class="text-secondary-600 font-medium break-words">{{ item.company }}</p>
                   </div>
-                  <div class="text-sm font-semibold text-primary-600">{{ item.period }}</div>
+                  <div class="text-sm font-semibold text-primary-600 break-words">{{ item.period }}</div>
                 </div>
 
                 <div class="mt-3 flex items-center gap-2 text-sm text-secondary-500">
@@ -192,11 +190,13 @@
 
                 <div class="mt-4 space-y-2">
                   <div class="text-[11px] font-bold uppercase tracking-[0.3em] text-primary-500">重點專案</div>
-                  <div class="flex items-start gap-2 text-secondary-600">
+                  <div class="flex items-start gap-2 text-secondary-600 min-w-0">
                     <Check :size="16" class="mt-1 text-primary-500" />
-                    <div>
-                      <div class="text-sm font-semibold text-secondary-900">{{ item.featuredProject.title }}</div>
-                      <p class="mt-1 text-sm text-secondary-600">{{ item.featuredProject.summary }}</p>
+                    <div class="min-w-0">
+                      <div class="text-sm font-semibold text-secondary-900 break-words">
+                        {{ item.featuredProject.title }}
+                      </div>
+                      <p class="mt-1 text-sm text-secondary-600 break-words">{{ item.featuredProject.summary }}</p>
                       <div class="mt-2 flex flex-wrap gap-2">
                         <span
                           v-for="tag in item.featuredProject.tags"
@@ -210,12 +210,16 @@
                   </div>
                 </div>
 
-                <div class="mt-4 rounded-2xl border border-primary-100 bg-primary-50/70 px-4 py-3">
+                <div class="mt-4 card-primary-soft px-4 py-3">
                   <div class="text-[11px] font-bold uppercase tracking-[0.3em] text-primary-500">工作內容</div>
                   <ul class="mt-2 space-y-2">
-                    <li v-for="detail in item.highlights" :key="detail" class="flex items-start gap-2 text-secondary-600">
+                    <li
+                      v-for="detail in item.highlights"
+                      :key="detail"
+                      class="flex items-start gap-2 text-secondary-600 min-w-0"
+                    >
                       <Check :size="16" class="mt-1 text-primary-500" />
-                      <span>{{ detail }}</span>
+                      <span class="break-words">{{ detail }}</span>
                     </li>
                   </ul>
                 </div>
@@ -225,26 +229,24 @@
         </div>
       </div>
 
-      <div id="contact" class="pt-10 lg:col-span-2 scroll-mt-24">
-        <div
-          class="relative overflow-hidden rounded-3xl border border-primary-100 bg-gradient-to-br from-white via-primary-50/60 to-secondary-50 p-8 shadow-sm"
-        >
+      <div id="contact" class="pt-10 lg:col-span-2 min-w-0 scroll-mt-24">
+        <div class="relative card-gradient p-8">
           <div class="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-primary-200/40 blur-2xl"></div>
           <div class="absolute -bottom-12 -left-12 h-36 w-36 rounded-full bg-secondary-200/40 blur-3xl"></div>
 
-          <div class="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-start">
-            <div class="space-y-4">
+          <div class="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-start min-w-0">
+            <div class="space-y-4 min-w-0">
               <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">Contact</p>
               <h4 class="text-2xl md:text-3xl font-bold text-secondary-900">一起把想法做成產品</h4>
-              <p class="text-secondary-600 leading-relaxed">
+              <p class="text-secondary-600 leading-relaxed break-words">
                 歡迎合作、專案諮詢或技術交流。回信速度快，通常 24 小時內回覆。
               </p>
-              <div class="flex flex-wrap gap-3 pt-2">
+              <div class="flex flex-wrap gap-3 pt-2 w-full">
                 <a
                   :href="profile104Link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-700"
+                  class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-700 sm:w-auto"
                 >
                   <ExternalLink :size="16" />
                   我的104
@@ -253,7 +255,7 @@
                   :href="resumeLink"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-white px-5 py-2.5 text-sm font-semibold text-primary-700 shadow-sm transition hover:border-primary-300 hover:bg-primary-50"
+                  class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary-200 bg-white px-5 py-2.5 text-sm font-semibold text-primary-700 shadow-sm transition hover:border-primary-300 hover:bg-primary-50 sm:w-auto"
                 >
                   <Download :size="16" />
                   下載簡歷
@@ -261,18 +263,18 @@
               </div>
             </div>
 
-            <ul class="space-y-4">
+            <ul class="space-y-4 min-w-0">
               <li
                 v-for="info in contactInfo"
                 :key="info.label"
-                class="flex items-center gap-4 rounded-2xl bg-white/80 px-4 py-3 shadow-sm"
+                class="flex w-full items-center gap-4 card-compact-glass px-4 py-3 min-w-0"
               >
                 <div class="w-11 h-11 rounded-2xl bg-primary-100 text-primary-600 flex items-center justify-center">
                   <component :is="info.icon" :size="20" />
                 </div>
-                <div>
+                <div class="min-w-0">
                   <div class="text-[11px] text-secondary-400 font-bold uppercase tracking-widest">{{ info.label }}</div>
-                  <div class="text-secondary-900 font-semibold">{{ info.value }}</div>
+                  <div class="text-secondary-900 font-semibold break-all">{{ info.value }}</div>
                 </div>
               </li>
             </ul>

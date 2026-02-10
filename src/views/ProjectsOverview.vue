@@ -5,6 +5,9 @@ import { projects } from '../data/projects'
 
 const featuredProjects = computed(() => projects.slice(0, 3))
 const currentSlide = ref(0)
+const categories = ['全部', 'UIUX', '前端開發', '其他'] as const
+type Category = (typeof categories)[number]
+const selectedCategory = ref<Category>('全部')
 
 const goToSlide = (index: number) => {
   currentSlide.value = index
@@ -18,6 +21,26 @@ const prevSlide = () => {
   currentSlide.value =
     (currentSlide.value - 1 + featuredProjects.value.length) % featuredProjects.value.length
 }
+
+const inferCategory = (tags: string[]): Category => {
+  const uiuxKeywords = ['使用者體驗設計', '視覺設計', 'UX', 'UI', '設計']
+  const frontendKeywords = ['Vue', 'Vue.js', 'Vue 3', 'React', 'Next.js', 'Tailwind', 'PWA', 'Canvas']
+
+  if (tags.some((tag) => uiuxKeywords.some((keyword) => tag.includes(keyword)))) {
+    return 'UIUX'
+  }
+  if (tags.some((tag) => frontendKeywords.some((keyword) => tag.includes(keyword)))) {
+    return '前端開發'
+  }
+  return '其他'
+}
+
+const filteredProjects = computed(() => {
+  if (selectedCategory.value === '全部') {
+    return projects
+  }
+  return projects.filter((project) => inferCategory(project.tags) === selectedCategory.value)
+})
 </script>
 
 <template>
@@ -34,7 +57,7 @@ const prevSlide = () => {
     </div>
   </section>
 
-  <section class="bg-secondary-50/60 py-20">
+  <section class="bg-secondary-50/60 py-14">
     <div class="max-w-7xl mx-auto px-6">
       <div class="space-y-6">
           <div>
@@ -96,15 +119,39 @@ const prevSlide = () => {
       </div>
   </section>
 
-  <section class="bg-white py-24 px-6">
+  <section class="bg-white pt-8">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-wrap gap-3">
+        <button
+          v-for="category in categories"
+          :key="category"
+          type="button"
+          @click="selectedCategory = category"
+          class="rounded-full px-4 py-2 text-sm font-semibold transition"
+          :class="
+            selectedCategory === category
+              ? 'bg-primary-600 text-white shadow-sm'
+              : 'bg-secondary-50 text-secondary-600 hover:text-primary-600 hover:bg-primary-50'
+          "
+        >
+          {{ category }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white pb-24 pt-10 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <ProjectCard
-          v-for="project in projects"
+          v-for="project in filteredProjects"
           :key="project.id"
           :project="project"
           :to="`/projects/${project.id}`"
         />
+      </div>
+      <div v-if="filteredProjects.length === 0" class="mt-10 text-center text-secondary-500">
+        目前沒有符合分類的作品。
       </div>
     </div>
   </section>

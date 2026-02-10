@@ -59,7 +59,7 @@
         </div>
         
         <div ref="heroStats" class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 max-w-3xl mx-auto">
-          <div v-for="stat in stats" :key="stat.label" class="rounded-2xl border border-secondary-100 bg-white/70 px-6 py-4">
+          <div v-for="stat in stats" :key="stat.label" class="card-compact-soft px-6 py-4">
             <div class="text-2xl font-bold text-secondary-900">{{ stat.value }}</div>
             <div class="text-sm text-secondary-500">{{ stat.label }}</div>
           </div>

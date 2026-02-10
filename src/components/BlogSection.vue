@@ -19,7 +19,7 @@ import { posts } from '../data/posts'
           v-for="post in posts"
           :key="post.id"
           :to="`/blog/${post.id}`"
-          class="group rounded-3xl border border-secondary-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+          class="group card-base card-hover-lift p-6"
         >
           <div class="flex items-center justify-between text-xs text-secondary-400">
             <span class="font-semibold uppercase tracking-widest">{{ post.tag }}</span>

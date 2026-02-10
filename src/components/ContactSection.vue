@@ -1,7 +1,7 @@
 <template>
   <section class="py-24 px-6 bg-white">
     <div class="max-w-6xl mx-auto">
-      <div class="rounded-3xl border border-primary-100 bg-gradient-to-br from-white via-primary-50/60 to-secondary-50 p-10 text-center shadow-sm">
+      <div class="card-gradient p-10 text-center">
         <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">Contact</p>
         <h3 class="mt-3 text-3xl md:text-4xl font-bold text-secondary-900">與我聯繫</h3>
         <p class="mt-4 text-secondary-600 text-lg">

@@ -2,7 +2,7 @@
   <component
     :is="to ? RouterLink : 'div'"
     :to="to"
-    class="group bg-white rounded-3xl overflow-hidden border border-secondary-100 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+    class="group card-base card-hover-lift-strong overflow-hidden cursor-pointer"
   >
     <div class="relative aspect-video overflow-hidden">
       <img :src="project.image" :alt="project.title" 
