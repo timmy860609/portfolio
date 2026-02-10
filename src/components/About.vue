@@ -65,20 +65,22 @@
               </p>
               <div class="flex flex-wrap gap-3 pt-2">
                 <a
-                  :href="gmailComposeLink"
+                  :href="profile104Link"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-700"
                 >
-                  <Mail :size="16" />
-                  寄送信件
+                  <ExternalLink :size="16" />
+                  我的104
                 </a>
                 <a
-                  href="tel:+886962002655"
+                  :href="resumeLink"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-white px-5 py-2.5 text-sm font-semibold text-primary-700 shadow-sm transition hover:border-primary-300 hover:bg-primary-50"
                 >
-                  <Phone :size="16" />
-                  立即通話
+                  <Download :size="16" />
+                  下載簡歷
                 </a>
               </div>
             </div>
@@ -106,9 +108,10 @@
 </template>
 
 <script setup lang="ts">
-import { Check, Mail, MapPin, Phone } from 'lucide-vue-next'
+import { Check, Download, ExternalLink, Mail, MapPin, Phone } from 'lucide-vue-next'
 
-const gmailComposeLink = 'https://mail.google.com/mail/?view=cm&fs=1&to=timmy.lee.9769@gmail.com'
+const profile104Link = 'https://www.104.com.tw'
+const resumeLink = '/resume.pdf'
 
 const skills = [
   { category: '前端開發', items: ['Vue 3 / Vuex / Pinia', 'TypeScript', 'Tailwind CSS', 'Next.js / React'] },

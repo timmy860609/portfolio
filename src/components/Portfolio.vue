@@ -18,6 +18,15 @@
           :to="`/projects/${project.id}`"
         />
       </div>
+
+      <div class="flex justify-center">
+        <RouterLink
+          to="/projects"
+          class="btn-outline"
+        >
+          查看全部專案
+        </RouterLink>
+      </div>
     </div>
   </section>
 </template>
@@ -25,4 +34,5 @@
 <script setup lang="ts">
 import ProjectCard from './ProjectCard.vue'
 import { projects } from '../data/projects'
+import { RouterLink } from 'vue-router'
 </script>

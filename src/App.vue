@@ -16,6 +16,7 @@ const scrollToTop = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+
 })
 
 onUnmounted(() => {
@@ -75,6 +76,33 @@ onUnmounted(() => {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+
+.animate-aurora {
+  animation: auroraGlow 12s ease-in-out infinite;
+}
+
+.animate-aurora-delay {
+  animation-delay: 2.5s;
+}
+
+@keyframes auroraGlow {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: translate3d(12px, -8px, 0) scale(1.06);
+    opacity: 0.8;
+    filter: hue-rotate(12deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+    filter: hue-rotate(0deg);
   }
 }
 </style>

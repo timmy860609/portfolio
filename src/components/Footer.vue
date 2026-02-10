@@ -17,16 +17,19 @@
         <h3 class="font-bold text-lg mb-6">快速連結</h3>
         <ul class="space-y-3">
           <li>
-            <RouterLink to="/#home" class="text-secondary-400 hover:text-primary-400 transition-colors">首頁</RouterLink>
+            <RouterLink to="/#home" class="text-link-muted">首頁</RouterLink>
           </li>
           <li>
-            <RouterLink to="/#portfolio" class="text-secondary-400 hover:text-primary-400 transition-colors">作品集</RouterLink>
+            <RouterLink to="/#portfolio" class="text-link-muted">作品集</RouterLink>
           </li>
           <li>
-            <RouterLink to="/#about" class="text-secondary-400 hover:text-primary-400 transition-colors">關於我</RouterLink>
+            <RouterLink to="/projects" class="text-link-muted">專案總覽</RouterLink>
           </li>
           <li>
-            <RouterLink to="/#contact" class="text-secondary-400 hover:text-primary-400 transition-colors">聯絡資訊</RouterLink>
+            <RouterLink to="/about" class="text-link-muted">關於我</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/about#contact" class="text-link-muted">聯絡資訊</RouterLink>
           </li>
         </ul>
       </div>
@@ -60,6 +63,6 @@ import { RouterLink } from 'vue-router'
 const socials = [
   { name: 'Github', href: 'https://github.com', icon: Github, external: true },
   { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin, external: true },
-  { name: 'Email', href: '/#contact', icon: Mail, external: false },
+  { name: 'Email', href: '/about#contact', icon: Mail, external: false },
 ]
 </script>

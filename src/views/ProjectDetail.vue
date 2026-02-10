@@ -22,20 +22,20 @@ const nextProject = computed(() =>
 <template>
   <section class="bg-white py-24 px-6">
     <div class="max-w-6xl mx-auto space-y-10">
-      <div class="flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-wrap items-start justify-start gap-4">
         <div class="space-y-2">
           <p class="text-xs font-bold uppercase tracking-[0.3em] text-primary-500">Project</p>
           <h1 class="text-3xl md:text-4xl font-bold text-secondary-900">
             {{ project?.title || '找不到此專案' }}
           </h1>
+          <RouterLink
+            to="/"
+            class="text-link"
+          >
+            <ArrowLeft :size="16" />
+            回首頁
+          </RouterLink>
         </div>
-        <RouterLink
-          to="/#portfolio"
-          class="inline-flex items-center gap-2 rounded-full border border-secondary-200 bg-white px-5 py-2.5 text-sm font-semibold text-secondary-700 shadow-sm transition hover:border-primary-200 hover:text-primary-600"
-        >
-          <ArrowLeft :size="16" />
-          回到作品集
-        </RouterLink>
       </div>
 
       <div v-if="project" class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
@@ -92,7 +92,7 @@ const nextProject = computed(() =>
         <RouterLink
           v-if="prevProject"
           :to="`/projects/${prevProject.id}`"
-          class="inline-flex items-center gap-2 rounded-full border border-secondary-200 bg-white px-5 py-2.5 text-sm font-semibold text-secondary-700 shadow-sm transition hover:border-primary-200 hover:text-primary-600"
+          class="btn-outline"
         >
           <ArrowLeft :size="16" />
           {{ prevProject.title }}
@@ -102,7 +102,7 @@ const nextProject = computed(() =>
         <RouterLink
           v-if="nextProject"
           :to="`/projects/${nextProject.id}`"
-          class="inline-flex items-center gap-2 rounded-full border border-secondary-200 bg-white px-5 py-2.5 text-sm font-semibold text-secondary-700 shadow-sm transition hover:border-primary-200 hover:text-primary-600"
+          class="btn-outline"
         >
           {{ nextProject.title }}
           <ArrowRight :size="16" />
