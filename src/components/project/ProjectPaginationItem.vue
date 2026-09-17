@@ -2,6 +2,7 @@
 import type { ProjectPaginationItem } from '../../types/project';
 import AppButton from '../AppButton.vue';
 import ProjectTags from './ProjectTags.vue';
+import { withBase } from '../../utils/basePath';
 
 withDefaults(
   defineProps<{
@@ -27,7 +28,7 @@ withDefaults(
   >
     <div class="project-pagination-item__image">
       <img
-        :src="item.image"
+        :src="withBase(item.image)"
         :alt="item.imageAlt"
         :style="{
           objectPosition: item.imagePosition,

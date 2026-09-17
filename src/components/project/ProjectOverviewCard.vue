@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ProjectTags from './ProjectTags.vue';
+import { withBase } from '../../utils/basePath';
 
 defineProps<{
   slug: string;
@@ -12,9 +13,9 @@ defineProps<{
 
 <template>
   <article>
-    <a class="overview-card" :href="`/projects/${slug}`">
+    <a class="overview-card" :href="withBase(`/projects/${slug}`)">
       <div class="overview-card__cover">
-        <img :src="image" :alt="`${title}專案封面`" width="1692" height="1671" />
+        <img :src="withBase(image)" :alt="`${title}專案封面`" width="1692" height="1671" />
       </div>
 
       <div class="overview-card__body">

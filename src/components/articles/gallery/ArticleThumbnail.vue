@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { withBase } from '../../../utils/basePath';
 
 const props = withDefaults(defineProps<{
   src: string;
@@ -21,7 +22,7 @@ const imageStyle = computed(() => ({
 <template>
   <div class="article-thumbnail">
     <img
-      :src="src"
+      :src="withBase(src)"
       :alt="alt"
       :style="imageStyle"
       loading="lazy"

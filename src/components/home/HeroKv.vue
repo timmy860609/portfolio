@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { homeHero } from '../../data/home';
 import LogoPathAnimation from './LogoPathAnimation.vue';
+import { withBase } from '../../utils/basePath';
 </script>
 
 <template>
@@ -9,13 +10,13 @@ import LogoPathAnimation from './LogoPathAnimation.vue';
       <picture class="hero-kv__background" aria-hidden="true">
         <source
           media="(max-width: 767px)"
-          srcset="/Image/Home/kv-new/hero-bg_m.webp"
+          :srcset="withBase('/Image/Home/kv-new/hero-bg_m.webp')"
         />
         <source
           media="(min-width: 768px) and (max-width: 1023px)"
-          srcset="/Image/Home/kv-new/hero-bg_p.webp"
+          :srcset="withBase('/Image/Home/kv-new/hero-bg_p.webp')"
         />
-        <img src="/Image/Home/kv-new/hero-bg_w.webp" alt="" />
+        <img :src="withBase('/Image/Home/kv-new/hero-bg_w.webp')" alt="" />
       </picture>
 
       <div class="hero-kv__brand">

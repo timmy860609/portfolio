@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { aboutHero } from '../../data/about';
+import { withBase } from '../../utils/basePath';
 
 const parseStat = (value: string) => {
   const match = value.match(/^(\d+(?:\.\d+)?)(.*)$/);
@@ -62,9 +63,9 @@ onBeforeUnmount(() => {
       <picture>
         <source
           media="(max-width: 767px)"
-          srcset="/Image/About/hero-glow-left-mobile.svg"
+          :srcset="withBase('/Image/About/hero-glow-left-mobile.svg')"
         />
-        <img src="/Image/About/hero-glow-left.svg" alt="" />
+        <img :src="withBase('/Image/About/hero-glow-left.svg')" alt="" />
       </picture>
     </div>
 
@@ -73,9 +74,9 @@ onBeforeUnmount(() => {
         <picture>
           <source
             media="(max-width: 767px)"
-            srcset="/Image/About/hero-triangle-mobile.svg"
+            :srcset="withBase('/Image/About/hero-triangle-mobile.svg')"
           />
-          <img src="/Image/About/hero-triangle.svg" alt="" />
+          <img :src="withBase('/Image/About/hero-triangle.svg')" alt="" />
         </picture>
       </div>
     </div>
@@ -84,9 +85,9 @@ onBeforeUnmount(() => {
       <picture>
         <source
           media="(max-width: 767px)"
-          srcset="/Image/About/hero-glow-right-mobile.svg"
+          :srcset="withBase('/Image/About/hero-glow-right-mobile.svg')"
         />
-        <img src="/Image/About/hero-glow-right.svg" alt="" />
+        <img :src="withBase('/Image/About/hero-glow-right.svg')" alt="" />
       </picture>
     </div>
 
@@ -104,7 +105,7 @@ onBeforeUnmount(() => {
             <img
               v-if="index < aboutHero.stats.length - 1"
               class="about-hero__stat-divider"
-              src="/Image/About/hero-stat-divider.svg"
+              :src="withBase('/Image/About/hero-stat-divider.svg')"
               alt=""
             />
           </template>
@@ -113,7 +114,7 @@ onBeforeUnmount(() => {
 
       <img
         class="about-hero__portrait"
-        :src="aboutHero.portrait"
+        :src="withBase(aboutHero.portrait)"
         :alt="aboutHero.portraitAlt"
         width="388"
         height="537"
@@ -123,10 +124,10 @@ onBeforeUnmount(() => {
     <picture class="about-hero__glass" aria-hidden="true">
       <source
         media="(max-width: 767px)"
-        srcset="/Image/About/glass-bg-mobile.svg"
+        :srcset="withBase('/Image/About/glass-bg-mobile.svg')"
       />
       <img
-        src="/Image/About/glass-bg.svg"
+        :src="withBase('/Image/About/glass-bg.svg')"
         alt=""
         width="1920"
         height="342"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { AboutExperience } from '../../data/about';
+import { withBase } from '../../utils/basePath';
 
 defineProps<{
   experience: AboutExperience;
@@ -9,13 +10,13 @@ defineProps<{
 <template>
   <div class="experience-summary">
     <div class="experience-summary__company">
-      <img :src="experience.companyLogo" alt="" aria-hidden="true" />
+      <img :src="withBase(experience.companyLogo)" alt="" aria-hidden="true" />
       <h3 v-if="experience.company === '方閣設計'">{{ experience.company }}</h3>
     </div>
     <img
       v-if="experience.roleImage"
       class="experience-summary__role-image"
-      :src="experience.roleImage"
+      :src="withBase(experience.roleImage)"
       alt="任職公司與期間"
     />
     <p v-else class="experience-summary__role">

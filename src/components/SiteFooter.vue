@@ -1,16 +1,20 @@
+<script setup lang="ts">
+import { withBase } from '../utils/basePath';
+</script>
+
 <template>
   <footer class="site-footer" data-node-id="5758:16017">
     <div class="site-footer__decorations" aria-hidden="true">
       <picture class="site-footer__glass">
         <source
           media="(max-width: 767px)"
-          srcset="/Image/Footer/footer-mobile-glass.svg"
+          :srcset="withBase('/Image/Footer/footer-mobile-glass.svg')"
         />
-        <img src="/Image/Footer/footer-glass-light.svg" alt="" />
+        <img :src="withBase('/Image/Footer/footer-glass-light.svg')" alt="" />
       </picture>
       <img
         class="site-footer__orb"
-        src="/Image/Footer/footer-orb-light.svg"
+        :src="withBase('/Image/Footer/footer-orb-light.svg')"
         alt=""
       />
       <div class="site-footer__triangle">
@@ -18,43 +22,43 @@
           <picture>
             <source
               media="(max-width: 767px)"
-              srcset="/Image/Footer/footer-mobile-triangle.svg"
+              :srcset="withBase('/Image/Footer/footer-mobile-triangle.svg')"
             />
-            <img src="/Image/Footer/footer-triangle-light.svg" alt="" />
+            <img :src="withBase('/Image/Footer/footer-triangle-light.svg')" alt="" />
           </picture>
         </div>
       </div>
       <div class="site-footer__glow">
-        <img src="/Image/Footer/footer-left-circle.svg" alt="" />
+        <img :src="withBase('/Image/Footer/footer-left-circle.svg')" alt="" />
       </div>
     </div>
 
     <div class="site-footer__inner">
       <div class="site-footer__identity">
-        <a class="site-footer__logo" href="/" aria-label="Timmy Lee 首頁">
-          <img src="/WebCI/ci-logo.svg" alt="Timmy Lee" width="362" height="28" />
+        <a class="site-footer__logo" :href="withBase('/')" aria-label="Timmy Lee 首頁">
+          <img :src="withBase('/WebCI/ci-logo.svg')" alt="Timmy Lee" width="362" height="28" />
         </a>
 
         <nav aria-label="頁尾導覽">
-          <a href="/">首頁</a>
-          <a href="/projects">精選專案</a>
-          <a href="/articles">專欄分享</a>
-          <a href="/about">關於我</a>
-          <a href="/#contact">與我聯繫</a>
-          <a href="/Image/About/portfolio.pdf" download="portfolio.pdf">下載簡歷</a>
+          <a :href="withBase('/')">首頁</a>
+          <a :href="withBase('/projects')">精選專案</a>
+          <a :href="withBase('/articles')">專欄分享</a>
+          <a :href="withBase('/about')">關於我</a>
+          <a :href="withBase('/#contact')">與我聯繫</a>
+          <a :href="withBase('/Image/About/portfolio.pdf')" download="portfolio.pdf">下載簡歷</a>
         </nav>
       </div>
 
       <div class="site-footer__meta">
         <div class="site-footer__socials" aria-label="社群平台">
           <a href="#" aria-label="LinkedIn">
-            <img src="/Image/Footer/linkedin.svg" alt="" width="36" height="36" />
+            <img :src="withBase('/Image/Footer/linkedin.svg')" alt="" width="36" height="36" />
           </a>
           <a href="#" aria-label="社群平台">
-            <img src="/Image/Footer/social-02.svg" alt="" width="36" height="36" />
+            <img :src="withBase('/Image/Footer/social-02.svg')" alt="" width="36" height="36" />
           </a>
           <a href="#" aria-label="104 個人頁面">
-            <img src="/Image/Footer/social-03.svg" alt="" width="36" height="36" />
+            <img :src="withBase('/Image/Footer/social-03.svg')" alt="" width="36" height="36" />
           </a>
         </div>
         <p>COPYRIGHT © 2022 Timmy.Lee</p>

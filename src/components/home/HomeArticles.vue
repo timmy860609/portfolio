@@ -2,6 +2,7 @@
 import { homeArticles } from '../../data/articles';
 import AppButton from '../AppButton.vue';
 import AppSectionHeading from '../AppSectionHeading.vue';
+import { withBase } from '../../utils/basePath';
 </script>
 
 <template>
@@ -37,7 +38,7 @@ import AppSectionHeading from '../AppSectionHeading.vue';
       <div class="home-articles__content">
         <figure class="home-articles__visual">
           <img
-            src="/Image/Home/creative-journal/creative-cover.webp"
+            :src="withBase('/Image/Home/creative-journal/creative-cover.webp')"
             alt="響應式網頁與視覺設計工具插畫"
             width="1704"
             height="984"
@@ -50,7 +51,7 @@ import AppSectionHeading from '../AppSectionHeading.vue';
           <a
             v-for="article in homeArticles"
             :key="article.slug"
-            :href="`/articles/${article.slug}`"
+            :href="withBase(`/articles/${article.slug}`)"
           >
             {{ article.title }}
           </a>

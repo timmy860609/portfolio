@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { withBase } from '../../utils/basePath';
+
 withDefaults(
   defineProps<{
     title?: string;
@@ -16,6 +18,7 @@ withDefaults(
 <template>
   <section
     class="project-hero"
+    :style="{ backgroundImage: `url(${withBase('/Image/Project/project-hero.webp')})` }"
     :aria-labelledby="titleId"
     data-node-id="5050:15981"
   >
@@ -29,7 +32,10 @@ withDefaults(
 <style scoped>
 .project-hero {
   align-items: center;
-  background: #f3f3f3 url('/Image/Project/project-hero.webp') center / cover no-repeat;
+  background-color: #f3f3f3;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   min-height: 256px;
   overflow: hidden;

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import type { ArticleDetailGalleryData } from '../../../data/articles';
+import { withBase } from '../../../utils/basePath';
 
 defineProps<ArticleDetailGalleryData>();
 
@@ -55,7 +56,7 @@ onBeforeUnmount(() => observer?.disconnect());
           class="article-image-gallery__item"
         >
           <img
-            :src="item.src"
+            :src="withBase(item.src)"
             :alt="item.alt"
             :width="item.width"
             :height="item.height"

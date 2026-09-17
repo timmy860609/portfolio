@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { withBase } from '../../utils/basePath';
+
 withDefaults(
   defineProps<{
     src: string;
@@ -22,10 +24,10 @@ withDefaults(
       <source
         v-if="mobileSrc"
         media="(max-width: 767px)"
-        :srcset="mobileSrc"
+        :srcset="withBase(mobileSrc)"
       />
       <img
-        :src="src"
+        :src="withBase(src)"
         :alt="alt"
         :width="width"
         :height="height"

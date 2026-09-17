@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { withBase } from '../utils/basePath';
+
 withDefaults(
   defineProps<{
     href?: string;
@@ -34,7 +36,7 @@ withDefaults(
         'app-button--has-icon': $slots.icon,
       },
     ]"
-    :href="tag === 'a' ? href : undefined"
+    :href="tag === 'a' && href ? withBase(href) : undefined"
     :download="tag === 'a' ? download : undefined"
     :type="tag === 'button' ? 'button' : undefined"
   >

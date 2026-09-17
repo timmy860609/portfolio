@@ -3,12 +3,13 @@ import { ref } from 'vue';
 import { homeContact } from '../../data/home';
 import AppButton from '../AppButton.vue';
 import AppToast from '../AppToast.vue';
+import { withBase } from '../../utils/basePath';
 
 const copiedValue = ref('');
 let resetTimer: ReturnType<typeof setTimeout> | undefined;
 
 function iconStyle(src: string): Record<string, string> {
-  return { '--contact-icon': `url("${src}")` };
+  return { '--contact-icon': `url("${withBase(src)}")` };
 }
 
 async function copyContact(value: string) {

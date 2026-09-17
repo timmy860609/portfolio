@@ -2,6 +2,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { gsap } from 'gsap/dist/gsap';
 import { mainNavigation as navigation } from '../data/site';
+import { withBase } from '../utils/basePath';
 import AppButton from './AppButton.vue';
 
 const props = defineProps<{
@@ -327,8 +328,8 @@ onBeforeUnmount(() => {
     data-node-id="1558:45412"
   >
     <div class="header-inner">
-      <a class="logo-link" href="/" aria-label="Timmy Lee 首頁">
-        <img src="/WebCI/ci-logo.svg" alt="Timmy Lee" width="233" height="18" />
+      <a class="logo-link" :href="withBase('/')" aria-label="Timmy Lee 首頁">
+        <img :src="withBase('/WebCI/ci-logo.svg')" alt="Timmy Lee" width="233" height="18" />
       </a>
 
       <button
@@ -341,9 +342,9 @@ onBeforeUnmount(() => {
         :aria-label="mobileMenuIsOpen ? '關閉主選單' : '開啟主選單'"
         @click="mobileMenuIsOpen = !mobileMenuIsOpen"
       >
-        <img src="/WebCI/menu-line-outer.svg" alt="" />
-        <img src="/WebCI/menu-line-middle.svg" alt="" />
-        <img src="/WebCI/menu-line-outer.svg" alt="" />
+        <img :src="withBase('/WebCI/menu-line-outer.svg')" alt="" />
+        <img :src="withBase('/WebCI/menu-line-middle.svg')" alt="" />
+        <img :src="withBase('/WebCI/menu-line-outer.svg')" alt="" />
       </button>
 
       <div
@@ -361,7 +362,7 @@ onBeforeUnmount(() => {
             v-for="item in navigation"
             :key="item.to"
             ref="navigationLinks"
-            :href="item.to"
+            :href="withBase(item.to)"
             class="nav-link"
             :class="{ 'nav-link--active': isNavigationActive(item.to) }"
             :aria-current="isNavigationActive(item.to) ? 'page' : undefined"

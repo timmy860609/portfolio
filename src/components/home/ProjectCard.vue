@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { withBase } from '../../utils/basePath';
+
 const props = defineProps<{
   title: string;
   tags: string[];
@@ -15,9 +17,9 @@ const alternativeText = `${props.title}，${props.tags.map((tag) => `#${tag}`).j
     class="project-card"
     :class="{ 'project-card--selected': selected }"
   >
-    <a :href="href" :aria-label="`查看${title}專案介紹`">
+    <a :href="withBase(href)" :aria-label="`查看${title}專案介紹`">
       <img
-        :src="image"
+        :src="withBase(image)"
         :alt="alternativeText"
         width="1152"
         height="1338"

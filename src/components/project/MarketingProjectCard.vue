@@ -2,6 +2,7 @@
 import type { MarketingProject } from '../../data/project/marketingProjects';
 import AppButton from '../AppButton.vue';
 import ProjectTags from './ProjectTags.vue';
+import { withBase } from '../../utils/basePath';
 
 defineProps<MarketingProject>();
 </script>
@@ -29,7 +30,7 @@ defineProps<MarketingProject>();
     </div>
 
     <figure>
-      <img :src="image" :alt="`${title}網站預覽`" width="1080" height="720" loading="lazy" />
+      <img :src="withBase(image)" :alt="`${title}網站預覽`" width="1080" height="720" loading="lazy" />
     </figure>
   </article>
 </template>

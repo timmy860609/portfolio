@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { AboutExperienceProject } from '../../data/about';
+import { withBase } from '../../utils/basePath';
 
 defineProps<AboutExperienceProject>();
 </script>
@@ -13,11 +14,11 @@ defineProps<AboutExperienceProject>();
       <img
         v-if="backgroundImage"
         class="experience-card__background"
-        :src="backgroundImage"
+        :src="withBase(backgroundImage)"
         alt=""
         aria-hidden="true"
       />
-      <img class="experience-card__image" :src="image" :alt="imageAlt" />
+      <img class="experience-card__image" :src="withBase(image)" :alt="imageAlt" />
     </div>
 
     <div class="experience-card__content">

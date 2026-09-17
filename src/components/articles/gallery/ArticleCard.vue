@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ArticleItem } from '../../../data/articles';
 import ArticleThumbnail from './ArticleThumbnail.vue';
+import { withBase } from '../../../utils/basePath';
 
 defineProps<ArticleItem>();
 </script>
@@ -8,7 +9,7 @@ defineProps<ArticleItem>();
 <template>
   <a
     class="article-card"
-    :href="`/articles/${slug}`"
+    :href="withBase(`/articles/${slug}`)"
     :aria-label="`閱讀${title}`"
   >
     <ArticleThumbnail

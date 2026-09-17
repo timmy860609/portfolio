@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ArticleFeatureCardData } from '../../../data/articles';
+import { withBase } from '../../../utils/basePath';
 
 defineProps<ArticleFeatureCardData>();
 </script>
@@ -8,7 +9,7 @@ defineProps<ArticleFeatureCardData>();
   <article class="article-feature-card">
     <img
       class="article-feature-card__image"
-      :src="image.src"
+      :src="withBase(image.src)"
       :alt="image.alt"
       :width="image.width"
       :height="image.height"

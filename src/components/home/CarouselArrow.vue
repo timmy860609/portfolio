@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { withBase } from '../../utils/basePath';
+
 defineProps<{
   direction: 'left' | 'right';
 }>();
@@ -16,7 +18,7 @@ defineEmits<{
     @click="$emit('click')"
   >
     <img
-      :src="`/Image/Home/featured-projects/arrow-${direction}.svg`"
+      :src="withBase(`/Image/Home/featured-projects/arrow-${direction}.svg`)"
       alt=""
     />
   </button>

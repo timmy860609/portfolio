@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import type { ProjectImage, ProjectVideo } from '../../types/project';
+import { withBase } from '../../utils/basePath';
 
 const props = withDefaults(
   defineProps<{
@@ -40,7 +41,7 @@ const playVideo = async () => {
   >
     <img
       v-if="image"
-      :src="image.src"
+      :src="withBase(image.src)"
       :alt="image.alt"
       :width="image.width ?? 2880"
       :height="image.height ?? 1680"
@@ -50,8 +51,8 @@ const playVideo = async () => {
     <video
       v-else-if="video"
       ref="videoElement"
-      :src="video.src"
-      :poster="video.poster"
+      :src="withBase(video.src)"
+      :poster="video.poster ? withBase(video.poster) : undefined"
       :width="video.width ?? 1280"
       :height="video.height ?? 720"
       :aria-label="video.title"
@@ -72,7 +73,7 @@ const playVideo = async () => {
       @click="playVideo"
     >
       <img
-        :src="video.poster"
+        :src="withBase(video.poster)"
         alt=""
         :width="video.width ?? 1280"
         :height="video.height ?? 720"

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { ProjectGoalItem } from '../../types/project';
+import { withBase } from '../../utils/basePath';
 
 export type { ProjectGoalItem } from '../../types/project';
 
@@ -34,7 +35,7 @@ const gridStyle = computed(() => ({
   '--goal-heading': props.headingColor ?? props.textColor,
   '--goal-text': props.textColor,
   backgroundImage: props.backgroundGradient
-    ?? (props.backgroundImage ? `url(${props.backgroundImage})` : undefined),
+    ?? (props.backgroundImage ? `url(${withBase(props.backgroundImage)})` : undefined),
 }));
 </script>
 
