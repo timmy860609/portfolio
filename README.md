@@ -22,5 +22,4 @@ npm run dev
 | `npm run build` | 檢查並建立正式版 |
 | `npm run preview` | 預覽正式版 |
 
-首頁在 `src/pages/index.astro`，互動式作品列表在
-`src/components/ProjectGrid.vue`，全域樣式在 `src/styles/global.css`。
+首頁在 `src/pages/index.astro`，目前保留為空白頁面，可由此開始加入內容。

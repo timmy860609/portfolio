@@ -16,8 +16,10 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/vue": "^5.1.4",
+    "@fontsource/montserrat": "^5.3.0",
     "@types/node": "^20.19.0",
     "astro": "^5.18.2",
+    "gsap": "^3.15.0",
     "typescript": "^5.9.0",
     "vue": "^3.5.0"
   }

@@ -1,0 +1,207 @@
+<div
+  class="page-transition"
+  aria-hidden="true"
+  data-page-transition
+  transition:persist="page-transition"
+>
+  <div class="page-transition__layer page-transition__layer--back"></div>
+  <div class="page-transition__layer page-transition__layer--main"></div>
+
+  <div class="page-transition__content">
+    <div class="page-transition__title-mask">
+      <p class="page-transition__label" data-page-transition-label></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const getDestination = (pathname: string) => {
+    if (pathname === '/') {
+      return 'Home';
+    }
+    if (pathname.startsWith('/projects')) {
+      return 'Case Study';
+    }
+    if (pathname.startsWith('/articles')) {
+      return 'Articles';
+    }
+    if (pathname.startsWith('/about')) {
+      return 'About Me';
+    }
+    return 'Timmy Lee';
+  };
+
+  const waitForMotion = (duration: number) =>
+    new Promise<void>((resolve) => window.setTimeout(resolve, duration));
+
+  document.addEventListener('astro:before-preparation', (event) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const transition = document.querySelector<HTMLElement>('[data-page-transition]');
+    const label = transition?.querySelector<HTMLElement>('[data-page-transition-label]');
+    if (!transition || !label) return;
+
+    const source = event.sourceElement as HTMLElement | undefined;
+    label.textContent =
+      source?.dataset.transitionLabel || getDestination(event.to.pathname);
+
+    transition.classList.remove('page-transition--exit', 'page-transition--reset');
+    void transition.offsetHeight;
+    transition.classList.add('page-transition--enter');
+
+    const loadPage = event.loader;
+    event.loader = async () => {
+      await Promise.all([loadPage(), waitForMotion(940)]);
+    };
+  });
+
+  document.addEventListener('astro:after-swap', () => {
+    const transition = document.querySelector<HTMLElement>('[data-page-transition]');
+    if (!transition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    requestAnimationFrame(() => {
+      transition.classList.remove('page-transition--enter');
+      transition.classList.add('page-transition--exit');
+
+      const pageContent = document.querySelector('main');
+      pageContent?.classList.add('page-transition-content-enter');
+      pageContent?.addEventListener('animationend', () => {
+        pageContent.classList.remove('page-transition-content-enter');
+      }, { once: true });
+
+      waitForMotion(940).then(() => {
+        transition.classList.add('page-transition--reset');
+        transition.classList.remove('page-transition--exit');
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            transition.classList.remove('page-transition--reset');
+          });
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .page-transition {
+    align-items: center;
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    pointer-events: none;
+    position: fixed;
+    z-index: 10000;
+  }
+
+  .page-transition__layer {
+    inset: 0;
+    position: absolute;
+    transform: translate3d(0, 101%, 0);
+    will-change: transform;
+  }
+
+  .page-transition__layer--back {
+    background: #131313;
+    transition: transform 760ms cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  .page-transition__layer--main {
+    background-color: #00d9ff;
+    transition: transform 820ms 90ms cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  .page-transition--enter .page-transition__layer {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .page-transition--reset .page-transition__layer,
+  .page-transition--reset .page-transition__content {
+    transition: none;
+  }
+
+  .page-transition--exit .page-transition__layer {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  .page-transition--exit .page-transition__layer--main {
+    transition-duration: 760ms;
+    transition-delay: 0ms;
+  }
+
+  .page-transition--exit .page-transition__layer--back {
+    transition-delay: 0ms;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+
+  .page-transition__label {
+    color: #323232;
+    font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
+    font-size: clamp(48px, 8vw, 128px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin: 0;
+    text-align: center;
+    transform: translate3d(0, 115%, 0);
+    transition: transform 700ms 320ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  .page-transition__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    position: relative;
+    transform: translate3d(0, 24px, 0);
+    transition:
+      opacity 280ms 280ms ease,
+      transform 600ms 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 3;
+  }
+
+  .page-transition__title-mask {
+    overflow: hidden;
+    padding: 0.08em 0.08em 0.12em;
+  }
+
+  .page-transition--enter .page-transition__content {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .page-transition--enter .page-transition__label {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .page-transition--exit .page-transition__content {
+    opacity: 0;
+    transform: translate3d(0, -28px, 0);
+    transition: none;
+  }
+
+  :global(main.page-transition-content-enter) {
+    animation: page-content-reveal 800ms 180ms both cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes page-content-reveal {
+    from {
+      opacity: 0.72;
+      transform: translate3d(0, 24px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-transition {
+      display: none;
+    }
+  }
+</style>

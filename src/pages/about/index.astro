@@ -1,0 +1,14 @@
+---
+import AboutHero from '../../components/about/AboutHero.vue';
+import AboutExperience from '../../components/about/AboutExperience.vue';
+import AboutExpectations from '../../components/about/AboutExpectations.vue';
+import AboutScrollEffects from '../../components/about/AboutScrollEffects.vue';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Timmy Lee｜關於我" description="關於 UI/UX 設計師 Timmy Lee。">
+  <AboutHero client:load />
+  <AboutExperience client:load />
+  <AboutScrollEffects client:load />
+  <AboutExpectations />
+</BaseLayout>

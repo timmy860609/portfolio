@@ -1,47 +1,21 @@
 ---
-import ProjectGrid from '../components/ProjectGrid.vue';
+import FeaturedProjects from '../components/home/FeaturedProjects.vue';
+import HeroKv from '../components/home/HeroKv.vue';
+import HomeArticles from '../components/home/HomeArticles.vue';
+import HomeContact from '../components/home/HomeContact.vue';
+import HomeScrollEffects from '../components/home/HomeScrollEffects.vue';
+import SkillsSection from '../components/home/SkillsSection.vue';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="設計作品集" description="跨越品牌、產品與數位體驗的設計作品集。">
-  <header class="site-header">
-    <a class="logo" href="/" aria-label="回到首頁">TY<span>®</span></a>
-    <nav aria-label="主要選單">
-      <a href="#work">作品</a>
-      <a href="#about">關於</a>
-      <a href="mailto:hello@example.com">聯絡</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero">
-      <p class="eyebrow">Independent designer · Taipei</p>
-      <h1>我用清晰的設計，<br />讓想法被看見。</h1>
-      <div class="hero-footer">
-        <p>專注於品牌識別、數位產品與互動體驗，將策略轉化為有感的視覺溝通。</p>
-        <a href="#work" aria-label="瀏覽作品">↓</a>
-      </div>
-    </section>
-
-    <section id="work" class="work">
-      <div class="section-heading">
-        <p>Selected work</p>
-        <h2>精選作品</h2>
-      </div>
-      <ProjectGrid client:load />
-    </section>
-
-    <section id="about" class="about">
-      <p>About</p>
-      <div>
-        <h2>設計不只解決問題，也創造值得記住的感受。</h2>
-        <p>這裡可以放入你的個人簡介、設計觀點與合作經驗。替換範例文字與專案資料後，就能成為你的作品集起點。</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>© {new Date().getFullYear()} Your Name</p>
-    <a href="mailto:hello@example.com">hello@example.com</a>
-  </footer>
+<BaseLayout
+  title="Timmy Lee｜UI/UX Designer"
+  description="李柏廷 Timmy 的 UI/UX 設計作品集。"
+>
+  <HeroKv />
+  <FeaturedProjects client:visible />
+  <SkillsSection />
+  <HomeArticles />
+  <HomeContact client:visible />
+  <HomeScrollEffects client:load />
 </BaseLayout>

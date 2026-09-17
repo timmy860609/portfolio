@@ -1,0 +1,407 @@
+<div
+  class="passcode-gate"
+  data-passcode-gate
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="passcode-gate-title"
+>
+  <div class="passcode-gate__panel">
+    <p class="passcode-gate__eyebrow">PRIVATE PORTFOLIO</p>
+    <h1 id="passcode-gate-title">Enter Passcode</h1>
+
+    <div
+      class="passcode-gate__indicators"
+      data-passcode-indicators
+      aria-label="已輸入 0 碼，共 4 碼"
+    >
+      {Array.from({ length: 4 }, (_, index) => (
+        <span data-passcode-indicator data-index={index}></span>
+      ))}
+    </div>
+
+    <p class="passcode-gate__status" data-passcode-status aria-live="polite">
+      請點擊數字輸入四位數密碼
+    </p>
+
+    <div class="passcode-gate__keypad" aria-label="數字鍵盤">
+      {
+        [
+          ['1', ''],
+          ['2', 'ABC'],
+          ['3', 'DEF'],
+          ['4', 'GHI'],
+          ['5', 'JKL'],
+          ['6', 'MNO'],
+          ['7', 'PQRS'],
+          ['8', 'TUV'],
+          ['9', 'WXYZ'],
+          ['0', ''],
+        ].map(([digit, letters]) => (
+          <button
+            class:list={[
+              'passcode-gate__key',
+              digit === '0' && 'passcode-gate__key--zero',
+            ]}
+            type="button"
+            data-passcode-digit={digit}
+            aria-label={`數字 ${digit}`}
+          >
+            <span>{digit}</span>
+            {letters && <small aria-hidden="true">{letters}</small>}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  const PASSCODE_SESSION_KEY = 'portfolio-access-granted';
+  const PASSCODE_LENGTH = 4;
+  const PASSCODE_HASH =
+    '5492da8979de59f2a90187ab8402db6de1ad167faebf6597531b74ad66cf78fe';
+
+  const hashValue = async (value: string) => {
+    const bytes = new TextEncoder().encode(value);
+    const hashBuffer = await window.crypto.subtle.digest('SHA-256', bytes);
+
+    return Array.from(new Uint8Array(hashBuffer))
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('');
+  };
+
+  const setDocumentLock = (locked: boolean) => {
+    const site = document.querySelector<HTMLElement>('[data-portfolio-site]');
+
+    document.documentElement.classList.toggle('portfolio-locked', locked);
+    document.documentElement.classList.toggle('portfolio-unlocked', !locked);
+    site?.toggleAttribute('inert', locked);
+
+    if (locked) {
+      site?.setAttribute('aria-hidden', 'true');
+    } else {
+      site?.removeAttribute('aria-hidden');
+    }
+  };
+
+  const initializePasscodeGate = () => {
+    const gate = document.querySelector<HTMLElement>('[data-passcode-gate]');
+    if (!gate || gate.dataset.initialized === 'true') return;
+
+    let hasAccess = false;
+    try {
+      hasAccess = window.sessionStorage.getItem(PASSCODE_SESSION_KEY) === 'true';
+    } catch {
+      hasAccess = false;
+    }
+
+    setDocumentLock(!hasAccess);
+    if (hasAccess) {
+      gate.hidden = true;
+      return;
+    }
+
+    gate.dataset.initialized = 'true';
+
+    const indicators = Array.from(
+      gate.querySelectorAll<HTMLElement>('[data-passcode-indicator]'),
+    );
+    const indicatorGroup = gate.querySelector<HTMLElement>(
+      '[data-passcode-indicators]',
+    );
+    const status = gate.querySelector<HTMLElement>('[data-passcode-status]');
+    const keys = gate.querySelectorAll<HTMLButtonElement>(
+      '[data-passcode-digit]',
+    );
+    let enteredCode = '';
+    let isChecking = false;
+
+    const renderIndicators = () => {
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle(
+          'passcode-gate__indicator--filled',
+          index < enteredCode.length,
+        );
+      });
+
+      indicatorGroup?.setAttribute(
+        'aria-label',
+        `已輸入 ${enteredCode.length} 碼，共 ${PASSCODE_LENGTH} 碼`,
+      );
+    };
+
+    const resetCode = () => {
+      enteredCode = '';
+      isChecking = false;
+      renderIndicators();
+    };
+
+    const unlockPortfolio = () => {
+      try {
+        window.sessionStorage.setItem(PASSCODE_SESSION_KEY, 'true');
+      } catch {
+        // The current page remains unlocked even when storage is unavailable.
+      }
+
+      status && (status.textContent = '驗證成功');
+      gate.classList.add('passcode-gate--unlocking');
+
+      window.setTimeout(() => {
+        setDocumentLock(false);
+        gate.hidden = true;
+      }, 560);
+    };
+
+    const rejectCode = () => {
+      gate.classList.remove('passcode-gate--error');
+      void gate.offsetWidth;
+      gate.classList.add('passcode-gate--error');
+      status && (status.textContent = '密碼錯誤，請重新輸入');
+
+      window.setTimeout(() => {
+        gate.classList.remove('passcode-gate--error');
+        status && (status.textContent = '請點擊數字輸入四位數密碼');
+        resetCode();
+      }, 620);
+    };
+
+    const appendDigit = async (digit: string) => {
+      if (isChecking || enteredCode.length >= PASSCODE_LENGTH) return;
+
+      enteredCode += digit;
+      renderIndicators();
+      if (enteredCode.length !== PASSCODE_LENGTH) return;
+
+      isChecking = true;
+      const isCorrect = (await hashValue(enteredCode)) === PASSCODE_HASH;
+      isCorrect ? unlockPortfolio() : rejectCode();
+    };
+
+    keys.forEach((key) => {
+      key.addEventListener('pointerup', (event) => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        const digit = key.dataset.passcodeDigit;
+        if (digit) void appendDigit(digit);
+      });
+
+      key.addEventListener('keydown', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+
+    renderIndicators();
+  };
+
+  initializePasscodeGate();
+  document.addEventListener('astro:page-load', initializePasscodeGate);
+</script>
+
+<style>
+  .passcode-gate {
+    align-items: center;
+    background:
+      radial-gradient(circle at 50% 15%, rgb(0 217 255 / 10%), transparent 34%),
+      #131313;
+    color: #fff;
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    min-height: 100dvh;
+    overflow: auto;
+    padding: 40px 20px;
+    position: fixed;
+    z-index: 2147483647;
+  }
+
+  .passcode-gate[hidden] {
+    display: none;
+  }
+
+  .passcode-gate__panel {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 420px;
+    width: 100%;
+  }
+
+  .passcode-gate__eyebrow {
+    color: #00d9ff;
+    font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    line-height: 1.5;
+    margin: 0 0 8px;
+  }
+
+  .passcode-gate h1 {
+    font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
+    font-size: clamp(28px, 5vw, 36px);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.3;
+    margin: 0;
+    text-align: center;
+  }
+
+  .passcode-gate__indicators {
+    display: flex;
+    gap: 18px;
+    margin-top: 24px;
+  }
+
+  .passcode-gate__indicators span {
+    border: 2px solid rgb(255 255 255 / 72%);
+    border-radius: 50%;
+    display: block;
+    height: 16px;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      transform 160ms ease;
+    width: 16px;
+  }
+
+  .passcode-gate__indicators .passcode-gate__indicator--filled {
+    background: #00d9ff;
+    border-color: #00d9ff;
+    transform: scale(1.08);
+  }
+
+  .passcode-gate__status {
+    color: rgb(255 255 255 / 62%);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 14px 0 24px;
+    min-height: 21px;
+    text-align: center;
+  }
+
+  .passcode-gate__keypad {
+    display: grid;
+    gap: clamp(12px, 3vw, 18px);
+    grid-template-columns: repeat(3, 1fr);
+    width: min(100%, 336px);
+  }
+
+  .passcode-gate__key {
+    -webkit-tap-highlight-color: transparent;
+    align-items: center;
+    appearance: none;
+    background: #454b47;
+    border: 1px solid rgb(255 255 255 / 8%);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
+    height: clamp(82px, 22vw, 100px);
+    justify-content: center;
+    padding: 0;
+    touch-action: manipulation;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+    user-select: none;
+    width: clamp(82px, 22vw, 100px);
+  }
+
+  .passcode-gate__key:hover {
+    background: #555c57;
+    border-color: rgb(0 217 255 / 36%);
+  }
+
+  .passcode-gate__key:active {
+    background: #00badb;
+    transform: scale(0.94);
+  }
+
+  .passcode-gate__key:focus-visible {
+    outline: 3px solid #00d9ff;
+    outline-offset: 3px;
+  }
+
+  .passcode-gate__key span {
+    font-size: clamp(32px, 8vw, 42px);
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .passcode-gate__key small {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    margin-top: 6px;
+    min-height: 10px;
+  }
+
+  .passcode-gate__key--zero {
+    grid-column: 2;
+  }
+
+  .passcode-gate--error .passcode-gate__panel {
+    animation: passcode-shake 420ms ease;
+  }
+
+  .passcode-gate--error .passcode-gate__indicators span {
+    background: #e65454;
+    border-color: #e65454;
+  }
+
+  .passcode-gate--unlocking {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-2%);
+    transition:
+      opacity 520ms ease,
+      transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes passcode-shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(9px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(4px); }
+  }
+
+  @media (max-height: 720px) {
+    .passcode-gate {
+      align-items: flex-start;
+      padding-block: 24px;
+    }
+
+    .passcode-gate__indicators {
+      margin-top: 16px;
+    }
+
+    .passcode-gate__status {
+      margin-block: 10px 16px;
+    }
+
+    .passcode-gate__keypad {
+      gap: 10px 16px;
+      width: 272px;
+    }
+
+    .passcode-gate__key {
+      height: 80px;
+      width: 80px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .passcode-gate,
+    .passcode-gate__key,
+    .passcode-gate__indicators span {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>

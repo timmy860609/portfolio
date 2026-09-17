@@ -1,0 +1,38 @@
+---
+import ArticleDetailHero from '../../components/articles/detail/ArticleDetailHero.vue';
+import ArticleDetailContent from '../../components/articles/detail/ArticleDetailContent.vue';
+import ArticleImageGallery from '../../components/articles/detail/ArticleImageGallery.vue';
+import ArticlePagination from '../../components/articles/detail/ArticlePagination.vue';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  articles,
+  getArticlePagination,
+  type ArticleItem,
+} from '../../data/articles';
+
+export function getStaticPaths() {
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: ArticleItem;
+}
+
+const { article } = Astro.props;
+const pagination = getArticlePagination(article.slug);
+---
+
+<BaseLayout
+  title={`Timmy Lee｜${article.detailHero.heading}`}
+  description={article.title}
+>
+  <ArticleDetailHero {...article.detailHero} />
+  {article.detailContent && (
+    <ArticleDetailContent {...article.detailContent} client:visible />
+  )}
+  {article.detailGallery && <ArticleImageGallery {...article.detailGallery} client:load />}
+  <ArticlePagination {...pagination} />
+</BaseLayout>

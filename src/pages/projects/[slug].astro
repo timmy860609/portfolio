@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HiringDetail from '../../components/project/HiringDetail.vue';
+import IotGatewayDetail from '../../components/project/IotGatewayDetail.vue';
+import LifePlatformDetail from '../../components/project/LifePlatformDetail.vue';
+import MarketingCollectionDetail from '../../components/project/MarketingCollectionDetail.vue';
+import MobileBankDetail from '../../components/project/MobileBankDetail.vue';
+import SmartFitnessDetail from '../../components/project/SmartFitnessDetail.vue';
+import ProjectScrollEffects from '../../components/project/ProjectScrollEffects.vue';
+import StandardProjectDetail from '../../components/project/StandardProjectDetail.vue';
+import {
+  vipMemberPlatformContentSections,
+  vipMemberPlatformCover,
+  vipMemberPlatformGoals,
+  vipMemberPlatformHero,
+} from '../../data/project/vipMemberPlatformProject';
+import {
+  hrOfficialContentSections,
+  hrOfficialCover,
+  hrOfficialGoals,
+  hrOfficialHero,
+} from '../../data/project/hrOfficialProject';
+import {
+  openAccountContentSections,
+  openAccountCover,
+  openAccountGoals,
+  openAccountHero,
+} from '../../data/project/openAccountProject';
+import {
+  jobPlatformContentSections,
+  jobPlatformCover,
+  jobPlatformGoals,
+  jobPlatformHero,
+} from '../../data/project/jobPlatformProject';
+import { getProjectPagination } from '../../data/project/projectPagination';
+import { projects } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.filter((project) => project.showInGallery !== false).map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+
+const detailComponents = {
+  'smart-fitness': SmartFitnessDetail,
+  'mobile-bank-2': MobileBankDetail,
+  'hiring-2026': HiringDetail,
+  'vip-platform': LifePlatformDetail,
+  'iot-backend': IotGatewayDetail,
+  'insurance-marketing': MarketingCollectionDetail,
+};
+
+const DetailComponent =
+  detailComponents[project.slug as keyof typeof detailComponents];
+
+const standardDetails = {
+  'vip-member-platform': {
+    cover: vipMemberPlatformCover,
+    hero: vipMemberPlatformHero,
+    goals: vipMemberPlatformGoals,
+    sections: vipMemberPlatformContentSections,
+    pagination: getProjectPagination('vip-member-platform'),
+    goalsAfterFirstSection: true,
+  },
+  'hr-official': {
+    cover: hrOfficialCover,
+    hero: hrOfficialHero,
+    goals: hrOfficialGoals,
+    sections: hrOfficialContentSections,
+    pagination: getProjectPagination('hr-official'),
+    goalsAfterFirstSection: true,
+  },
+  'open-account': {
+    cover: openAccountCover,
+    hero: openAccountHero,
+    goals: openAccountGoals,
+    sections: openAccountContentSections,
+    pagination: getProjectPagination('open-account'),
+    goalsAfterFirstSection: true,
+  },
+  'job-platform': {
+    cover: jobPlatformCover,
+    hero: jobPlatformHero,
+    goals: jobPlatformGoals,
+    sections: jobPlatformContentSections,
+    pagination: getProjectPagination('job-platform'),
+    goalsAfterFirstSection: true,
+  },
+};
+
+const standardDetail =
+  standardDetails[project.slug as keyof typeof standardDetails];
+---
+
+<BaseLayout
+  title={`Timmy Lee｜${project.title}`}
+  description={project.description}
+>
+  {DetailComponent && <DetailComponent />}
+  {standardDetail && <StandardProjectDetail {...standardDetail} />}
+  <ProjectScrollEffects client:load />
+</BaseLayout>

@@ -1,4 +1,9 @@
 ---
+import AppHeader from '../components/AppHeader.vue';
+import PasscodeGate from '../components/PasscodeGate.astro';
+import PageTransition from '../components/PageTransition.astro';
+import SiteFooter from '../components/SiteFooter.vue';
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
 interface Props {
@@ -7,6 +12,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
 <!doctype html>
@@ -16,10 +22,32 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
+    <script is:inline>
+      (() => {
+        let hasAccess = false;
+        try {
+          hasAccess = sessionStorage.getItem('portfolio-access-granted') === 'true';
+        } catch {
+          hasAccess = false;
+        }
+
+        document.documentElement.classList.add(
+          hasAccess ? 'portfolio-unlocked' : 'portfolio-locked',
+        );
+      })();
+    </script>
+    <ClientRouter fallback="swap" />
   </head>
   <body>
-    <slot />
+    <PasscodeGate />
+    <div class="portfolio-site" data-portfolio-site>
+      <AppHeader currentPath={currentPath} client:load />
+      <main>
+        <slot />
+      </main>
+      <SiteFooter />
+      <PageTransition />
+    </div>
   </body>
 </html>

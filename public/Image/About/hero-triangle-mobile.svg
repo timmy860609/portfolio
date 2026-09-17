@@ -1,0 +1,23 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="473.287" height="591.94" viewBox="0 0 473.287 591.94" fill="none" xmlns="http://www.w3.org/2000/svg">
+<foreignObject x="-1.2517e-06" y="1.66893e-06" width="506.787" height="591.94"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(29.25px);clip-path:url(#bgblur_0_0_30_clip_path);height:100%;width:100%"></div></foreignObject><g id="Rectangle 18415" filter="url(#filter0_d_0_30)" data-figma-bg-blur-radius="58.5">
+<path d="M95.0046 64.1923C94.8705 61.3479 97.6672 59.2783 100.348 60.2378L445.635 183.822C447.226 184.392 448.287 185.899 448.287 187.588V527.94C448.287 530.149 446.496 531.94 444.287 531.94H120.878C118.742 531.94 116.983 530.262 116.882 528.129L95.0046 64.1923Z" fill="url(#paint0_radial_0_30)" shape-rendering="crispEdges"/>
+</g>
+<defs>
+<filter id="filter0_d_0_30" x="-1.2517e-06" y="1.66893e-06" width="506.787" height="591.94" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="-35"/>
+<feGaussianBlur stdDeviation="30"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.636756 0 0 0 0 0.983975 0 0 0 0 1 0 0 0 0.6 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_30"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_30" result="shape"/>
+</filter>
+<clipPath id="bgblur_0_0_30_clip_path" transform="translate(1.2517e-06 -1.66893e-06)"><path d="M95.0046 64.1923C94.8705 61.3479 97.6672 59.2783 100.348 60.2378L445.635 183.822C447.226 184.392 448.287 185.899 448.287 187.588V527.94C448.287 530.149 446.496 531.94 444.287 531.94H120.878C118.742 531.94 116.983 530.262 116.882 528.129L95.0046 64.1923Z"/>
+</clipPath><radialGradient id="paint0_radial_0_30" cx="0" cy="0" r="1" gradientTransform="matrix(433.744 -112.223 113.353 484.424 39.2104 316.729)" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0"/>
+<stop offset="0.801382" stop-color="#B2FCFF" stop-opacity="0.6"/>
+<stop offset="1" stop-color="#80F6FE"/>
+</radialGradient>
+</defs>
+</svg>

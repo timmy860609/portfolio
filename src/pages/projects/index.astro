@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectPageHero from '../../components/project/ProjectPageHero.vue';
+import ProjectsGallery from '../../components/project/ProjectsGallery.vue';
+---
+
+<BaseLayout
+  title="Timmy Lee｜精選案例"
+  description="Timmy Lee 的 UI/UX、數位金融、IoT、品牌形象與會員服務設計案例。"
+>
+  <ProjectPageHero />
+  <ProjectsGallery client:load />
+</BaseLayout>

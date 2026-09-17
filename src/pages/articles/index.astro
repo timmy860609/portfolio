@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectPageHero from '../../components/project/ProjectPageHero.vue';
+import ArticlesGallery from '../../components/articles/gallery/ArticlesGallery.vue';
+import { articlesHero } from '../../data/articles';
+---
+
+<BaseLayout title="Timmy Lee｜專欄分享" description="Timmy Lee 的設計專欄與分享。">
+  <ProjectPageHero {...articlesHero} />
+  <ArticlesGallery />
+</BaseLayout>
