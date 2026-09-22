@@ -36,6 +36,9 @@ const columns = computed(() => [
   filteredProjects.value.filter((_, index) => index % 2 === 1),
 ]);
 
+const isPriorityProject = (slug: string) =>
+  filteredProjects.value.slice(0, 2).some((project) => project.slug === slug);
+
 const getHeaderHeight = () => {
   const header = document.querySelector<HTMLElement>('.site-header');
 
@@ -133,6 +136,7 @@ const selectCategory = async (category: ProjectCategory) => {
           v-for="project in column"
           :key="project.title"
           v-bind="project"
+          :priority="isPriorityProject(project.slug)"
         />
       </TransitionGroup>
     </div>
@@ -146,6 +150,7 @@ const selectCategory = async (category: ProjectCategory) => {
         v-for="project in filteredProjects"
         :key="project.title"
         v-bind="project"
+        :priority="isPriorityProject(project.slug)"
       />
     </TransitionGroup>
   </section>

@@ -6,12 +6,13 @@ const props = withDefaults(
     title: string;
     tags: string[];
     image: string;
+    imageSmall?: string;
     href: string;
     selected?: boolean;
-    loadImage?: boolean;
+    priority?: boolean;
   }>(),
   {
-    loadImage: true,
+    priority: false,
   },
 );
 
@@ -25,15 +26,16 @@ const alternativeText = `${props.title}，${props.tags.map((tag) => `#${tag}`).j
   >
     <a :href="withBase(href)" :aria-label="`查看${title}專案介紹`">
       <img
-        v-if="loadImage"
         :src="withBase(image)"
+        :srcset="imageSmall ? `${withBase(imageSmall)} 768w, ${withBase(image)} 1152w` : undefined"
+        sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1600px) calc((100vw - 176px) / 3), 480px"
         :alt="alternativeText"
         width="1152"
         height="1338"
         draggable="false"
-        loading="lazy"
+        :loading="priority ? 'eager' : 'lazy'"
         decoding="async"
-        fetchpriority="low"
+        :fetchpriority="priority ? 'high' : 'low'"
       />
     </a>
   </article>

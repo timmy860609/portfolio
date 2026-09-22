@@ -118,6 +118,9 @@ onBeforeUnmount(() => {
         :alt="aboutHero.portraitAlt"
         width="388"
         height="537"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
       />
     </div>
 

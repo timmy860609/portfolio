@@ -2,20 +2,34 @@
 import ProjectTags from './ProjectTags.vue';
 import { withBase } from '../../utils/basePath';
 
-defineProps<{
+withDefaults(defineProps<{
   slug: string;
   title: string;
   description: string;
   tags: string[];
   image: string;
-}>();
+  imageSmall?: string;
+  priority?: boolean;
+}>(), {
+  priority: false,
+});
 </script>
 
 <template>
   <article>
     <a class="overview-card" :href="withBase(`/projects/${slug}`)">
       <div class="overview-card__cover">
-        <img :src="withBase(image)" :alt="`${title}專案封面`" width="1692" height="1671" />
+        <img
+          :src="withBase(image)"
+          :srcset="imageSmall ? `${withBase(imageSmall)} 960w, ${withBase(image)} 1692w` : undefined"
+          sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1024px) calc((100vw - 104px) / 2), 444px"
+          :alt="`${title}專案封面`"
+          width="1692"
+          height="1671"
+          :loading="priority ? 'eager' : 'lazy'"
+          decoding="async"
+          :fetchpriority="priority ? 'high' : 'low'"
+        />
       </div>
 
       <div class="overview-card__body">
@@ -41,6 +55,7 @@ defineProps<{
 
 .overview-card__cover {
   aspect-ratio: 564 / 557;
+  background: #e4e4e4;
   border-radius: 24px;
   overflow: hidden;
 }

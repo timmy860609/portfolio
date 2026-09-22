@@ -18,7 +18,7 @@ export const articles: ArticleItem[] = [
     description:
       '以實體介面結合互動科技技術，把數位內容轉化成動手參與的學習體驗，提升幼兒學習時的趣味性！',
     tags: ['互動投影', '幼兒教育', '益智遊戲'],
-    cover: '/Image/Articles/article-cover/child-education.jpg',
+    cover: '/Image/Articles/article-cover/child-education.webp',
     coverAlt: '幼兒圍繞互動投影桌進行益智學習遊戲',
     coverScale: 1.35,
     coverPosition: 'center 58%',

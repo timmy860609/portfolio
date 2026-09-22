@@ -26,7 +26,7 @@ export type AboutExperience = {
 export const aboutHero = {
   logo: '/WebCI/ci-logo.svg',
   logoAlt: 'Timmy Lee',
-  portrait: '/Image/About/profile.png',
+  portrait: '/Image/About/profile.webp',
   portraitAlt: 'Timmy Lee 個人照片',
   introduction:
     '專注數位產品體驗與視覺落地，從需求規劃、UI/UX 設計到前端實作，讓設計不只停留在畫面。',

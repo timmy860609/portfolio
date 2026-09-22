@@ -17,8 +17,16 @@ defineProps<AboutExperienceProject>();
         :src="withBase(backgroundImage)"
         alt=""
         aria-hidden="true"
+        loading="lazy"
+        decoding="async"
       />
-      <img class="experience-card__image" :src="withBase(image)" :alt="imageAlt" />
+      <img
+        class="experience-card__image"
+        :src="withBase(image)"
+        :alt="imageAlt"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
 
     <div class="experience-card__content">

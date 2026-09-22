@@ -2,6 +2,7 @@ export type FeaturedProject = {
   title: string;
   tags: string[];
   image: string;
+  imageSmall?: string;
   href: string;
 };
 
@@ -32,30 +33,35 @@ export const featuredProjects: FeaturedProject[] = [
     title: '全新行動銀行 2.0',
     tags: ['UIUX', '視覺設計'],
     image: '/Image/Home/featured-projects/mobile-bank.webp',
+    imageSmall: '/Image/Optimized/home-featured/mobile-bank-768.webp',
     href: '/projects/mobile-bank-2',
   },
   {
     title: '智慧健身膠囊 App',
     tags: ['UIUX'],
     image: '/Image/Home/featured-projects/smart-fitness.webp',
+    imageSmall: '/Image/Optimized/home-featured/smart-fitness-768.webp',
     href: '/projects/smart-fitness',
   },
   {
     title: '2026 人才召募網',
     tags: ['UIUX', '前端開發'],
     image: '/Image/Home/featured-projects/hiring-web.webp',
+    imageSmall: '/Image/Optimized/home-featured/hiring-web-768.webp',
     href: '/projects/hiring-2026',
   },
   {
     title: '智慧閘道器後台系統',
     tags: ['UIUX', '視覺設計'],
     image: '/Image/Home/featured-projects/iot-backend.webp',
+    imageSmall: '/Image/Optimized/home-featured/iot-backend-768.webp',
     href: '/projects/iot-backend',
   },
   {
     title: '保足感平台',
     tags: ['UIUX', '視覺設計'],
     image: '/Image/Home/featured-projects/life-web.webp',
+    imageSmall: '/Image/Optimized/home-featured/life-web-768.webp',
     href: '/projects/vip-platform',
   },
 ];
