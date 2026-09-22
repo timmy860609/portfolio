@@ -40,24 +40,87 @@
   const waitForMotion = (duration: number) =>
     new Promise<void>((resolve) => window.setTimeout(resolve, duration));
 
-  document.addEventListener('astro:before-preparation', (event) => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const preloadPriorityImage = async (
+    image: HTMLImageElement,
+    signal: AbortSignal,
+    destination: URL,
+  ) => {
+    if (signal.aborted) return;
 
+    const picture = image.closest('picture');
+    const source = Array.from(picture?.querySelectorAll('source') ?? []).find(
+      (candidate) =>
+        !candidate.media || window.matchMedia(candidate.media).matches,
+    );
+    const srcset = source?.getAttribute('srcset') || image.getAttribute('srcset');
+    const firstCandidate = srcset
+      ?.split(',')[0]
+      ?.trim()
+      .split(/\s+/)[0];
+    const rawSource = firstCandidate || image.getAttribute('src');
+    if (!rawSource) return;
+
+    const preload = new Image();
+    preload.decoding = 'async';
+    preload.fetchPriority = 'high';
+
+    const ready = new Promise<void>((resolve) => {
+      const finish = () => resolve();
+      preload.addEventListener('load', finish, { once: true });
+      preload.addEventListener('error', finish, { once: true });
+      signal.addEventListener('abort', finish, { once: true });
+    });
+
+    preload.src = new URL(rawSource, destination).href;
+    if (!preload.complete) {
+      await Promise.race([ready, waitForMotion(4000)]);
+    }
+
+    if (preload.complete && preload.naturalWidth > 0) {
+      await preload.decode().catch(() => undefined);
+    }
+  };
+
+  const preloadPriorityImages = (
+    newDocument: Document,
+    signal: AbortSignal,
+    destination: URL,
+  ) => {
+    const images = Array.from(
+      newDocument.querySelectorAll<HTMLImageElement>(
+        'main img[fetchpriority="high"], main img[loading="eager"]',
+      ),
+    ).slice(0, 3);
+
+    return Promise.all(
+      images.map((image) => preloadPriorityImage(image, signal, destination)),
+    );
+  };
+
+  document.addEventListener('astro:before-preparation', (event) => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const transition = document.querySelector<HTMLElement>('[data-page-transition]');
     const label = transition?.querySelector<HTMLElement>('[data-page-transition-label]');
-    if (!transition || !label) return;
+    const shouldAnimate = !reduceMotion && Boolean(transition && label);
 
-    const source = event.sourceElement as HTMLElement | undefined;
-    label.textContent =
-      source?.dataset.transitionLabel || getDestination(event.to.pathname);
+    if (transition && label && shouldAnimate) {
+      const source = event.sourceElement as HTMLElement | undefined;
+      label.textContent =
+        source?.dataset.transitionLabel || getDestination(event.to.pathname);
 
-    transition.classList.remove('page-transition--exit', 'page-transition--reset');
-    void transition.offsetHeight;
-    transition.classList.add('page-transition--enter');
+      transition.classList.remove('page-transition--exit', 'page-transition--reset');
+      void transition.offsetHeight;
+      transition.classList.add('page-transition--enter');
+    }
 
     const loadPage = event.loader;
     event.loader = async () => {
-      await Promise.all([loadPage(), waitForMotion(650)]);
+      const motion = shouldAnimate ? waitForMotion(650) : Promise.resolve();
+      await loadPage();
+      await Promise.all([
+        motion,
+        preloadPriorityImages(event.newDocument, event.signal, event.to),
+      ]);
     };
   });
 

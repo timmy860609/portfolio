@@ -3,7 +3,11 @@ import type { ArticleItem } from '../../../data/articles';
 import ArticleThumbnail from './ArticleThumbnail.vue';
 import { withBase } from '../../../utils/basePath';
 
-defineProps<ArticleItem>();
+withDefaults(defineProps<ArticleItem & {
+  priority?: boolean;
+}>(), {
+  priority: false,
+});
 </script>
 
 <template>
@@ -17,6 +21,7 @@ defineProps<ArticleItem>();
       :alt="coverAlt"
       :scale="coverScale"
       :position="coverPosition"
+      :priority="priority"
     />
     <div class="article-card__content">
       <div class="article-card__heading">

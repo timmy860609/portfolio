@@ -16,7 +16,13 @@ import { withBase } from '../../utils/basePath';
           media="(min-width: 768px) and (max-width: 1023px)"
           :srcset="withBase('/Image/Home/kv-new/hero-bg_p.webp')"
         />
-        <img :src="withBase('/Image/Home/kv-new/hero-bg_w.webp')" alt="" />
+        <img
+          :src="withBase('/Image/Home/kv-new/hero-bg_w.webp')"
+          alt=""
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
       </picture>
 
       <div class="hero-kv__brand">

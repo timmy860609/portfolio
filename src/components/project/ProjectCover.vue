@@ -33,6 +33,7 @@ withDefaults(
         :height="height"
         :loading="loading"
         decoding="async"
+        :fetchpriority="loading === 'eager' ? 'high' : 'low'"
       />
     </picture>
   </section>

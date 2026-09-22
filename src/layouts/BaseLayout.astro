@@ -25,6 +25,7 @@ const faviconPath = withBase('/WebCI/ci-logo.svg');
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href={faviconPath} type="image/svg+xml" />
+    <slot name="head" />
     <title>{title}</title>
     <script is:inline define:vars={{ accessPath }}>
       (() => {

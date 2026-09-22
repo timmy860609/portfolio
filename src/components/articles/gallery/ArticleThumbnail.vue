@@ -7,9 +7,11 @@ const props = withDefaults(defineProps<{
   alt: string;
   scale?: number;
   position?: string;
+  priority?: boolean;
 }>(), {
   scale: 1,
   position: 'center',
+  priority: false,
 });
 
 const imageStyle = computed(() => ({
@@ -25,8 +27,9 @@ const imageStyle = computed(() => ({
       :src="withBase(src)"
       :alt="alt"
       :style="imageStyle"
-      loading="lazy"
+      :loading="priority ? 'eager' : 'lazy'"
       decoding="async"
+      :fetchpriority="priority ? 'high' : 'low'"
     />
   </div>
 </template>

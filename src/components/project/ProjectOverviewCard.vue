@@ -13,23 +13,32 @@ withDefaults(defineProps<{
 }>(), {
   priority: false,
 });
+
+const toAvif = (source?: string) => source?.replace(/\.webp$/i, '.avif');
 </script>
 
 <template>
   <article>
     <a class="overview-card" :href="withBase(`/projects/${slug}`)">
       <div class="overview-card__cover">
-        <img
-          :src="withBase(image)"
-          :srcset="imageSmall ? `${withBase(imageSmall)} 960w, ${withBase(image)} 1692w` : undefined"
-          sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1024px) calc((100vw - 104px) / 2), 444px"
-          :alt="`${title}專案封面`"
-          width="1692"
-          height="1671"
-          :loading="priority ? 'eager' : 'lazy'"
-          decoding="async"
-          :fetchpriority="priority ? 'high' : 'low'"
-        />
+        <picture>
+          <source
+            v-if="imageSmall"
+            type="image/avif"
+            :srcset="withBase(toAvif(imageSmall) || imageSmall)"
+          />
+          <img
+            :src="withBase(image)"
+            :srcset="imageSmall ? `${withBase(imageSmall)} 960w, ${withBase(image)} 1692w` : undefined"
+            sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1024px) calc((100vw - 104px) / 2), 444px"
+            :alt="`${title}專案封面`"
+            width="1692"
+            height="1671"
+            :loading="priority ? 'eager' : 'lazy'"
+            decoding="async"
+            :fetchpriority="priority ? 'high' : 'low'"
+          />
+        </picture>
       </div>
 
       <div class="overview-card__body">
@@ -58,6 +67,12 @@ withDefaults(defineProps<{
   background: #e4e4e4;
   border-radius: 24px;
   overflow: hidden;
+}
+
+.overview-card__cover picture {
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 .overview-card__cover img {

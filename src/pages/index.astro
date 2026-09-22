@@ -6,12 +6,43 @@ import HomeContact from '../components/home/HomeContact.vue';
 import HomeScrollEffects from '../components/home/HomeScrollEffects.vue';
 import SkillsSection from '../components/home/SkillsSection.vue';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/basePath';
 ---
 
 <BaseLayout
   title="Timmy Lee｜UI/UX Designer"
   description="李柏廷 Timmy 的 UI/UX 設計作品集。"
 >
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      href={withBase('/Image/Home/kv-new/hero-bg_m.webp')}
+      media="(max-width: 767px)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href={withBase('/Image/Home/kv-new/hero-bg_p.webp')}
+      media="(min-width: 768px) and (max-width: 1023px)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href={withBase('/Image/Home/kv-new/hero-bg_w.webp')}
+      media="(min-width: 1024px)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      href={withBase('/Image/Optimized/home-featured/mobile-bank-768.avif')}
+      fetchpriority="high"
+    />
+  </Fragment>
   <HeroKv />
   <FeaturedProjects client:visible />
   <SkillsSection />

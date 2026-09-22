@@ -17,6 +17,7 @@ const props = withDefaults(
 );
 
 const alternativeText = `${props.title}，${props.tags.map((tag) => `#${tag}`).join(' ')}`;
+const avifSource = props.imageSmall?.replace(/\.webp$/i, '.avif');
 </script>
 
 <template>
@@ -25,18 +26,25 @@ const alternativeText = `${props.title}，${props.tags.map((tag) => `#${tag}`).j
     :class="{ 'project-card--selected': selected }"
   >
     <a :href="withBase(href)" :aria-label="`查看${title}專案介紹`">
-      <img
-        :src="withBase(image)"
-        :srcset="imageSmall ? `${withBase(imageSmall)} 768w, ${withBase(image)} 1152w` : undefined"
-        sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1600px) calc((100vw - 176px) / 3), 480px"
-        :alt="alternativeText"
-        width="1152"
-        height="1338"
-        draggable="false"
-        :loading="priority ? 'eager' : 'lazy'"
-        decoding="async"
-        :fetchpriority="priority ? 'high' : 'low'"
-      />
+      <picture>
+        <source
+          v-if="avifSource"
+          type="image/avif"
+          :srcset="withBase(avifSource)"
+        />
+        <img
+          :src="withBase(image)"
+          :srcset="imageSmall ? `${withBase(imageSmall)} 768w, ${withBase(image)} 1152w` : undefined"
+          sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1600px) calc((100vw - 176px) / 3), 480px"
+          :alt="alternativeText"
+          width="1152"
+          height="1338"
+          draggable="false"
+          :loading="priority ? 'eager' : 'lazy'"
+          decoding="async"
+          :fetchpriority="priority ? 'high' : 'low'"
+        />
+      </picture>
     </a>
   </article>
 </template>
@@ -52,6 +60,12 @@ const alternativeText = `${props.title}，${props.tags.map((tag) => `#${tag}`).j
 
 .project-card a {
   cursor: pointer;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.project-card picture {
   display: block;
   height: 100%;
   width: 100%;

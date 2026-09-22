@@ -7,9 +7,10 @@ import ArticleCard from './ArticleCard.vue';
   <section class="articles-gallery" aria-label="專欄文章">
     <div class="articles-gallery__grid">
       <ArticleCard
-        v-for="article in articles"
+        v-for="(article, index) in articles"
         :key="article.slug"
         v-bind="article"
+        :priority="index === 0"
       />
     </div>
   </section>
