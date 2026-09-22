@@ -28,8 +28,20 @@ const mediaStyle = computed(() => ({
 const videoElement = ref<HTMLVideoElement | null>(null);
 const videoHasStarted = ref(false);
 
+const ensureVideoSource = () => {
+  const video = videoElement.value;
+  if (!video || video.getAttribute('src')) return video;
+
+  const source = video.dataset.src;
+  if (!source) return video;
+
+  video.src = source;
+  video.load();
+  return video;
+};
+
 const playVideo = async () => {
-  await videoElement.value?.play().catch(() => undefined);
+  await ensureVideoSource()?.play().catch(() => undefined);
 };
 </script>
 
@@ -51,7 +63,7 @@ const playVideo = async () => {
     <video
       v-else-if="video"
       ref="videoElement"
-      :src="withBase(video.src)"
+      :data-src="withBase(video.src)"
       :poster="video.poster ? withBase(video.poster) : undefined"
       :width="video.width ?? 1280"
       :height="video.height ?? 720"
@@ -61,7 +73,7 @@ const playVideo = async () => {
       :loop="video.loop || video.autoplayOnView"
       :muted="video.muted || video.autoplayOnView"
       playsinline
-      :preload="video.autoplayOnView ? 'auto' : 'metadata'"
+      preload="none"
       @playing="videoHasStarted = true"
     ></video>
 

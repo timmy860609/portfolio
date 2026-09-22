@@ -57,7 +57,7 @@
 
     const loadPage = event.loader;
     event.loader = async () => {
-      await Promise.all([loadPage(), waitForMotion(940)]);
+      await Promise.all([loadPage(), waitForMotion(650)]);
     };
   });
 
@@ -75,7 +75,7 @@
         pageContent.classList.remove('page-transition-content-enter');
       }, { once: true });
 
-      waitForMotion(940).then(() => {
+      waitForMotion(650).then(() => {
         transition.classList.add('page-transition--reset');
         transition.classList.remove('page-transition--exit');
         requestAnimationFrame(() => {
@@ -108,12 +108,12 @@
 
   .page-transition__layer--back {
     background: #131313;
-    transition: transform 760ms cubic-bezier(0.76, 0, 0.24, 1);
+    transition: transform 520ms cubic-bezier(0.76, 0, 0.24, 1);
   }
 
   .page-transition__layer--main {
     background-color: #00d9ff;
-    transition: transform 820ms 90ms cubic-bezier(0.76, 0, 0.24, 1);
+    transition: transform 580ms 50ms cubic-bezier(0.76, 0, 0.24, 1);
   }
 
   .page-transition--enter .page-transition__layer {
@@ -130,7 +130,7 @@
   }
 
   .page-transition--exit .page-transition__layer--main {
-    transition-duration: 760ms;
+    transition-duration: 520ms;
     transition-delay: 0ms;
   }
 
@@ -153,7 +153,7 @@
     margin: 0;
     text-align: center;
     transform: translate3d(0, 115%, 0);
-    transition: transform 700ms 320ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 460ms 150ms cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform;
   }
 
@@ -165,8 +165,8 @@
     position: relative;
     transform: translate3d(0, 24px, 0);
     transition:
-      opacity 280ms 280ms ease,
-      transform 600ms 280ms cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 220ms 140ms ease,
+      transform 460ms 140ms cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 3;
   }
 

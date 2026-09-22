@@ -33,6 +33,6 @@ const pagination = getArticlePagination(article.slug);
   {article.detailContent && (
     <ArticleDetailContent {...article.detailContent} client:visible />
   )}
-  {article.detailGallery && <ArticleImageGallery {...article.detailGallery} client:load />}
+  {article.detailGallery && <ArticleImageGallery {...article.detailGallery} client:visible />}
   <ArticlePagination {...pagination} />
 </BaseLayout>

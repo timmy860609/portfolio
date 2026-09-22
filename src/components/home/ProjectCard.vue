@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import { withBase } from '../../utils/basePath';
 
-const props = defineProps<{
-  title: string;
-  tags: string[];
-  image: string;
-  href: string;
-  selected?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    title: string;
+    tags: string[];
+    image: string;
+    href: string;
+    selected?: boolean;
+    loadImage?: boolean;
+  }>(),
+  {
+    loadImage: true,
+  },
+);
 
 const alternativeText = `${props.title}，${props.tags.map((tag) => `#${tag}`).join(' ')}`;
 </script>
@@ -19,11 +25,15 @@ const alternativeText = `${props.title}，${props.tags.map((tag) => `#${tag}`).j
   >
     <a :href="withBase(href)" :aria-label="`查看${title}專案介紹`">
       <img
+        v-if="loadImage"
         :src="withBase(image)"
         :alt="alternativeText"
         width="1152"
         height="1338"
         draggable="false"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
       />
     </a>
   </article>

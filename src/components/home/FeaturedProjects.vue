@@ -13,6 +13,7 @@ const dragOffset = ref(0);
 const transitionEnabled = ref(true);
 const isAnimating = ref(false);
 const isDragging = ref(false);
+const imagesReady = ref(false);
 const trackElement = ref<HTMLElement>();
 let dragStartX = 0;
 let didDrag = false;
@@ -169,6 +170,7 @@ const handleResize = () => {
 };
 
 onMounted(() => {
+  imagesReady.value = true;
   updateTrackOffset();
   window.addEventListener('resize', handleResize);
 });
@@ -227,6 +229,7 @@ onBeforeUnmount(() => {
             :key="`${project.title}-${index}`"
             v-bind="project"
             :selected="index === trackIndex"
+            :load-image="imagesReady"
           />
         </div>
       </div>

@@ -19,11 +19,21 @@ const setupAutoplayVideos = () => {
     video.defaultMuted = true;
     video.loop = true;
     video.playsInline = true;
-    if (video.readyState === HTMLMediaElement.HAVE_NOTHING) video.load();
   });
+
+  const ensureVideoSource = (video: HTMLVideoElement) => {
+    if (video.getAttribute('src')) return;
+
+    const source = video.dataset.src;
+    if (!source) return;
+
+    video.src = source;
+    video.load();
+  };
 
   if (!('IntersectionObserver' in window)) {
     autoplayVideos.forEach((video) => {
+      ensureVideoSource(video);
       void video.play().catch(() => undefined);
     });
     return;
@@ -33,6 +43,10 @@ const setupAutoplayVideos = () => {
     (entries) => {
       entries.forEach((entry) => {
         const video = entry.target as HTMLVideoElement;
+
+        if (entry.isIntersecting) {
+          ensureVideoSource(video);
+        }
 
         if (entry.intersectionRatio >= 0.45) {
           void video.play().catch(() => undefined);
@@ -44,7 +58,7 @@ const setupAutoplayVideos = () => {
         }
       });
     },
-    { threshold: [0, 0.45] },
+    { rootMargin: '240px 0px', threshold: [0, 0.1, 0.45] },
   );
 
   autoplayVideos.forEach((video) => videoObserver?.observe(video));

@@ -1,6 +1,20 @@
+---
+interface Props {
+  redirectOnUnlock?: boolean;
+  defaultReturnTo?: string;
+}
+
+const {
+  redirectOnUnlock = false,
+  defaultReturnTo = '/',
+} = Astro.props;
+---
+
 <div
   class="passcode-gate"
   data-passcode-gate
+  data-redirect-on-unlock={redirectOnUnlock ? 'true' : 'false'}
+  data-default-return-to={defaultReturnTo}
   role="dialog"
   aria-modal="true"
   aria-labelledby="passcode-gate-title"
@@ -84,6 +98,31 @@
     }
   };
 
+  const getReturnTarget = (gate: HTMLElement) => {
+    const defaultReturnTo = gate.dataset.defaultReturnTo || '/';
+    const requestedReturnTo = new URLSearchParams(window.location.search).get(
+      'returnTo',
+    );
+
+    if (!requestedReturnTo) return defaultReturnTo;
+
+    try {
+      const defaultUrl = new URL(defaultReturnTo, window.location.origin);
+      const requestedUrl = new URL(requestedReturnTo, window.location.origin);
+
+      if (
+        requestedUrl.origin !== window.location.origin ||
+        !requestedUrl.pathname.startsWith(defaultUrl.pathname)
+      ) {
+        return defaultReturnTo;
+      }
+
+      return `${requestedUrl.pathname}${requestedUrl.search}${requestedUrl.hash}`;
+    } catch {
+      return defaultReturnTo;
+    }
+  };
+
   const initializePasscodeGate = () => {
     const gate = document.querySelector<HTMLElement>('[data-passcode-gate]');
     if (!gate || gate.dataset.initialized === 'true') return;
@@ -97,7 +136,11 @@
 
     setDocumentLock(!hasAccess);
     if (hasAccess) {
-      gate.hidden = true;
+      if (gate.dataset.redirectOnUnlock === 'true') {
+        window.location.replace(getReturnTarget(gate));
+      } else {
+        gate.hidden = true;
+      }
       return;
     }
 
@@ -147,6 +190,11 @@
       gate.classList.add('passcode-gate--unlocking');
 
       window.setTimeout(() => {
+        if (gate.dataset.redirectOnUnlock === 'true') {
+          window.location.replace(getReturnTarget(gate));
+          return;
+        }
+
         setDocumentLock(false);
         gate.hidden = true;
       }, 560);
