@@ -4,34 +4,16 @@ import { withBase } from '../utils/basePath';
 
 <template>
   <footer class="site-footer" data-node-id="5758:16017">
-    <div class="site-footer__decorations" aria-hidden="true">
-      <picture class="site-footer__glass">
-        <source
-          media="(max-width: 767px)"
-          :srcset="withBase('/Image/Footer/footer-mobile-glass.svg')"
-        />
-        <img :src="withBase('/Image/Footer/footer-glass-light.svg')" alt="" />
-      </picture>
-      <img
-        class="site-footer__orb"
-        :src="withBase('/Image/Footer/footer-orb-light.svg')"
-        alt=""
-      />
-      <div class="site-footer__triangle">
-        <div class="site-footer__triangle-shape">
-          <picture>
-            <source
-              media="(max-width: 767px)"
-              :srcset="withBase('/Image/Footer/footer-mobile-triangle.svg')"
-            />
-            <img :src="withBase('/Image/Footer/footer-triangle-light.svg')" alt="" />
-          </picture>
-        </div>
-      </div>
-      <div class="site-footer__glow">
-        <img :src="withBase('/Image/Footer/footer-left-circle.svg')" alt="" />
-      </div>
-    </div>
+    <img
+      class="site-footer__artwork"
+      :src="withBase('/Image/Footer/Footer.webp')"
+      alt=""
+      width="3840"
+      height="696"
+      loading="lazy"
+      decoding="async"
+      aria-hidden="true"
+    />
 
     <div class="site-footer__inner">
       <div class="site-footer__identity">
@@ -81,92 +63,15 @@ import { withBase } from '../utils/basePath';
   position: relative;
 }
 
-.site-footer__decorations {
-  inset: 0;
-  pointer-events: none;
-  position: absolute;
-}
-
-.site-footer__orb,
-.site-footer__triangle,
-.site-footer__glow {
-  z-index: 0;
-}
-
-.site-footer__orb {
-  display: block;
-  height: calc(500 * var(--footer-art-unit));
-  left: calc(50% + 552 * var(--footer-art-unit));
-  max-width: none;
-  position: absolute;
-  top: calc(42 * var(--footer-art-unit));
-  width: calc(500 * var(--footer-art-unit));
-}
-
-.site-footer__triangle {
-  align-items: center;
-  display: flex;
-  height: calc(747.029 * var(--footer-art-unit));
-  justify-content: center;
-  left: calc(50% + 197 * var(--footer-art-unit));
-  position: absolute;
-  top: 0;
-  width: calc(638.439 * var(--footer-art-unit));
-}
-
-.site-footer__triangle-shape {
-  height: calc(486.752 * var(--footer-art-unit));
-  position: relative;
-  transform: rotate(-41.62deg) skewX(-9.27deg) scaleY(.99);
-  transform-origin: center;
-  width: calc(505.621 * var(--footer-art-unit));
-}
-
-.site-footer__triangle img {
-  display: block;
-  height: calc(606.36 * var(--footer-art-unit));
-  left: calc(-94.25 * var(--footer-art-unit));
-  max-width: none;
-  position: absolute;
-  top: calc(-59.62 * var(--footer-art-unit));
-  width: calc(624.851 * var(--footer-art-unit));
-}
-
-.site-footer__glow {
-  height: calc(471 * var(--footer-art-unit));
-  left: calc(50% - 823 * var(--footer-art-unit));
-  position: absolute;
-  top: calc(99 * var(--footer-art-unit));
-  transform: rotate(180deg);
-  width: calc(471 * var(--footer-art-unit));
-}
-
-.site-footer__glow img {
-  display: block;
-  height: calc(591 * var(--footer-art-unit));
-  left: calc(-95 * var(--footer-art-unit));
-  max-width: none;
-  position: absolute;
-  top: calc(-60 * var(--footer-art-unit));
-  width: calc(591 * var(--footer-art-unit));
-}
-
-.site-footer__glass {
-  display: block;
-  height: calc(204 * var(--footer-art-unit));
-  left: 0;
-  max-width: none;
-  position: absolute;
-  right: 0;
-  top: calc(144 * var(--footer-art-unit));
-  width: 100%;
-  z-index: 1;
-}
-
-.site-footer__glass img {
+.site-footer__artwork {
   display: block;
   height: 100%;
+  inset: 0;
+  object-fit: fill;
+  pointer-events: none;
+  position: absolute;
   width: 100%;
+  z-index: 0;
 }
 
 .site-footer__inner {
@@ -288,13 +193,9 @@ import { withBase } from '../utils/basePath';
     padding: 32px 24px;
   }
 
-  .site-footer__glass {
-    bottom: auto;
-    height: 128.945px;
-    left: 0;
-    right: 0;
-    top: 191px;
-    width: 100%;
+  .site-footer__artwork {
+    object-fit: cover;
+    object-position: center;
   }
 
   .site-footer__inner {
@@ -352,30 +253,5 @@ import { withBase } from '../utils/basePath';
     font-size: 16px;
   }
 
-  .site-footer__triangle {
-    height: 504.686px;
-    left: auto;
-    right: 0;
-    top: 93px;
-    width: 431.323px;
-  }
-
-  .site-footer__triangle-shape {
-    height: 328.845px;
-    transform: rotate(-41.62deg) skewX(-9.27deg) scaleY(.99);
-    width: 341.593px;
-  }
-
-  .site-footer__triangle img {
-    height: 448.453px;
-    left: -94.25px;
-    top: -59.62px;
-    width: 460.823px;
-  }
-
-  .site-footer__glow,
-  .site-footer__orb {
-    display: none;
-  }
 }
 </style>
