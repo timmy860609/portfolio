@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { responsiveImage } from '../../utils/responsiveImage';
 import type { ProjectPaginationItem } from '../../types/project';
 import AppButton from '../AppButton.vue';
 import ProjectTags from './ProjectTags.vue';
-import { withBase } from '../../utils/basePath';
 
 withDefaults(
   defineProps<{
@@ -28,7 +28,7 @@ withDefaults(
   >
     <div class="project-pagination-item__image">
       <img
-        :src="withBase(item.image)"
+        v-bind="responsiveImage(item.image, '(max-width: 767px) 40vw, 240px')"
         :alt="item.imageAlt"
         :style="{
           objectPosition: item.imagePosition,

@@ -12,3 +12,7 @@ dist/
 # Local browser-test captures and comparison screenshots
 .playwright-mcp/
 artifacts/
+
+# Rebuilt from source images before dev/check/build
+public/Image/Responsive/
+src/generated/

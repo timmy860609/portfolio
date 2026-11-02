@@ -11,7 +11,12 @@
     "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
-    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check"
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "images": "node scripts/generate-images.mjs",
+    "prebuild": "npm run images",
+    "predev": "npm run images",
+    "precheck": "npm run images",
+    "prestart": "npm run images"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -22,5 +27,8 @@
     "gsap": "^3.15.0",
     "typescript": "^5.9.0",
     "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }

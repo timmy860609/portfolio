@@ -1,5 +1,6 @@
 ---
 import AppHeader from '../components/AppHeader.vue';
+import ImageLoading from '../components/ImageLoading.astro';
 import PageTransition from '../components/PageTransition.astro';
 import SiteFooter from '../components/SiteFooter.vue';
 import { stripBase, withBase } from '../utils/basePath';
@@ -72,6 +73,7 @@ const faviconPath = withBase('/WebCI/ci-logo.svg');
       </main>
       <SiteFooter />
       <PageTransition />
+      <ImageLoading />
     </div>
   </body>
 </html>

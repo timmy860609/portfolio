@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { responsiveImage } from '../../../utils/responsiveImage';
 import { computed } from 'vue';
-import { withBase } from '../../../utils/basePath';
 
 const props = withDefaults(defineProps<{
   src: string;
@@ -24,7 +24,7 @@ const imageStyle = computed(() => ({
 <template>
   <div class="article-thumbnail">
     <img
-      :src="withBase(src)"
+      v-bind="responsiveImage(src, '(max-width: 767px) calc(100vw - 40px), 320px')"
       :alt="alt"
       :style="imageStyle"
       :loading="priority ? 'eager' : 'lazy'"

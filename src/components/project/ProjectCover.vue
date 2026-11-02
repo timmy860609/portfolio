@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { responsiveImage, imageSrcset } from '../../utils/responsiveImage';
 import { withBase } from '../../utils/basePath';
 
 withDefaults(
@@ -24,10 +25,11 @@ withDefaults(
       <source
         v-if="mobileSrc"
         media="(max-width: 767px)"
-        :srcset="withBase(mobileSrc)"
+        :srcset="imageSrcset(mobileSrc) || withBase(mobileSrc)"
+        sizes="100vw"
       />
       <img
-        :src="withBase(src)"
+        v-bind="responsiveImage(src, '(max-width: 767px) 100vw, (max-width: 1439px) 1440px, 100vw')"
         :alt="alt"
         :width="width"
         :height="height"

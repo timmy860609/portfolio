@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { responsiveImage } from '../../utils/responsiveImage';
 import type { MarketingProject } from '../../data/project/marketingProjects';
 import AppButton from '../AppButton.vue';
 import ProjectTags from './ProjectTags.vue';
-import { withBase } from '../../utils/basePath';
 
 defineProps<MarketingProject>();
 </script>
@@ -30,7 +30,7 @@ defineProps<MarketingProject>();
     </div>
 
     <figure>
-      <img :src="withBase(image)" :alt="`${title}網站預覽`" width="1080" height="720" loading="lazy" />
+      <img v-bind="responsiveImage(image, '(max-width: 767px) calc(100vw - 40px), 540px')" :alt="`${title}網站預覽`" width="1080" height="720" loading="lazy" />
     </figure>
   </article>
 </template>

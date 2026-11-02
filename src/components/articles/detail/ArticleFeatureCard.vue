@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { responsiveImage } from '../../../utils/responsiveImage';
 import type { ArticleFeatureCardData } from '../../../data/articles';
-import { withBase } from '../../../utils/basePath';
 
 defineProps<ArticleFeatureCardData>();
 </script>
@@ -9,7 +9,7 @@ defineProps<ArticleFeatureCardData>();
   <article class="article-feature-card">
     <img
       class="article-feature-card__image"
-      :src="withBase(image.src)"
+      v-bind="responsiveImage(image.src, '(max-width: 767px) 88px, 200px')"
       :alt="image.alt"
       :width="image.width"
       :height="image.height"

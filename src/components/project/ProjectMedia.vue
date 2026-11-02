@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { responsiveImage } from '../../utils/responsiveImage';
 import { computed, ref } from 'vue';
 import type { ProjectImage, ProjectVideo } from '../../types/project';
 import { withBase } from '../../utils/basePath';
@@ -53,7 +54,7 @@ const playVideo = async () => {
   >
     <img
       v-if="image"
-      :src="withBase(image.src)"
+      v-bind="responsiveImage(image.src)"
       :alt="image.alt"
       :width="image.width ?? 2880"
       :height="image.height ?? 1680"
@@ -85,7 +86,7 @@ const playVideo = async () => {
       @click="playVideo"
     >
       <img
-        :src="withBase(video.poster)"
+        v-bind="responsiveImage(video.poster)"
         alt=""
         :width="video.width ?? 1280"
         :height="video.height ?? 720"

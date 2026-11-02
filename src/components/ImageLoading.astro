@@ -1,0 +1,37 @@
+<script>
+  let observer: IntersectionObserver | undefined;
+  let controller: AbortController | undefined;
+
+  function initializeImages() {
+    observer?.disconnect();
+    controller?.abort();
+    controller = new AbortController();
+    const { signal } = controller;
+    const images = document.querySelectorAll<HTMLImageElement>('img[data-responsive-image]');
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(entries => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          // Keep real src/srcset and native lazy loading as a no-JS fallback.
+          (entry.target as HTMLImageElement).loading = 'eager';
+          observer?.unobserve(entry.target);
+        }
+      }, { rootMargin: '2000px 0px', threshold: 0 });
+    }
+    images.forEach(image => {
+      const reveal = async () => {
+        if (!image.naturalWidth) return;
+        await image.decode().catch(() => undefined);
+        if (!signal.aborted) image.style.backgroundImage = 'none';
+      };
+      if (image.complete) void reveal();
+      else image.addEventListener('load', reveal, { once: true, signal });
+      if (image.loading === 'lazy') observer?.observe(image);
+    });
+  }
+  document.addEventListener('astro:page-load', initializeImages);
+  document.addEventListener('astro:before-swap', () => {
+    observer?.disconnect();
+    controller?.abort();
+  });
+</script>

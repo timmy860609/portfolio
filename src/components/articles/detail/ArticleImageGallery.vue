@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { responsiveImage } from '../../../utils/responsiveImage';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import type { ArticleDetailGalleryData } from '../../../data/articles';
-import { withBase } from '../../../utils/basePath';
 
 defineProps<ArticleDetailGalleryData>();
 
@@ -31,7 +31,7 @@ onMounted(() => {
       });
     },
     {
-      rootMargin: '0px 0px -8% 0px',
+      rootMargin: '200px 0px',
       threshold: 0.08,
     },
   );
@@ -56,7 +56,7 @@ onBeforeUnmount(() => observer?.disconnect());
           class="article-image-gallery__item"
         >
           <img
-            :src="withBase(item.src)"
+            v-bind="responsiveImage(item.src, '(max-width: 767px) calc(100vw - 40px), (max-width: 1024px) calc((100vw - 72px) / 2), 304px')"
             :alt="item.alt"
             :width="item.width"
             :height="item.height"
@@ -107,8 +107,8 @@ onBeforeUnmount(() => observer?.disconnect());
   opacity: 0;
   transform: translateY(48px);
   transition:
-    opacity 700ms cubic-bezier(.22, 1, .36, 1),
-    transform 700ms cubic-bezier(.22, 1, .36, 1);
+    opacity 250ms cubic-bezier(.22, 1, .36, 1),
+    transform 250ms cubic-bezier(.22, 1, .36, 1);
 }
 
 .article-image-gallery--ready .article-image-gallery__item--visible {
