@@ -108,7 +108,9 @@ export const mobileBankPersonalizedHome = {
     '不同用戶持有的金融商品、關注資訊與操作習慣不同，固定的首頁配置難以回應每個人的日常需求。透過卡片排序與快捷功能設定，讓用戶自行決定優先查看的內容與常用服務，讓首頁更貼近個人的使用情境。',
   ],
   video: {
-    src: '/Image/Project/mobile-bank-detail/vd-4.mov',
+    src: '/Video/mobile-bank-detail/vd-4-1280.mp4',
+    mobileSrc: '/Video/mobile-bank-detail/vd-4-768.mp4',
+    poster: '/Video/mobile-bank-detail/vd-4-poster.webp',
     title: '可自訂總覽卡片與快捷功能排序的個人化首頁',
     autoplayOnView: true,
     controls: false,
@@ -221,7 +223,9 @@ export const mobileBankTransferFlow = {
     '臺幣轉帳涉及多項複雜資訊填寫，團隊將流程拆分為「資料填寫、交易確認、身分驗證與完成結果」四個階段，依照操作順序動態顯示重要資訊，並強化關鍵內容的辨識，讓用戶在送出交易前能充分確認。',
   ],
   video: {
-    src: '/Image/Project/mobile-bank-detail/vd-10.mov',
+    src: '/Video/mobile-bank-detail/vd-10-1280.mp4',
+    mobileSrc: '/Video/mobile-bank-detail/vd-10-768.mp4',
+    poster: '/Video/mobile-bank-detail/vd-10-poster.webp',
     title: '多元收款方式、分段確認與安全驗證的台幣轉帳流程',
     autoplayOnView: true,
     controls: false,
@@ -238,7 +242,9 @@ export const mobileBankCarbonTracking = {
     '「鑽金碳吉」將全站的金融行為，轉換為具體的減碳數據，用戶可以看見每一次操作對環境產生的影響。除了顯示整體減碳成果，也依月份整理明細來源，協助用戶理解減碳量如何產生；同時透過生活化比較與低碳服務引導，將永續議題轉化為更貼近日常的資訊，鼓勵用戶持續選擇數位化與低碳的金融服務。',
   ],
   video: {
-    src: '/Image/Project/mobile-bank-detail/vd-11.mov',
+    src: '/Video/mobile-bank-detail/vd-11-1280.mp4',
+    mobileSrc: '/Video/mobile-bank-detail/vd-11-768.mp4',
+    poster: '/Video/mobile-bank-detail/vd-11-poster.webp',
     title: '鑽金碳吉減碳成果、減碳明細與低碳生活引導介面',
     autoplayOnView: true,
     controls: false,

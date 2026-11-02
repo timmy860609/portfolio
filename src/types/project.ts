@@ -7,6 +7,7 @@ export type ProjectImage = {
 
 export type ProjectVideo = {
   src: string;
+  mobileSrc?: string;
   title: string;
   width?: number;
   height?: number;

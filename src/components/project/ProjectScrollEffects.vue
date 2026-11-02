@@ -4,71 +4,9 @@ import { gsap } from 'gsap/dist/gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 let mediaContext: ReturnType<typeof gsap.matchMedia> | undefined;
-let videoObserver: IntersectionObserver | undefined;
-
-const setupAutoplayVideos = () => {
-  videoObserver?.disconnect();
-  const autoplayVideos = Array.from(
-    document.querySelectorAll<HTMLVideoElement>('video[data-autoplay-on-view]'),
-  );
-
-  if (!autoplayVideos.length) return;
-
-  autoplayVideos.forEach((video) => {
-    video.muted = true;
-    video.defaultMuted = true;
-    video.loop = true;
-    video.playsInline = true;
-  });
-
-  const ensureVideoSource = (video: HTMLVideoElement) => {
-    if (video.getAttribute('src')) return;
-
-    const source = video.dataset.src;
-    if (!source) return;
-
-    video.src = source;
-    video.load();
-  };
-
-  if (!('IntersectionObserver' in window)) {
-    autoplayVideos.forEach((video) => {
-      ensureVideoSource(video);
-      void video.play().catch(() => undefined);
-    });
-    return;
-  }
-
-  videoObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const video = entry.target as HTMLVideoElement;
-
-        if (entry.isIntersecting) {
-          ensureVideoSource(video);
-        }
-
-        if (entry.intersectionRatio >= 0.45) {
-          void video.play().catch(() => undefined);
-        } else if (!entry.isIntersecting) {
-          video.pause();
-          if (video.readyState > HTMLMediaElement.HAVE_NOTHING) {
-            video.currentTime = 0;
-          }
-        }
-      });
-    },
-    { rootMargin: '240px 0px', threshold: [0, 0.1, 0.45] },
-  );
-
-  autoplayVideos.forEach((video) => videoObserver?.observe(video));
-};
-
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
   mediaContext = gsap.matchMedia();
-  setupAutoplayVideos();
-  document.addEventListener('astro:page-load', setupAutoplayVideos);
 
   const createEffects = (coverOffset: number, paginationOffset: number) => {
     const cover = document.querySelector<HTMLElement>('.project-cover');
@@ -129,8 +67,6 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  document.removeEventListener('astro:page-load', setupAutoplayVideos);
-  videoObserver?.disconnect();
   mediaContext?.revert();
 });
 </script>

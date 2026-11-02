@@ -39,3 +39,17 @@ and native lazy loading without JavaScript. The shared page script promotes
 images within 2000px to eager loading and removes the inline preview after
 image decoding; it reconnects after Astro navigation. Page transitions wait
 only for the destination HTML and the transition animation, not image downloads.
+
+## Project videos
+
+`FFMPEG=/path/to/ffmpeg python3 scripts/compress-videos.py` creates delivery
+copies of the original project MOV recordings in `public/Video/`. Commit these
+MP4s and WebP posters; FFmpeg is not required during the Pages build. The copies
+use H.264/yuv420p, 30fps, 768px and 1280px widths, a two-second keyframe interval,
+and fast-start metadata. Original recordings remain unchanged.
+
+The shared video loader selects the mobile copy before the first request,
+preloads nearby autoplay videos within 1200px, and plays only when visible.
+Offscreen videos pause without seeking. Save-Data/reduced-motion users receive
+manual controls and metadata-only preloading. Manual article videos retain audio
+and use their original sources.

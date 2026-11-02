@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { responsiveImage } from '../../utils/responsiveImage';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import type { ProjectImage, ProjectVideo } from '../../types/project';
 import { withBase } from '../../utils/basePath';
 
@@ -26,24 +26,6 @@ const mediaStyle = computed(() => ({
     : {}),
 }));
 
-const videoElement = ref<HTMLVideoElement | null>(null);
-const videoHasStarted = ref(false);
-
-const ensureVideoSource = () => {
-  const video = videoElement.value;
-  if (!video || video.getAttribute('src')) return video;
-
-  const source = video.dataset.src;
-  if (!source) return video;
-
-  video.src = source;
-  video.load();
-  return video;
-};
-
-const playVideo = async () => {
-  await ensureVideoSource()?.play().catch(() => undefined);
-};
 </script>
 
 <template>
@@ -63,8 +45,9 @@ const playVideo = async () => {
     />
     <video
       v-else-if="video"
-      ref="videoElement"
+      data-managed-video
       :data-src="withBase(video.src)"
+      :data-mobile-src="video.mobileSrc ? withBase(video.mobileSrc) : undefined"
       :poster="video.poster ? withBase(video.poster) : undefined"
       :width="video.width ?? 1280"
       :height="video.height ?? 720"
@@ -75,15 +58,14 @@ const playVideo = async () => {
       :muted="video.muted || video.autoplayOnView"
       playsinline
       preload="none"
-      @playing="videoHasStarted = true"
     ></video>
 
     <button
-      v-if="video?.poster && !videoHasStarted"
+      v-if="video?.poster && !video.autoplayOnView"
       class="project-media__video-cover"
       type="button"
       :aria-label="`播放影片：${video.title}`"
-      @click="playVideo"
+      data-play-video
     >
       <img
         v-bind="responsiveImage(video.poster)"

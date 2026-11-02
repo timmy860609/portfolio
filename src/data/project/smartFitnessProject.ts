@@ -151,7 +151,9 @@ export const smartFitnessContentSections: ProjectContentSectionData[] = [
       '整合會員儲值與方案選擇，讓用戶可清楚比較方案，確認購買金額並付款。交易成功後即時更新點數或會員狀態，並提供場館預約入口。',
     ],
     video: {
-      src: `${smartFitnessAssetPath}/vd-5.mov`,
+      src: '/Video/smart-fitness-detail/vd-5-1280.mp4',
+      mobileSrc: '/Video/smart-fitness-detail/vd-5-768.mp4',
+      poster: '/Video/smart-fitness-detail/vd-5-poster.webp',
       title: 'OSPACE 會員方案、點數加值與付款流程',
       autoplayOnView: true,
       controls: false,
@@ -196,7 +198,9 @@ export const smartFitnessContentSections: ProjectContentSectionData[] = [
       '場館的規劃重點，是依照用戶進入健身膠囊的過程，串聯時段、權限、設備與數據。系統會根據當下狀態開放對應功能，讓用戶從抵達到完成運動，都能透過App掌握場館情況；訓練結束後，呈現健身成果與趨勢查看，使Ospace成為連接實體場館與個人運動管理的核心工具。',
     ],
     video: {
-      src: `${smartFitnessAssetPath}/vd-7.mov`,
+      src: '/Video/smart-fitness-detail/vd-7-1280.mp4',
+      mobileSrc: '/Video/smart-fitness-detail/vd-7-768.mp4',
+      poster: '/Video/smart-fitness-detail/vd-7-poster.webp',
       title: 'OSPACE IoT 場館控制與運動數據流程',
       autoplayOnView: true,
       controls: false,
