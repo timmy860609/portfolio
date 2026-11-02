@@ -10,6 +10,21 @@ import { withBase } from '../../utils/basePath';
       <picture class="hero-kv__background" aria-hidden="true">
         <source
           media="(max-width: 767px)"
+          type="image/avif"
+          :srcset="withBase('/Image/Home/kv-new/hero-bg_m.avif')"
+        />
+        <source
+          media="(min-width: 768px) and (max-width: 1023px)"
+          type="image/avif"
+          :srcset="withBase('/Image/Home/kv-new/hero-bg_p.avif')"
+        />
+        <source
+          media="(min-width: 1024px)"
+          type="image/avif"
+          :srcset="withBase('/Image/Home/kv-new/hero-bg_w.avif')"
+        />
+        <source
+          media="(max-width: 767px)"
           :srcset="withBase('/Image/Home/kv-new/hero-bg_m.webp')"
         />
         <source

@@ -1,23 +1,25 @@
 <script setup lang="ts">
 import { withBase } from '../../utils/basePath';
+import type { OptimizedImage } from '../../data/home';
 
 const props = withDefaults(
   defineProps<{
     title: string;
     tags: string[];
-    image: string;
-    imageSmall?: string;
+    image: OptimizedImage;
     href: string;
     selected?: boolean;
     priority?: boolean;
+    eager?: boolean;
   }>(),
   {
     priority: false,
+    eager: false,
   },
 );
 
 const alternativeText = `${props.title}，${props.tags.map((tag) => `#${tag}`).join(' ')}`;
-const avifSource = props.imageSmall?.replace(/\.webp$/i, '.avif');
+const imageSizes = '(max-width: 767px) calc(100vw - 32px), (max-width: 1600px) calc((100vw - 176px) / 3), 480px';
 </script>
 
 <template>
@@ -25,24 +27,33 @@ const avifSource = props.imageSmall?.replace(/\.webp$/i, '.avif');
     class="project-card"
     :class="{ 'project-card--selected': selected }"
   >
-    <a :href="withBase(href)" :aria-label="`查看${title}專案介紹`">
+    <a
+      :href="withBase(href)"
+      :aria-label="`查看${title}專案介紹`"
+      data-astro-prefetch="viewport"
+    >
       <picture>
         <source
-          v-if="avifSource"
           type="image/avif"
-          :srcset="withBase(avifSource)"
+          :srcset="image.avifSrcset"
+          :sizes="imageSizes"
+        />
+        <source
+          type="image/webp"
+          :srcset="image.webpSrcset"
+          :sizes="imageSizes"
         />
         <img
-          :src="withBase(image)"
-          :srcset="imageSmall ? `${withBase(imageSmall)} 768w, ${withBase(image)} 1152w` : undefined"
-          sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1600px) calc((100vw - 176px) / 3), 480px"
+          :src="image.src"
+          :srcset="image.webpSrcset"
+          :sizes="imageSizes"
           :alt="alternativeText"
-          width="1152"
-          height="1338"
+          :width="image.width"
+          :height="image.height"
           draggable="false"
-          :loading="priority ? 'eager' : 'lazy'"
+          :loading="priority || eager ? 'eager' : 'lazy'"
           decoding="async"
-          :fetchpriority="priority ? 'high' : 'low'"
+          :fetchpriority="priority ? 'high' : eager ? 'auto' : 'low'"
         />
       </picture>
     </a>

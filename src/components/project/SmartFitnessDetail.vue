@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { provide } from 'vue';
 import {
   smartFitnessContentSections,
   smartFitnessCover,
@@ -7,6 +8,18 @@ import {
 } from '../../data/project/smartFitnessProject';
 import { getProjectPagination } from '../../data/project/projectPagination';
 import StandardProjectDetail from './StandardProjectDetail.vue';
+import {
+  optimizedProjectImagesKey,
+  type OptimizedProjectImages,
+} from '../../utils/projectImageAssets';
+
+const props = withDefaults(defineProps<{
+  optimizedImages?: OptimizedProjectImages;
+}>(), {
+  optimizedImages: () => ({}),
+});
+
+provide(optimizedProjectImagesKey, props.optimizedImages);
 
 const pagination = getProjectPagination('smart-fitness');
 </script>

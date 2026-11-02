@@ -1,4 +1,4 @@
-import { readdir, readFile, mkdir, writeFile, access } from 'node:fs/promises';
+import { readdir, readFile, mkdir, writeFile, access, unlink } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 
@@ -16,6 +16,7 @@ async function walk(directory) {
   return files.sort();
 }
 const manifest = {};
+const generatedFiles = new Set();
 for (const path of await walk('public/Image')) {
   const bytes = await readFile(path);
   const metadata = await sharp(bytes).metadata();
@@ -26,12 +27,18 @@ for (const path of await walk('public/Image')) {
   const variants = [];
   for (const width of widths) {
     const name = `${hash}-${width}.webp`;
+    generatedFiles.add(name);
     try { await access(`${output}/${name}`); }
     catch { await sharp(bytes).resize({ width, withoutEnlargement: true }).webp({ quality: 82 }).toFile(`${output}/${name}`); }
     variants.push({ width, src: `/Image/Responsive/${name}` });
   }
   const preview = await sharp(bytes).resize({ width: 32 }).blur(1).webp({ quality: 35 }).toBuffer();
   manifest[path.slice('public'.length)] = { width: metadata.width, height: metadata.height, variants, placeholder: `data:image/webp;base64,${preview.toString('base64')}` };
+}
+for (const entry of await readdir(output, { withFileTypes: true })) {
+  if (entry.isFile() && entry.name.endsWith('.webp') && !generatedFiles.has(entry.name)) {
+    await unlink(`${output}/${entry.name}`);
+  }
 }
 await writeFile('src/generated/images.json', JSON.stringify(manifest));
 console.log(`Generated responsive image metadata for ${Object.keys(manifest).length} images.`);

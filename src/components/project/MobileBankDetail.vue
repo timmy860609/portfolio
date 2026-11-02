@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { provide } from 'vue';
 import {
   mobileBankBackground,
   mobileBankCarbonTracking,
@@ -21,6 +22,18 @@ import ProjectDetailHero from './ProjectDetailHero.vue';
 import ProjectGoalsSection from './ProjectGoalsSection.vue';
 import ProjectMediaSequence from './ProjectMediaSequence.vue';
 import ProjectPagination from './ProjectPagination.vue';
+import {
+  optimizedProjectImagesKey,
+  type OptimizedProjectImages,
+} from '../../utils/projectImageAssets';
+
+const props = withDefaults(defineProps<{
+  optimizedImages?: OptimizedProjectImages;
+}>(), {
+  optimizedImages: () => ({}),
+});
+
+provide(optimizedProjectImagesKey, props.optimizedImages);
 
 const pagination = getProjectPagination('mobile-bank-2');
 </script>

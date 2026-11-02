@@ -50,6 +50,7 @@ withDefaults(
         :href="item.href"
         size="s"
         fit-content
+        data-astro-prefetch="viewport"
       >
         {{ label ?? (direction === 'previous' ? '上一個' : '下一個') }}
       </AppButton>

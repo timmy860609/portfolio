@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
-import { featuredProjects as projects } from '../../data/home';
+import type { FeaturedProject } from '../../data/home';
 import AppButton from '../AppButton.vue';
 import AppSectionHeading from '../AppSectionHeading.vue';
 import CarouselArrow from './CarouselArrow.vue';
 import ProjectCard from './ProjectCard.vue';
+
+const { projects } = defineProps<{
+  projects: FeaturedProject[];
+}>();
 
 const activeIndex = ref(0);
 const trackIndex = ref(1);
@@ -228,6 +232,7 @@ onBeforeUnmount(() => {
             v-bind="project"
             :selected="index === trackIndex"
             :priority="index === trackIndex"
+            eager
           />
         </div>
       </div>
@@ -423,7 +428,6 @@ onBeforeUnmount(() => {
 
 @media (max-width: 767px) {
   .featured {
-    min-height: 820px;
     padding-top: 48px;
   }
 

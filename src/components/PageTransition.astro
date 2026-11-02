@@ -40,6 +40,41 @@
   const waitForMotion = (duration: number) =>
     new Promise<void>((resolve) => window.setTimeout(resolve, duration));
 
+  const preloadCriticalImage = async (
+    nextDocument: Document,
+    signal: AbortSignal,
+  ) => {
+    const image = nextDocument.querySelector<HTMLImageElement>(
+      'main img[fetchpriority="high"], main img[loading="eager"]',
+    );
+    if (!image || signal.aborted) return;
+
+    const picture = image.closest('picture');
+    const source = Array.from(
+      picture?.querySelectorAll<HTMLSourceElement>('source') ?? [],
+    ).find((candidate) => {
+      const media = candidate.getAttribute('media');
+      return !media || window.matchMedia(media).matches;
+    });
+    const preload = new Image();
+    const srcset = source?.srcset || image.srcset;
+    const sizes = source?.sizes || image.sizes;
+
+    preload.decoding = 'async';
+    preload.fetchPriority = 'high';
+    if (srcset) preload.srcset = srcset;
+    if (sizes) preload.sizes = sizes;
+    preload.src = image.src;
+
+    const maximumWait = window.matchMedia('(max-width: 767px)').matches
+      ? 1600
+      : 1000;
+    await Promise.race([
+      preload.decode().catch(() => undefined),
+      waitForMotion(maximumWait),
+    ]);
+  };
+
   document.addEventListener('astro:before-preparation', (event) => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const transition = document.querySelector<HTMLElement>('[data-page-transition]');
@@ -59,7 +94,10 @@
     const loadPage = event.loader;
     event.loader = async () => {
       const motion = shouldAnimate ? waitForMotion(650) : Promise.resolve();
-      await Promise.all([loadPage(), motion]);
+      const pageAndCriticalImage = loadPage().then(() =>
+        preloadCriticalImage(event.newDocument, event.signal),
+      );
+      await Promise.all([pageAndCriticalImage, motion]);
     };
   });
 

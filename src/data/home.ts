@@ -1,9 +1,21 @@
-export type FeaturedProject = {
+export type FeaturedProjectContent = {
   title: string;
   tags: string[];
-  image: string;
-  imageSmall?: string;
+  imageKey: 'mobile-bank' | 'smart-fitness' | 'hiring-web' | 'iot-backend' | 'life-web';
   href: string;
+};
+
+export type OptimizedImage = {
+  src: string;
+  avifSrc: string;
+  avifSrcset: string;
+  webpSrcset: string;
+  width: number;
+  height: number;
+};
+
+export type FeaturedProject = Omit<FeaturedProjectContent, 'imageKey'> & {
+  image: OptimizedImage;
 };
 
 export type Skill = {
@@ -28,40 +40,35 @@ export const homeHero = {
   tagline: '以設計梳理體驗，用前端實現細節',
 };
 
-export const featuredProjects: FeaturedProject[] = [
+export const featuredProjects: FeaturedProjectContent[] = [
   {
     title: '全新行動銀行 2.0',
     tags: ['UIUX', '視覺設計'],
-    image: '/Image/Home/featured-projects/mobile-bank.webp',
-    imageSmall: '/Image/Optimized/home-featured/mobile-bank-768.webp',
+    imageKey: 'mobile-bank',
     href: '/projects/mobile-bank-2',
   },
   {
     title: '智慧健身膠囊 App',
     tags: ['UIUX'],
-    image: '/Image/Home/featured-projects/smart-fitness.webp',
-    imageSmall: '/Image/Optimized/home-featured/smart-fitness-768.webp',
+    imageKey: 'smart-fitness',
     href: '/projects/smart-fitness',
   },
   {
     title: '2026 人才召募網',
     tags: ['UIUX', '前端開發'],
-    image: '/Image/Home/featured-projects/hiring-web.webp',
-    imageSmall: '/Image/Optimized/home-featured/hiring-web-768.webp',
+    imageKey: 'hiring-web',
     href: '/projects/hiring-2026',
   },
   {
     title: '智慧閘道器後台系統',
     tags: ['UIUX', '視覺設計'],
-    image: '/Image/Home/featured-projects/iot-backend.webp',
-    imageSmall: '/Image/Optimized/home-featured/iot-backend-768.webp',
+    imageKey: 'iot-backend',
     href: '/projects/iot-backend',
   },
   {
     title: '保足感平台',
     tags: ['UIUX', '視覺設計'],
-    image: '/Image/Home/featured-projects/life-web.webp',
-    imageSmall: '/Image/Optimized/home-featured/life-web-768.webp',
+    imageKey: 'life-web',
     href: '/projects/vip-platform',
   },
 ];

@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { computed, inject } from 'vue';
 import { responsiveImage, imageSrcset } from '../../utils/responsiveImage';
 import { withBase } from '../../utils/basePath';
+import { optimizedProjectImagesKey } from '../../utils/projectImageAssets';
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     src: string;
     mobileSrc?: string;
@@ -17,19 +19,62 @@ withDefaults(
     loading: 'eager',
   },
 );
+
+const optimizedImages = inject(optimizedProjectImagesKey, {});
+const desktopImage = computed(() => optimizedImages[props.src]);
+const mobileImage = computed(() => props.mobileSrc
+  ? optimizedImages[props.mobileSrc]
+  : undefined);
+const imageAttributes = computed(() => desktopImage.value
+  ? {
+      src: desktopImage.value.src,
+      srcset: desktopImage.value.webpSrcset,
+      sizes: '100vw',
+      'data-responsive-image': '',
+    }
+  : responsiveImage(
+      props.src,
+      '(max-width: 767px) 100vw, (max-width: 1439px) 1440px, 100vw',
+    ));
 </script>
 
 <template>
   <section class="project-cover" aria-label="專案主視覺">
     <picture>
       <source
-        v-if="mobileSrc"
+        v-if="mobileImage"
+        media="(max-width: 767px)"
+        type="image/avif"
+        :srcset="mobileImage.mobileAvifSrcset || mobileImage.avifSrcset"
+        sizes="100vw"
+      />
+      <source
+        v-if="mobileImage"
+        media="(max-width: 767px)"
+        type="image/webp"
+        :srcset="mobileImage.mobileWebpSrcset || mobileImage.webpSrcset"
+        sizes="100vw"
+      />
+      <source
+        v-else-if="mobileSrc"
         media="(max-width: 767px)"
         :srcset="imageSrcset(mobileSrc) || withBase(mobileSrc)"
         sizes="100vw"
       />
+      <source
+        v-if="desktopImage"
+        type="image/avif"
+        :srcset="desktopImage.avifSrcset"
+        sizes="100vw"
+      />
+      <source
+        v-if="desktopImage"
+        type="image/webp"
+        :srcset="desktopImage.webpSrcset"
+        sizes="100vw"
+      />
       <img
-        v-bind="responsiveImage(src, '(max-width: 767px) 100vw, (max-width: 1439px) 1440px, 100vw')"
+        v-bind="imageAttributes"
         :alt="alt"
         :width="width"
         :height="height"

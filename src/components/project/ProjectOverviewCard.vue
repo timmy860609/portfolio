@@ -19,7 +19,11 @@ const toAvif = (source?: string) => source?.replace(/\.webp$/i, '.avif');
 
 <template>
   <article>
-    <a class="overview-card" :href="withBase(`/projects/${slug}`)">
+    <a
+      class="overview-card"
+      :href="withBase(`/projects/${slug}`)"
+      data-astro-prefetch="viewport"
+    >
       <div class="overview-card__cover">
         <picture>
           <source

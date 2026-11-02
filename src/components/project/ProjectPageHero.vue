@@ -87,7 +87,7 @@ withDefaults(
   }
 
   .project-hero__content {
-    padding-block: 48px;
+    padding-block: 24px 72px;
   }
 
   .project-hero h1 {

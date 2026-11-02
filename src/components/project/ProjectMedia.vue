@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { responsiveImage } from '../../utils/responsiveImage';
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 import type { ProjectImage, ProjectVideo } from '../../types/project';
 import { withBase } from '../../utils/basePath';
+import { optimizedProjectImagesKey } from '../../utils/projectImageAssets';
 
 const props = withDefaults(
   defineProps<{
@@ -26,6 +27,22 @@ const mediaStyle = computed(() => ({
     : {}),
 }));
 
+const optimizedImages = inject(optimizedProjectImagesKey, {});
+const optimizedImage = computed(() => props.image
+  ? optimizedImages[props.image.src]
+  : undefined);
+const imageSizes = '(max-width: 767px) 100vw, (max-width: 1008px) calc(100vw - 48px), 960px';
+const imageAttributes = computed(() => {
+  if (!props.image) return {};
+  if (!optimizedImage.value) return responsiveImage(props.image.src);
+  return {
+    src: optimizedImage.value.src,
+    srcset: optimizedImage.value.webpSrcset,
+    sizes: imageSizes,
+    'data-responsive-image': '',
+  };
+});
+
 </script>
 
 <template>
@@ -34,15 +51,42 @@ const mediaStyle = computed(() => ({
     :class="{ 'project-media--cover': fit === 'cover' }"
     :style="mediaStyle"
   >
-    <img
-      v-if="image"
-      v-bind="responsiveImage(image.src)"
-      :alt="image.alt"
-      :width="image.width ?? 2880"
-      :height="image.height ?? 1680"
-      loading="lazy"
-      decoding="async"
-    />
+    <picture v-if="image">
+      <source
+        v-if="optimizedImage"
+        media="(max-width: 767px)"
+        type="image/avif"
+        :srcset="optimizedImage.mobileAvifSrcset"
+        sizes="100vw"
+      />
+      <source
+        v-if="optimizedImage"
+        media="(max-width: 767px)"
+        type="image/webp"
+        :srcset="optimizedImage.mobileWebpSrcset"
+        sizes="100vw"
+      />
+      <source
+        v-if="optimizedImage"
+        type="image/avif"
+        :srcset="optimizedImage.avifSrcset"
+        :sizes="imageSizes"
+      />
+      <source
+        v-if="optimizedImage"
+        type="image/webp"
+        :srcset="optimizedImage.webpSrcset"
+        :sizes="imageSizes"
+      />
+      <img
+        v-bind="imageAttributes"
+        :alt="image.alt"
+        :width="optimizedImage?.width ?? image.width ?? 2880"
+        :height="optimizedImage?.height ?? image.height ?? 1680"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
     <video
       v-else-if="video"
       data-managed-video
@@ -93,6 +137,11 @@ const mediaStyle = computed(() => ({
 .project-media video {
   display: block;
   height: auto;
+  width: 100%;
+}
+
+.project-media picture {
+  display: block;
   width: 100%;
 }
 
@@ -160,6 +209,7 @@ const mediaStyle = computed(() => ({
   height: var(--project-media-height);
 }
 
+.project-media--cover picture,
 .project-media--cover img,
 .project-media--cover video {
   height: 100%;
@@ -178,6 +228,7 @@ const mediaStyle = computed(() => ({
     height: auto;
   }
 
+  .project-media--cover picture,
   .project-media--cover img,
   .project-media--cover video {
     height: auto;

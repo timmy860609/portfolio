@@ -7,6 +7,47 @@ import HomeScrollEffects from '../components/home/HomeScrollEffects.vue';
 import SkillsSection from '../components/home/SkillsSection.vue';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { withBase } from '../utils/basePath';
+import { getImage } from 'astro:assets';
+import { featuredProjects } from '../data/home';
+import type { FeaturedProject, FeaturedProjectContent } from '../data/home';
+import mobileBankImage from '../assets/home-featured/mobile-bank.webp';
+import smartFitnessImage from '../assets/home-featured/smart-fitness.webp';
+import hiringWebImage from '../assets/home-featured/hiring-web.webp';
+import iotBackendImage from '../assets/home-featured/iot-backend.webp';
+import lifeWebImage from '../assets/home-featured/life-web.webp';
+
+const featuredImageSizes = '(max-width: 767px) calc(100vw - 32px), (max-width: 1600px) calc((100vw - 176px) / 3), 480px';
+const featuredImageSources = {
+  'mobile-bank': mobileBankImage,
+  'smart-fitness': smartFitnessImage,
+  'hiring-web': hiringWebImage,
+  'iot-backend': iotBackendImage,
+  'life-web': lifeWebImage,
+} satisfies Record<FeaturedProjectContent['imageKey'], typeof mobileBankImage>;
+
+const optimizedFeaturedProjects: FeaturedProject[] = await Promise.all(
+  featuredProjects.map(async ({ imageKey, ...project }) => {
+    const source = featuredImageSources[imageKey];
+    const [avif, webp] = await Promise.all([
+      getImage({ src: source, widths: [768, 1152], format: 'avif', quality: 55 }),
+      getImage({ src: source, widths: [768, 1152], format: 'webp', quality: 82 }),
+    ]);
+
+    return {
+      ...project,
+      image: {
+        src: webp.src,
+        avifSrc: avif.src,
+        avifSrcset: avif.srcSet.attribute,
+        webpSrcset: webp.srcSet.attribute,
+        width: source.width,
+        height: source.height,
+      },
+    };
+  }),
+);
+
+const primaryFeaturedImage = optimizedFeaturedProjects[0].image;
 ---
 
 <BaseLayout
@@ -17,21 +58,24 @@ import { withBase } from '../utils/basePath';
     <link
       rel="preload"
       as="image"
-      href={withBase('/Image/Home/kv-new/hero-bg_m.webp')}
+      type="image/avif"
+      href={withBase('/Image/Home/kv-new/hero-bg_m.avif')}
       media="(max-width: 767px)"
       fetchpriority="high"
     />
     <link
       rel="preload"
       as="image"
-      href={withBase('/Image/Home/kv-new/hero-bg_p.webp')}
+      type="image/avif"
+      href={withBase('/Image/Home/kv-new/hero-bg_p.avif')}
       media="(min-width: 768px) and (max-width: 1023px)"
       fetchpriority="high"
     />
     <link
       rel="preload"
       as="image"
-      href={withBase('/Image/Home/kv-new/hero-bg_w.webp')}
+      type="image/avif"
+      href={withBase('/Image/Home/kv-new/hero-bg_w.avif')}
       media="(min-width: 1024px)"
       fetchpriority="high"
     />
@@ -39,12 +83,14 @@ import { withBase } from '../utils/basePath';
       rel="preload"
       as="image"
       type="image/avif"
-      href={withBase('/Image/Optimized/home-featured/mobile-bank-768.avif')}
+      href={primaryFeaturedImage.avifSrc}
+      imagesrcset={primaryFeaturedImage.avifSrcset}
+      imagesizes={featuredImageSizes}
       fetchpriority="high"
     />
   </Fragment>
   <HeroKv />
-  <FeaturedProjects client:visible />
+  <FeaturedProjects projects={optimizedFeaturedProjects} client:visible />
   <SkillsSection />
   <HomeArticles />
   <HomeContact client:visible />

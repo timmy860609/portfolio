@@ -4,16 +4,20 @@ import { withBase } from '../utils/basePath';
 
 <template>
   <footer class="site-footer" data-node-id="5758:16017">
-    <img
-      class="site-footer__artwork"
-      :src="withBase('/Image/Footer/Footer.webp')"
-      alt=""
-      width="3840"
-      height="696"
-      loading="lazy"
-      decoding="async"
-      aria-hidden="true"
-    />
+    <picture class="site-footer__artwork" aria-hidden="true">
+      <source
+        media="(max-width: 767px)"
+        :srcset="withBase('/Image/Footer/Footer_M.webp')"
+      />
+      <img
+        :src="withBase('/Image/Footer/Footer.webp')"
+        alt=""
+        width="3840"
+        height="696"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
 
     <div class="site-footer__inner">
       <div class="site-footer__identity">
@@ -32,17 +36,6 @@ import { withBase } from '../utils/basePath';
       </div>
 
       <div class="site-footer__meta">
-        <div class="site-footer__socials" aria-label="社群平台">
-          <a href="#" aria-label="LinkedIn">
-            <img :src="withBase('/Image/Footer/linkedin.svg')" alt="" width="36" height="36" />
-          </a>
-          <a href="#" aria-label="社群平台">
-            <img :src="withBase('/Image/Footer/social-02.svg')" alt="" width="36" height="36" />
-          </a>
-          <a href="#" aria-label="104 個人頁面">
-            <img :src="withBase('/Image/Footer/social-03.svg')" alt="" width="36" height="36" />
-          </a>
-        </div>
         <p>COPYRIGHT © 2022 Timmy.Lee</p>
       </div>
     </div>
@@ -67,11 +60,17 @@ import { withBase } from '../utils/basePath';
   display: block;
   height: 100%;
   inset: 0;
-  object-fit: fill;
   pointer-events: none;
   position: absolute;
   width: 100%;
   z-index: 0;
+}
+
+.site-footer__artwork img {
+  display: block;
+  height: 100%;
+  object-fit: fill;
+  width: 100%;
 }
 
 .site-footer__inner {
@@ -113,10 +112,10 @@ import { withBase } from '../utils/basePath';
 
 .site-footer nav a {
   color: #323232;
-  font-size: calc(16 * var(--footer-art-unit));
+  font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
-  min-width: calc(120 * var(--footer-art-unit));
+  min-width: auto;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
@@ -124,12 +123,11 @@ import { withBase } from '../utils/basePath';
 
 @media (min-width: 1024px) {
   .site-footer nav a {
-    font-size: calc(18 * var(--footer-art-unit));
+    font-size: 18px;
   }
 }
 
-.site-footer nav a,
-.site-footer__socials a {
+.site-footer nav a {
   transition:
     opacity 180ms ease,
     transform 180ms ease;
@@ -143,28 +141,12 @@ import { withBase } from '../utils/basePath';
   align-items: flex-end;
   display: flex;
   flex-direction: column;
-  gap: calc(12 * var(--footer-art-unit));
-}
-
-.site-footer__socials {
-  display: flex;
-  gap: calc(12 * var(--footer-art-unit));
-}
-
-.site-footer__socials a,
-.site-footer__socials img {
-  display: block;
-  height: calc(36 * var(--footer-art-unit));
-  width: calc(36 * var(--footer-art-unit));
-}
-
-.site-footer__socials a:hover {
-  transform: translateY(-2px);
+  gap: 12px;
 }
 
 .site-footer__meta p {
   font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
-  font-size: calc(16 * var(--footer-art-unit));
+  font-size: 16px;
   font-weight: 300;
   line-height: 1.5;
   margin: 0;
@@ -191,11 +173,6 @@ import { withBase } from '../utils/basePath';
     align-items: stretch;
     min-height: 320px;
     padding: 32px 24px;
-  }
-
-  .site-footer__artwork {
-    object-fit: cover;
-    object-position: center;
   }
 
   .site-footer__inner {
@@ -237,16 +214,6 @@ import { withBase } from '../utils/basePath';
   .site-footer__meta {
     align-items: flex-start;
     gap: 16px;
-  }
-
-  .site-footer__socials {
-    gap: 12px;
-  }
-
-  .site-footer__socials a,
-  .site-footer__socials img {
-    height: 36px;
-    width: 36px;
   }
 
   .site-footer__meta p {

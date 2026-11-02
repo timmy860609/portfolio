@@ -679,6 +679,7 @@ nav.navigation--no-transition::before {
   }
 
   .menu-toggle {
+    -webkit-tap-highlight-color: transparent;
     align-items: center;
     background: transparent;
     border: 0;
@@ -690,7 +691,9 @@ nav.navigation--no-transition::before {
     justify-content: center;
     padding: 0;
     position: relative;
+    touch-action: manipulation;
     width: 20px;
+    z-index: 2;
   }
 
   .menu-toggle::before {
@@ -703,10 +706,12 @@ nav.navigation--no-transition::before {
     display: block;
     height: 2px;
     left: 0;
+    pointer-events: none;
     position: absolute;
     transition:
       opacity 180ms ease,
       transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+    user-select: none;
     width: 20px;
   }
 

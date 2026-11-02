@@ -9,14 +9,25 @@
     const { signal } = controller;
     const images = document.querySelectorAll<HTMLImageElement>('img[data-responsive-image]');
     if ('IntersectionObserver' in window) {
+      const preloadDistance = window.matchMedia('(max-width: 767px)').matches
+        ? 3000
+        : 2000;
       observer = new IntersectionObserver(entries => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
           // Keep real src/srcset and native lazy loading as a no-JS fallback.
-          (entry.target as HTMLImageElement).loading = 'eager';
+          const image = entry.target as HTMLImageElement;
+          const distanceFromViewport = Math.max(
+            0,
+            entry.boundingClientRect.top - window.innerHeight,
+          );
+          image.fetchPriority = distanceFromViewport < window.innerHeight
+            ? 'high'
+            : 'low';
+          image.loading = 'eager';
           observer?.unobserve(entry.target);
         }
-      }, { rootMargin: '2000px 0px', threshold: 0 });
+      }, { rootMargin: `${preloadDistance}px 0px`, threshold: 0 });
     }
     images.forEach(image => {
       const reveal = async () => {
