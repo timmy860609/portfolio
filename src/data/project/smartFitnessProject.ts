@@ -31,7 +31,7 @@ export const smartFitnessGoals: ProjectGoalItem[] = [
   {
     number: '02',
     title: '串聯完整的健身旅程',
-    description: '整合場館探索、方案購買與訓練紀錄，打造流暢的使用流程',
+    description: '整合場館探索、方案購買與訓練紀錄，打造流暢的使用流程。',
   },
   {
     number: '03',
@@ -43,7 +43,7 @@ export const smartFitnessGoals: ProjectGoalItem[] = [
 export const smartFitnessResults: ProjectResultItem[] = [
   {
     title: '串聯數位與實體體驗',
-    description: '完善健身預約旅程，讓Ospace成為線上服務與健身場館的核心入口。',
+    description: '完善健身預約旅程，讓 OSPACE 成為線上服務與健身場館的核心入口。',
   },
   {
     title: '整合複雜邏輯的會員加值功能',
@@ -58,12 +58,12 @@ export const smartFitnessResults: ProjectResultItem[] = [
 export const smartFitnessGoalsSection = {
   title: '設計目標',
   introduction:
-    'Ospace的體驗同時發生在線上與實體空間，App不只是預約工具，也需要處理健身數據、會員管理與金流串接等需求。透過Ospace串起每個旅程節點，用戶能從健身需求開始，銜接至預約、進場與完成訓練，完成一條龍服務；品牌也能透過會員方案、教練服務或運動數據，持續經營後續與客群開發。',
+    'OSPACE 的體驗同時發生在線上與實體空間。App 不只是預約工具，也需要處理健身數據、會員管理與金流串接等需求。透過 OSPACE 串起每個旅程節點，用戶能從健身需求開始，銜接預約、進場與訓練，完成一站式服務；品牌也能透過會員方案、教練服務與運動數據，持續經營客群。',
   goals: smartFitnessGoals,
   accentColor: '#169b49',
   backgroundImage: `${smartFitnessAssetPath}/goal-bg.webp`,
   conclusion:
-    'Ospace從會員經營、服務旅程與產品延展三個面向建構，以會員方案與訓練紀錄延續使用關係，串聯場館探索與健身管理，同時建立容納不同設備與數據的系統架構。',
+    'OSPACE 從會員經營、服務旅程與產品延展三個面向建構，以會員方案與訓練紀錄延續使用關係，串聯場館探索與健身管理，同時建立可容納不同設備與數據的系統架構。',
   conclusionPosition: 'after' as const,
   density: 'compact' as const,
 };
@@ -79,7 +79,7 @@ export const smartFitnessContentSections: ProjectContentSectionData[] = [
       alt: 'OSPACE 智慧健身膠囊場館內部',
     },
     conclusion:
-      'Ospace以全天候與預約制的智慧健身膠囊切入市場，將私人運動空間部署於不同生活場域，透過數位服務承接預約、付款、入場與訓練管理，有別於傳統健身房的服務模式。',
+      'OSPACE 以全天候、預約制的智慧健身膠囊切入市場，將私人運動空間部署於不同生活場域，透過數位服務承接預約、付款、入場與訓練管理，建立有別於傳統健身房的服務模式。',
     density: 'compact',
     imageFit: 'cover',
     imageHeight: 560,
@@ -87,20 +87,20 @@ export const smartFitnessContentSections: ProjectContentSectionData[] = [
   {
     title: '智慧健身服務架構',
     introduction: [
-      'Ospace作為智慧健身服務的主要入口，整合多項功能讓用戶從選擇健身地點到完成運動，都能在同一套流程中進行。',
+      'OSPACE 作為智慧健身服務的主要入口，整合多項功能，讓用戶從選擇健身地點到完成運動，都能在同一套流程中進行。',
     ],
     image: {
       src: `${smartFitnessAssetPath}/pc-2.webp`,
       alt: 'OSPACE 智慧健身服務架構示意',
     },
     conclusion:
-      '進入場館後，App透過Gateway控制門鎖、燈光、空調或健身器材，並將設備狀態與健身數據同步至雲端平台，進一步支援目標分析，形成涵蓋數位操作與實體場館的智慧健身服務。',
+      '進入場館後，App 透過 Gateway 控制門鎖、燈光、空調或健身器材，並將設備狀態與健身數據同步至雲端平台，進一步支援目標分析，形成涵蓋數位操作與實體場館的智慧健身服務。',
     density: 'compact',
   },
   {
     title: '讓健身更簡單、更快速',
     introduction: [
-      '為了讓用戶更快速登入使用App，可以社群帳號綁定登入，減少註冊時的操作負擔；首次使用時則透過偏好設定蒐集健身類型、時段與地區，作為後續個人化內容的依據。首頁集中呈現會員管理、推薦內容與場館預約，登入後即可掌握重點資訊。',
+      '為了讓用戶更快登入並使用 App，可綁定社群帳號，減少註冊時的操作負擔；首次使用時則透過偏好設定蒐集健身類型、時段與地區，作為後續個人化內容的依據。首頁集中呈現會員管理、推薦內容與場館預約，登入後即可掌握重點資訊。',
     ],
     image: {
       src: `${smartFitnessAssetPath}/pc-3.webp`,
@@ -109,11 +109,11 @@ export const smartFitnessContentSections: ProjectContentSectionData[] = [
     details: [
       {
         title: '支援社群登入',
-        description: '社群帳號綁定登入，縮短註冊時流程，讓新用戶更快開始使用。',
+        description: '綁定社群帳號登入，縮短註冊流程，讓新用戶更快開始使用。',
       },
       {
         title: '個人喜好設定',
-        description: '搜集用戶偏好項目，建立符合個人需求的內資訊呈現。',
+        description: '蒐集用戶偏好，呈現符合個人需求的資訊。',
       },
       {
         title: '突顯關鍵資訊',
@@ -139,7 +139,7 @@ export const smartFitnessContentSections: ProjectContentSectionData[] = [
       },
       {
         title: '場館費用總覽',
-        description: '統整場館相關費用，在預約前即可清楚瞭解。',
+        description: '統整場館相關費用，讓用戶在預約前即可清楚了解。',
       },
     ],
     detailMarkerColor: '#169b49',
@@ -163,7 +163,7 @@ export const smartFitnessContentSections: ProjectContentSectionData[] = [
       height: 1094,
     },
     conclusion:
-      'Ospace 提供點數儲值與會員方案兩種購買方式，我將方案內容做為重點資訊呈現；付款階段加入安全驗證，降低交易風險；完成購買後則立即顯示新增點數與可預約場館，讓用戶直接延續至下一步使用服務。',
+      'OSPACE 提供點數儲值與會員方案兩種購買方式。我將方案內容作為重點資訊呈現；付款階段加入安全驗證，降低交易風險；完成購買後立即顯示新增點數與可預約場館，讓用戶直接進入下一步使用服務。',
     density: 'compact',
   },
   {
@@ -195,7 +195,7 @@ export const smartFitnessContentSections: ProjectContentSectionData[] = [
   {
     title: '智慧場館控制與訓練管理',
     introduction: [
-      '場館的規劃重點，是依照用戶進入健身膠囊的過程，串聯時段、權限、設備與數據。系統會根據當下狀態開放對應功能，讓用戶從抵達到完成運動，都能透過App掌握場館情況；訓練結束後，呈現健身成果與趨勢查看，使Ospace成為連接實體場館與個人運動管理的核心工具。',
+      '場館的規劃重點，是依照用戶進入健身膠囊的過程，串聯時段、權限、設備與數據。系統會根據當下狀態開放對應功能，讓用戶從抵達到完成運動，都能透過 App 掌握場館情況；訓練結束後，系統呈現健身成果與訓練趨勢，使 OSPACE 成為連接實體場館與個人運動管理的核心工具。',
     ],
     video: {
       src: '/Video/smart-fitness-detail/vd-7-1280.mp4',
@@ -214,7 +214,7 @@ export const smartFitnessContentSections: ProjectContentSectionData[] = [
   {
     title: '專案成果',
     introduction: [
-      'Ospace 是一套自動化健身管理的數位服務。設計面囊括各種功能，將數位平台、實體場館與 IoT 設備串聯，使用戶能從加入會員一路完成健身，品牌也能透過會員與教練服務持續經營。',
+      'OSPACE 是一套自動化健身管理的數位服務。設計涵蓋各項功能，串聯數位平台、實體場館與 IoT 設備，讓用戶能從加入會員一路完成健身，品牌也能透過會員與教練服務持續經營。',
     ],
     image: {
       src: `${smartFitnessAssetPath}/pc-8.webp`,

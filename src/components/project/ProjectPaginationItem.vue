@@ -110,14 +110,14 @@ withDefaults(
 }
 
 .project-pagination-item h2 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--font-size-item-heading);
+  font-weight: var(--font-weight-bold);
   line-height: 1.2;
   margin: 0;
 }
 
 .project-pagination-item :deep(.app-button) {
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
   padding: 11px 23px;
 }
 
@@ -172,10 +172,6 @@ withDefaults(
   .project-pagination-item__image {
     flex-basis: 120px;
     height: 150px;
-  }
-
-  .project-pagination-item h2 {
-    font-size: 20px;
   }
 
   .project-pagination-item :deep(.app-button) {

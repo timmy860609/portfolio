@@ -19,7 +19,7 @@ import { withBase } from '../../utils/basePath';
           tone="dark"
         >
           <p class="home-articles__description">
-            這裡紀錄了我過去在設計路途中與到的趣事
+            這裡記錄了我在設計路途中遇到的趣事
           </p>
         </AppSectionHeading>
 
@@ -101,7 +101,7 @@ import { withBase } from '../../utils/basePath';
 
 .home-articles__description {
   color: #e3e3e3;
-  font-size: 18px;
+  font-size: var(--font-size-body-small);
   letter-spacing: 0.9px;
   line-height: 1.5;
   margin: 0;
@@ -138,7 +138,7 @@ import { withBase } from '../../utils/basePath';
   color: #bcbcbc;
   display: block;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   line-height: 1.2;
   padding-block: 24px;
   text-decoration: none;
@@ -187,10 +187,6 @@ import { withBase } from '../../utils/basePath';
     align-items: flex-start;
     flex-direction: column;
     gap: 24px;
-  }
-
-  .home-articles__description {
-    font-size: 16px;
   }
 
   .home-articles__controls {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { withBase } from '../utils/basePath';
+import { mainNavigation } from '../data/site';
 </script>
 
 <template>
@@ -26,17 +27,20 @@ import { withBase } from '../utils/basePath';
         </a>
 
         <nav aria-label="頁尾導覽">
-          <a :href="withBase('/')">首頁</a>
-          <a :href="withBase('/projects')">精選案例</a>
-          <a :href="withBase('/articles')">專欄分享</a>
-          <a :href="withBase('/about')">關於我</a>
+          <a
+            v-for="item in mainNavigation"
+            :key="item.to"
+            :href="withBase(item.to)"
+          >
+            {{ item.label }}
+          </a>
           <a :href="withBase('/#contact')">與我聯繫</a>
           <a :href="withBase('/Image/About/portfolio.pdf')" download="portfolio.pdf">下載簡歷</a>
         </nav>
       </div>
 
       <div class="site-footer__meta">
-        <p>COPYRIGHT © 2022 Timmy.Lee</p>
+        <p>Copyright © {{ new Date().getFullYear() }} Timmy Lee</p>
       </div>
     </div>
   </footer>
@@ -112,19 +116,13 @@ import { withBase } from '../utils/basePath';
 
 .site-footer nav a {
   color: #323232;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: var(--font-size-body-small);
+  font-weight: var(--font-weight-medium);
   line-height: 1.5;
   min-width: auto;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
-}
-
-@media (min-width: 1024px) {
-  .site-footer nav a {
-    font-size: 18px;
-  }
 }
 
 .site-footer nav a {
@@ -146,8 +144,8 @@ import { withBase } from '../utils/basePath';
 
 .site-footer__meta p {
   font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
-  font-size: 16px;
-  font-weight: 300;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-regular);
   line-height: 1.5;
   margin: 0;
   white-space: nowrap;
@@ -205,7 +203,7 @@ import { withBase } from '../utils/basePath';
   }
 
   .site-footer nav a {
-    font-size: 16px;
+    font-size: var(--font-size-body-small);
     line-height: 24px;
     min-width: 120px;
     text-align: left;
@@ -214,10 +212,6 @@ import { withBase } from '../utils/basePath';
   .site-footer__meta {
     align-items: flex-start;
     gap: 16px;
-  }
-
-  .site-footer__meta p {
-    font-size: 16px;
   }
 
 }

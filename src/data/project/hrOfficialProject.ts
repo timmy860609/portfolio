@@ -30,7 +30,7 @@ export const hrOfficialGoals = {
       number: '01',
       title: '點出集團品牌價值',
       description:
-        '清楚呈現集團提供的職涯環境，讓用戶快速先理解企業待遇。',
+        '清楚呈現集團提供的職涯環境，讓用戶快速理解企業福利與待遇。',
     },
     {
       number: '02',
@@ -83,7 +83,7 @@ export const hrOfficialContentSections: ProjectContentSectionData[] = [
   {
     title: '一站式整合跨集團職缺引導入口',
     introduction: [
-      '集團旗下共有五間子公司，每一間公司都有強調的召募計畫，因此設計上以標籤突顯計畫所需的技能及產業類別，同時每張計畫卡片都能引導至人才招募網中對應的頁面，讓用戶可以更詳細地了解計畫內容與待遇。',
+      '集團旗下共有五間子公司，各公司皆有主推的招募計畫。因此設計上以標籤突顯計畫所需的技能及產業類別，每張計畫卡片也能引導至人才招募網的對應頁面，讓用戶進一步了解計畫內容與待遇。',
     ],
     image: {
       src: `${assetPath}/pc-3.webp`,
@@ -95,7 +95,7 @@ export const hrOfficialContentSections: ProjectContentSectionData[] = [
   {
     title: '',
     introduction: [
-      '除了重點召募外，在下方集團職缺區塊中，呈現子公司常態性職缺的入口。用戶不必透過搜尋引擎逐一查找。這項設計也保留各子公司原有召募系統，不需強制整併後端資料，降低平台改造成本。',
+      '除了重點招募外，下方的集團職缺區塊也提供各子公司常態性職缺的入口，讓用戶不必透過搜尋引擎逐一查找。這項設計也保留各子公司原有的招募系統，無須強制整併後端資料，降低平台改造成本。',
     ],
     image: {
       src: `${assetPath}/pc-4.webp`,
@@ -117,7 +117,7 @@ export const hrOfficialContentSections: ProjectContentSectionData[] = [
       height: 1680,
     },
     conclusion:
-      '將抽象的制度轉化為視覺架構，讓用戶能看見職級能力與發展方向的關係，使用戶更具體地瞭解人才如何在組織內持續成長。',
+      '將抽象的制度轉化為視覺架構，呈現職級能力與發展方向的關係，讓用戶更具體地了解人才如何在組織內持續成長。',
     density: 'caption',
   },
   {
@@ -149,7 +149,7 @@ export const hrOfficialContentSections: ProjectContentSectionData[] = [
   {
     title: '專案成果',
     introduction: [
-      '新版人力資源網將原本性質不同的內容，重整為具有連續閱讀脈絡的人力資源平台。用戶能從企業理念開始，逐步了解人才培育、學習資源與員工照護，最後再依照自身背景選擇合適的召募計畫或子公司職缺。',
+      '新版人力資源網將原本性質不同的內容，重整為具有連續閱讀脈絡的人力資源平台。用戶能從企業理念開始，逐步了解人才培育、學習資源與員工照護，最後再依照自身背景選擇合適的招募計畫或子公司職缺。',
     ],
     image: {
       src: `${assetPath}/pc-8.webp`,
@@ -158,7 +158,7 @@ export const hrOfficialContentSections: ProjectContentSectionData[] = [
       height: 1680,
     },
     conclusion:
-      '透過資訊視覺化與模組化，複雜的人才制度變得更容易理解，各項召募計畫也具備一致的比較規則。響應式版型則補足不同裝置的瀏覽情境，使人力資源網能同時支援品牌傳達、制度介紹與職缺引導，也為未來更新計畫與人力資源內容保留擴充彈性。',
+      '透過資訊視覺化與模組化，複雜的人才制度變得更容易理解，各項招募計畫也具備一致的比較規則。響應式版型則補足不同裝置的瀏覽情境，使人力資源網能同時支援品牌傳達、制度介紹與職缺引導，也為未來更新計畫與人力資源內容保留擴充彈性。',
     density: 'caption',
   },
 ];

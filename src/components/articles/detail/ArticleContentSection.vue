@@ -102,8 +102,8 @@ const sectionStyle = computed(() => ({
 }
 
 .article-content-section h2 {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: var(--font-size-content-heading);
+  font-weight: var(--font-weight-bold);
   line-height: 1.5;
 }
 
@@ -128,7 +128,7 @@ const sectionStyle = computed(() => ({
 .article-content-section__external-link a {
   color: inherit;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
   overflow-wrap: anywhere;
   text-decoration: none;
 }
@@ -147,10 +147,6 @@ const sectionStyle = computed(() => ({
 @media (max-width: 767px) {
   .article-content-section {
     gap: 32px;
-  }
-
-  .article-content-section h2 {
-    font-size: 24px;
   }
 
   .article-content-section p {

@@ -22,7 +22,7 @@ export const jobPlatformHero = {
 export const jobPlatformGoals = {
   title: '設計目標',
   introduction:
-    '這次履歷平台的主要目標為：優化資訊架構、履歷欄位與跨裝置體驗，讓用戶能在不同裝置上清楚瀏覽職缺，輕鬆完成履歷建立，並完成履歷投遞。',
+    '這次履歷平台的主要目標是優化資訊架構、履歷欄位與跨裝置體驗，讓用戶能在不同裝置上清楚瀏覽職缺、輕鬆建立履歷並完成投遞。',
   goals: [
     {
       number: '01',
@@ -54,7 +54,7 @@ export const jobPlatformContentSections: ProjectContentSectionData[] = [
   {
     title: '專案動機',
     introduction: [
-      '履歷平台專門用於集團的計畫型召募專案，由於不同年度的召募會有各自的職缺內容，平台除了要承載大量資訊，也必須讓用戶快速掌握應徵要求。',
+      '履歷平台專門用於集團的計畫型招募專案。不同年度的招募各有不同的職缺內容，平台除了要承載大量資訊，也必須讓用戶快速掌握應徵要求。',
       '然而，現有平台採固定寬度，缺少響應式設計，用戶透過手機操作時，需要頻繁縮放與左右拖曳。畫面又以表格和文字為主且缺乏清楚層級，冗長的履歷表單也沒有適當的分段引導。',
     ],
     image: {
@@ -80,7 +80,7 @@ export const jobPlatformContentSections: ProjectContentSectionData[] = [
   {
     title: '登入頁整合招募視覺，延續活動品牌識別',
     introduction: [
-      '登入頁作為應徵者接觸招募平台的首個入口，於畫面中加入當期召募活動的主視覺，讓平台與年度召募主題保持一致，也強化集團的品牌印象。',
+      '登入頁是應徵者接觸招募平台的第一個入口。畫面加入當期招募活動的主視覺，讓平台與年度招募主題保持一致，也強化集團的品牌印象。',
     ],
     image: {
       src: `${assetPath}/pc-3.webp`,
@@ -155,7 +155,7 @@ export const jobPlatformContentSections: ProjectContentSectionData[] = [
   {
     title: '專案成果',
     introduction: [
-      '全新履歷平台透過清楚的資訊層級與狀態回饋，讓用戶能快速理解職缺概要，清楚掌握履歷狀態與投遞進度。前端以 Web Components 搭配 Shadow DOM 完成元件化，讓新版介面能穩定整合既有系統。專案最終與 IT 團隊共同完成上線，也為後續不同年度的召募計畫建立可迭代的設計與開發基礎。',
+      '全新履歷平台透過清楚的資訊層級與狀態回饋，讓用戶能快速理解職缺概要，掌握履歷狀態與投遞進度。前端以 Web Components 搭配 Shadow DOM 完成元件化，讓新版介面能穩定整合既有系統。專案最終與 IT 團隊共同完成上線，也為後續不同年度的招募計畫建立可迭代的設計與開發基礎。',
     ],
     image: {
       src: `${assetPath}/pc-9.webp`,

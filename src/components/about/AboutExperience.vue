@@ -124,8 +124,8 @@ onBeforeUnmount(() => {
 }
 
 .about-experience__description {
-  font-size: 20px;
-  font-weight: 400;
+  font-size: var(--content-body-font-size);
+  font-weight: var(--font-weight-regular);
   line-height: 1.5;
   margin: 0;
   max-width: 568px;
@@ -192,9 +192,6 @@ onBeforeUnmount(() => {
     font-size: 24px;
   }
 
-  .about-experience__description {
-    font-size: 18px;
-  }
 
   .about-experience__desktop {
     gap: 40px;

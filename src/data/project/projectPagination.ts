@@ -3,6 +3,7 @@ import type {
   ProjectPaginationItem,
 } from '../../types/project';
 import { projectsBySlug } from '../projects';
+import { getCircularNeighbors } from '../../utils/circularNeighbors';
 
 const projectOrder = [
   'smart-fitness',
@@ -48,14 +49,10 @@ export function getProjectPagination(
   slug: PublishedProjectSlug,
 ): ProjectPaginationData {
   const matchedIndex = projectOrder.indexOf(slug as PublishedProjectSlug);
-  const currentIndex = matchedIndex < 0 ? 0 : matchedIndex;
-  const previousSlug = projectOrder[
-    (currentIndex - 1 + projectOrder.length) % projectOrder.length
-  ];
-  const nextSlug = projectOrder[(currentIndex + 1) % projectOrder.length];
+  const { previous, next } = getCircularNeighbors(projectOrder, matchedIndex);
 
   return {
-    previous: createPaginationItem(previousSlug),
-    next: createPaginationItem(nextSlug),
+    previous: createPaginationItem(previous),
+    next: createPaginationItem(next),
   };
 }

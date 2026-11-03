@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { provide } from 'vue';
 import type {
   ProjectContentSectionData,
   ProjectGoalItem,
@@ -9,6 +10,10 @@ import ProjectCover from './ProjectCover.vue';
 import ProjectDetailHero from './ProjectDetailHero.vue';
 import ProjectGoalsSection from './ProjectGoalsSection.vue';
 import ProjectPagination from './ProjectPagination.vue';
+import {
+  optimizedProjectImagesKey,
+  type OptimizedProjectImages,
+} from '../../utils/projectImageAssets';
 
 type CoverData = {
   src: string;
@@ -44,14 +49,19 @@ type GoalsData = {
   textColor?: string;
 };
 
-defineProps<{
+const props = withDefaults(defineProps<{
   cover: CoverData;
   hero: HeroData;
   goals: GoalsData;
   sections: ProjectContentSectionData[];
   pagination: ProjectPaginationData;
   goalsAfterFirstSection?: boolean;
-}>();
+  optimizedImages?: OptimizedProjectImages;
+}>(), {
+  optimizedImages: () => ({}),
+});
+
+provide(optimizedProjectImagesKey, props.optimizedImages);
 </script>
 
 <template>

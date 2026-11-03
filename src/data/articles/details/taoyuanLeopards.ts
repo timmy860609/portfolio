@@ -67,7 +67,7 @@ export const taoyuanLeopardsContent: ArticleDetailContentData = {
       ],
       cards: [
         {
-          title: '方案四｜色彩以桃紅、深藍與白色建立主要視覺',
+          title: '色彩策略｜以桃紅、深藍與白色建立主要視覺',
           description:
             '色彩以桃紅、深藍與白色建立主要視覺，再加入螢光黃作為亮點。桃紅帶出年輕且鮮明的球隊形象，深藍穩定整體結構，螢光黃則集中在眼睛、外圈與隊名字樣，讓 Logo 在遠距離觀看時依然醒目，也更容易在紫色主視覺與賽事燈光中被看見。',
           image: {
@@ -89,7 +89,7 @@ export const taoyuanLeopardsContent: ArticleDetailContentData = {
       gap: 56,
       image: {
         src: `${imageRoot}/pic-6.webp`,
-        alt: '桃園雲豹飛將球員展示印有球隊識別的球衣',
+        alt: '桃園飛將雲豹球員展示印有球隊識別的球衣',
         width: 1920,
         height: 1120,
       },

@@ -44,6 +44,19 @@ import { withBase } from '../../utils/basePath';
         <LogoPathAnimation class="hero-kv__logo" :label="homeHero.logoAlt" />
         <h1 id="hero-tagline">{{ homeHero.tagline }}</h1>
       </div>
+
+      <a
+        class="hero-kv__scroll-cue"
+        href="#featured-projects"
+        aria-label="向下捲動至代表專案"
+      >
+        <span class="hero-kv__scroll-label">Scroll</span>
+        <span class="hero-kv__scroll-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M12 5v13M7.5 13.5 12 18l4.5-4.5" />
+          </svg>
+        </span>
+      </a>
     </div>
   </section>
 </template>
@@ -111,12 +124,92 @@ import { withBase } from '../../utils/basePath';
 .hero-kv__brand h1 {
   color: #323232;
   font-size: clamp(24px, 2.0833vw, 40px);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   letter-spacing: 0.12em;
   line-height: 1.2;
   margin: 0;
   text-align: center;
   white-space: nowrap;
+}
+
+.hero-kv__scroll-cue {
+  -webkit-backdrop-filter: blur(14px);
+  align-items: center;
+  backdrop-filter: blur(14px);
+  background: rgb(255 255 255 / 58%);
+  border: 1px solid rgb(50 50 50 / 6%);
+  border-radius: 999px;
+  bottom: clamp(24px, 4vh, 44px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 78%),
+    0 10px 30px rgb(50 50 50 / 8%);
+  color: #323232;
+  display: flex;
+  gap: 12px;
+  left: 50%;
+  min-height: 48px;
+  padding: 7px 8px 7px 18px;
+  position: absolute;
+  text-decoration: none;
+  transform: translateX(-50%);
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+  z-index: 3;
+}
+
+.hero-kv__scroll-label {
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.22em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.hero-kv__scroll-icon {
+  align-items: center;
+  background: var(--color-accent);
+  border-radius: 50%;
+  display: flex;
+  height: 32px;
+  justify-content: center;
+  width: 32px;
+}
+
+.hero-kv__scroll-icon svg {
+  animation: scroll-cue-arrow 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  fill: none;
+  height: 18px;
+  stroke: #323232;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  width: 18px;
+}
+
+.hero-kv__scroll-cue:hover {
+  background: rgb(255 255 255 / 76%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 90%),
+    0 12px 32px rgb(50 50 50 / 12%);
+  transform: translate(-50%, 2px);
+}
+
+.hero-kv__scroll-cue:focus-visible {
+  outline: 3px solid #323232;
+  outline-offset: 4px;
+}
+
+@keyframes scroll-cue-arrow {
+  0%,
+  100% {
+    transform: translateY(-1px);
+  }
+
+  50% {
+    transform: translateY(3px);
+  }
 }
 
 
@@ -155,5 +248,22 @@ import { withBase } from '../../utils/basePath';
     white-space: normal;
   }
 
+  .hero-kv__scroll-cue {
+    bottom: 20px;
+    min-height: 44px;
+    padding: 6px 7px 6px 16px;
+  }
+
+  .hero-kv__scroll-icon {
+    height: 30px;
+    width: 30px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-kv__scroll-icon svg {
+    animation: none;
+  }
 }
 </style>

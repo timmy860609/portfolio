@@ -289,7 +289,7 @@ const selectCategory = async (category: ProjectCategory, event: MouseEvent) => {
   flex: 0 0 auto;
   font: inherit;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
   line-height: 1.5;
   padding: 8px 24px;
   position: relative;

@@ -44,7 +44,7 @@ const listStyle = computed(() => ({
 .result-list h3 {
   color: #323232;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   letter-spacing: 1px;
   line-height: 1.5;
   margin: 0;

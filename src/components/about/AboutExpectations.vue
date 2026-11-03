@@ -75,7 +75,7 @@ import AppSectionHeading from '../AppSectionHeading.vue';
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-size: 20px;
+  font-size: var(--content-body-font-size);
   line-height: 1.5;
   width: 100%;
 }
@@ -95,7 +95,7 @@ import AppSectionHeading from '../AppSectionHeading.vue';
 }
 
 .about-expectations__copy strong {
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .about-expectations__actions {
@@ -115,10 +115,6 @@ import AppSectionHeading from '../AppSectionHeading.vue';
 
   .about-expectations__inner {
     gap: 24px;
-  }
-
-  .about-expectations__copy {
-    font-size: 17px;
   }
 
   .about-expectations__actions {

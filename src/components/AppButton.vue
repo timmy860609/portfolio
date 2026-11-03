@@ -58,7 +58,7 @@ withDefaults(
   cursor: pointer;
   display: flex;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   justify-content: center;
   line-height: 1.5;
   padding: 12px 24px;

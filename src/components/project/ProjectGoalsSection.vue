@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import ProjectGoalsGrid, {
-  type ProjectGoalItem,
-} from './ProjectGoalsGrid.vue';
+import type { ProjectGoalItem } from '../../types/project';
+import ProjectGoalsGrid from './ProjectGoalsGrid.vue';
 
 defineProps<{
   title: string;
@@ -76,8 +75,8 @@ defineProps<{
 }
 
 .project-goals h2 {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: var(--font-size-content-heading);
+  font-weight: var(--font-weight-bold);
   line-height: 1.5;
   margin: 0;
 }
@@ -110,10 +109,6 @@ defineProps<{
 @media (max-width: 767px) {
   .project-goals {
     gap: 40px;
-  }
-
-  .project-goals h2 {
-    font-size: 24px;
   }
 
 }

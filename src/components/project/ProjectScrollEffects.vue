@@ -1,74 +1,50 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted } from 'vue';
 import { gsap } from 'gsap/dist/gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import {
+  addScrollParallax,
+  useResponsiveScrollEffects,
+} from '../../utils/useResponsiveScrollEffects';
 
-let mediaContext: ReturnType<typeof gsap.matchMedia> | undefined;
-onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger);
-  mediaContext = gsap.matchMedia();
+const createEffects = (coverOffset: number, paginationOffset: number) => {
+  const cover = document.querySelector<HTMLElement>('.project-cover');
+  const pagination = document.querySelector<HTMLElement>('.project-pagination');
+  const paginationItems = gsap.utils.toArray<HTMLElement>(
+    '.project-pagination-item',
+  );
 
-  const createEffects = (coverOffset: number, paginationOffset: number) => {
-    const cover = document.querySelector<HTMLElement>('.project-cover');
-    const pagination = document.querySelector<HTMLElement>('.project-pagination');
-    const paginationItems = gsap.utils.toArray<HTMLElement>(
-      '.project-pagination-item',
-    );
+  addScrollParallax(cover, cover, coverOffset);
 
-    if (cover) {
-      gsap.to(cover, {
-        ease: 'none',
-        y: coverOffset,
+  if (pagination && paginationItems.length) {
+    gsap.fromTo(
+      paginationItems,
+      {
+        autoAlpha: 0,
+        scale: 0.98,
+        x: (index) => index === 0 ? -paginationOffset : paginationOffset,
+        y: 32,
+      },
+      {
+        autoAlpha: 1,
+        duration: 1.15,
+        ease: 'power4.out',
+        scale: 1,
+        stagger: 0.08,
+        x: 0,
+        y: 0,
         scrollTrigger: {
-          trigger: cover,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 0.5,
+          trigger: pagination,
+          start: 'top 88%',
+          toggleActions: 'play none none none',
         },
-      });
-    }
+      },
+    );
+  }
+};
 
-    if (pagination && paginationItems.length) {
-      gsap.fromTo(
-        paginationItems,
-        {
-          autoAlpha: 0,
-          scale: 0.98,
-          x: (index) => index === 0 ? -paginationOffset : paginationOffset,
-          y: 32,
-        },
-        {
-          autoAlpha: 1,
-          duration: 1.15,
-          ease: 'power4.out',
-          scale: 1,
-          stagger: 0.08,
-          x: 0,
-          y: 0,
-          scrollTrigger: {
-            trigger: pagination,
-            start: 'top 88%',
-            toggleActions: 'play none none none',
-          },
-        },
-      );
-    }
-  };
-
-  mediaContext.add(
-    '(min-width: 768px) and (prefers-reduced-motion: no-preference)',
-    () => createEffects(72, 72),
-  );
-
-  mediaContext.add(
-    '(max-width: 767px) and (prefers-reduced-motion: no-preference)',
-    () => createEffects(36, 36),
-  );
-});
-
-onBeforeUnmount(() => {
-  mediaContext?.revert();
-});
+useResponsiveScrollEffects(
+  () => createEffects(72, 72),
+  () => createEffects(36, 36),
+);
 </script>
 
 <template>

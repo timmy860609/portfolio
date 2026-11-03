@@ -15,7 +15,6 @@ const menuToggleElement = ref<HTMLButtonElement | null>(null);
 const navigationLinks = ref<HTMLElement[]>([]);
 const readingProgress = ref(0);
 const mobileMenuIsOpen = ref(false);
-const showLanguageButton = false;
 let progressAnimationFrame = 0;
 let mobileMenuTimeline: gsap.core.Timeline | undefined;
 
@@ -66,14 +65,7 @@ const updateNavigationIndicator = () => {
 
   if (!navigationNode || !activeLink) return;
 
-  navigationNode.style.setProperty(
-    '--indicator-x',
-    `${activeLink.offsetLeft}px`,
-  );
-  navigationNode.style.setProperty(
-    '--indicator-width',
-    `${activeLink.offsetWidth}px`,
-  );
+  setIndicatorFromLink(navigationNode, activeLink);
 };
 
 const setIndicatorFromLink = (
@@ -355,7 +347,6 @@ onBeforeUnmount(() => {
         <nav
           id="main-navigation"
           ref="navigationElement"
-          :class="{ 'navigation--open': mobileMenuIsOpen }"
           aria-label="主要導覽"
         >
           <a
@@ -374,16 +365,7 @@ onBeforeUnmount(() => {
 
         <div
           class="header-actions"
-          :class="{ 'header-actions--open': mobileMenuIsOpen }"
         >
-          <button
-            v-if="showLanguageButton"
-            class="language-button"
-            type="button"
-            aria-label="切換為英文"
-          >
-            EN
-          </button>
           <AppButton
             href="/#contact"
             variant="primary"
@@ -510,8 +492,8 @@ nav.navigation--no-transition::before {
   align-items: center;
   color: #000;
   display: flex;
-  font-size: 18px;
-  font-weight: 400;
+  font-size: var(--font-size-body-small);
+  font-weight: var(--font-weight-medium);
   justify-content: center;
   line-height: 1.5;
   padding: 8px 12px;
@@ -528,7 +510,7 @@ nav.navigation--no-transition::before {
 
 .nav-link--active {
   color: #000;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   padding-inline: 16px;
 }
 
@@ -539,37 +521,10 @@ nav.navigation--no-transition::before {
   justify-content: flex-end;
 }
 
-.language-button {
-  align-items: center;
-  border-radius: 999px;
-  color: #323232;
-  display: flex;
-  font-family: inherit;
-  font-size: 18px;
-  font-weight: 500;
-  justify-content: center;
-  line-height: 1.5;
-  text-decoration: none;
-}
-
-.language-button {
-  background: transparent;
-  border: 1px solid #323232;
-  cursor: pointer;
-  height: 44px;
-  padding: 0;
-  width: 44px;
-}
-
 .contact-button {
-  font-size: 18px;
+  font-size: var(--font-size-body-small);
   padding: 12px 24px;
   white-space: nowrap;
-}
-
-.language-button:focus-visible {
-  outline: 3px solid #323232;
-  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -631,15 +586,8 @@ nav.navigation--no-transition::before {
     visibility: visible;
   }
 
-  .language-button {
-    font-size: 16px;
-    height: 40px;
-    order: 2;
-    width: 40px;
-  }
-
   .contact-button {
-    font-size: 16px;
+    font-size: var(--font-size-body-small);
     line-height: 1.5;
     order: 1;
     padding: 8px;
@@ -658,23 +606,19 @@ nav.navigation--no-transition::before {
     width: 100%;
   }
 
-  nav.navigation--open {
-    padding-top: 0;
-  }
-
   nav::before {
     display: none;
   }
 
   .nav-link {
     border-radius: 999px;
-    font-size: 16px;
+    font-size: var(--font-size-body-small);
     padding: 8px 12px;
   }
 
   .nav-link--active {
     background: transparent;
-    font-weight: 400;
+    font-weight: var(--font-weight-medium);
     padding-inline: 12px;
   }
 

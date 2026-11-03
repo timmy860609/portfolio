@@ -3,10 +3,10 @@ import type {
   ProjectPaginationItem,
 } from '../../types/project';
 import { articles } from './articles';
+import type { ArticleItem } from './types';
+import { getCircularNeighbors } from '../../utils/circularNeighbors';
 
-function createPaginationItem(index: number): ProjectPaginationItem {
-  const article = articles[index];
-
+function createPaginationItem(article: ArticleItem): ProjectPaginationItem {
   return {
     title: article.title,
     tags: article.tags,
@@ -20,12 +20,10 @@ function createPaginationItem(index: number): ProjectPaginationItem {
 
 export function getArticlePagination(slug: string): ProjectPaginationData {
   const matchedIndex = articles.findIndex((article) => article.slug === slug);
-  const currentIndex = matchedIndex < 0 ? 0 : matchedIndex;
-  const previousIndex = (currentIndex - 1 + articles.length) % articles.length;
-  const nextIndex = (currentIndex + 1) % articles.length;
+  const { previous, next } = getCircularNeighbors(articles, matchedIndex);
 
   return {
-    previous: createPaginationItem(previousIndex),
-    next: createPaginationItem(nextIndex),
+    previous: createPaginationItem(previous),
+    next: createPaginationItem(next),
   };
 }

@@ -13,7 +13,7 @@ withDefaults(
   {
     year: '2025',
     showAction: false,
-    actionLabel: '前往網頁',
+    actionLabel: '前往網站',
     actionHref: '#',
   },
 );
@@ -89,8 +89,8 @@ withDefaults(
 }
 
 .project-detail-hero h1 {
-  font-size: 40px;
-  font-weight: 700;
+  font-size: var(--font-size-detail-heading);
+  font-weight: var(--font-weight-bold);
   line-height: 1.2;
   margin: 0;
 }
@@ -103,15 +103,15 @@ withDefaults(
 
 .project-detail-hero__meta-item span {
   color: #525252;
-  font-size: 18px;
+  font-size: var(--font-size-body-small);
   letter-spacing: 0.9px;
   line-height: 1.5;
 }
 
 .project-detail-hero__meta-item strong {
   color: #323232;
-  font-size: 20px;
-  font-weight: 400;
+  font-size: var(--content-body-font-size);
+  font-weight: var(--font-weight-regular);
   letter-spacing: 1px;
   line-height: 1.5;
 }
@@ -122,7 +122,7 @@ withDefaults(
 
 .project-detail-hero__action {
   flex: 0 0 auto;
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 @media (max-width: 767px) {
@@ -133,22 +133,10 @@ withDefaults(
     padding-block: 28px;
   }
 
-  .project-detail-hero h1 {
-    font-size: 30px;
-  }
-
   .project-detail-hero__meta {
     align-items: flex-start;
     flex-direction: row;
     gap: 16px;
-  }
-
-  .project-detail-hero__meta-item span {
-    font-size: 16px;
-  }
-
-  .project-detail-hero__meta-item strong {
-    font-size: 18px;
   }
 
 }

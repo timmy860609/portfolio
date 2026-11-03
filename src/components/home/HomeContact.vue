@@ -129,15 +129,15 @@ async function copyContact(value: string) {
 }
 
 .home-contact__introduction h2 {
-  font-size: 40px;
-  font-weight: 700;
+  font-size: var(--font-size-section-heading);
+  font-weight: var(--font-weight-bold);
   line-height: 1.2;
   margin: 0;
 }
 
 .home-contact__introduction p {
-  font-size: 18px;
-  font-weight: 400;
+  font-size: var(--font-size-body-small);
+  font-weight: var(--font-weight-regular);
   line-height: 1.5;
   margin: 0;
 }
@@ -169,7 +169,7 @@ async function copyContact(value: string) {
 .home-contact__details p {
   color: #737373;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   line-height: 1.5;
   margin: 0;
 }
@@ -177,7 +177,7 @@ async function copyContact(value: string) {
 .home-contact__details a {
   color: #323232;
   font-size: 24px;
-  font-weight: 600;
+  font-weight: var(--font-weight-medium);
   line-height: 1.5;
   overflow-wrap: anywhere;
   text-decoration: none;
@@ -210,10 +210,6 @@ async function copyContact(value: string) {
 }
 
 @media (max-width: 900px) {
-  .home-contact__introduction h2 {
-    font-size: 36px;
-  }
-
   .home-contact__details a {
     font-size: 20px;
   }
@@ -237,14 +233,6 @@ async function copyContact(value: string) {
   .home-contact__list {
     flex-direction: column;
     gap: 24px;
-  }
-
-  .home-contact__introduction h2 {
-    font-size: 32px;
-  }
-
-  .home-contact__introduction p {
-    font-size: 16px;
   }
 
   .home-contact__card {

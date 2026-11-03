@@ -110,8 +110,8 @@ const toAvif = (source?: string) => source?.replace(/\.webp$/i, '.avif');
 }
 
 .overview-card h2 {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: var(--font-size-card-heading);
+  font-weight: var(--font-weight-bold);
   line-height: 1.2;
   margin: 0;
 }
@@ -126,10 +126,6 @@ const toAvif = (source?: string) => source?.replace(/\.webp$/i, '.avif');
 @media (max-width: 767px) {
   .overview-card {
     gap: 18px;
-  }
-
-  .overview-card h2 {
-    font-size: 26px;
   }
 
 }

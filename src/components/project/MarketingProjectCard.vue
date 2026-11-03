@@ -70,8 +70,8 @@ defineProps<MarketingProject>();
 
 .marketing-card h2 {
   color: #323232;
-  font-size: 32px;
-  font-weight: 700;
+  font-size: var(--font-size-card-heading);
+  font-weight: var(--font-weight-bold);
   line-height: 1.2;
   margin: 0;
 }
@@ -84,7 +84,7 @@ defineProps<MarketingProject>();
 }
 
 .marketing-card :deep(.marketing-card__button) {
-  font-weight: 700;
+  font-weight: var(--font-weight-medium);
 }
 
 .marketing-card figure {
@@ -107,10 +107,6 @@ defineProps<MarketingProject>();
   .marketing-card {
     align-items: stretch;
     flex-direction: column-reverse;
-  }
-
-  .marketing-card h2 {
-    font-size: 26px;
   }
 
   .marketing-card :deep(.marketing-card__button.app-button--fit) {

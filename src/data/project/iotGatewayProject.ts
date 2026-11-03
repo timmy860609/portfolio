@@ -49,7 +49,7 @@ export const iotGatewayContentSections: ProjectContentSectionData[] = [
   {
     title: '專案背景',
     introduction: [
-      'IoT 設備逐漸部署各種智慧場域，工程人員需要頻繁前往現場完成設備調整。然而，多數 Gateway 管理工具仍以 Desktop 為主要介面，使現場作業高度依賴筆記型電腦，不僅增加攜帶負擔，也限制了維運工作的靈活性。',
+      'IoT 設備逐漸部署於各種智慧場域，工程人員需要頻繁前往現場完成設備調整。然而，多數 Gateway 管理工具仍以桌機為主要介面，使現場作業高度依賴筆記型電腦，不僅增加攜帶負擔，也限制了維運工作的靈活性。',
       'Gateway 後台管理系統將設備管理延伸至手機，讓工程人員能直接於現場完成系統設定，使維運更貼近實際使用情境。',
     ],
     density: 'compact',
@@ -70,7 +70,7 @@ export const iotGatewayContentSections: ProjectContentSectionData[] = [
   {
     title: '一機在手，現場設定一次搞定',
     introduction: [
-      '透過行動化介面整合 Gateway 與設備節點，讓工程人員抵達現場後即可使用手機快速掌握概況，快速定位異常，並接續完成安裝與除錯作業。',
+      '透過行動化介面整合 Gateway 與設備節點，讓工程人員抵達現場後即可使用手機掌握概況、快速定位異常，並接續完成安裝與除錯作業。',
     ],
     image: {
       src: `${assetPath}/pc-2.webp`,
@@ -81,7 +81,7 @@ export const iotGatewayContentSections: ProjectContentSectionData[] = [
     details: [
       {
         title: '快速掌握設備狀態',
-        description: '將場域設備與數據集中顯示，快速取得目前狀態。',
+        description: '集中顯示場域設備與數據，快速掌握目前狀態。',
       },
       {
         title: '精準定位裝置訊息',
@@ -112,7 +112,7 @@ export const iotGatewayContentSections: ProjectContentSectionData[] = [
       {
         title: '重點功能總覽',
         description:
-          '側邊選單提供系統更新與參數設定，快速切換不同的功能。',
+          '側邊選單提供系統更新與參數設定，方便切換不同功能。',
       },
       {
         title: '進度即時回饋',
@@ -135,12 +135,12 @@ export const iotGatewayContentSections: ProjectContentSectionData[] = [
     },
     details: [
       {
-        title: '快速掌握設備狀態',
+        title: '簡化設備配對流程',
         description:
           '輸入設備專屬的 DSK 資訊後，可送出配對指令，將新的感測器加入，簡化現場建置時的節點新增流程。',
       },
       {
-        title: '精準定位裝置訊息',
+        title: '集中管理設備資訊',
         description:
           '將 Gateway 資訊與硬體版本等資訊整合於分頁，方便快速查找並調整相關設定。',
       },

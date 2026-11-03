@@ -51,15 +51,15 @@ defineProps<{
 }
 
 .experience-summary__company h3 {
-  font-size: 26px;
-  font-weight: 500;
+  font-size: var(--font-size-item-heading);
+  font-weight: var(--font-weight-semibold);
   letter-spacing: 0.06em;
   line-height: 1.5;
   margin: 0;
 }
 
 .experience-summary__role {
-  font-size: 20px;
+  font-size: var(--content-body-font-size);
   letter-spacing: 0.06em;
   line-height: 1.5;
   margin: 0;
@@ -67,7 +67,7 @@ defineProps<{
 
 .experience-summary__role strong,
 .experience-summary__role b {
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .experience-summary__role-image {
@@ -80,7 +80,7 @@ defineProps<{
 }
 
 .experience-summary__description {
-  font-size: 18px;
+  font-size: var(--font-size-body-small);
   letter-spacing: 0.06em;
   line-height: 1.5;
   margin: 0;
@@ -94,12 +94,7 @@ defineProps<{
 
 @media (max-width: 620px) {
   .experience-summary__description {
-    font-size: 16px;
     letter-spacing: 0.03em;
-  }
-
-  .experience-summary__role {
-    font-size: 17px;
   }
 }
 </style>

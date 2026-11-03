@@ -59,39 +59,23 @@ onBeforeUnmount(() => {
 
 <template>
   <section class="about-hero" aria-labelledby="about-hero-title" data-node-id="4391:25152">
-    <div class="about-hero__orb about-hero__orb--left" aria-hidden="true">
-      <picture>
-        <source
-          media="(max-width: 767px)"
-          :srcset="withBase('/Image/About/hero-glow-left-mobile.svg')"
-        />
-        <img :src="withBase('/Image/About/hero-glow-left.svg')" alt="" />
-      </picture>
-    </div>
-
-    <div class="about-hero__triangle" aria-hidden="true">
-      <div class="about-hero__triangle-shape">
-        <picture>
-          <source
-            media="(max-width: 767px)"
-            :srcset="withBase('/Image/About/hero-triangle-mobile.svg')"
-          />
-          <img :src="withBase('/Image/About/hero-triangle.svg')" alt="" />
-        </picture>
-      </div>
-    </div>
-
-    <div class="about-hero__orb about-hero__orb--right" aria-hidden="true">
-      <picture>
-        <source
-          media="(max-width: 767px)"
-          :srcset="withBase('/Image/About/hero-glow-right-mobile.svg')"
-        />
-        <img :src="withBase('/Image/About/hero-glow-right.svg')" alt="" />
-      </picture>
-    </div>
-
     <div class="about-hero__stage">
+      <picture class="about-hero__background" aria-hidden="true">
+        <source
+          media="(max-width: 767px)"
+          :srcset="withBase('/Image/About/about-hero-bg-mobile.webp')"
+        />
+        <img
+          :src="withBase('/Image/About/about-hero-bg-desktop.webp')"
+          alt=""
+          width="3840"
+          height="1250"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </picture>
+
       <div class="about-hero__content">
         <h1 id="about-hero-title">關於我</h1>
         <p class="about-hero__introduction">{{ aboutHero.introduction }}</p>
@@ -124,18 +108,6 @@ onBeforeUnmount(() => {
       />
     </div>
 
-    <picture class="about-hero__glass" aria-hidden="true">
-      <source
-        media="(max-width: 767px)"
-        :srcset="withBase('/Image/About/glass-bg-mobile.svg')"
-      />
-      <img
-        :src="withBase('/Image/About/glass-bg.svg')"
-        alt=""
-        width="1920"
-        height="342"
-      />
-    </picture>
   </section>
 </template>
 
@@ -162,6 +134,22 @@ onBeforeUnmount(() => {
   z-index: 3;
 }
 
+.about-hero__background {
+  display: block;
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+
+.about-hero__background img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  width: 100%;
+}
+
 .about-hero__content {
   color: #323232;
   display: flex;
@@ -176,14 +164,14 @@ onBeforeUnmount(() => {
 
 .about-hero__content h1 {
   font-size: 48px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   line-height: 1.5;
   margin: 0;
 }
 
 .about-hero__introduction {
   font-size: 24px;
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   line-height: 1.5;
   margin: 0;
   width: 100%;
@@ -209,7 +197,7 @@ onBeforeUnmount(() => {
 
 .about-hero__stat dt {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   line-height: 1.5;
   order: 2;
 }
@@ -217,7 +205,7 @@ onBeforeUnmount(() => {
 .about-hero__stat dd {
   font-feature-settings: 'tnum';
   font-size: 40px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   font-variant-numeric: tabular-nums;
   line-height: 1.5;
   margin: 0;
@@ -245,166 +233,6 @@ onBeforeUnmount(() => {
   top: auto;
   width: 388px;
   z-index: 5;
-}
-
-.about-hero__orb,
-.about-hero__triangle {
-  pointer-events: none;
-  position: absolute;
-  z-index: 1;
-}
-
-.about-hero__orb img,
-.about-hero__triangle img {
-  display: block;
-  max-width: none;
-  transition: transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.about-hero__orb picture,
-.about-hero__triangle picture {
-  display: contents;
-}
-
-.about-hero__orb--left {
-  animation: about-hero-enter-top-left 1600ms cubic-bezier(.16, 1, .3, 1) both;
-  bottom: auto;
-  height: 1689px;
-  left: calc(50% - 1431px);
-  top: -355px;
-  width: 1689px;
-}
-
-.about-hero__orb--left img {
-  height: 100%;
-  width: 100%;
-}
-
-.about-hero__triangle {
-  align-items: center;
-  animation: about-hero-enter-left 1500ms 70ms cubic-bezier(.16, 1, .3, 1) both;
-  bottom: auto;
-  display: flex;
-  height: 551.59px;
-  justify-content: center;
-  left: calc(50% - 1091px);
-  position: absolute;
-  top: 221px;
-  width: 798.5px;
-  z-index: 1;
-}
-
-.about-hero__triangle-shape {
-  height: 672.038px;
-  position: relative;
-  transform: rotate(-105deg) skewX(-9.27deg) scaleY(-.99);
-  width: 501.584px;
-}
-
-.about-hero__triangle img {
-  bottom: auto;
-  height: 790.263px;
-  left: -18.88%;
-  position: absolute;
-  top: -8.66%;
-  width: 621.308px;
-}
-
-.about-hero__orb--right {
-  animation: about-hero-enter-right 1700ms 110ms cubic-bezier(.16, 1, .3, 1) both;
-  bottom: auto;
-  height: 917px;
-  left: calc(50% + 43px);
-  top: 221px;
-  width: 917px;
-}
-
-.about-hero__orb--right img {
-  bottom: auto;
-  height: 1037px;
-  left: -10.36%;
-  position: absolute;
-  top: -6.54%;
-  width: 1037px;
-}
-
-.about-hero__glass {
-  animation: about-hero-enter-bottom 1450ms 90ms cubic-bezier(.16, 1, .3, 1) both;
-  bottom: 0;
-  display: block;
-  height: 342px;
-  left: calc(50% - 960px);
-  max-width: none;
-  position: absolute;
-  right: auto;
-  top: auto;
-  width: 1920px;
-  z-index: 2;
-}
-
-.about-hero__glass img {
-  display: block;
-  height: 100%;
-  object-fit: fill;
-  width: 100%;
-}
-
-@keyframes about-hero-enter-top-left {
-  from {
-    opacity: 0;
-    transform: translate3d(-18vw, -14vh, 0) scale(.94);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}
-
-@keyframes about-hero-enter-left {
-  from {
-    opacity: 0;
-    transform: translate3d(-28vw, 10vh, 0) scale(.94);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}
-
-@keyframes about-hero-enter-right {
-  from {
-    opacity: 0;
-    transform: translate3d(26vw, 14vh, 0) scale(.94);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}
-
-@keyframes about-hero-enter-bottom {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 24vh, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes about-hero-enter-glass-mobile {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
 
 @media (max-width: 1440px) {
@@ -518,72 +346,5 @@ onBeforeUnmount(() => {
     width: 285px;
   }
 
-  .about-hero__orb--left {
-    bottom: auto;
-    height: 923px;
-    left: -551px;
-    top: -66px;
-    width: 923px;
-  }
-
-  .about-hero__triangle {
-    bottom: auto;
-    height: 388.812px;
-    left: -293px;
-    top: 381px;
-    width: 562.858px;
-  }
-
-  .about-hero__triangle-shape {
-    height: 473.716px;
-    width: 353.564px;
-  }
-
-  .about-hero__triangle img {
-    bottom: auto;
-    height: 592px;
-    left: -26.79%;
-    top: -12.29%;
-    width: 473.3px;
-  }
-
-  .about-hero__orb--right {
-    bottom: auto;
-    height: 431px;
-    left: 249px;
-    top: 311px;
-    width: 431px;
-  }
-
-  .about-hero__orb--right img {
-    bottom: auto;
-    height: 551px;
-    left: -22.04%;
-    top: -13.92%;
-    width: 551px;
-  }
-
-  .about-hero__glass {
-    animation: about-hero-enter-glass-mobile 900ms 90ms cubic-bezier(.16, 1, .3, 1) both;
-    bottom: 0;
-    height: 194px;
-    inset-block-end: 0;
-    inset-block-start: auto;
-    inset-inline: auto;
-    left: 50%;
-    right: auto;
-    top: auto;
-    transform: translateX(-50%) scaleX(-1);
-    width: 1076.532px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .about-hero__orb--left,
-  .about-hero__triangle,
-  .about-hero__orb--right,
-  .about-hero__glass {
-    animation: none;
-  }
 }
 </style>

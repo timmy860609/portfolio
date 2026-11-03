@@ -67,20 +67,20 @@ withDefaults(defineProps<ArticleItem & {
 }
 
 .article-card__tags span {
-  font-size: 18px;
+  font-size: var(--font-size-body-small);
   line-height: 1.5;
   white-space: nowrap;
 }
 
 .article-card__tags b {
   color: #00d9ff;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .article-card h2 {
   font-family: 'Noto Sans TC', sans-serif;
-  font-size: 32px;
-  font-weight: 700;
+  font-size: var(--font-size-card-heading);
+  font-weight: var(--font-weight-bold);
   line-height: 1.2;
   margin: 0;
 }
@@ -111,14 +111,6 @@ withDefaults(defineProps<ArticleItem & {
   .article-card {
     flex-direction: column;
     gap: 16px;
-  }
-
-  .article-card__tags span {
-    font-size: 16px;
-  }
-
-  .article-card h2 {
-    font-size: 24px;
   }
 
 }

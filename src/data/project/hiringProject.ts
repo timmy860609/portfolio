@@ -15,7 +15,7 @@ export const hiringHero = {
   tags: hiringProject.detailTags ?? hiringProject.tags,
   title: hiringProject.detailTitle ?? hiringProject.title,
   showAction: true,
-  actionLabel: '前往網頁',
+  actionLabel: '前往網站',
   actionHref: 'https://pse.is/9mgr32',
 };
 
@@ -23,18 +23,18 @@ export const hiringBackground = {
   title: '專案背景',
   introduction: [
     '集團旗下包含多間子公司，人才計畫各自具有不同的專業條件與申請門檻。若以傳統職缺頁面呈現，求職者往往只能看到工作要求，難以理解集團環境、培育制度及未來發展。',
-    '因此，人才召募網依正職與實習兩種求職階段進行規劃，除了協助求職者精準判斷職涯方向，也讓召募網成為企業長期對外招攬人才的入口。',
+    '因此，人才招募網依正職與實習兩種求職階段進行規劃，除了協助求職者精準判斷職涯方向，也讓招募網成為企業長期對外招攬人才的入口。',
   ],
 };
 
 export const hiringDesignGoals = {
   title: '設計目標',
   introduction:
-    '人才召募網是企業對求職者建立第一印象的管道。以企業品牌經營與人才招募策略為核心，整合不同職缺計畫，建立一致的平台體驗，讓求職者能快速理解企業文化，同時提升企業召募效率與長期維運彈性。',
+    '人才招募網是企業向求職者建立第一印象的管道。以企業品牌經營與人才招募策略為核心，整合不同職缺計畫，建立一致的平台體驗，讓求職者能快速理解企業文化，同時提升企業招募效率與長期維運彈性。',
   goals: [
     {
       number: '01',
-      title: '建立一致的召募形象',
+      title: '建立一致的招募形象',
       description:
         '以集團品牌為核心，統整正職與實習的視覺及資訊層級，傳達共同的招募形象。',
     },
@@ -48,11 +48,11 @@ export const hiringDesignGoals = {
       number: '03',
       title: '可持續擴充的招募平台',
       description:
-        '規劃召募期間及職缺異動彈性更新，減少維護成本。',
+        '規劃招募期間及職缺異動的彈性更新機制，減少維護成本。',
     },
   ],
   conclusion:
-    '正職與實習面對的求職者不同，正職人才在意長期發展；學生更重視實際工作內容與學習收穫。因此要在集團品牌之下，回應不同階段的人才需求，同時協助各子公司持續發布與管理召募。',
+    '正職與實習面對的求職者不同，正職人才在意長期發展；學生更重視實際工作內容與學習收穫。因此要在集團品牌之下，回應不同階段的人才需求，同時協助各子公司持續發布與管理招募資訊。',
   conclusionPosition: 'after' as const,
   density: 'compact' as const,
   accentColor: '#fff',
@@ -64,7 +64,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
   {
     title: '透過視覺差異呈現不同的求職目的',
     introduction: [
-      '網站延續品牌藍作為主要用色，並使用橘色作為關鍵資訊與重點引導，使兩類召募頁面保有共同的品牌辨識。依求職階段，網站將分為兩條主要路徑。',
+      '網站延續品牌藍作為主要用色，並使用橘色作為關鍵資訊與重點引導，使兩類招募頁面保有共同的品牌辨識。依求職階段，網站分為兩條主要路徑。',
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-1.webp',
@@ -89,7 +89,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
   {
     title: '釐清資訊架構與引導路徑',
     introduction: [
-      '召募網同時涵蓋 MA、ITMT 等計畫，各領域人才在瀏覽時關注的資訊不同。因此先以「求職目的」區分主要路徑，再依子公司與職務類別規劃內容層級，避免大量職缺與制度資訊集中在同一畫面。',
+      '招募網同時涵蓋 MA、ITMT 等計畫，各領域人才在瀏覽時關注的資訊不同。因此先以「求職目的」區分主要路徑，再依子公司與職務類別規劃內容層級，避免大量職缺與制度資訊集中在同一畫面。',
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-2.webp',
@@ -98,7 +98,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
       height: 1680,
     },
     conclusion:
-      '正職路徑著重培育制度及職涯發展；實習路徑則優先呈現實習期間與學習經驗。兩條路徑最後皆銜接召募流程與履歷投遞，使求職者能從認識職缺一路完成履歷投遞。',
+      '正職路徑著重培育制度及職涯發展；實習路徑則優先呈現實習期間與學習經驗。兩條路徑最後皆銜接招募流程與履歷投遞，使求職者能從認識職缺一路完成履歷投遞。',
     density: 'caption',
   },
   {
@@ -114,13 +114,13 @@ export const hiringContentSections: ProjectContentSectionData[] = [
       height: 1680,
     },
     conclusion:
-      '例如：當元件位於 fulltime.html 時，頁面載入正職主題，以深藍色作為主要色彩；進入 internship.html 時，則切換為實習的淺藍色。相同的元件與內容模組不需重新開發，即可依所在頁面呈現對應風格。',
+      '例如：當元件位於 fulltime.html 時，頁面載入正職主題，以深藍色作為主要色彩；進入 internship.html 時，則切換為實習的淺藍色。相同的元件與內容模組無須重新開發，即可依所在頁面呈現對應風格。',
     density: 'caption',
   },
   {
     title: '正職：從多元招募計畫，找到適合自己的職涯入口',
     introduction: [
-      '正職招募以 MA、ITM 等核心計畫作為分群，再於計畫內呈現不同職能與發展方向。透過資訊層級化，求職者不需一次閱讀所有招募內容，即可快速切換計畫、相互比較。',
+      '正職招募以 MA、ITM 等核心計畫作為分群，再於計畫內呈現不同職能與發展方向。透過資訊層級化，求職者無須一次閱讀所有招募內容，即可快速切換計畫、相互比較。',
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-4.webp',
@@ -150,7 +150,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
   {
     title: '透過真實經驗，補足制度之外的職涯想像',
     introduction: [
-      '對於求職者，最關心的不外乎日常的工作環境與成長歷程。透過「學長姐分享」，讓求職者能快速找到與自身方向相關的經驗分享。列表以卡片摘要呈現，能夠快速瀏覽不同背景的分享；點擊卡片後，再以彈窗開啟被收納的完整內容。',
+      '求職者最關心的不外乎日常工作環境與成長歷程。透過「學長姐分享」，讓求職者能快速找到與自身方向相關的經驗。列表以卡片摘要呈現，方便瀏覽不同背景的分享；點擊卡片後，再以彈窗開啟完整內容。',
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-7.webp',
@@ -163,13 +163,13 @@ export const hiringContentSections: ProjectContentSectionData[] = [
     density: 'results',
   },
   {
-    title: '整合活動資訊與地點導航，協助求職者精準安排行程',
+    title: '整合活動資訊與地點導覽，協助求職者精準安排行程',
     introduction: [
       '企業會於各式場合舉辦招募說明會，以卡片呈現活動摘要訊息，讓求職者能快速比較場次並掌握參與資訊。',
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-6.webp',
-      alt: '人才招募活動資訊與地點導航的桌機及手機版畫面',
+      alt: '人才招募活動資訊與地點導覽的桌機及手機版畫面',
       width: 2880,
       height: 1680,
     },
@@ -191,9 +191,9 @@ export const hiringContentSections: ProjectContentSectionData[] = [
     density: 'tight',
   },
   {
-    title: '透過學長姐分享，提升學生的信心度',
+    title: '透過學長姐分享，提升學生的信心',
     introduction: [
-      '同正職網頁的設計邏輯，除了沿用前端元件外，心得分享以心得摘要突顯敘述主題；點擊後再閱讀完整內容，避免大量長文直接佔據版面，也讓求職者只深入感興趣的經驗分享。',
+      '沿用正職頁面的設計邏輯與前端元件，心得分享先以摘要突顯主題；點擊後再閱讀完整內容，避免大量長文直接佔據版面，也讓求職者深入閱讀感興趣的經驗分享。',
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-9.webp',
@@ -206,7 +206,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
   {
     title: '專案成果',
     introduction: [
-      '將正職、實習與不同人才計畫串連於人才召募網，統整求職複雜資訊，規劃清晰的求職探索路徑。介面以模組化方式設計，以主題 Token 延伸不同召募風格，兼顧品牌辨識與元件彈性；後續新增職缺、調整樣式或年度更新時，也能沿用既有模組快速維護。',
+      '將正職、實習與不同人才計畫串連於人才招募網，統整複雜的求職資訊，規劃清晰的求職探索路徑。介面以模組化方式設計，透過主題 Token 延伸不同招募風格，兼顧品牌辨識與元件彈性；後續新增職缺、調整樣式或年度更新時，也能沿用既有模組快速維護。',
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-10.webp',
@@ -228,7 +228,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
       {
         title: '建立可共用的前端架構，提升後續維運效率',
         description:
-          '集中管理網站的元件模組，減少重複修改與提升迭代效率。',
+          '集中管理網站的元件模組，減少重複修改，提升迭代效率。',
       },
     ],
     detailMarkerColor: '#116de4',

@@ -3,8 +3,6 @@ import { computed } from 'vue';
 import type { ProjectGoalItem } from '../../types/project';
 import { withBase } from '../../utils/basePath';
 
-export type { ProjectGoalItem } from '../../types/project';
-
 const props = withDefaults(
   defineProps<{
     goals: ProjectGoalItem[];
@@ -80,8 +78,8 @@ const gridStyle = computed(() => ({
 
 .project-goals-grid span,
 .project-goals-grid h3 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--font-size-item-heading);
+  font-weight: var(--font-weight-bold);
   line-height: 1.35;
 }
 
@@ -131,11 +129,6 @@ const gridStyle = computed(() => ({
     gap: 28px;
     grid-template-columns: 1fr;
     padding: 28px 24px;
-  }
-
-  .project-goals-grid span,
-  .project-goals-grid h3 {
-    font-size: 22px;
   }
 }
 </style>

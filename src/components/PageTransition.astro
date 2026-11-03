@@ -187,7 +187,7 @@
     color: #323232;
     font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
     font-size: clamp(48px, 8vw, 128px);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
     letter-spacing: -0.04em;
     line-height: 1;
     margin: 0;
@@ -232,6 +232,16 @@
 
   :global(main.page-transition-content-enter) {
     animation: page-content-reveal 800ms 180ms both cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (max-width: 767px) {
+    .page-transition__layer--back {
+      display: none;
+    }
+
+    .page-transition__layer--main {
+      transition-delay: 0ms;
+    }
   }
 
   @keyframes page-content-reveal {

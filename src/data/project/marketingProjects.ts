@@ -27,14 +27,14 @@ export const marketingProjects: MarketingProject[] = [
   {
     title: '智能客服｜24小時不打烊',
     description: '藍色漸層結合數位圖形，傳達科技與信賴感；企業品牌角色則讓智能服務保有親民印象。',
-    tags: ['UIUX', '視覺設計'],
+    tags: ['UI/UX', '視覺設計'],
     image: '/Image/Project/marketing-page-detail/24h-service.webp',
     href: 'https://pse.is/9mgrl8',
   },
   {
-    title: 'LINE個人化服務｜專屬即時交易通知',
+    title: 'LINE 個人化服務｜專屬即時交易通知',
     description: '以手機畫面為核心訊息，周圍的通知圖形模擬資訊即時送達，直觀呈現隨時掌握交易動態的服務特色。',
-    tags: ['UIUX', '視覺設計'],
+    tags: ['UI/UX', '視覺設計'],
     image: '/Image/Project/marketing-page-detail/line-personal.webp',
     href: 'https://pse.is/9mgrnn',
   },
@@ -53,7 +53,7 @@ export const marketingProjects: MarketingProject[] = [
     href: 'https://pse.is/9mgrs3',
   },
   {
-    title: 'iMoney App｜口袋Money Money',
+    title: 'iMoney App｜口袋 Money Money',
     description: '將借款服務包裝成隨身可用的資金方案，拉近金融產品與日常需求的距離。',
     tags: ['前端開發'],
     image: '/Image/Project/marketing-page-detail/imoney-app.webp',
@@ -62,7 +62,7 @@ export const marketingProjects: MarketingProject[] = [
   {
     title: '省利貸｜降息囉！',
     description: '從「減少利息負擔」的直接利益出發，透過存股情境將降息效果具體化，讓用戶快速理解產品能帶來的幫助。',
-    tags: ['UIUX', '前端開發', '視覺設計'],
+    tags: ['UI/UX', '前端開發', '視覺設計'],
     image: '/Image/Project/marketing-page-detail/rate-down.webp',
     href: 'https://pse.is/9mgrv9',
   },

@@ -22,8 +22,8 @@ defineProps<{
 }
 
 .project-section-heading h2 {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: var(--font-size-content-heading);
+  font-weight: var(--font-weight-bold);
   line-height: 1.5;
   margin: 0;
 }
@@ -35,9 +35,4 @@ defineProps<{
   margin: 0;
 }
 
-@media (max-width: 767px) {
-  .project-section-heading h2 {
-    font-size: 24px;
-  }
-}
 </style>

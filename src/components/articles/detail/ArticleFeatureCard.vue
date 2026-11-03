@@ -57,8 +57,8 @@ defineProps<ArticleFeatureCardData>();
 }
 
 .article-feature-card h3 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--font-size-item-heading);
+  font-weight: var(--font-weight-bold);
   letter-spacing: 1.2px;
 }
 

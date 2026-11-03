@@ -43,12 +43,12 @@ defineProps<ArticleDetailHeroData>();
 
 .article-detail-hero h1 {
   font-size: 48px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .article-detail-hero p {
   font-size: 40px;
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
 }
 
 @media (max-width: 1023px) {

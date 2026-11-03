@@ -43,31 +43,31 @@ export const homeHero = {
 export const featuredProjects: FeaturedProjectContent[] = [
   {
     title: '全新行動銀行 2.0',
-    tags: ['UIUX', '視覺設計'],
+    tags: ['UI/UX', '視覺設計'],
     imageKey: 'mobile-bank',
     href: '/projects/mobile-bank-2',
   },
   {
     title: '智慧健身膠囊 App',
-    tags: ['UIUX'],
+    tags: ['UI/UX'],
     imageKey: 'smart-fitness',
     href: '/projects/smart-fitness',
   },
   {
-    title: '2026 人才召募網',
-    tags: ['UIUX', '前端開發'],
+    title: '2026 人才招募網',
+    tags: ['UI/UX', '前端開發'],
     imageKey: 'hiring-web',
     href: '/projects/hiring-2026',
   },
   {
     title: '智慧閘道器後台系統',
-    tags: ['UIUX', '視覺設計'],
+    tags: ['UI/UX', '視覺設計'],
     imageKey: 'iot-backend',
     href: '/projects/iot-backend',
   },
   {
     title: '保足感平台',
-    tags: ['UIUX', '視覺設計'],
+    tags: ['UI/UX', '視覺設計'],
     imageKey: 'life-web',
     href: '/projects/vip-platform',
   },

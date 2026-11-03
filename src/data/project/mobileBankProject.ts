@@ -48,7 +48,7 @@ export const mobileBankDesignGoals = {
     {
       number: '02',
       title: '免登入即可使用服務',
-      description: '完善的免登入服務頁，不需登入就能即時獲得資訊',
+      description: '完善免登入服務頁，無須登入就能即時取得資訊。',
     },
     {
       number: '03',
@@ -61,7 +61,7 @@ export const mobileBankDesignGoals = {
 export const mobileBankDesignSystem = {
   title: '建立系統規劃，提升開發與迭代效率',
   introduction: [
-    '為提升行動銀行 2.0 的視覺與操作一致性，團隊建立中心化的設計系統，將色彩、字體、間距、Icon、元件及互動規範進行模組化，讓不同功能皆能遵循相同的設計語言。透過元件與設計規範的建立，降低重複設計與開發成本，也提升跨部門協作效率，使後續功能擴充與產品迭代更加快速且具備一致的使用體驗。',
+    '為提升行動銀行 2.0 的視覺與操作一致性，團隊建立中心化設計系統，將色彩、字體、間距、圖示、元件及互動規範模組化，讓不同功能皆能遵循相同的設計語言。透過元件與設計規範，降低重複設計與開發成本，也提升跨部門協作效率，加快後續功能擴充與產品迭代，並維持一致的使用體驗。',
   ],
   image: {
     src: '/Image/Project/mobile-bank-detail/pc-2.webp',
@@ -103,7 +103,7 @@ export const mobileBankLoggedOutExperience = {
 };
 
 export const mobileBankPersonalizedHome = {
-  title: '個人化首頁，打造屬於你的金融App',
+  title: '個人化首頁，打造屬於你的金融 App',
   introduction: [
     '不同用戶持有的金融商品、關注資訊與操作習慣不同，固定的首頁配置難以回應每個人的日常需求。透過卡片排序與快捷功能設定，讓用戶自行決定優先查看的內容與常用服務，讓首頁更貼近個人的使用情境。',
   ],
@@ -177,7 +177,7 @@ export const mobileBankMembershipBenefits = {
         height: 1260,
       },
       description:
-        '財管會員制度涵蓋交易優惠、等級條件、專屬權益與理財服務，不同會員等級對應的內容繁多，且使用情境各異，若缺乏清楚的整理方式，用戶難以快速瞭解自己目前的權益，以及後續可達成的目標。',
+        '財管會員制度涵蓋交易優惠、等級條件、專屬權益與理財服務。不同會員等級對應的內容繁多，且使用情境各異；若缺乏清楚的整理方式，用戶難以快速了解目前擁有的權益，以及後續可達成的目標。',
     },
     {
       image: {
@@ -226,7 +226,7 @@ export const mobileBankTransferFlow = {
     src: '/Video/mobile-bank-detail/vd-10-1280.mp4',
     mobileSrc: '/Video/mobile-bank-detail/vd-10-768.mp4',
     poster: '/Video/mobile-bank-detail/vd-10-poster.webp',
-    title: '多元收款方式、分段確認與安全驗證的台幣轉帳流程',
+    title: '多元收款方式、分段確認與安全驗證的臺幣轉帳流程',
     autoplayOnView: true,
     controls: false,
     muted: true,

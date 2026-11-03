@@ -21,12 +21,12 @@ const trackElement = ref<HTMLElement>();
 let dragStartX = 0;
 let didDrag = false;
 const marqueeItems = [
-  'UIUXDesign',
+  'UI/UX Design',
   'Vue.js',
   'Git',
   'Figma',
-  'AdobeSuite',
-  'GraphicDesign',
+  'Adobe Suite',
+  'Graphic Design',
 ];
 const loopedProjects = computed(() => [
   projects.at(-1)!,
@@ -183,7 +183,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="featured" aria-labelledby="featured-title" data-node-id="4965:32095">
+  <section id="featured-projects" class="featured" aria-labelledby="featured-title" data-node-id="4965:32095">
     <div class="featured__inner">
       <header class="featured__header">
         <AppSectionHeading class="featured__heading" title="代表專案" title-id="featured-title" tone="dark">
@@ -304,7 +304,7 @@ onBeforeUnmount(() => {
 
 .featured__description {
   color: #e3e3e3;
-  font-size: 18px;
+  font-size: var(--font-size-body-small);
   letter-spacing: 0.9px;
   line-height: 1.5;
   margin: 0;
@@ -373,7 +373,7 @@ onBeforeUnmount(() => {
   color: #7d7d7d;
   font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
   font-size: 32px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   line-height: 1;
   overflow: hidden;
   padding-block: 20px 24px;
@@ -441,10 +441,6 @@ onBeforeUnmount(() => {
     align-items: flex-start;
     flex-direction: column;
     gap: 24px;
-  }
-
-  .featured__description {
-    font-size: 16px;
   }
 
   .featured__controls {

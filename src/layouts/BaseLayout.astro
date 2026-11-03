@@ -15,8 +15,10 @@ interface Props {
 
 const { title, description } = Astro.props;
 const currentPath = stripBase(Astro.url.pathname).replace(/\/$/, '') || '/';
-const accessPath = withBase('/access');
 const faviconPath = withBase('/WebCI/Favicon.svg');
+const socialTitle = 'Timmy Lee｜Product Designer';
+const socialDescription =
+  '設計不像其他學科，需要垂直鑽研；而是要水平發展，接觸各種不同的領域';
 ---
 
 <!doctype html>
@@ -25,31 +27,19 @@ const faviconPath = withBase('/WebCI/Favicon.svg');
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:site_name" content="Timmy Lee Portfolio" />
+    <meta property="og:title" content={socialTitle} />
+    <meta property="og:description" content={socialDescription} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={socialTitle} />
+    <meta name="twitter:description" content={socialDescription} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href={faviconPath} type="image/svg+xml" />
     <slot name="head" />
     <title>{title}</title>
-    <script is:inline define:vars={{ accessPath }}>
-      (() => {
-        let hasAccess = false;
-        try {
-          hasAccess = sessionStorage.getItem('portfolio-access-granted') === 'true';
-        } catch {
-          hasAccess = false;
-        }
-
-        document.documentElement.classList.add(
-          hasAccess ? 'portfolio-unlocked' : 'portfolio-locked',
-        );
-
-        if (!hasAccess) {
-          const returnTo = `${window.location.pathname}${window.location.search}${window.location.hash}`;
-          window.location.replace(
-            `${accessPath}?returnTo=${encodeURIComponent(returnTo)}`,
-          );
-        }
-      })();
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -67,7 +57,7 @@ const faviconPath = withBase('/WebCI/Favicon.svg');
     <ClientRouter fallback="swap" />
   </head>
   <body>
-    <div class="portfolio-site" data-portfolio-site>
+    <div class="portfolio-site">
       <AppHeader currentPath={currentPath} client:load />
       <main>
         <slot />

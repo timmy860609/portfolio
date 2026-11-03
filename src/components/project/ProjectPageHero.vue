@@ -61,7 +61,7 @@ withDefaults(
 .project-hero h1 {
   color: #323232;
   font-size: 48px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   line-height: 1.5;
   margin: 0;
 }
@@ -69,7 +69,7 @@ withDefaults(
 .project-hero p {
   color: #323232;
   font-size: 40px;
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   line-height: 1.5;
   margin: 0;
 }
@@ -97,7 +97,7 @@ withDefaults(
 
   .project-hero h1 {
     font-size: 24px;
-    font-weight: 900;
+    font-weight: var(--font-weight-bold);
     line-height: 1.2;
   }
 

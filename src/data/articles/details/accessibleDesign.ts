@@ -45,7 +45,7 @@ export const accessibleDesignContent: ArticleDetailContentData = {
         {
           number: '03',
           title: '提升設計與開發效率',
-          description: '整合無障礙規則至元件庫，降低交付與開發的成本。',
+          description: '整合無障礙規則至元件庫，降低交付與開發成本。',
         },
       ],
       goalsAppearance: {
@@ -81,7 +81,7 @@ export const accessibleDesignContent: ArticleDetailContentData = {
         {
           title: '重複內容（如：廣告）',
           description:
-            '開放基金瀏覽、匯率換算與貸款試算，讓用戶登入前即可探索服務，再決定是否進一步登入或申辦。',
+            '同一內容若已由圖片替代文字完整說明，可略過重複資訊，避免螢幕閱讀器反覆報讀。',
         },
         {
           title: '輪播圖片或卡片',
@@ -91,7 +91,7 @@ export const accessibleDesignContent: ArticleDetailContentData = {
         {
           title: '非必要動態／特效',
           description:
-            '若有自動播放的動畫或視覺效果，可設置讓用戶略過動畫或停用動畫效果。',
+            '若有自動播放的動畫或視覺效果，可提供略過或停用功能。',
         },
       ],
     },
@@ -130,25 +130,25 @@ export const accessibleDesignContent: ArticleDetailContentData = {
     {
       title: '依介面結構報讀，建立清晰的操作脈絡',
       paragraphs: [
-        '以用戶進入頁面後的理解順序為基礎，規劃介面的報讀路徑。從頁面標題與返回按鈕開始，接續重要提示與主要內容，最後再進入輔助操作及功能導航，讓用戶能先確認所在位置，再依序掌握重點資訊與完成操作，避免報讀內容與畫面脈絡產生落差。',
+        '以用戶進入頁面後的理解順序為基礎，規劃介面的報讀路徑。從頁面標題與返回按鈕開始，接續重要提示與主要內容，最後再進入輔助操作及功能導覽，讓用戶能先確認所在位置，再依序掌握重點資訊與完成操作，避免報讀內容與畫面脈絡產生落差。',
       ],
       gap: 56,
       image: image(
         'Frame 1618875441-1.webp',
-        '行動介面的標題、返回按鈕、主要內容與功能導航報讀順序',
+        '行動介面的標題、返回按鈕、主要內容與功能導覽報讀順序',
       ),
       details: [
         {
           title: '01－標題或頁面名稱（H1）',
           description:
-            'APP Header 通常為標題或頁面名稱，標題／H1 優先報讀，方便用戶確認位置。',
+            'App Header 通常為標題或頁面名稱，標題／H1 優先報讀，方便用戶確認位置。',
         },
         {
-          title: '02－返回按鈕（Back-Button）',
+          title: '02－返回按鈕（Back Button）',
           description: '用戶點擊返回按鈕時報讀「返回前一頁名稱」。',
         },
         {
-          title: '03－導航頁籤（Tab）／通知或提示（Alert）',
+          title: '03－導覽頁籤（Tab）／通知或提示（Alert）',
           description: '遵循左至右、上至下報讀規則。',
         },
         {
@@ -158,11 +158,11 @@ export const accessibleDesignContent: ArticleDetailContentData = {
         {
           title: '05－輔助操作（Button、Link）',
           description:
-            '通常為輔助或決策 Main 區塊的相關元素，接續於 Main 後報讀，例如台幣轉帳頁的「確認轉帳（下一步）」按鈕。',
+            '輔助操作通常與主要內容相關，接續於 Main 區塊後報讀，例如臺幣轉帳頁的「確認轉帳（下一步）」按鈕。',
         },
         {
-          title: '06－功能導航（NavBar）',
-          description: '底部導航欄讓用戶得知可進行主要頁面切換。',
+          title: '06－功能導覽（Navigation Bar）',
+          description: '底部導覽列讓用戶了解可切換的主要頁面。',
         },
       ],
     },

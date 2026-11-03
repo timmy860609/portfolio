@@ -58,7 +58,7 @@ const tagStyle = computed(() => ({
 .project-tags span {
   color: var(--project-tag-marker);
   font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 @media (max-width: 767px) {

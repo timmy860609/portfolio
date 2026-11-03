@@ -39,8 +39,8 @@ defineProps<{
 }
 
 .skill-card h3 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--font-size-item-heading);
+  font-weight: var(--font-weight-bold);
   line-height: 1.5;
   margin: 0;
 }
@@ -49,7 +49,7 @@ defineProps<{
   display: flex;
   flex-wrap: wrap;
   font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
-  font-size: 18px;
+  font-size: var(--font-size-body-small);
   gap: 12px;
   justify-content: flex-end;
   line-height: 1.5;
@@ -64,11 +64,11 @@ defineProps<{
 
 .skill-card li span {
   color: #00d9ff;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .skill-card > p {
-  font-size: 18px;
+  font-size: var(--font-size-body-small);
   line-height: 1.5;
   margin: 0;
 }
@@ -91,13 +91,5 @@ defineProps<{
     padding: 20px;
   }
 
-  .skill-card h3 {
-    font-size: 20px;
-  }
-
-  .skill-card ul,
-  .skill-card > p {
-    font-size: 16px;
-  }
 }
 </style>

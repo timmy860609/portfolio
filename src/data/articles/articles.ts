@@ -44,7 +44,7 @@ export const articles: ArticleItem[] = [
   },
   {
     slug: 'tpvl-official-website',
-    title: '化身為PM，臺灣職業排球聯盟官網上線啦！',
+    title: '化身為 PM，臺灣職業排球聯盟官網上線啦！',
     description:
       '整合賽事資訊、球隊介紹、最新消息與票務資訊，打造兼具品牌形象與球迷互動體驗的官方網站。',
     tags: ['設計顧問', '專案溝通', '需求訪談'],
@@ -52,7 +52,7 @@ export const articles: ArticleItem[] = [
     coverAlt: '臺灣職業排球聯盟官網主視覺',
     detailHero: {
       heading: '臺灣職業排球聯盟官網',
-      subtitle: '化身為PM，臺灣職業排球聯盟官網上線啦！',
+      subtitle: '化身為 PM，臺灣職業排球聯盟官網上線啦！',
     },
     detailContent: tpvlWebsiteContent,
   },
@@ -60,7 +60,7 @@ export const articles: ArticleItem[] = [
     slug: 'visual-design-collection',
     title: '設計路途中，一定會遇到的視覺大雜燴在此',
     description:
-      '自求學到工作階段，雖然不是平面設計本科出生，但這一路上也支援了許多平面相關的產出，也算是一種休閒活動(?',
+      '從求學到工作，雖然我並非平面設計本科出身，仍參與了許多平面設計專案，也將視覺創作延伸為工作之外的興趣。',
     tags: ['Banner', 'EDM', '電子報'],
     cover: '/Image/Articles/article-cover/visaul-design.webp',
     coverAlt: 'Banner、EDM 與電子報等視覺設計作品拼貼',
@@ -72,15 +72,15 @@ export const articles: ArticleItem[] = [
   },
   {
     slug: 'taoyuan-leopards-logo',
-    title: '臺灣第一個職業排球聯盟的成員：桃園雲豹飛將登場！',
+    title: '臺灣首個職業排球聯盟球隊：桃園飛將雲豹登場！',
     description:
       '透過雲豹形象、競技感與球隊個性的整合，打造更具辨識度與延伸性的全新隊徽。',
-    tags: ['Logo設計', '體育行銷'],
+    tags: ['Logo 設計', '體育行銷'],
     cover: '/Image/Articles/article-cover/taoyuan-leopards.webp',
-    coverAlt: '桃園雲豹飛將品牌標誌設計',
+    coverAlt: '桃園飛將雲豹品牌標誌設計',
     detailHero: {
       heading: '桃園飛將雲豹職業排球隊',
-      subtitle: '臺灣第一個職業排球聯盟的成員：桃園雲豹飛將登場！',
+      subtitle: '臺灣首個職業排球聯盟球隊：桃園飛將雲豹登場！',
     },
     detailContent: taoyuanLeopardsContent,
   },

@@ -116,8 +116,8 @@ defineProps<AboutExperienceProject>();
 
 .experience-card h3 {
   color: #323232;
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--font-size-item-heading);
+  font-weight: var(--font-weight-bold);
   letter-spacing: 0.06em;
   line-height: 1.35;
   margin: 0;
@@ -128,7 +128,7 @@ defineProps<AboutExperienceProject>();
   color: #323232;
   display: flex;
   flex-wrap: wrap;
-  font-size: 18px;
+  font-size: var(--font-size-body-small);
   gap: 14px;
   line-height: 1.5;
 }
@@ -150,7 +150,7 @@ defineProps<AboutExperienceProject>();
 .experience-card li::before {
   color: #00d9ff;
   content: '#';
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 @media (max-width: 620px) {
