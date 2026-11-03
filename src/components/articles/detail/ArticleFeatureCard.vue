@@ -63,7 +63,7 @@ defineProps<ArticleFeatureCardData>();
 }
 
 .article-feature-card p {
-  font-size: 20px;
+  font-size: var(--content-body-font-size);
   letter-spacing: 1px;
 }
 
@@ -90,7 +90,6 @@ defineProps<ArticleFeatureCardData>();
   }
 
   .article-feature-card p {
-    font-size: 16px;
     letter-spacing: 0.8px;
   }
 }

@@ -27,7 +27,7 @@ import { withBase } from '../utils/basePath';
 
         <nav aria-label="頁尾導覽">
           <a :href="withBase('/')">首頁</a>
-          <a :href="withBase('/projects')">精選專案</a>
+          <a :href="withBase('/projects')">精選案例</a>
           <a :href="withBase('/articles')">專欄分享</a>
           <a :href="withBase('/about')">關於我</a>
           <a :href="withBase('/#contact')">與我聯繫</a>

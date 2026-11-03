@@ -151,6 +151,14 @@ const imageAttributes = computed(() => {
   transform-origin: center;
 }
 
+.project-media video[data-autoplay-on-view] {
+  pointer-events: none;
+}
+
+.project-media video[data-autoplay-on-view]::-webkit-media-controls {
+  display: none !important;
+}
+
 .project-media__video-cover {
   background: #131313;
   border: 0;

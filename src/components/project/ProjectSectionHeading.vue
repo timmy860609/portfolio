@@ -29,7 +29,7 @@ defineProps<{
 }
 
 .project-section-heading p {
-  font-size: 18px;
+  font-size: var(--content-body-font-size);
   letter-spacing: 0.9px;
   line-height: 1.6;
   margin: 0;

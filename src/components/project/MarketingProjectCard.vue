@@ -78,7 +78,7 @@ defineProps<MarketingProject>();
 
 .marketing-card p {
   color: #737373;
-  font-size: 20px;
+  font-size: var(--content-body-font-size);
   line-height: 1.5;
   margin: 0;
 }
@@ -111,10 +111,6 @@ defineProps<MarketingProject>();
 
   .marketing-card h2 {
     font-size: 26px;
-  }
-
-  .marketing-card p {
-    font-size: 18px;
   }
 
   .marketing-card :deep(.marketing-card__button.app-button--fit) {

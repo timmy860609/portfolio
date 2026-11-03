@@ -18,7 +18,10 @@ withDefaults(
 <template>
   <section
     class="project-hero"
-    :style="{ backgroundImage: `url(${withBase('/Image/Project/project-hero.webp')})` }"
+    :style="{
+      '--project-hero-background': `url(${withBase('/Image/Project/project-hero.webp')})`,
+      '--project-hero-background-mobile': `url(${withBase('/Image/Project/project-hero_m.webp')})`,
+    }"
     :aria-labelledby="titleId"
     data-node-id="5050:15981"
   >
@@ -33,6 +36,7 @@ withDefaults(
 .project-hero {
   align-items: center;
   background-color: #f3f3f3;
+  background-image: var(--project-hero-background);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -83,20 +87,24 @@ withDefaults(
 
 @media (max-width: 767px) {
   .project-hero {
-    min-height: 240px;
+    background-image: var(--project-hero-background-mobile);
+    min-height: 153px;
   }
 
   .project-hero__content {
-    padding-block: 24px 72px;
+    padding: 24px 16px 72px;
   }
 
   .project-hero h1 {
-    font-size: 32px;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1.2;
   }
 
   .project-hero p {
-    font-size: 24px;
-    line-height: 1.35;
+    font-size: 16px;
+    letter-spacing: 0.8px;
+    line-height: 1.5;
     white-space: normal;
   }
 

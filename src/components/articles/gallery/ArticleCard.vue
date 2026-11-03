@@ -87,7 +87,7 @@ withDefaults(defineProps<ArticleItem & {
 
 .article-card p {
   color: #737373;
-  font-size: 20px;
+  font-size: var(--content-body-font-size);
   line-height: 1.5;
   margin: 0;
 }
@@ -121,8 +121,5 @@ withDefaults(defineProps<ArticleItem & {
     font-size: 24px;
   }
 
-  .article-card p {
-    font-size: 18px;
-  }
 }
 </style>

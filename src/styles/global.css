@@ -7,6 +7,7 @@
   --color-accent: #00d9ff;
   --color-surface-muted: #f3f3f3;
   --color-text-primary: #323232;
+  --content-body-font-size: 20px;
   --content-heading-gap: 24px;
   --content-width-project: 960px;
   --content-width-wide: 1200px;
@@ -75,12 +76,13 @@ main {
 
 @media (max-width: 1023px) {
   main {
-    padding-top: 44px;
+    padding-top: 52px;
   }
 }
 
 @media (max-width: 767px) {
   :root {
+    --content-body-font-size: 18px;
     --layout-gutter: 20px;
     --page-gutter: 20px;
   }

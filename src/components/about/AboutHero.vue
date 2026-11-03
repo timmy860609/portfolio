@@ -426,6 +426,34 @@ onBeforeUnmount(() => {
   }
 }
 
+@media (min-width: 768px) {
+  .about-hero__stats {
+    column-gap: 24px;
+    grid-template-columns: max-content 1px max-content 1px max-content;
+    padding-inline: 0;
+    width: max-content;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .about-hero__stats {
+    column-gap: clamp(12px, calc(4.6875vw - 24px), 24px);
+  }
+
+  .about-hero__stat dd {
+    font-size: clamp(28px, calc(4.6875vw - 8px), 40px);
+    min-width: 0;
+  }
+
+  .about-hero__stat dt {
+    font-size: clamp(14px, calc(0.78125vw + 8px), 16px);
+  }
+
+  .about-hero__stat-divider {
+    height: clamp(64px, calc(7.8125vw + 4px), 84px);
+  }
+}
+
 @media (min-width: 1921px) {
   .about-hero__stage {
     left: calc(50% - 960px);

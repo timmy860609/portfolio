@@ -16,7 +16,10 @@ import {
 const activeCategory = ref<ProjectCategory>('全部');
 const galleryElement = ref<HTMLElement | null>(null);
 const tabsElement = ref<HTMLElement | null>(null);
+const tabsScrollerElement = ref<HTMLElement | null>(null);
 const tabsAreStuck = ref(false);
+const tabsCanScrollRight = ref(false);
+let tabsResizeObserver: ResizeObserver | undefined;
 const galleryProjects = projects.filter(
   (project) => project.showInGallery !== false,
 );
@@ -48,6 +51,43 @@ const getHeaderHeight = () => {
   );
 };
 
+const updateTabsOverflow = () => {
+  const tabs = tabsScrollerElement.value;
+  if (!tabs) return;
+
+  const buttons = tabs.querySelectorAll<HTMLButtonElement>('button');
+  const lastButton = buttons.item(buttons.length - 1);
+  if (!lastButton) return;
+
+  const styles = getComputedStyle(tabs);
+  const paddingRight = Number.parseFloat(styles.paddingRight) || 0;
+  const contentRight = lastButton.offsetLeft + lastButton.offsetWidth;
+  const hasOverflow = contentRight + paddingRight > tabs.clientWidth + 1;
+  const visibleRight = tabs.scrollLeft + tabs.clientWidth - paddingRight;
+
+  tabsCanScrollRight.value = hasOverflow && contentRight > visibleRight + 1;
+};
+
+const alignTabToLeft = (button: HTMLButtonElement) => {
+  const tabs = tabsScrollerElement.value;
+  if (!tabs) return;
+
+  updateTabsOverflow();
+  const buttons = tabs.querySelectorAll<HTMLButtonElement>('button');
+  const lastButton = buttons.item(buttons.length - 1);
+  const styles = getComputedStyle(tabs);
+  const paddingLeft = Number.parseFloat(styles.paddingLeft) || 0;
+  const paddingRight = Number.parseFloat(styles.paddingRight) || 0;
+  const targetLeft = button === lastButton
+    ? button.offsetLeft + button.offsetWidth + paddingRight - tabs.clientWidth
+    : button.offsetLeft - paddingLeft;
+
+  tabs.scrollTo({
+    left: Math.max(0, targetLeft),
+    behavior: 'smooth',
+  });
+};
+
 const updateStickyState = () => {
   const tabs = tabsElement.value;
   if (!tabs) return;
@@ -61,18 +101,33 @@ const updateStickyState = () => {
 
 onMounted(() => {
   updateStickyState();
+  updateTabsOverflow();
+  tabsScrollerElement.value?.addEventListener('scroll', updateTabsOverflow, {
+    passive: true,
+  });
+  if ('ResizeObserver' in window && tabsScrollerElement.value) {
+    tabsResizeObserver = new ResizeObserver(updateTabsOverflow);
+    tabsResizeObserver.observe(tabsScrollerElement.value);
+  }
+  void document.fonts?.ready.then(updateTabsOverflow);
   window.addEventListener('scroll', updateStickyState, { passive: true });
   window.addEventListener('resize', updateStickyState, { passive: true });
+  window.addEventListener('resize', updateTabsOverflow, { passive: true });
 });
 
 onBeforeUnmount(() => {
+  tabsScrollerElement.value?.removeEventListener('scroll', updateTabsOverflow);
+  tabsResizeObserver?.disconnect();
   window.removeEventListener('scroll', updateStickyState);
   window.removeEventListener('resize', updateStickyState);
+  window.removeEventListener('resize', updateTabsOverflow);
 });
 
-const selectCategory = async (category: ProjectCategory) => {
+const selectCategory = async (category: ProjectCategory, event: MouseEvent) => {
+  const selectedButton = event.currentTarget as HTMLButtonElement;
   activeCategory.value = category;
   await nextTick();
+  alignTabToLeft(selectedButton);
 
   const tabs = tabsElement.value;
   const isMobile = window.matchMedia('(max-width: 760px)').matches;
@@ -101,9 +156,13 @@ const selectCategory = async (category: ProjectCategory) => {
     <div
       ref="tabsElement"
       class="projects-gallery__tabs-shell"
-      :class="{ 'projects-gallery__tabs-shell--stuck': tabsAreStuck }"
+      :class="{
+        'projects-gallery__tabs-shell--stuck': tabsAreStuck,
+        'projects-gallery__tabs-shell--can-scroll-right': tabsCanScrollRight,
+      }"
     >
       <div
+        ref="tabsScrollerElement"
         class="projects-gallery__tabs"
         role="tablist"
         aria-label="專案分類"
@@ -116,7 +175,7 @@ const selectCategory = async (category: ProjectCategory) => {
           :aria-selected="activeCategory === category"
           :class="{ active: activeCategory === category }"
           @pointerdown.stop
-          @click.stop.prevent="selectCategory(category)"
+          @click.stop.prevent="selectCategory(category, $event)"
         >
           {{ category }}
         </button>
@@ -194,9 +253,26 @@ const selectCategory = async (category: ProjectCategory) => {
   display: none;
 }
 
+.projects-gallery__tabs-shell--can-scroll-right .projects-gallery__tabs {
+  --projects-tabs-mask-width: 95px;
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0,
+    #000 calc(100% - var(--projects-tabs-mask-width)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 0,
+    #000 calc(100% - var(--projects-tabs-mask-width)),
+    transparent 100%
+  );
+}
+
 .projects-gallery__tabs-shell--stuck .projects-gallery__tabs {
   border-radius: 12px;
-  padding-block: 8px;
+  padding-block: 16px;
   transform: scale(0.9);
 }
 
@@ -312,7 +388,7 @@ const selectCategory = async (category: ProjectCategory) => {
   }
 
   .projects-gallery__tabs-shell--stuck .projects-gallery__tabs {
-    padding-block: 6px;
+    padding-block: 12px;
     transform: none;
   }
 

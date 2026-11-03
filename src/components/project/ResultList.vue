@@ -52,7 +52,7 @@ const listStyle = computed(() => ({
 
 .result-list p {
   color: #000;
-  font-size: 18px;
+  font-size: var(--content-body-font-size);
   letter-spacing: 1px;
   line-height: 1.5;
   margin: 2px 0 0;

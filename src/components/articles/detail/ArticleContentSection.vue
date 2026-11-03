@@ -108,7 +108,7 @@ const sectionStyle = computed(() => ({
 }
 
 .article-content-section p {
-  font-size: 20px;
+  font-size: var(--content-body-font-size);
   letter-spacing: 1px;
   line-height: 1.6;
 }
@@ -154,7 +154,6 @@ const sectionStyle = computed(() => ({
   }
 
   .article-content-section p {
-    font-size: 16px;
     letter-spacing: 0.8px;
   }
 

@@ -118,7 +118,7 @@ const toAvif = (source?: string) => source?.replace(/\.webp$/i, '.avif');
 
 .overview-card p {
   color: #737373;
-  font-size: 20px;
+  font-size: var(--content-body-font-size);
   line-height: 1.5;
   margin: 0;
 }
@@ -132,8 +132,5 @@ const toAvif = (source?: string) => source?.replace(/\.webp$/i, '.avif');
     font-size: 26px;
   }
 
-  .overview-card p {
-    font-size: 17px;
-  }
 }
 </style>

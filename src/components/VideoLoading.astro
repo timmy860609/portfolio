@@ -8,8 +8,6 @@
     const videos = Array.from(document.querySelectorAll<HTMLVideoElement>('video[data-managed-video]'));
     const visible = new Set<HTMLVideoElement>();
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const allowAutoplay = !saveData && !reduceMotion;
 
     function load(video: HTMLVideoElement, preload: 'auto' | 'metadata') {
       video.preload = preload;
@@ -23,11 +21,18 @@
 
     async function play(video: HTMLVideoElement) {
       load(video, 'auto');
+      const autoplay = video.hasAttribute('data-autoplay-on-view');
+      if (autoplay) video.controls = false;
       try {
         await video.play();
       } catch (error) {
         // A pause during a pending play is expected when scrolling away.
-        if (!signal.aborted && error instanceof DOMException && error.name === 'NotAllowedError') {
+        if (
+          !autoplay &&
+          !signal.aborted &&
+          error instanceof DOMException &&
+          error.name === 'NotAllowedError'
+        ) {
           video.controls = true;
         }
       }
@@ -37,7 +42,7 @@
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         const video = entry.target as HTMLVideoElement;
-        load(video, video.hasAttribute('data-autoplay-on-view') && allowAutoplay ? 'auto' : 'metadata');
+        load(video, video.hasAttribute('data-autoplay-on-view') ? 'auto' : 'metadata');
         preloadObserver?.unobserve(video);
       });
     }, { rootMargin: '1200px 0px' }) : undefined;
@@ -47,7 +52,7 @@
         const video = entry.target as HTMLVideoElement;
         if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
           visible.add(video);
-          if (allowAutoplay && !document.hidden) void play(video);
+          if (!document.hidden) void play(video);
         } else {
           visible.delete(video);
           video.pause();
@@ -61,24 +66,33 @@
       const button = video.closest('figure')?.querySelector<HTMLButtonElement>('[data-play-video]');
       button?.addEventListener('click', () => { void play(video); }, { signal });
       video.addEventListener('playing', () => { if (button) button.hidden = true; }, { signal });
-      video.addEventListener('error', () => { video.controls = true; }, { signal });
+      video.addEventListener('error', () => {
+        if (!autoplay) video.controls = true;
+      }, { signal });
       if (autoplay) {
         video.muted = true;
         video.defaultMuted = true;
         video.loop = true;
         video.playsInline = true;
-        if (!allowAutoplay) video.controls = true;
-        playbackObserver?.observe(video);
+        video.controls = false;
+        video.addEventListener('canplay', () => {
+          if (visible.has(video) && !document.hidden && video.paused) void play(video);
+        }, { signal });
+        if (playbackObserver) playbackObserver.observe(video);
+        else {
+          visible.add(video);
+          void play(video);
+        }
       }
       if (preloadObserver) preloadObserver.observe(video);
-      else {
+      else if (!autoplay) {
         load(video, 'metadata');
         video.controls = true;
       }
     });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) videos.forEach(video => video.pause());
-      else if (allowAutoplay) visible.forEach(video => { void play(video); });
+      else visible.forEach(video => { void play(video); });
     }, { signal });
     dispose = () => {
       controller.abort();

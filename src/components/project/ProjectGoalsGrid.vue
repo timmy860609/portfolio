@@ -121,7 +121,7 @@ const gridStyle = computed(() => ({
 }
 
 .project-goals-grid p {
-  font-size: 18px;
+  font-size: var(--content-body-font-size);
   line-height: 1.5;
 }
 
