@@ -12,6 +12,12 @@
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
   const motionDuration = 440;
   let navigationSequence = 0;
+  const transitionWindow = window as Window & {
+    __pageTransitionController?: AbortController;
+  };
+  transitionWindow.__pageTransitionController?.abort();
+  const eventController = new AbortController();
+  transitionWindow.__pageTransitionController = eventController;
 
   const wait = (duration: number) =>
     new Promise<void>((resolve) => window.setTimeout(resolve, duration));
@@ -115,7 +121,7 @@
         panelAnimation.finished.catch(() => undefined),
         wait(motionDuration + 80),
       ]).then(() => {
-        if (sequence !== navigationSequence) return;
+        if (eventController.signal.aborted || sequence !== navigationSequence) return;
         transition.style.transform = 'translate3d(0, 0, 0)';
         label.style.opacity = '1';
         label.style.transform = 'translate3d(0, 0, 0)';
@@ -131,7 +137,7 @@
       );
       await Promise.all([coverPage, pageAndImage]);
     };
-  });
+  }, { signal: eventController.signal });
 
   document.addEventListener('astro:after-swap', () => {
     const sequence = navigationSequence;
@@ -169,14 +175,17 @@
       panelAnimation.finished.catch(() => undefined),
       wait(motionDuration + 80),
     ]).then(() => {
-      if (sequence !== navigationSequence) return;
-      cancelAnimations(transition);
+      if (eventController.signal.aborted || sequence !== navigationSequence) return;
+      // Commit the animation's final position before canceling it. Otherwise
+      // Safari can briefly reveal the underlying centered position.
+      transition.style.transform = 'translate3d(0, -101%, 0)';
       transition.hidden = true;
+      cancelAnimations(transition);
       transition.style.transform = 'translate3d(0, 101%, 0)';
       label.style.opacity = '';
       label.style.transform = '';
     });
-  });
+  }, { signal: eventController.signal });
 </script>
 
 <style>
