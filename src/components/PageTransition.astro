@@ -5,6 +5,7 @@
   hidden
   transition:persist="page-transition"
 >
+  <div class="page-transition__panel" data-page-transition-panel></div>
   <p class="page-transition__label" data-page-transition-label></p>
 </div>
 
@@ -76,24 +77,25 @@
   document.addEventListener('astro:before-preparation', (event) => {
     const sequence = ++navigationSequence;
     const transition = document.querySelector<HTMLElement>('[data-page-transition]');
+    const panel = transition?.querySelector<HTMLElement>('[data-page-transition-panel]');
     const label = transition?.querySelector<HTMLElement>('[data-page-transition-label]');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const shouldAnimate = Boolean(transition && label && !reduceMotion);
+    const shouldAnimate = Boolean(transition && panel && label && !reduceMotion);
 
     let coverPage: Promise<void> = Promise.resolve();
 
-    if (transition && label && shouldAnimate) {
+    if (transition && panel && label && shouldAnimate) {
       const source = event.sourceElement as HTMLElement | undefined;
       label.textContent =
         source?.dataset.transitionLabel || getDestination(event.to.pathname);
 
       cancelAnimations(transition);
       transition.hidden = false;
-      transition.style.transform = 'translate3d(0, 101%, 0)';
+      transition.style.opacity = '1';
+      panel.style.transform = 'translate3d(0, 101%, 0)';
       label.style.opacity = '0';
-      label.style.transform = 'translate3d(0, 12px, 0)';
 
-      const panelAnimation = transition.animate(
+      const panelAnimation = panel.animate(
         [
           { transform: 'translate3d(0, 101%, 0)' },
           { transform: 'translate3d(0, 0, 0)' },
@@ -106,13 +108,13 @@
       );
       const labelAnimation = label.animate(
         [
-          { opacity: 0, transform: 'translate3d(0, 12px, 0)' },
-          { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+          { opacity: 0 },
+          { opacity: 1 },
         ],
         {
-          duration: 220,
-          delay: 140,
-          easing: 'ease-out',
+          duration: 260,
+          delay: 120,
+          easing: 'ease-in-out',
           fill: 'forwards',
         },
       );
@@ -121,10 +123,12 @@
         panelAnimation.finished.catch(() => undefined),
         wait(motionDuration + 80),
       ]).then(() => {
-        if (eventController.signal.aborted || sequence !== navigationSequence) return;
-        transition.style.transform = 'translate3d(0, 0, 0)';
+        if (
+          eventController.signal.aborted ||
+          sequence !== navigationSequence
+        ) return;
+        panel.style.transform = 'translate3d(0, 0, 0)';
         label.style.opacity = '1';
-        label.style.transform = 'translate3d(0, 0, 0)';
         panelAnimation.cancel();
         labelAnimation.cancel();
       });
@@ -142,48 +146,51 @@
   document.addEventListener('astro:after-swap', () => {
     const sequence = navigationSequence;
     const transition = document.querySelector<HTMLElement>('[data-page-transition]');
+    const panel = transition?.querySelector<HTMLElement>('[data-page-transition-panel]');
     const label = transition?.querySelector<HTMLElement>('[data-page-transition-label]');
-    if (!transition || !label || transition.hidden) return;
+    if (!transition || !panel || !label || transition.hidden) return;
 
     cancelAnimations(transition);
-    transition.style.transform = 'translate3d(0, 0, 0)';
+    transition.style.opacity = '1';
+    panel.style.transform = 'translate3d(0, 0, 0)';
 
-    const panelAnimation = transition.animate(
+    const fadeAnimation = transition.animate(
       [
-        { transform: 'translate3d(0, 0, 0)' },
-        { transform: 'translate3d(0, -101%, 0)' },
+        { opacity: 1 },
+        { opacity: 0 },
       ],
       {
-        duration: motionDuration,
-        easing: 'cubic-bezier(0.76, 0, 0.24, 1)',
+        duration: 320,
+        easing: 'ease-out',
         fill: 'forwards',
       },
     );
     label.animate(
       [
-        { opacity: 1, transform: 'translate3d(0, 0, 0)' },
-        { opacity: 0, transform: 'translate3d(0, -10px, 0)' },
+        { opacity: 1 },
+        { opacity: 0 },
       ],
       {
-        duration: 140,
+        duration: 180,
         easing: 'ease-in',
         fill: 'forwards',
       },
     );
 
     Promise.race([
-      panelAnimation.finished.catch(() => undefined),
-      wait(motionDuration + 80),
+      fadeAnimation.finished.catch(() => undefined),
+      wait(400),
     ]).then(() => {
-      if (eventController.signal.aborted || sequence !== navigationSequence) return;
-      // Commit the animation's final position before canceling it. Otherwise
-      // Safari can briefly reveal the underlying centered position.
-      transition.style.transform = 'translate3d(0, -101%, 0)';
+      if (
+        eventController.signal.aborted ||
+        sequence !== navigationSequence
+      ) return;
+      transition.style.opacity = '0';
       transition.hidden = true;
       cancelAnimations(transition);
-      transition.style.transform = 'translate3d(0, 101%, 0)';
+      transition.style.opacity = '1';
+      panel.style.transform = 'translate3d(0, 101%, 0)';
       label.style.opacity = '';
-      label.style.transform = '';
     });
   }, { signal: eventController.signal });
 </script>
@@ -191,15 +198,13 @@
 <style>
   .page-transition {
     align-items: center;
-    background: #00d9ff;
     contain: paint;
     display: flex;
     inset: 0;
     justify-content: center;
     pointer-events: none;
     position: fixed;
-    transform: translate3d(0, 101%, 0);
-    will-change: transform;
+    will-change: opacity;
     z-index: 10000;
   }
 
@@ -207,15 +212,26 @@
     display: none;
   }
 
+  .page-transition__panel {
+    background: #00d9ff;
+    inset: 0;
+    position: absolute;
+    transform: translate3d(0, 101%, 0);
+    will-change: transform;
+  }
+
   .page-transition__label {
     color: #202020;
     font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
-    font-size: clamp(24px, 5vw, 64px);
+    font-size: clamp(48px, 9vw, 128px);
     font-weight: var(--font-weight-bold);
     letter-spacing: -0.03em;
     line-height: 1;
     margin: 0;
-    will-change: opacity, transform;
+    position: relative;
+    text-align: center;
+    will-change: opacity;
+    z-index: 1;
   }
 
   ::view-transition-old(root),
