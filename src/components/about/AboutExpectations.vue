@@ -14,11 +14,9 @@ import AppSectionHeading from '../AppSectionHeading.vue';
       <AppSectionHeading
         :title="aboutExpectations.title"
         title-id="about-expectations-title"
+        :subtitle="aboutExpectations.quote"
       >
         <div class="about-expectations__copy">
-          <p class="about-expectations__quote">
-            {{ aboutExpectations.quote }}
-          </p>
           <div class="about-expectations__paragraphs">
             <p v-for="paragraph in aboutExpectations.paragraphs" :key="paragraph">
               {{ paragraph }}
@@ -87,10 +85,6 @@ import AppSectionHeading from '../AppSectionHeading.vue';
   margin: 0;
 }
 
-.about-expectations__quote {
-  margin: 0;
-}
-
 @media (max-width: 1024px) {
   .about-expectations__paragraphs p {
     display: inline;
@@ -122,6 +116,10 @@ import AppSectionHeading from '../AppSectionHeading.vue';
 
   .about-expectations__inner {
     gap: 24px;
+  }
+
+  .about-expectations__copy {
+    margin-top: 8px;
   }
 
   .about-expectations__actions {

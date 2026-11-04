@@ -153,10 +153,14 @@ import { withBase } from '../../utils/basePath';
     0 10px 30px rgb(50 50 50 / 8%);
   color: #323232;
   display: flex;
-  gap: 12px;
+  gap: clamp(12px, 1.15vmin, 16px);
   margin-top: clamp(48px, 8vmin, 80px);
-  min-height: 48px;
-  padding: 7px 8px 7px 18px;
+  min-height: clamp(52px, 6.25vmin, 64px);
+  padding:
+    clamp(8px, 0.9vmin, 10px)
+    clamp(9px, 1vmin, 11px)
+    clamp(8px, 0.9vmin, 10px)
+    clamp(20px, 1.8vmin, 28px);
   position: relative;
   text-decoration: none;
   transition:
@@ -167,7 +171,7 @@ import { withBase } from '../../utils/basePath';
 }
 
 .hero-kv__scroll-label {
-  font-size: 11px;
+  font-size: clamp(12px, 1vmin, 14px);
   font-weight: var(--font-weight-medium);
   letter-spacing: 0.22em;
   line-height: 1;
@@ -179,20 +183,20 @@ import { withBase } from '../../utils/basePath';
   background: var(--color-accent);
   border-radius: 50%;
   display: flex;
-  height: 32px;
+  height: clamp(36px, 4.2vmin, 44px);
   justify-content: center;
-  width: 32px;
+  width: clamp(36px, 4.2vmin, 44px);
 }
 
 .hero-kv__scroll-icon svg {
   animation: scroll-cue-arrow 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
   fill: none;
-  height: 18px;
+  height: clamp(20px, 2.4vmin, 24px);
   stroke: #323232;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.8;
-  width: 18px;
+  width: clamp(20px, 2.4vmin, 24px);
 }
 
 .hero-kv__scroll-cue:hover {
@@ -262,13 +266,27 @@ import { withBase } from '../../utils/basePath';
   }
 
   .hero-kv__scroll-cue {
-    min-height: 44px;
-    padding: 6px 7px 6px 16px;
+    gap: clamp(10px, 2.8vw, 13px);
+    min-height: clamp(48px, 6.5svh, 56px);
+    padding:
+      clamp(7px, 1svh, 9px)
+      clamp(8px, 2vw, 10px)
+      clamp(7px, 1svh, 9px)
+      clamp(18px, 4.8vw, 22px);
+  }
+
+  .hero-kv__scroll-label {
+    font-size: clamp(12px, 3.2vw, 13px);
   }
 
   .hero-kv__scroll-icon {
-    height: 30px;
-    width: 30px;
+    height: clamp(34px, 4.8svh, 40px);
+    width: clamp(34px, 4.8svh, 40px);
+  }
+
+  .hero-kv__scroll-icon svg {
+    height: clamp(19px, 2.8svh, 22px);
+    width: clamp(19px, 2.8svh, 22px);
   }
 
 }

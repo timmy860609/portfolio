@@ -3,8 +3,8 @@ import type {
   ProjectImage,
   ProjectResultItem,
 } from '../../types/project';
+import AppContentHeading from '../AppContentHeading.vue';
 import ProjectMedia from './ProjectMedia.vue';
-import ProjectSectionHeading from './ProjectSectionHeading.vue';
 import ResultList from './ResultList.vue';
 
 type MediaItem = {
@@ -22,10 +22,11 @@ defineProps<{
 </script>
 
 <template>
-  <section class="project-media-sequence">
-    <ProjectSectionHeading
+  <section class="project-media-sequence app-content-shell">
+    <AppContentHeading
       :title="title"
       :introduction="introduction"
+      spacing="compact"
     />
 
     <div
@@ -46,12 +47,7 @@ defineProps<{
 
 <style scoped>
 .project-media-sequence {
-  color: var(--color-text-primary);
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
-  margin-inline: auto;
-  max-width: var(--content-width-project);
+  --content-section-mobile-gap: 40px;
 }
 
 .project-media-sequence p {
@@ -67,10 +63,4 @@ defineProps<{
   gap: 24px;
 }
 
-@media (max-width: 767px) {
-  .project-media-sequence {
-    gap: 40px;
-  }
-
-}
 </style>

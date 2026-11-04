@@ -2,7 +2,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 import type { FeaturedProject } from '../../data/home';
 import AppButton from '../AppButton.vue';
-import AppSectionHeading from '../AppSectionHeading.vue';
+import AppSectionHeader from '../AppSectionHeader.vue';
 import CarouselArrow from './CarouselArrow.vue';
 import ProjectCard from './ProjectCard.vue';
 
@@ -188,13 +188,13 @@ onBeforeUnmount(() => {
 <template>
   <section id="featured-projects" class="featured" aria-labelledby="featured-title" data-node-id="4965:32095">
     <div class="featured__inner">
-      <header class="featured__header">
-        <AppSectionHeading class="featured__heading" title="代表專案" title-id="featured-title" tone="dark">
-          <p class="featured__description">
-            歡迎深入了解我的設計過程和思考方式
-          </p>
-        </AppSectionHeading>
-
+      <AppSectionHeader
+        class="featured__header"
+        title="代表專案"
+        title-id="featured-title"
+        subtitle="歡迎深入了解我的設計過程和思考方式"
+        tone="dark"
+      >
         <div class="featured__controls">
           <AppButton
             href="/projects"
@@ -210,7 +210,7 @@ onBeforeUnmount(() => {
             <CarouselArrow direction="right" @click="next" />
           </div>
         </div>
-      </header>
+      </AppSectionHeader>
 
       <div
         class="featured__carousel"
@@ -300,24 +300,7 @@ onBeforeUnmount(() => {
 }
 
 .featured__header {
-  align-items: flex-end;
-  display: flex;
-  gap: 56px;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.featured__heading {
-  flex: 1;
-}
-
-.featured__description {
-  color: #e3e3e3;
-  font-size: var(--font-size-body-small);
-  letter-spacing: 0.9px;
-  line-height: 1.5;
-  margin: 0;
-  text-wrap: pretty;
+  --section-subtitle-color: #e3e3e3;
 }
 
 .featured__controls {
@@ -444,12 +427,6 @@ onBeforeUnmount(() => {
     margin-inline: calc(50% - 50vw);
     padding: 10px 16px;
     width: 100vw;
-  }
-
-  .featured__header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 24px;
   }
 
   .featured__controls {

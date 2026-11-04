@@ -28,9 +28,9 @@ withDefaults(defineProps<ArticleItem & {
         <div class="article-card__tags">
           <span v-for="tag in tags" :key="tag"><b>#</b>{{ tag }}</span>
         </div>
-        <h2>{{ title }}</h2>
+        <h2 class="app-card-heading">{{ title }}</h2>
       </div>
-      <p>{{ description }}</p>
+      <p class="app-card-description">{{ description }}</p>
     </div>
   </a>
 </template>
@@ -77,19 +77,8 @@ withDefaults(defineProps<ArticleItem & {
   font-weight: var(--font-weight-semibold);
 }
 
-.article-card h2 {
+.article-card .app-card-heading {
   font-family: 'Noto Sans TC', sans-serif;
-  font-size: var(--font-size-card-heading);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-  margin: 0;
-}
-
-.article-card p {
-  color: #737373;
-  font-size: var(--content-body-font-size);
-  line-height: 1.5;
-  margin: 0;
 }
 
 .article-card:focus-visible {

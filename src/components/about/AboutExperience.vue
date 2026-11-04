@@ -52,13 +52,11 @@ onBeforeUnmount(() => {
   <section class="about-experience" aria-labelledby="about-experience-title" data-node-id="5131:36409">
     <div class="about-experience__inner">
       <AppSectionHeading
+        class="about-experience__heading"
         :title="aboutExperienceSection.title"
         title-id="about-experience-title"
-      >
-        <p class="about-experience__description">
-          {{ aboutExperienceSection.description }}
-        </p>
-      </AppSectionHeading>
+        :subtitle="aboutExperienceSection.description"
+      />
 
       <div class="about-experience__desktop">
         <div class="about-experience__summary">
@@ -123,11 +121,7 @@ onBeforeUnmount(() => {
   max-width: 1200px;
 }
 
-.about-experience__description {
-  font-size: var(--content-body-font-size);
-  font-weight: var(--font-weight-regular);
-  line-height: 1.5;
-  margin: 0;
+.about-experience__heading :deep(.app-section-heading__subtitle) {
   max-width: 568px;
 }
 

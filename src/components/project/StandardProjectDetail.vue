@@ -69,7 +69,7 @@ provide(optimizedProjectImagesKey, props.optimizedImages);
     <ProjectCover v-bind="cover" />
     <ProjectDetailHero v-bind="hero" />
 
-    <div class="standard-project-detail__content">
+    <div class="standard-project-detail__content detail-content-layout">
       <ProjectGoalsSection v-if="!goalsAfterFirstSection" v-bind="goals" />
       <template v-for="(section, index) in sections" :key="section.title">
         <ProjectContentSection v-bind="section" />
@@ -91,17 +91,6 @@ provide(optimizedProjectImagesKey, props.optimizedImages);
 }
 
 .standard-project-detail__content {
-  display: flex;
-  flex-direction: column;
-  gap: 120px;
-  margin-inline: auto;
-  max-width: calc(var(--content-width-project) + var(--page-gutter) * 2);
-  padding: 60px var(--page-gutter);
-}
-
-@media (max-width: 767px) {
-  .standard-project-detail__content {
-    gap: 64px;
-  }
+  --detail-content-mobile-gap: 64px;
 }
 </style>

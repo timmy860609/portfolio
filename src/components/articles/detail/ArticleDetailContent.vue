@@ -7,7 +7,7 @@ defineProps<ArticleDetailContentData>();
 
 <template>
   <div class="article-detail-content" data-node-id="4395:44506">
-    <div class="article-detail-content__inner">
+    <div class="article-detail-content__inner detail-content-layout">
       <ArticleContentSection
         v-for="(section, index) in sections"
         :key="section.title ?? section.image?.src ?? index"
@@ -23,18 +23,7 @@ defineProps<ArticleDetailContentData>();
 }
 
 .article-detail-content__inner {
-  display: flex;
-  flex-direction: column;
-  gap: 120px;
-  margin-inline: auto;
-  max-width: calc(var(--content-width-project) + var(--page-gutter) * 2);
-  padding: 60px var(--page-gutter);
-}
-
-@media (max-width: 767px) {
-  .article-detail-content__inner {
-    gap: 56px;
-    padding-block: 48px;
-  }
+  --detail-content-mobile-gap: 56px;
+  --detail-content-mobile-padding: 48px var(--page-gutter);
 }
 </style>

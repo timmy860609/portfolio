@@ -7,11 +7,12 @@ import AppSectionHeading from '../AppSectionHeading.vue';
 <template>
   <section class="skills" aria-labelledby="skills-title" data-node-id="4967:32414">
     <div class="skills__inner">
-      <AppSectionHeading class="skills__intro" title="技能與專長" title-id="skills-title">
-        <p class="skills__description">
-          兼顧用戶體驗與技術實作，使設計落實於產品中
-        </p>
-      </AppSectionHeading>
+      <AppSectionHeading
+        class="skills__intro"
+        title="技能與專長"
+        title-id="skills-title"
+        subtitle="兼顧用戶體驗與技術實作，使設計落實於產品中"
+      />
 
       <div class="skills__list">
         <SkillCard
@@ -47,14 +48,6 @@ import AppSectionHeading from '../AppSectionHeading.vue';
   align-self: start;
   position: sticky;
   top: 120px;
-}
-
-.skills__description {
-  font-size: var(--content-body-font-size);
-  line-height: 1.5;
-  margin: 0;
-  position: relative;
-  z-index: 1;
 }
 
 .skills__list {

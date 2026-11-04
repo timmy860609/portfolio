@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ProjectGoalItem } from '../../types/project';
+import AppContentHeading from '../AppContentHeading.vue';
 import ProjectGoalsGrid from './ProjectGoalsGrid.vue';
 
 defineProps<{
@@ -22,12 +23,14 @@ defineProps<{
 
 <template>
   <section
-    class="project-goals"
+    class="project-goals app-content-shell"
     :class="{ 'project-goals--compact': density === 'compact' }"
   >
-    <div class="project-goals__heading">
-      <h2>{{ title }}</h2>
-      <p>{{ introduction }}</p>
+    <AppContentHeading
+      class="project-goals__heading"
+      :title="title"
+      :introduction="introduction"
+    >
       <ul v-if="challenges?.length">
         <li v-for="challenge in challenges" :key="challenge">
           {{ challenge }}
@@ -36,7 +39,7 @@ defineProps<{
       <p v-if="conclusion && conclusionPosition !== 'after'">
         {{ conclusion }}
       </p>
-    </div>
+    </AppContentHeading>
 
     <ProjectGoalsGrid
       :goals="goals"
@@ -60,37 +63,13 @@ defineProps<{
 
 <style scoped>
 .project-goals {
-  color: var(--color-text-primary);
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
-  margin-inline: auto;
-  max-width: var(--content-width-project);
+  --content-section-mobile-gap: 40px;
 }
 
-.project-goals__heading {
-  display: flex;
-  flex-direction: column;
-  gap: var(--content-heading-gap);
-}
-
-.project-goals h2 {
-  font-size: var(--font-size-content-heading);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.5;
-  margin: 0;
-}
-
-.project-goals__heading p,
-.project-goals__heading li,
 .project-goals__conclusion {
   font-size: var(--content-body-font-size);
   letter-spacing: 0.9px;
   line-height: 1.6;
-}
-
-.project-goals__heading p {
-  margin: 0;
 }
 
 .project-goals__conclusion {
@@ -98,7 +77,7 @@ defineProps<{
 }
 
 .project-goals--compact {
-  gap: 32px;
+  --content-section-gap: 32px;
 }
 
 .project-goals__heading ul {
@@ -106,10 +85,4 @@ defineProps<{
   padding-left: 30px;
 }
 
-@media (max-width: 767px) {
-  .project-goals {
-    gap: 40px;
-  }
-
-}
 </style>

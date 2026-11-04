@@ -25,7 +25,10 @@ const pagination = getProjectPagination('insurance-marketing');
       :year="marketingCollectionYear"
     />
 
-    <section class="marketing-content" aria-label="行銷網站案例">
+    <section
+      class="marketing-content detail-content-layout"
+      aria-label="行銷網站案例"
+    >
       <MarketingProjectCard
         v-for="item in marketingProjects"
         :key="item.title"
@@ -44,18 +47,8 @@ const pagination = getProjectPagination('insurance-marketing');
 }
 
 .marketing-content {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  margin-inline: auto;
-  max-width: calc(var(--content-width-project) + var(--page-gutter) * 2);
-  padding: 60px var(--page-gutter);
-}
-
-@media (max-width: 767px) {
-  .marketing-content {
-    gap: 24px;
-    padding-block: 40px;
-  }
+  --detail-content-gap: 40px;
+  --detail-content-mobile-gap: 24px;
+  --detail-content-mobile-padding: 40px var(--page-gutter);
 }
 </style>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { homeArticles } from '../../data/articles';
 import AppButton from '../AppButton.vue';
-import AppSectionHeading from '../AppSectionHeading.vue';
+import AppSectionHeader from '../AppSectionHeader.vue';
 import { withBase } from '../../utils/basePath';
 </script>
 
@@ -11,29 +11,22 @@ import { withBase } from '../../utils/basePath';
     aria-labelledby="home-articles-title"
   >
     <div class="home-articles__inner">
-      <header class="home-articles__header">
-        <AppSectionHeading
-          class="home-articles__heading"
-          title="專欄分享"
-          title-id="home-articles-title"
-          tone="dark"
+      <AppSectionHeader
+        class="home-articles__header"
+        title="專欄分享"
+        title-id="home-articles-title"
+        subtitle="這裡記錄了我在設計路途中遇到的趣事"
+        tone="dark"
+      >
+        <AppButton
+          href="/articles"
+          variant="light-outline"
+          size="s-wide"
+          fit-content
         >
-          <p class="home-articles__description">
-            這裡記錄了我在設計路途中遇到的趣事
-          </p>
-        </AppSectionHeading>
-
-        <div class="home-articles__controls">
-          <AppButton
-            href="/articles"
-            variant="light-outline"
-            size="s-wide"
-            fit-content
-          >
-            更多文章
-          </AppButton>
-        </div>
-      </header>
+          更多文章
+        </AppButton>
+      </AppSectionHeader>
 
       <div class="home-articles__content">
         <figure class="home-articles__visual">
@@ -80,32 +73,7 @@ import { withBase } from '../../utils/basePath';
 }
 
 .home-articles__header {
-  align-items: flex-end;
-  display: flex;
-  gap: 56px;
-  justify-content: space-between;
-}
-
-.home-articles__heading {
-  flex: 1 0 0;
-  min-width: 0;
-}
-
-.home-articles__controls {
-  align-items: center;
-  display: flex;
-  flex: 1 0 0;
-  justify-content: flex-end;
-  min-width: 0;
-}
-
-.home-articles__description {
-  color: #e3e3e3;
-  font-size: var(--font-size-body-small);
-  letter-spacing: 0.9px;
-  line-height: 1.5;
-  margin: 0;
-  text-wrap: pretty;
+  --section-subtitle-color: #e3e3e3;
 }
 
 .home-articles__content {
@@ -168,10 +136,6 @@ import { withBase } from '../../utils/basePath';
 }
 
 @media (max-width: 1023px) {
-  .home-articles__header {
-    gap: 40px;
-  }
-
   .home-articles__content {
     gap: 40px;
   }
@@ -181,17 +145,6 @@ import { withBase } from '../../utils/basePath';
   .home-articles__inner {
     gap: 32px;
     padding-block: 56px;
-  }
-
-  .home-articles__header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .home-articles__controls {
-    flex: none;
-    justify-content: flex-start;
   }
 
   .home-articles__content {

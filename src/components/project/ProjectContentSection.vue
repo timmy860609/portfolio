@@ -2,8 +2,8 @@
 import type {
   ProjectContentSectionData,
 } from '../../types/project';
+import AppContentHeading from '../AppContentHeading.vue';
 import ProjectMedia from './ProjectMedia.vue';
-import ProjectSectionHeading from './ProjectSectionHeading.vue';
 import ResultList from './ResultList.vue';
 
 withDefaults(defineProps<ProjectContentSectionData>(), {
@@ -15,12 +15,13 @@ withDefaults(defineProps<ProjectContentSectionData>(), {
 
 <template>
   <section
-    class="project-content-section"
+    class="project-content-section app-content-shell"
     :class="`project-content-section--${density}`"
   >
-    <ProjectSectionHeading
+    <AppContentHeading
       :title="title"
       :introduction="introduction"
+      spacing="compact"
     />
 
     <div
@@ -50,12 +51,7 @@ withDefaults(defineProps<ProjectContentSectionData>(), {
 
 <style scoped>
 .project-content-section {
-  color: var(--color-text-primary);
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
-  margin-inline: auto;
-  max-width: var(--content-width-project);
+  --content-section-mobile-gap: 40px;
 }
 
 .project-content-section p {
@@ -70,19 +66,19 @@ withDefaults(defineProps<ProjectContentSectionData>(), {
 }
 
 .project-content-section--compact {
-  gap: 32px;
+  --content-section-gap: 32px;
 }
 
 .project-content-section--tight {
-  gap: 24px;
+  --content-section-gap: 24px;
 }
 
 .project-content-section--results {
-  gap: 0;
+  --content-section-gap: 0;
   padding-bottom: 20px;
 }
 
-.project-content-section--results :deep(.project-section-heading) {
+.project-content-section--results :deep(.app-content-heading) {
   margin-bottom: 56px;
 }
 
@@ -91,10 +87,10 @@ withDefaults(defineProps<ProjectContentSectionData>(), {
 }
 
 .project-content-section--caption {
-  gap: 0;
+  --content-section-gap: 0;
 }
 
-.project-content-section--caption :deep(.project-section-heading) {
+.project-content-section--caption :deep(.app-content-heading) {
   margin-bottom: 64px;
 }
 
@@ -103,16 +99,8 @@ withDefaults(defineProps<ProjectContentSectionData>(), {
 }
 
 @media (max-width: 767px) {
-  .project-content-section,
-  .project-content-section--compact,
-  .project-content-section--tight,
-  .project-content-section--results,
-  .project-content-section--caption {
-    gap: 40px;
-  }
-
-  .project-content-section--results :deep(.project-section-heading),
-  .project-content-section--caption :deep(.project-section-heading) {
+  .project-content-section--results :deep(.app-content-heading),
+  .project-content-section--caption :deep(.app-content-heading) {
     margin-bottom: 0;
   }
 

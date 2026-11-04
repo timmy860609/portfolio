@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { ArticleContentSectionData } from '../../../data/articles';
+import AppContentHeading from '../../AppContentHeading.vue';
 import ProjectGoalsGrid from '../../project/ProjectGoalsGrid.vue';
 import ProjectMedia from '../../project/ProjectMedia.vue';
 import ResultList from '../../project/ResultList.vue';
@@ -16,12 +17,11 @@ const sectionStyle = computed(() => ({
 
 <template>
   <section class="article-content-section" :style="sectionStyle">
-    <div class="article-content-section__copy">
-      <h2 v-if="title">{{ title }}</h2>
-      <p v-for="paragraph in paragraphs" :key="paragraph">
-        {{ paragraph }}
-      </p>
-    </div>
+    <AppContentHeading
+      class="article-content-section__copy"
+      :title="title"
+      :introduction="paragraphs"
+    />
 
     <div
       v-if="image || video || goals?.length || details?.length || cards?.length || conclusion || externalLink"
@@ -91,23 +91,14 @@ const sectionStyle = computed(() => ({
 }
 
 .article-content-section__copy {
-  display: flex;
-  flex-direction: column;
-  gap: var(--content-heading-gap);
+  --content-copy-letter-spacing: 1px;
 }
 
-.article-content-section h2,
 .article-content-section p {
   margin: 0;
 }
 
-.article-content-section h2 {
-  font-size: var(--font-size-content-heading);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.5;
-}
-
-.article-content-section p {
+.article-content-section__body p {
   font-size: var(--content-body-font-size);
   letter-spacing: 1px;
   line-height: 1.6;
@@ -149,7 +140,11 @@ const sectionStyle = computed(() => ({
     gap: 32px;
   }
 
-  .article-content-section p {
+  .article-content-section__copy {
+    --content-copy-letter-spacing: 0.8px;
+  }
+
+  .article-content-section__body p {
     letter-spacing: 0.8px;
   }
 

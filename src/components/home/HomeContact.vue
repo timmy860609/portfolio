@@ -35,9 +35,8 @@ async function copyContact(value: string) {
         class="home-contact__introduction"
         :title="homeContact.title"
         title-id="home-contact-title"
-      >
-        <p>{{ homeContact.description }}</p>
-      </AppSectionHeading>
+        :subtitle="homeContact.description"
+      />
 
       <div class="home-contact__list">
         <div
@@ -123,13 +122,6 @@ async function copyContact(value: string) {
   max-width: var(--layout-shell-width);
   padding-inline: var(--layout-gutter);
   width: 100%;
-}
-
-.home-contact__introduction p {
-  font-size: var(--font-size-body-small);
-  font-weight: var(--font-weight-regular);
-  line-height: 1.5;
-  margin: 0;
 }
 
 .home-contact__list {

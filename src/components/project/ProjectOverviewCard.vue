@@ -48,8 +48,8 @@ const toAvif = (source?: string) => source?.replace(/\.webp$/i, '.avif');
       <div class="overview-card__body">
         <ProjectTags :tags="tags" :mobile-font-size="16" />
         <div>
-          <h2>{{ title }}</h2>
-          <p>{{ description }}</p>
+          <h2 class="app-card-heading">{{ title }}</h2>
+          <p class="app-card-description">{{ description }}</p>
         </div>
       </div>
     </a>
@@ -107,20 +107,6 @@ const toAvif = (source?: string) => source?.replace(/\.webp$/i, '.avif');
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.overview-card h2 {
-  font-size: var(--font-size-card-heading);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-  margin: 0;
-}
-
-.overview-card p {
-  color: #737373;
-  font-size: var(--content-body-font-size);
-  line-height: 1.5;
-  margin: 0;
 }
 
 @media (max-width: 767px) {

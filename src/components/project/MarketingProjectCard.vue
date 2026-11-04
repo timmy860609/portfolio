@@ -13,8 +13,8 @@ defineProps<MarketingProject>();
       <div class="marketing-card__copy">
         <ProjectTags :tags="tags" />
         <div>
-          <h2>{{ title }}</h2>
-          <p>{{ description }}</p>
+          <h2 class="app-card-heading">{{ title }}</h2>
+          <p class="app-card-description">{{ description }}</p>
         </div>
       </div>
       <AppButton
@@ -68,19 +68,8 @@ defineProps<MarketingProject>();
   gap: 8px;
 }
 
-.marketing-card h2 {
+.marketing-card .app-card-heading {
   color: #323232;
-  font-size: var(--font-size-card-heading);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-  margin: 0;
-}
-
-.marketing-card p {
-  color: #737373;
-  font-size: var(--content-body-font-size);
-  line-height: 1.5;
-  margin: 0;
 }
 
 .marketing-card :deep(.marketing-card__button) {
