@@ -40,23 +40,25 @@ import { withBase } from '../../utils/basePath';
         />
       </picture>
 
-      <div class="hero-kv__brand">
-        <LogoPathAnimation class="hero-kv__logo" :label="homeHero.logoAlt" />
-        <h1 id="hero-tagline">{{ homeHero.tagline }}</h1>
-      </div>
+      <div class="hero-kv__content">
+        <div class="hero-kv__brand">
+          <LogoPathAnimation class="hero-kv__logo" :label="homeHero.logoAlt" />
+          <h1 id="hero-tagline">{{ homeHero.tagline }}</h1>
+        </div>
 
-      <a
-        class="hero-kv__scroll-cue"
-        href="#featured-projects"
-        aria-label="向下捲動至代表專案"
-      >
-        <span class="hero-kv__scroll-label">Scroll</span>
-        <span class="hero-kv__scroll-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" focusable="false">
-            <path d="M12 5v13M7.5 13.5 12 18l4.5-4.5" />
-          </svg>
-        </span>
-      </a>
+        <a
+          class="hero-kv__scroll-cue"
+          href="#featured-projects"
+          aria-label="向下捲動至代表專案"
+        >
+          <span class="hero-kv__scroll-label">Scroll</span>
+          <span class="hero-kv__scroll-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M12 5v13M7.5 13.5 12 18l4.5-4.5" />
+            </svg>
+          </span>
+        </a>
+      </div>
     </div>
   </section>
 </template>
@@ -102,17 +104,24 @@ import { withBase } from '../../utils/basePath';
   width: 100%;
 }
 
-.hero-kv__brand {
+.hero-kv__content {
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: clamp(26px, 2.1875vw, 42px);
   left: 50%;
   position: absolute;
   top: 27.5%;
   transform: translateX(-50%);
   width: min(53.90625vw, calc(100% - 48px));
   z-index: 2;
+}
+
+.hero-kv__brand {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(26px, 2.1875vw, 42px);
+  width: 100%;
 }
 
 .hero-kv__logo {
@@ -139,19 +148,17 @@ import { withBase } from '../../utils/basePath';
   background: rgb(255 255 255 / 58%);
   border: 1px solid rgb(50 50 50 / 6%);
   border-radius: 999px;
-  bottom: clamp(24px, 4vh, 44px);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 78%),
     0 10px 30px rgb(50 50 50 / 8%);
   color: #323232;
   display: flex;
   gap: 12px;
-  left: 50%;
+  margin-top: clamp(48px, 8vmin, 80px);
   min-height: 48px;
   padding: 7px 8px 7px 18px;
-  position: absolute;
+  position: relative;
   text-decoration: none;
-  transform: translateX(-50%);
   transition:
     background-color 180ms ease,
     box-shadow 180ms ease,
@@ -193,7 +200,7 @@ import { withBase } from '../../utils/basePath';
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 90%),
     0 12px 32px rgb(50 50 50 / 12%);
-  transform: translate(-50%, 2px);
+  transform: translateY(2px);
 }
 
 .hero-kv__scroll-cue:focus-visible {
@@ -214,9 +221,12 @@ import { withBase } from '../../utils/basePath';
 
 
 @media (max-width: 1024px) {
+  .hero-kv__content {
+    width: min(82vw, 820px);
+  }
+
   .hero-kv__brand {
     gap: 30px;
-    width: min(82vw, 820px);
   }
 
   .hero-kv__brand h1 {
@@ -236,10 +246,13 @@ import { withBase } from '../../utils/basePath';
     min-height: 560px;
   }
 
-  .hero-kv__brand {
-    gap: 26px;
+  .hero-kv__content {
     top: 36%;
     width: calc(100% - 40px);
+  }
+
+  .hero-kv__brand {
+    gap: 26px;
   }
 
   .hero-kv__brand h1 {
@@ -249,7 +262,6 @@ import { withBase } from '../../utils/basePath';
   }
 
   .hero-kv__scroll-cue {
-    bottom: calc(36px + env(safe-area-inset-bottom, 0px));
     min-height: 44px;
     padding: 6px 7px 6px 16px;
   }

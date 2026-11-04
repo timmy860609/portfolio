@@ -16,6 +16,9 @@ import AppSectionHeading from '../AppSectionHeading.vue';
         title-id="about-expectations-title"
       >
         <div class="about-expectations__copy">
+          <p class="about-expectations__quote">
+            {{ aboutExpectations.quote }}
+          </p>
           <div class="about-expectations__paragraphs">
             <p v-for="paragraph in aboutExpectations.paragraphs" :key="paragraph">
               {{ paragraph }}
@@ -81,6 +84,10 @@ import AppSectionHeading from '../AppSectionHeading.vue';
 }
 
 .about-expectations__paragraphs p {
+  margin: 0;
+}
+
+.about-expectations__quote {
   margin: 0;
 }
 

@@ -24,4 +24,8 @@ withDefaults(
 .app-section-heading--center { align-items: center; text-align: center; }
 .app-section-heading h2 { color: inherit; font-size: var(--font-size-section-heading); font-weight: var(--font-weight-bold); letter-spacing: .06em; line-height: 1.5; margin: 0; }
 .app-section-heading__content { color: inherit; }
+
+@media (max-width: 767px) {
+  .app-section-heading { gap: 0; }
+}
 </style>

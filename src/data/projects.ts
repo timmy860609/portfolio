@@ -50,8 +50,7 @@ export const projects: Project[] = [
     title: '線上開戶平台',
     category: '數位金融',
     tags: ['UI/UX', '視覺設計'],
-    image: '/Image/Project/open-account/project-cover_m.webp',
-    imageSmall: '/Image/Optimized/project-covers/open-account-960.webp',
+    image: '/Image/Project/project-cover/open-account.webp',
     description:
       '重新梳理線上開戶、預約開戶與帳戶升級流程，以清楚分流及一致的驗證架構降低金融申請負擔。',
     detailTitle: '線上開戶平台｜在家開戶免煩惱',

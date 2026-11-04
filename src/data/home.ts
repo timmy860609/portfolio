@@ -94,7 +94,7 @@ export const skills: Skill[] = [
 export const homeContact = {
   title: '與我聯繫',
   description:
-    '我很樂意接收各種想法或合作機會！無論你有任何問題、建議或只是想聊聊，可以透過以下方式聯繫我：',
+    '我很樂意接收各種想法或合作機會！可以透過以下方式聯繫我：',
   items: [
     {
       title: '電子郵件',

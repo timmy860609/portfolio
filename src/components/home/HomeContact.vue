@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { homeContact } from '../../data/home';
 import AppButton from '../AppButton.vue';
+import AppSectionHeading from '../AppSectionHeading.vue';
 import AppToast from '../AppToast.vue';
 import { withBase } from '../../utils/basePath';
 
@@ -30,10 +31,13 @@ async function copyContact(value: string) {
 <template>
   <section id="contact" class="home-contact" aria-labelledby="home-contact-title" data-node-id="4288:47664">
     <div class="home-contact__inner">
-      <div class="home-contact__introduction">
-        <h2 id="home-contact-title">{{ homeContact.title }}</h2>
+      <AppSectionHeading
+        class="home-contact__introduction"
+        :title="homeContact.title"
+        title-id="home-contact-title"
+      >
         <p>{{ homeContact.description }}</p>
-      </div>
+      </AppSectionHeading>
 
       <div class="home-contact__list">
         <div
@@ -119,20 +123,6 @@ async function copyContact(value: string) {
   max-width: var(--layout-shell-width);
   padding-inline: var(--layout-gutter);
   width: 100%;
-}
-
-.home-contact__introduction {
-  color: #323232;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.home-contact__introduction h2 {
-  font-size: var(--font-size-section-heading);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-  margin: 0;
 }
 
 .home-contact__introduction p {

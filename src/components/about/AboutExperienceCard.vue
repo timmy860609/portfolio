@@ -176,7 +176,7 @@ defineProps<AboutExperienceProject>();
   }
 
   .experience-card__meta {
-    font-size: 14px;
+    font-size: 16px;
     gap: 8px;
   }
 }

@@ -9,7 +9,8 @@ async function walk(directory) {
   const files = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = `${directory}/${entry.name}`;
-    if (path === output) continue;
+    // Social crawlers use the original JPEGs, not responsive page images.
+    if (path === output || path === 'public/Image/og-image') continue;
     if (entry.isDirectory()) files.push(...await walk(path));
     else if (/\.(webp|png|jpe?g)$/i.test(path)) files.push(path);
   }

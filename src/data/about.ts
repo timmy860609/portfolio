@@ -153,6 +153,8 @@ export const aboutExperienceSection = {
 
 export const aboutExpectations = {
   title: '自我期許',
+  quote:
+    '《為真實的世界而設計》（Victor Papanek，2013）：「設計不像其他學科，需要垂直鑽研；而是要水平發展，接觸各種不同的領域。」',
   paragraphs: [
     '期望持續深化 UI/UX 與前端落地能力，讓設計不只停留在畫面，而能真正回應需求並推動產品前進。',
     '未來也希望接觸更多不同產業的專案，透過跨領域合作累積更完整的產品思維，持續打造兼具體驗與價值的設計成果。',

@@ -9,7 +9,7 @@ import AppSectionHeading from '../AppSectionHeading.vue';
     <div class="skills__inner">
       <AppSectionHeading class="skills__intro" title="技能與專長" title-id="skills-title">
         <p class="skills__description">
-          為真實世界而設計<span class="english">（Victor Papanek，2013）</span>：「設計不像其他學科，需要垂直鑽研；而是要水平發展，接觸各種不同的領域。」
+          兼顧用戶體驗與技術實作，使設計落實於產品中
         </p>
       </AppSectionHeading>
 
@@ -55,10 +55,6 @@ import AppSectionHeading from '../AppSectionHeading.vue';
   margin: 0;
   position: relative;
   z-index: 1;
-}
-
-.skills__intro .english {
-  font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
 }
 
 .skills__list {

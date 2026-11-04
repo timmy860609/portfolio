@@ -17,6 +17,14 @@ const { title, description } = Astro.props;
 const currentPath = stripBase(Astro.url.pathname).replace(/\/$/, '') || '/';
 const faviconPath = withBase('/WebCI/Favicon.svg');
 const socialTitle = 'Timmy Lee｜Product Designer';
+const socialImageAlt = 'Timmy Lee Portfolio — 青白色背景上的作品集品牌標誌';
+const socialImages = [
+  { path: '/Image/og-image/media-share_l.jpg', width: 2400, height: 1260 },
+  { path: '/Image/og-image/media-share_mjpg.jpg', width: 2160, height: 2160 },
+].map((image) => ({
+  ...image,
+  url: new URL(withBase(image.path), Astro.site ?? Astro.url).href,
+}));
 const socialDescription =
   '設計不像其他學科，需要垂直鑽研；而是要水平發展，接觸各種不同的領域';
 ---
@@ -37,7 +45,18 @@ const socialDescription =
     <meta property="og:title" content={socialTitle} />
     <meta property="og:description" content={socialDescription} />
     <meta property="og:url" content={Astro.url.href} />
-    <meta name="twitter:card" content="summary" />
+    {socialImages.map((image) => (
+      <>
+        <meta property="og:image" content={image.url} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content={String(image.width)} />
+        <meta property="og:image:height" content={String(image.height)} />
+        <meta property="og:image:alt" content={socialImageAlt} />
+      </>
+    ))}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={socialImages[0].url} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
     <meta name="twitter:title" content={socialTitle} />
     <meta name="twitter:description" content={socialDescription} />
     <meta name="generator" content={Astro.generator} />
