@@ -3,7 +3,7 @@
   aria-hidden="true"
   data-page-transition
   hidden
-  transition:persist="page-transition"
+  transition:persist="page-transition-curtain-v2"
 >
   <div class="page-transition__panel" data-page-transition-panel></div>
   <p class="page-transition__label" data-page-transition-label></p>
@@ -11,8 +11,9 @@
 
 <script>
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-  const motionDuration = 440;
+  const motionDuration = 560;
   let navigationSequence = 0;
+  let phase: 'idle' | 'covering' | 'covered' | 'leaving' = 'idle';
   const transitionWindow = window as Window & {
     __pageTransitionController?: AbortController;
   };
@@ -90,6 +91,7 @@
         source?.dataset.transitionLabel || getDestination(event.to.pathname);
 
       cancelAnimations(transition);
+      phase = 'covering';
       transition.hidden = false;
       transition.style.opacity = '1';
       panel.style.transform = 'translate3d(0, 101%, 0)';
@@ -102,7 +104,7 @@
         ],
         {
           duration: motionDuration,
-          easing: 'cubic-bezier(0.76, 0, 0.24, 1)',
+          easing: 'cubic-bezier(0.65, 0, 0.2, 1)',
           fill: 'forwards',
         },
       );
@@ -112,8 +114,8 @@
           { opacity: 1 },
         ],
         {
-          duration: 260,
-          delay: 120,
+          duration: 300,
+          delay: 260,
           easing: 'ease-in-out',
           fill: 'forwards',
         },
@@ -129,6 +131,7 @@
         ) return;
         panel.style.transform = 'translate3d(0, 0, 0)';
         label.style.opacity = '1';
+        phase = 'covered';
         panelAnimation.cancel();
         labelAnimation.cancel();
       });
@@ -139,7 +142,17 @@
       const pageAndImage = loadPage().then(() =>
         preloadCriticalImage(event.newDocument, event.signal),
       );
-      await Promise.all([coverPage, pageAndImage]);
+      try {
+        await Promise.all([coverPage, pageAndImage]);
+        if (shouldAnimate && !event.signal.aborted) await wait(100);
+      } catch (error) {
+        if (sequence === navigationSequence && !eventController.signal.aborted && transition) {
+          transition.hidden = true;
+          cancelAnimations(transition);
+          phase = 'idle';
+        }
+        throw error;
+      }
     };
   }, { signal: eventController.signal });
 
@@ -148,7 +161,8 @@
     const transition = document.querySelector<HTMLElement>('[data-page-transition]');
     const panel = transition?.querySelector<HTMLElement>('[data-page-transition-panel]');
     const label = transition?.querySelector<HTMLElement>('[data-page-transition-label]');
-    if (!transition || !panel || !label || transition.hidden) return;
+    if (!transition || !panel || !label || transition.hidden || phase !== 'covered') return;
+    phase = 'leaving';
 
     cancelAnimations(transition);
     transition.style.opacity = '1';
@@ -160,8 +174,8 @@
         { opacity: 0 },
       ],
       {
-        duration: 320,
-        easing: 'ease-out',
+        duration: 420,
+        easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
         fill: 'forwards',
       },
     );
@@ -171,7 +185,7 @@
         { opacity: 0 },
       ],
       {
-        duration: 180,
+        duration: 240,
         easing: 'ease-in',
         fill: 'forwards',
       },
@@ -179,7 +193,7 @@
 
     Promise.race([
       fadeAnimation.finished.catch(() => undefined),
-      wait(400),
+      wait(520),
     ]).then(() => {
       if (
         eventController.signal.aborted ||
@@ -191,11 +205,14 @@
       transition.style.opacity = '1';
       panel.style.transform = 'translate3d(0, 101%, 0)';
       label.style.opacity = '';
+      phase = 'idle';
     });
   }, { signal: eventController.signal });
 </script>
 
-<style>
+<!-- Persistent DOM must retain its styles across client-side deployments.
+     Global pseudo-element rules also disable the native root crossfade. -->
+<style is:global>
   .page-transition {
     align-items: center;
     contain: paint;
@@ -204,6 +221,7 @@
     justify-content: center;
     pointer-events: none;
     position: fixed;
+    isolation: isolate;
     will-change: opacity;
     z-index: 10000;
   }
@@ -228,6 +246,7 @@
     letter-spacing: -0.03em;
     line-height: 1;
     margin: 0;
+    max-width: calc(100% - 40px);
     position: relative;
     text-align: center;
     will-change: opacity;
@@ -236,6 +255,15 @@
 
   ::view-transition-old(root),
   ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(root) {
+    display: none;
+  }
+
+  ::view-transition-group(root) {
     animation: none;
   }
 
