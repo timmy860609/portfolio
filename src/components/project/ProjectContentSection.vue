@@ -51,7 +51,7 @@ withDefaults(defineProps<ProjectContentSectionData>(), {
 
 <style scoped>
 .project-content-section {
-  --content-section-mobile-gap: 40px;
+  --content-section-mobile-gap: 16px;
 }
 
 .project-content-section p {

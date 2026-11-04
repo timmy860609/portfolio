@@ -93,7 +93,7 @@ export const hrOfficialContentSections: ProjectContentSectionData[] = [
     },
   },
   {
-    title: '',
+    title: '整合各子公司職缺，保留既有招募系統',
     introduction: [
       '除了重點招募外，下方的集團職缺區塊也提供各子公司常態性職缺的入口，讓用戶不必透過搜尋引擎逐一查找。這項設計也保留各子公司原有的招募系統，無須強制整併後端資料，降低平台改造成本。',
     ],

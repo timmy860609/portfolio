@@ -20,7 +20,6 @@ import ProjectContentSection from './ProjectContentSection.vue';
 import ProjectCover from './ProjectCover.vue';
 import ProjectDetailHero from './ProjectDetailHero.vue';
 import ProjectGoalsSection from './ProjectGoalsSection.vue';
-import ProjectMediaSequence from './ProjectMediaSequence.vue';
 import ProjectPagination from './ProjectPagination.vue';
 import {
   optimizedProjectImagesKey,
@@ -50,7 +49,11 @@ const pagination = getProjectPagination('mobile-bank-2');
       <ProjectContentSection v-bind="mobileBankPersonalizedHome" />
       <ProjectContentSection v-bind="mobileBankInvestmentServices" />
       <ProjectContentSection v-bind="mobileBankGroupAssets" />
-      <ProjectMediaSequence v-bind="mobileBankMembershipBenefits" />
+      <ProjectContentSection
+        v-for="section in mobileBankMembershipBenefits"
+        :key="section.title"
+        v-bind="section"
+      />
       <ProjectContentSection v-bind="mobileBankTransferFlow" />
       <ProjectContentSection v-bind="mobileBankCarbonTracking" />
       <ProjectContentSection v-bind="mobileBankResults" />

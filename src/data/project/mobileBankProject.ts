@@ -162,60 +162,47 @@ export const mobileBankGroupAssets = {
   },
 };
 
-export const mobileBankMembershipBenefits = {
-  title: '會員權益重整，讓複雜資訊更容易理解',
-  introduction: [
-    '原本分散且複雜的客戶權益，藉由不同的視覺風格與元件樣式，整合為更清楚的層級與分類，讓用戶更清楚理解自己擁有哪些權益、還差多少條件，以及可以進一步使用哪些服務。',
-  ],
-  detailMarkerColor: '#076ed7',
-  items: [
-    {
-      image: {
-        src: '/Image/Project/mobile-bank-detail/pc-7.webp',
-        alt: '財管會員等級、條件與專屬優惠介面',
-        width: 2880,
-        height: 1260,
-      },
-      description:
-        '財管會員制度涵蓋交易優惠、等級條件、專屬權益與理財服務。不同會員等級對應的內容繁多，且使用情境各異；若缺乏清楚的整理方式，用戶難以快速了解目前擁有的權益，以及後續可達成的目標。',
+export const mobileBankMembershipBenefits = [
+  {
+    title: '會員權益重整，讓複雜資訊更容易理解',
+    introduction: [
+      '原本分散且複雜的客戶權益，藉由不同的視覺風格與元件樣式，整合為更清楚的層級與分類，讓用戶更清楚理解自己擁有哪些權益、還差多少條件，以及可以進一步使用哪些服務。',
+      '財管會員制度涵蓋交易優惠、等級條件、專屬權益與理財服務。不同會員等級對應的內容繁多，且使用情境各異；若缺乏清楚的整理方式，用戶難以快速了解目前擁有的權益，以及後續可達成的目標。',
+    ],
+    image: {
+      src: '/Image/Project/mobile-bank-detail/pc-7.webp',
+      alt: '財管會員等級、條件與專屬優惠介面',
+      width: 2880,
+      height: 1260,
     },
-    {
-      image: {
-        src: '/Image/Project/mobile-bank-detail/pc-8.webp',
-        alt: '富樂會員不同等級的專屬視覺卡片',
-        width: 2880,
-        height: 1260,
-      },
-      description:
-        '富樂會員以「成長型會員制度」為核心，透過任務條件進行權益解鎖。介面著重呈現升級條件與已取得優惠，使會員關係從單次瀏覽延伸為持續累積的成長型歷程。',
+  },
+  {
+    title: '成長型會員制度，讓權益持續累積',
+    introduction: [
+      '富樂會員以「成長型會員制度」為核心，透過任務條件進行權益解鎖。介面著重呈現升級條件與已取得優惠，使會員關係從單次瀏覽延伸為持續累積的成長型歷程。',
+    ],
+    image: {
+      src: '/Image/Project/mobile-bank-detail/pc-8.webp',
+      alt: '富樂會員不同等級的專屬視覺卡片',
+      width: 2880,
+      height: 1260,
     },
-    {
-      image: {
-        src: '/Image/Project/mobile-bank-detail/pc-9.webp',
-        alt: '金融交易優惠、財管會員權益與理財會員服務介面',
-        width: 2880,
-        height: 1680,
-      },
-      details: [
-        {
-          title: '金融交易優惠',
-          description:
-            '清楚呈現各項優惠的適用條件、剩餘次數及引導入口，用戶能快速確認目前可使用的回饋。',
-        },
-        {
-          title: '財管會員權益',
-          description:
-            '以富樂會員的成長機制為核心，除了呈現目前等級，也同步揭露下一階段條件，讓會員清楚掌握自身狀態與升級方向。',
-        },
-        {
-          title: '理財會員服務',
-          description:
-            '依客戶的財管身分顯示對應的服務，並提供專人聯繫入口。',
-        },
-      ],
+  },
+  {
+    title: '金融交易優惠、財管會員權益與理財會員服務',
+    introduction: [
+      '金融交易優惠：清楚呈現各項優惠的適用條件、剩餘次數及引導入口，用戶能快速確認目前可使用的回饋。',
+      '財管會員權益：以富樂會員的成長機制為核心，除了呈現目前等級，也同步揭露下一階段條件，讓會員清楚掌握自身狀態與升級方向。',
+      '理財會員服務：依客戶的財管身分顯示對應的服務，並提供專人聯繫入口。',
+    ],
+    image: {
+      src: '/Image/Project/mobile-bank-detail/pc-9.webp',
+      alt: '金融交易優惠、財管會員權益與理財會員服務介面',
+      width: 2880,
+      height: 1680,
     },
-  ],
-};
+  },
+];
 
 export const mobileBankTransferFlow = {
   title: '重整資訊與驗證節點，讓每一次交易都更安心',

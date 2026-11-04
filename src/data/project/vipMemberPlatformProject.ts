@@ -108,7 +108,7 @@ export const vipMemberPlatformContentSections: ProjectContentSectionData[] = [
     density: 'tight',
   },
   {
-    title: '',
+    title: '盤點會員資料狀態，建立一致的顯示規則',
     introduction: [
       '依照會員資格、星等、點數與到期情況，盤點可能出現的資料組合，並整理會員卡片在各種狀態下的顯示方式。透過欄位規則與資訊優先順序，讓用戶快速掌握目前資格與點數狀態。',
     ],

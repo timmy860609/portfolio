@@ -30,6 +30,7 @@ defineProps<{
       class="project-goals__heading"
       :title="title"
       :introduction="introduction"
+      spacing="compact"
     >
       <ul v-if="challenges?.length">
         <li v-for="challenge in challenges" :key="challenge">
