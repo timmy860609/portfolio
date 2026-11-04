@@ -17,7 +17,7 @@
 <script>
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
   let navigationSequence = 0;
-  let cancelExitReset: (() => void) | undefined;
+  let exitResetTimer: number | undefined;
 
   const getDestination = (pathname: string) => {
     if (basePath && pathname.startsWith(basePath)) {
@@ -41,6 +41,11 @@
 
   const waitForMotion = (duration: number) =>
     new Promise<void>((resolve) => window.setTimeout(resolve, duration));
+
+  const waitForPaint = () =>
+    new Promise<void>((resolve) => {
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+    });
 
   const preloadCriticalImage = async (
     nextDocument: Document,
@@ -79,8 +84,8 @@
 
   document.addEventListener('astro:before-preparation', (event) => {
     const sequence = ++navigationSequence;
-    cancelExitReset?.();
-    cancelExitReset = undefined;
+    window.clearTimeout(exitResetTimer);
+    exitResetTimer = undefined;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const transition = document.querySelector<HTMLElement>('[data-page-transition]');
     const label = transition?.querySelector<HTMLElement>('[data-page-transition-label]');
@@ -91,20 +96,26 @@
       label.textContent =
         source?.dataset.transitionLabel || getDestination(event.to.pathname);
 
-      // Reset in one frame and start in the next. This avoids a synchronous
-      // full-page layout flush, which is noticeably expensive on mobile.
+      // Mobile Safari needs the reset position to be committed before
+      // transitions are enabled again. Two paint frames avoid both a forced
+      // layout and the enter/exit states being applied in the same frame.
       transition.classList.add('page-transition--reset');
       transition.classList.remove('page-transition--enter', 'page-transition--exit');
-      requestAnimationFrame(() => {
-        if (sequence !== navigationSequence) return;
-        transition.classList.remove('page-transition--reset');
-        transition.classList.add('page-transition--enter');
-      });
     }
+
+    const startMotion = shouldAnimate
+      ? waitForPaint().then(() => {
+          if (sequence !== navigationSequence) return;
+          transition?.classList.add('page-transition--enter');
+          transition?.classList.remove('page-transition--reset');
+        })
+      : Promise.resolve();
 
     const loadPage = event.loader;
     event.loader = async () => {
-      const motion = shouldAnimate ? waitForMotion(650) : Promise.resolve();
+      const motion = shouldAnimate
+        ? startMotion.then(() => waitForMotion(650))
+        : Promise.resolve();
       const pageAndCriticalImage = loadPage().then(() =>
         preloadCriticalImage(event.newDocument, event.signal),
       );
@@ -128,40 +139,15 @@
         pageContent.classList.remove('page-transition-content-enter');
       }, { once: true });
 
-      const mainLayer = transition.querySelector<HTMLElement>('.page-transition__layer--main');
-      let resetTimer = 0;
-      let completed = false;
-
-      const resetTransition = () => {
-        if (completed || sequence !== navigationSequence) return;
-        completed = true;
-        window.clearTimeout(resetTimer);
-        mainLayer?.removeEventListener('transitionend', handleTransitionEnd);
+      exitResetTimer = window.setTimeout(async () => {
+        if (sequence !== navigationSequence) return;
         transition.classList.add('page-transition--reset');
         transition.classList.remove('page-transition--exit');
-        requestAnimationFrame(() => {
-          if (sequence === navigationSequence) {
-            transition.classList.remove('page-transition--reset');
-          }
-        });
-        if (cancelExitReset === cancel) cancelExitReset = undefined;
-      };
-
-      const handleTransitionEnd = (event: TransitionEvent) => {
-        if (event.propertyName === 'transform') resetTransition();
-      };
-
-      const cancel = () => {
-        completed = true;
-        window.clearTimeout(resetTimer);
-        mainLayer?.removeEventListener('transitionend', handleTransitionEnd);
-      };
-
-      mainLayer?.addEventListener('transitionend', handleTransitionEnd);
-      // Fallback for browsers that suppress transitionend during a viewport
-      // resize or tab visibility change.
-      resetTimer = window.setTimeout(resetTransition, 700);
-      cancelExitReset = cancel;
+        await waitForPaint();
+        if (sequence !== navigationSequence) return;
+        transition.classList.remove('page-transition--reset');
+        exitResetTimer = undefined;
+      }, 560);
     });
   });
 </script>
@@ -169,7 +155,7 @@
 <style>
   .page-transition {
     align-items: center;
-    contain: strict;
+    contain: paint;
     display: flex;
     inset: 0;
     isolation: isolate;
