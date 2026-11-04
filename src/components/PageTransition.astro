@@ -2,50 +2,40 @@
   class="page-transition"
   aria-hidden="true"
   data-page-transition
+  hidden
   transition:persist="page-transition"
 >
-  <div class="page-transition__layer page-transition__layer--back"></div>
-  <div class="page-transition__layer page-transition__layer--main"></div>
-
-  <div class="page-transition__content">
-    <div class="page-transition__title-mask">
-      <p class="page-transition__label" data-page-transition-label></p>
-    </div>
-  </div>
+  <p class="page-transition__label" data-page-transition-label></p>
 </div>
 
 <script>
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const motionDuration = 440;
   let navigationSequence = 0;
-  let exitResetTimer: number | undefined;
+
+  const wait = (duration: number) =>
+    new Promise<void>((resolve) => window.setTimeout(resolve, duration));
 
   const getDestination = (pathname: string) => {
     if (basePath && pathname.startsWith(basePath)) {
       pathname = pathname.slice(basePath.length) || '/';
     }
 
-    if (pathname === '/') {
-      return 'Home';
-    }
-    if (pathname.startsWith('/projects')) {
-      return 'Case Study';
-    }
-    if (pathname.startsWith('/articles')) {
-      return 'Articles';
-    }
-    if (pathname.startsWith('/about')) {
-      return 'About Me';
-    }
+    if (pathname === '/') return 'Home';
+    if (pathname.startsWith('/projects')) return 'Case Study';
+    if (pathname.startsWith('/articles')) return 'Articles';
+    if (pathname.startsWith('/about')) return 'About Me';
     return 'Timmy Lee';
   };
 
-  const waitForMotion = (duration: number) =>
-    new Promise<void>((resolve) => window.setTimeout(resolve, duration));
-
-  const waitForPaint = () =>
-    new Promise<void>((resolve) => {
-      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
-    });
+  const cancelAnimations = (transition: HTMLElement) => {
+    transition.getAnimations().forEach((animation) => animation.cancel());
+    transition
+      .querySelectorAll<HTMLElement>('*')
+      .forEach((element) =>
+        element.getAnimations().forEach((animation) => animation.cancel()),
+      );
+  };
 
   const preloadCriticalImage = async (
     nextDocument: Document,
@@ -64,90 +54,127 @@
       return !media || window.matchMedia(media).matches;
     });
     const preload = new Image();
-    const srcset = source?.srcset || image.srcset;
-    const sizes = source?.sizes || image.sizes;
 
     preload.decoding = 'async';
     preload.fetchPriority = 'high';
-    if (srcset) preload.srcset = srcset;
-    if (sizes) preload.sizes = sizes;
+    preload.srcset = source?.srcset || image.srcset;
+    preload.sizes = source?.sizes || image.sizes;
     preload.src = image.src;
 
-    const maximumWait = window.matchMedia('(max-width: 767px)').matches
-      ? 1600
-      : 1000;
     await Promise.race([
       preload.decode().catch(() => undefined),
-      waitForMotion(maximumWait),
+      wait(window.matchMedia('(max-width: 767px)').matches ? 1200 : 800),
     ]);
   };
 
   document.addEventListener('astro:before-preparation', (event) => {
     const sequence = ++navigationSequence;
-    window.clearTimeout(exitResetTimer);
-    exitResetTimer = undefined;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const transition = document.querySelector<HTMLElement>('[data-page-transition]');
     const label = transition?.querySelector<HTMLElement>('[data-page-transition-label]');
-    const shouldAnimate = !reduceMotion && Boolean(transition && label);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const shouldAnimate = Boolean(transition && label && !reduceMotion);
+
+    let coverPage: Promise<void> = Promise.resolve();
 
     if (transition && label && shouldAnimate) {
       const source = event.sourceElement as HTMLElement | undefined;
       label.textContent =
         source?.dataset.transitionLabel || getDestination(event.to.pathname);
 
-      // Mobile Safari needs the reset position to be committed before
-      // transitions are enabled again. Two paint frames avoid both a forced
-      // layout and the enter/exit states being applied in the same frame.
-      transition.classList.add('page-transition--reset');
-      transition.classList.remove('page-transition--enter', 'page-transition--exit');
-    }
+      cancelAnimations(transition);
+      transition.hidden = false;
+      transition.style.transform = 'translate3d(0, 101%, 0)';
+      label.style.opacity = '0';
+      label.style.transform = 'translate3d(0, 12px, 0)';
 
-    const startMotion = shouldAnimate
-      ? waitForPaint().then(() => {
-          if (sequence !== navigationSequence) return;
-          transition?.classList.add('page-transition--enter');
-          transition?.classList.remove('page-transition--reset');
-        })
-      : Promise.resolve();
+      const panelAnimation = transition.animate(
+        [
+          { transform: 'translate3d(0, 101%, 0)' },
+          { transform: 'translate3d(0, 0, 0)' },
+        ],
+        {
+          duration: motionDuration,
+          easing: 'cubic-bezier(0.76, 0, 0.24, 1)',
+          fill: 'forwards',
+        },
+      );
+      const labelAnimation = label.animate(
+        [
+          { opacity: 0, transform: 'translate3d(0, 12px, 0)' },
+          { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+        ],
+        {
+          duration: 220,
+          delay: 140,
+          easing: 'ease-out',
+          fill: 'forwards',
+        },
+      );
+
+      coverPage = Promise.race([
+        panelAnimation.finished.catch(() => undefined),
+        wait(motionDuration + 80),
+      ]).then(() => {
+        if (sequence !== navigationSequence) return;
+        transition.style.transform = 'translate3d(0, 0, 0)';
+        label.style.opacity = '1';
+        label.style.transform = 'translate3d(0, 0, 0)';
+        panelAnimation.cancel();
+        labelAnimation.cancel();
+      });
+    }
 
     const loadPage = event.loader;
     event.loader = async () => {
-      const motion = shouldAnimate
-        ? startMotion.then(() => waitForMotion(650))
-        : Promise.resolve();
-      const pageAndCriticalImage = loadPage().then(() =>
+      const pageAndImage = loadPage().then(() =>
         preloadCriticalImage(event.newDocument, event.signal),
       );
-      await Promise.all([pageAndCriticalImage, motion]);
+      await Promise.all([coverPage, pageAndImage]);
     };
   });
 
   document.addEventListener('astro:after-swap', () => {
     const sequence = navigationSequence;
     const transition = document.querySelector<HTMLElement>('[data-page-transition]');
-    if (!transition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const label = transition?.querySelector<HTMLElement>('[data-page-transition-label]');
+    if (!transition || !label || transition.hidden) return;
 
-    requestAnimationFrame(() => {
+    cancelAnimations(transition);
+    transition.style.transform = 'translate3d(0, 0, 0)';
+
+    const panelAnimation = transition.animate(
+      [
+        { transform: 'translate3d(0, 0, 0)' },
+        { transform: 'translate3d(0, -101%, 0)' },
+      ],
+      {
+        duration: motionDuration,
+        easing: 'cubic-bezier(0.76, 0, 0.24, 1)',
+        fill: 'forwards',
+      },
+    );
+    label.animate(
+      [
+        { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+        { opacity: 0, transform: 'translate3d(0, -10px, 0)' },
+      ],
+      {
+        duration: 140,
+        easing: 'ease-in',
+        fill: 'forwards',
+      },
+    );
+
+    Promise.race([
+      panelAnimation.finished.catch(() => undefined),
+      wait(motionDuration + 80),
+    ]).then(() => {
       if (sequence !== navigationSequence) return;
-      transition.classList.remove('page-transition--enter');
-      transition.classList.add('page-transition--exit');
-
-      const pageContent = document.querySelector('main');
-      pageContent?.classList.add('page-transition-content-enter');
-      pageContent?.addEventListener('animationend', () => {
-        pageContent.classList.remove('page-transition-content-enter');
-      }, { once: true });
-
-      exitResetTimer = window.setTimeout(async () => {
-        if (sequence !== navigationSequence) return;
-        transition.classList.add('page-transition--reset');
-        transition.classList.remove('page-transition--exit');
-        await waitForPaint();
-        if (sequence !== navigationSequence) return;
-        transition.classList.remove('page-transition--reset');
-        exitResetTimer = undefined;
-      }, 560);
+      cancelAnimations(transition);
+      transition.hidden = true;
+      transition.style.transform = 'translate3d(0, 101%, 0)';
+      label.style.opacity = '';
+      label.style.transform = '';
     });
   });
 </script>
@@ -155,135 +182,36 @@
 <style>
   .page-transition {
     align-items: center;
+    background: #00d9ff;
     contain: paint;
     display: flex;
     inset: 0;
-    isolation: isolate;
     justify-content: center;
     pointer-events: none;
     position: fixed;
+    transform: translate3d(0, 101%, 0);
+    will-change: transform;
     z-index: 10000;
   }
 
-  .page-transition__layer {
-    backface-visibility: hidden;
-    inset: 0;
-    position: absolute;
-    transform: translate3d(0, 101%, 0);
-    will-change: transform;
+  .page-transition[hidden] {
+    display: none;
   }
 
-  .page-transition__layer--back {
-    background: #131313;
-    transition: transform 520ms cubic-bezier(0.76, 0, 0.24, 1);
-  }
-
-  .page-transition__layer--main {
-    background-color: #00d9ff;
-    transition: transform 580ms 50ms cubic-bezier(0.76, 0, 0.24, 1);
-  }
-
-  .page-transition--enter .page-transition__layer {
-    transform: translate3d(0, 0, 0);
-  }
-
-  .page-transition--reset .page-transition__layer,
-  .page-transition--reset .page-transition__content {
-    transition: none;
-  }
-
-  .page-transition--exit .page-transition__layer {
-    transform: translate3d(0, -100%, 0);
-  }
-
-  .page-transition--exit .page-transition__layer--main {
-    transition-duration: 520ms;
-    transition-delay: 0ms;
-  }
-
-  .page-transition--exit .page-transition__layer--back {
-    transition-delay: 0ms;
+  .page-transition__label {
+    color: #202020;
+    font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
+    font-size: clamp(24px, 5vw, 64px);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin: 0;
+    will-change: opacity, transform;
   }
 
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none;
-  }
-
-  .page-transition__label {
-    color: #323232;
-    font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
-    font-size: clamp(48px, 8vw, 128px);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: -0.04em;
-    line-height: 1;
-    margin: 0;
-    text-align: center;
-    transform: translate3d(0, 115%, 0);
-    transition: transform 460ms 150ms cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
-  }
-
-  .page-transition__content {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    position: relative;
-    transform: translate3d(0, 24px, 0);
-    transition:
-      opacity 220ms 140ms ease,
-      transform 460ms 140ms cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 3;
-  }
-
-  .page-transition__title-mask {
-    overflow: hidden;
-    padding: 0.08em 0.08em 0.12em;
-  }
-
-  .page-transition--enter .page-transition__content {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-
-  .page-transition--enter .page-transition__label {
-    transform: translate3d(0, 0, 0);
-  }
-
-  .page-transition--exit .page-transition__content {
-    opacity: 0;
-    transform: translate3d(0, -28px, 0);
-    transition: none;
-  }
-
-  :global(main.page-transition-content-enter) {
-    animation: page-content-reveal 800ms 180ms both cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  @media (max-width: 767px) {
-    .page-transition__layer--back {
-      display: none;
-    }
-
-    .page-transition__layer--main {
-      transition-delay: 0ms;
-    }
-
-    :global(main.page-transition-content-enter) {
-      animation: none;
-    }
-  }
-
-  @keyframes page-content-reveal {
-    from {
-      opacity: 0.72;
-      transform: translate3d(0, 24px, 0);
-    }
-    to {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
