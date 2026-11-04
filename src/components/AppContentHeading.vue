@@ -5,11 +5,13 @@ const props = withDefaults(
   defineProps<{
     title?: string;
     introduction?: string | string[];
+    headingTag?: 'h2' | 'h3';
     spacing?: 'compact' | 'default';
   }>(),
   {
     title: undefined,
     introduction: undefined,
+    headingTag: 'h2',
     spacing: 'default',
   },
 );
@@ -27,7 +29,13 @@ const paragraphs = computed(() => {
     class="app-content-heading"
     :class="`app-content-heading--${spacing}`"
   >
-    <h2 v-if="title">{{ title }}</h2>
+    <component
+      :is="headingTag"
+      v-if="title"
+      class="app-content-heading__title"
+    >
+      {{ title }}
+    </component>
     <p
       v-for="paragraph in paragraphs"
       :key="paragraph"
@@ -50,7 +58,7 @@ const paragraphs = computed(() => {
   --app-content-heading-gap: 8px;
 }
 
-.app-content-heading h2 {
+.app-content-heading__title {
   font-size: var(--font-size-content-heading);
   font-weight: var(--font-weight-bold);
   line-height: 1.5;

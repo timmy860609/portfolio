@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import type { ProjectGoalItem } from '../../types/project';
 import { withBase } from '../../utils/basePath';
+import AppContentHeading from '../AppContentHeading.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -45,10 +46,13 @@ const gridStyle = computed(() => ({
   >
     <li v-for="goal in goals" :key="goal.number">
       <span>{{ goal.number }}</span>
-      <div>
-        <h3>{{ goal.title }}</h3>
-        <p>{{ goal.description }}</p>
-      </div>
+      <AppContentHeading
+        class="project-goals-grid__content"
+        :title="goal.title"
+        :introduction="goal.description"
+        heading-tag="h3"
+        spacing="compact"
+      />
     </li>
   </ol>
 </template>
@@ -76,8 +80,7 @@ const gridStyle = computed(() => ({
   min-width: 0;
 }
 
-.project-goals-grid span,
-.project-goals-grid h3 {
+.project-goals-grid span {
   font-size: var(--font-size-item-heading);
   font-weight: var(--font-weight-bold);
   line-height: 1.35;
@@ -87,13 +90,12 @@ const gridStyle = computed(() => ({
   color: var(--goal-accent);
 }
 
-.project-goals-grid h3 {
+.project-goals-grid__content {
   color: var(--goal-heading);
-  margin: 0;
 }
 
 .project-goals-grid--gradient span,
-.project-goals-grid--gradient h3 {
+.project-goals-grid--gradient :deep(.app-content-heading__title) {
   background-image: var(--goal-accent-gradient);
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -103,24 +105,12 @@ const gridStyle = computed(() => ({
   -webkit-text-fill-color: transparent;
 }
 
-.project-goals-grid--gradient h3 {
+.project-goals-grid--gradient :deep(.app-content-heading__title) {
   width: fit-content;
 }
 
-.project-goals-grid p {
+.project-goals-grid__content :deep(.app-content-heading__introduction) {
   color: var(--goal-text);
-  margin: 0;
-}
-
-.project-goals-grid > li > div {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.project-goals-grid p {
-  font-size: var(--content-body-font-size);
-  line-height: 1.5;
 }
 
 @media (max-width: 767px) {
