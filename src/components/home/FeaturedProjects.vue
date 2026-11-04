@@ -29,10 +29,13 @@ const marqueeItems = [
   'Graphic Design',
 ];
 const loopedProjects = computed(() => [
-  projects.at(-1)!,
-  ...projects,
-  ...projects.slice(0, 3),
+  { project: projects.at(-1)!, clone: true },
+  ...projects.map((project) => ({ project, clone: false })),
+  ...projects.slice(0, 3).map((project) => ({ project, clone: true })),
 ]);
+
+const shouldEagerLoad = (index: number) =>
+  Math.abs(index - trackIndex.value) <= 2;
 
 const updateTrackOffset = () => {
   const targetCard = trackElement.value?.children[trackIndex.value];
@@ -212,7 +215,8 @@ onBeforeUnmount(() => {
       <div
         class="featured__carousel"
         :class="{ 'featured__carousel--dragging': isDragging }"
-        aria-live="polite"
+        aria-roledescription="輪播"
+        aria-label="代表專案"
         @pointerdown="startDrag"
         @pointermove="moveDrag"
         @pointerup="endDrag"
@@ -227,15 +231,20 @@ onBeforeUnmount(() => {
           @transitionend="finishSlide"
         >
           <ProjectCard
-            v-for="(project, index) in loopedProjects"
+            v-for="({ project, clone }, index) in loopedProjects"
             :key="`${project.title}-${index}`"
             v-bind="project"
+            :clone="clone"
             :selected="index === trackIndex"
             :priority="index === trackIndex"
-            eager
+            :eager="shouldEagerLoad(index)"
           />
         </div>
       </div>
+
+      <p class="visually-hidden" aria-live="polite" aria-atomic="true">
+        目前顯示：{{ projects[activeIndex]?.title }}
+      </p>
 
       <div class="featured__dots" aria-label="輪播頁面">
         <button

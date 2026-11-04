@@ -2,6 +2,7 @@
 import ArticleDetailHero from '../../components/articles/detail/ArticleDetailHero.vue';
 import ArticleDetailContent from '../../components/articles/detail/ArticleDetailContent.vue';
 import ArticleImageGallery from '../../components/articles/detail/ArticleImageGallery.vue';
+import ArticleGalleryEffects from '../../components/articles/detail/ArticleGalleryEffects.astro';
 import ArticlePagination from '../../components/articles/detail/ArticlePagination.vue';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import {
@@ -31,8 +32,13 @@ const pagination = getArticlePagination(article.slug);
 >
   <ArticleDetailHero {...article.detailHero} />
   {article.detailContent && (
-    <ArticleDetailContent {...article.detailContent} client:visible />
+    <ArticleDetailContent {...article.detailContent} />
   )}
-  {article.detailGallery && <ArticleImageGallery {...article.detailGallery} client:visible />}
+  {article.detailGallery && (
+    <>
+      <ArticleImageGallery {...article.detailGallery} />
+      <ArticleGalleryEffects />
+    </>
+  )}
   <ArticlePagination {...pagination} />
 </BaseLayout>

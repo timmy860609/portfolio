@@ -34,7 +34,7 @@ const imageAttributes = computed(() => desktopImage.value
     }
   : responsiveImage(
       props.src,
-      '(max-width: 767px) 100vw, (max-width: 1439px) 1440px, 100vw',
+      '100vw',
     ));
 </script>
 

@@ -4,7 +4,7 @@
 
 ## 開始使用
 
-需要 Node.js 20.11 以上（或 Node.js 22.12 以上）。
+需要 Node.js 22.23.4 以上。建議先執行 `nvm use`，使用 `.nvmrc` 指定的版本。
 
 ```sh
 npm install
@@ -43,10 +43,11 @@ only for the destination HTML and the transition animation, not image downloads.
 ## Project videos
 
 `FFMPEG=/path/to/ffmpeg python3 scripts/compress-videos.py` creates delivery
-copies of the original project MOV recordings in `public/Video/`. Commit these
-MP4s and WebP posters; FFmpeg is not required during the Pages build. The copies
-use H.264/yuv420p, 30fps, 768px and 1280px widths, a two-second keyframe interval,
-and fast-start metadata. Original recordings remain unchanged.
+copies from `source-media/project-videos/` in `public/Video/`. Commit the source
+MOV files, delivery MP4s, and WebP posters; FFmpeg is not required during the
+Pages build. The copies use H.264/yuv420p, 30fps, 768px and 1280px widths, a
+two-second keyframe interval, and fast-start metadata. Keeping the source MOV
+files outside `public/` prevents them from being included in the deployed site.
 
 The shared video loader selects the mobile copy before the first request,
 preloads nearby autoplay videos within 1200px, and plays only when visible.

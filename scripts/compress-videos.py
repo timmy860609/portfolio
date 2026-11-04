@@ -6,7 +6,7 @@ import subprocess
 from pathlib import Path
 
 ffmpeg = os.environ.get('FFMPEG', 'ffmpeg')
-sources = sorted(Path('public/Image/Project').rglob('*.mov'))
+sources = sorted(Path('source-media/project-videos').rglob('*.mov'))
 for source in sources:
     output = Path('public/Video') / source.parent.name
     output.mkdir(parents=True, exist_ok=True)

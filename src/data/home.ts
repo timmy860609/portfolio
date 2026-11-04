@@ -98,9 +98,9 @@ export const homeContact = {
   items: [
     {
       title: '電子郵件',
-      label: 'timmy.lee.9769@gmail.com',
-      value: 'timmy.lee.9769@gmail.com',
-      href: 'mailto:timmy.lee.9769@gmail.com',
+      label: 'timmyk408b@gmail.com',
+      value: 'timmyk408b@gmail.com',
+      href: 'mailto:timmyk408b@gmail.com',
       copyLabel: '複製郵件',
       actionLabel: '前往寄件',
       actionIcon: '/Image/Home/contact/envelope.svg',

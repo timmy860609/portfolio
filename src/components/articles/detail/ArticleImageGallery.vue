@@ -1,49 +1,12 @@
 <script setup lang="ts">
 import { responsiveImage } from '../../../utils/responsiveImage';
-import { onBeforeUnmount, onMounted, ref } from 'vue';
 import type { ArticleDetailGalleryData } from '../../../data/articles';
 
 defineProps<ArticleDetailGalleryData>();
-
-const gallery = ref<HTMLElement | null>(null);
-let observer: IntersectionObserver | undefined;
-
-onMounted(() => {
-  const root = gallery.value;
-  if (!root) return;
-
-  const items = Array.from(root.querySelectorAll<HTMLElement>('.article-image-gallery__item'));
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (reduceMotion || !('IntersectionObserver' in window)) {
-    items.forEach((item) => item.classList.add('article-image-gallery__item--visible'));
-    return;
-  }
-
-  root.classList.add('article-image-gallery--ready');
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        entry.target.classList.add('article-image-gallery__item--visible');
-        observer?.unobserve(entry.target);
-      });
-    },
-    {
-      rootMargin: '200px 0px',
-      threshold: 0.08,
-    },
-  );
-
-  items.forEach((item) => observer?.observe(item));
-});
-
-onBeforeUnmount(() => observer?.disconnect());
 </script>
 
 <template>
-  <section ref="gallery" class="article-image-gallery" aria-label="視覺設計作品">
+  <section class="article-image-gallery" aria-label="視覺設計作品">
     <div class="article-image-gallery__inner">
       <div
         v-for="(column, columnIndex) in columns"

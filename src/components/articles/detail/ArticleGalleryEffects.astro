@@ -1,0 +1,47 @@
+<script>
+  let galleryObserver: IntersectionObserver | undefined;
+
+  function initializeArticleGallery() {
+    galleryObserver?.disconnect();
+    galleryObserver = undefined;
+
+    const root = document.querySelector<HTMLElement>('.article-image-gallery');
+    if (!root) return;
+
+    const items = Array.from(
+      root.querySelectorAll<HTMLElement>('.article-image-gallery__item'),
+    );
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      items.forEach((item) =>
+        item.classList.add('article-image-gallery__item--visible'),
+      );
+      return;
+    }
+
+    root.classList.add('article-image-gallery--ready');
+    galleryObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('article-image-gallery__item--visible');
+          galleryObserver?.unobserve(entry.target);
+        });
+      },
+      {
+        rootMargin: '200px 0px',
+        threshold: 0.08,
+      },
+    );
+
+    items.forEach((item) => galleryObserver?.observe(item));
+  }
+
+  document.addEventListener('astro:page-load', initializeArticleGallery);
+  document.addEventListener('astro:before-swap', () =>
+    galleryObserver?.disconnect(),
+  );
+</script>

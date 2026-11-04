@@ -54,6 +54,18 @@ body {
   min-height: 100vh;
 }
 
+/* Prevent iOS Data Detectors from restyling dates and other plain text. */
+a[x-apple-data-detectors],
+a[href^='x-apple-data-detectors:'] {
+  -webkit-text-fill-color: inherit !important;
+  color: inherit !important;
+  cursor: inherit !important;
+  font: inherit !important;
+  letter-spacing: inherit !important;
+  pointer-events: none !important;
+  text-decoration: none !important;
+}
+
 .portfolio-site {
   display: flex;
   flex: 1;

@@ -297,8 +297,10 @@ onBeforeUnmount(() => {
   .about-hero__stage {
     display: block;
     left: 0;
+    max-width: none;
+    padding-inline: 0;
     right: 0;
-    width: calc(100% - 32px);
+    width: 100%;
   }
 
   .about-hero__content {
@@ -307,7 +309,7 @@ onBeforeUnmount(() => {
     max-width: 420px;
     top: 30px;
     transform: translateX(-50%);
-    width: 100%;
+    width: calc(100% - 32px);
     z-index: 3;
   }
 

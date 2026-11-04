@@ -249,7 +249,7 @@ import { withBase } from '../../utils/basePath';
   }
 
   .hero-kv__scroll-cue {
-    bottom: 20px;
+    bottom: calc(36px + env(safe-area-inset-bottom, 0px));
     min-height: 44px;
     padding: 6px 7px 6px 16px;
   }

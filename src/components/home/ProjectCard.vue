@@ -11,10 +11,12 @@ const props = withDefaults(
     selected?: boolean;
     priority?: boolean;
     eager?: boolean;
+    clone?: boolean;
   }>(),
   {
     priority: false,
     eager: false,
+    clone: false,
   },
 );
 
@@ -26,10 +28,13 @@ const imageSizes = '(max-width: 767px) calc(100vw - 32px), (max-width: 1600px) c
   <article
     class="project-card"
     :class="{ 'project-card--selected': selected }"
+    :aria-hidden="clone ? 'true' : undefined"
+    :inert="clone || undefined"
   >
     <a
       :href="withBase(href)"
       :aria-label="`查看${title}專案介紹`"
+      :tabindex="clone ? -1 : undefined"
       data-astro-prefetch="viewport"
     >
       <picture>

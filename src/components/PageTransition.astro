@@ -16,6 +16,8 @@
 
 <script>
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+  let navigationSequence = 0;
+  let cancelExitReset: (() => void) | undefined;
 
   const getDestination = (pathname: string) => {
     if (basePath && pathname.startsWith(basePath)) {
@@ -76,6 +78,9 @@
   };
 
   document.addEventListener('astro:before-preparation', (event) => {
+    const sequence = ++navigationSequence;
+    cancelExitReset?.();
+    cancelExitReset = undefined;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const transition = document.querySelector<HTMLElement>('[data-page-transition]');
     const label = transition?.querySelector<HTMLElement>('[data-page-transition-label]');
@@ -86,9 +91,15 @@
       label.textContent =
         source?.dataset.transitionLabel || getDestination(event.to.pathname);
 
-      transition.classList.remove('page-transition--exit', 'page-transition--reset');
-      void transition.offsetHeight;
-      transition.classList.add('page-transition--enter');
+      // Reset in one frame and start in the next. This avoids a synchronous
+      // full-page layout flush, which is noticeably expensive on mobile.
+      transition.classList.add('page-transition--reset');
+      transition.classList.remove('page-transition--enter', 'page-transition--exit');
+      requestAnimationFrame(() => {
+        if (sequence !== navigationSequence) return;
+        transition.classList.remove('page-transition--reset');
+        transition.classList.add('page-transition--enter');
+      });
     }
 
     const loadPage = event.loader;
@@ -102,10 +113,12 @@
   });
 
   document.addEventListener('astro:after-swap', () => {
+    const sequence = navigationSequence;
     const transition = document.querySelector<HTMLElement>('[data-page-transition]');
     if (!transition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     requestAnimationFrame(() => {
+      if (sequence !== navigationSequence) return;
       transition.classList.remove('page-transition--enter');
       transition.classList.add('page-transition--exit');
 
@@ -115,15 +128,40 @@
         pageContent.classList.remove('page-transition-content-enter');
       }, { once: true });
 
-      waitForMotion(650).then(() => {
+      const mainLayer = transition.querySelector<HTMLElement>('.page-transition__layer--main');
+      let resetTimer = 0;
+      let completed = false;
+
+      const resetTransition = () => {
+        if (completed || sequence !== navigationSequence) return;
+        completed = true;
+        window.clearTimeout(resetTimer);
+        mainLayer?.removeEventListener('transitionend', handleTransitionEnd);
         transition.classList.add('page-transition--reset');
         transition.classList.remove('page-transition--exit');
         requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
+          if (sequence === navigationSequence) {
             transition.classList.remove('page-transition--reset');
-          });
+          }
         });
-      });
+        if (cancelExitReset === cancel) cancelExitReset = undefined;
+      };
+
+      const handleTransitionEnd = (event: TransitionEvent) => {
+        if (event.propertyName === 'transform') resetTransition();
+      };
+
+      const cancel = () => {
+        completed = true;
+        window.clearTimeout(resetTimer);
+        mainLayer?.removeEventListener('transitionend', handleTransitionEnd);
+      };
+
+      mainLayer?.addEventListener('transitionend', handleTransitionEnd);
+      // Fallback for browsers that suppress transitionend during a viewport
+      // resize or tab visibility change.
+      resetTimer = window.setTimeout(resetTransition, 700);
+      cancelExitReset = cancel;
     });
   });
 </script>
@@ -131,8 +169,10 @@
 <style>
   .page-transition {
     align-items: center;
+    contain: strict;
     display: flex;
     inset: 0;
+    isolation: isolate;
     justify-content: center;
     pointer-events: none;
     position: fixed;
@@ -140,6 +180,7 @@
   }
 
   .page-transition__layer {
+    backface-visibility: hidden;
     inset: 0;
     position: absolute;
     transform: translate3d(0, 101%, 0);
@@ -241,6 +282,10 @@
 
     .page-transition__layer--main {
       transition-delay: 0ms;
+    }
+
+    :global(main.page-transition-content-enter) {
+      animation: none;
     }
   }
 
