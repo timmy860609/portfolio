@@ -169,7 +169,7 @@ import { mainNavigation } from '../data/site';
 @media (max-width: 767px) {
   .site-footer {
     align-items: stretch;
-    min-height: 320px;
+    min-height: 280px;
     padding: 32px 24px;
   }
 
@@ -198,7 +198,7 @@ import { mainNavigation } from '../data/site';
     align-items: start;
     column-gap: 12px;
     display: grid;
-    grid-template-columns: repeat(2, 120px);
+    grid-template-columns: repeat(3, 120px);
     row-gap: 12px;
   }
 

@@ -125,6 +125,19 @@ onBeforeUnmount(() => {
 
 const selectCategory = async (category: ProjectCategory, event: MouseEvent) => {
   const selectedButton = event.currentTarget as HTMLButtonElement;
+
+  galleryElement.value
+    ?.querySelectorAll<HTMLElement>(
+      '.projects-gallery__column > article, .projects-gallery__mobile > article',
+    )
+    .forEach((card) => {
+      const { width } = card.getBoundingClientRect();
+
+      card.style.setProperty('--project-leave-left', `${card.offsetLeft}px`);
+      card.style.setProperty('--project-leave-top', `${card.offsetTop}px`);
+      card.style.setProperty('--project-leave-width', `${width}px`);
+    });
+
   activeCategory.value = category;
   await nextTick();
   alignTabToLeft(selectedButton);
@@ -192,10 +205,13 @@ const selectCategory = async (category: ProjectCategory, event: MouseEvent) => {
         :class="{ 'projects-gallery__column--offset': columnIndex === 1 }"
       >
         <ProjectOverviewCard
-          v-for="project in column"
-          :key="project.title"
+          v-for="(project, projectIndex) in column"
+          :key="project.slug"
           v-bind="project"
           :priority="isPriorityProject(project.slug)"
+          :style="{
+            '--project-filter-delay': `${Math.min(projectIndex, 5) * 45}ms`,
+          }"
         />
       </TransitionGroup>
     </div>
@@ -206,10 +222,13 @@ const selectCategory = async (category: ProjectCategory, event: MouseEvent) => {
       class="projects-gallery__mobile"
     >
       <ProjectOverviewCard
-        v-for="project in filteredProjects"
-        :key="project.title"
+        v-for="(project, projectIndex) in filteredProjects"
+        :key="project.slug"
         v-bind="project"
         :priority="isPriorityProject(project.slug)"
+        :style="{
+          '--project-filter-delay': `${Math.min(projectIndex, 6) * 40}ms`,
+        }"
       />
     </TransitionGroup>
   </section>
@@ -340,25 +359,45 @@ const selectCategory = async (category: ProjectCategory, event: MouseEvent) => {
   display: none;
 }
 
-.project-filter-enter-active,
-.project-filter-leave-active {
+.project-filter-enter-active {
   transition:
-    opacity 260ms ease,
-    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 560ms ease-out calc(120ms + var(--project-filter-delay, 0ms)),
+    transform 680ms cubic-bezier(0.22, 1, 0.36, 1) calc(120ms + var(--project-filter-delay, 0ms));
+  will-change: opacity, transform;
 }
 
-.project-filter-enter-from,
+.project-filter-enter-from {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+.project-filter-leave-active {
+  left: var(--project-leave-left, 0);
+  pointer-events: none;
+  position: absolute;
+  top: var(--project-leave-top, 0);
+  transition: opacity 180ms ease-in;
+  width: var(--project-leave-width, 100%);
+  will-change: opacity;
+  z-index: 0;
+}
+
 .project-filter-leave-to {
   opacity: 0;
-  transform: translateY(20px);
 }
 
-.project-filter-leave-active {
-  position: absolute;
+.project-filter-move {
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .projects-gallery__tabs {
+    transition: none;
+  }
+
+  .project-filter-enter-active,
+  .project-filter-leave-active,
+  .project-filter-move {
     transition: none;
   }
 }

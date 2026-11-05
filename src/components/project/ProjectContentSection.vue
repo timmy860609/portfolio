@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import type {
   ProjectContentSectionData,
 } from '../../types/project';
@@ -6,17 +7,23 @@ import AppContentHeading from '../AppContentHeading.vue';
 import ProjectMedia from './ProjectMedia.vue';
 import ResultList from './ResultList.vue';
 
-withDefaults(defineProps<ProjectContentSectionData>(), {
+const props = withDefaults(defineProps<ProjectContentSectionData>(), {
   density: 'default',
+  gap: undefined,
   imageFit: 'natural',
   imageHeight: 560,
 });
+
+const sectionStyle = computed(() => ({
+  '--content-section-gap': props.gap ? `${props.gap}px` : undefined,
+}));
 </script>
 
 <template>
   <section
     class="project-content-section app-content-shell"
     :class="`project-content-section--${density}`"
+    :style="sectionStyle"
   >
     <AppContentHeading
       :title="title"
@@ -36,15 +43,21 @@ withDefaults(defineProps<ProjectContentSectionData>(), {
         :cover-height="imageHeight"
       />
 
+      <slot name="after-media" />
+
       <ResultList
         v-if="details?.length"
         :items="details"
         :marker-color="detailMarkerColor ?? '#076ed7'"
       />
 
+      <slot name="after-details" />
+
       <p v-if="conclusion" class="project-content-section__conclusion">
         {{ conclusion }}
       </p>
+
+      <slot name="footer" />
     </div>
   </section>
 </template>

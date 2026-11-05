@@ -81,6 +81,7 @@ export const puzzleGameContent: ArticleDetailContentData = {
       image: image(5, '生命智慧樹互動桌的樹幹造型概念草圖'),
     },
     {
+      title: '整合投影與感測器，完成桌面互動配置',
       paragraphs: [
         '視覺動畫由投影機輸出，再經鏡面反射呈現於裝置桌面。電子感測器包含按鈕開關與滑軌電位器：按鈕開關設置於桌面邊緣的四個角落，滑軌電位器則位於裝置側邊的環形面，每面各放置一組。',
       ],

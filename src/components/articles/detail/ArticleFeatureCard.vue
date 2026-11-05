@@ -9,7 +9,7 @@ defineProps<ArticleFeatureCardData>();
   <article class="article-feature-card">
     <img
       class="article-feature-card__image"
-      v-bind="responsiveImage(image.src, '(max-width: 767px) 88px, 200px')"
+      v-bind="responsiveImage(image.src, '(max-width: 767px) 70vw, 200px')"
       :alt="image.alt"
       :width="image.width"
       :height="image.height"
@@ -69,15 +69,18 @@ defineProps<ArticleFeatureCardData>();
 
 @media (max-width: 767px) {
   .article-feature-card {
-    align-items: flex-start;
+    align-items: stretch;
+    flex-direction: column;
     gap: 16px;
     padding: 16px;
   }
 
   .article-feature-card__image {
-    flex-basis: 88px;
-    height: 88px;
-    width: 88px;
+    align-self: center;
+    aspect-ratio: 1;
+    flex-basis: auto;
+    height: auto;
+    width: 70%;
   }
 
   .article-feature-card__content {

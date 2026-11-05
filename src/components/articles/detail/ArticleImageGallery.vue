@@ -19,7 +19,7 @@ defineProps<ArticleDetailGalleryData>();
           class="article-image-gallery__item"
         >
           <img
-            v-bind="responsiveImage(item.src, '(max-width: 767px) calc(100vw - 40px), (max-width: 1024px) calc((100vw - 72px) / 2), 304px')"
+            v-bind="responsiveImage(item.src, '(max-width: 767px) 100vw, (max-width: 1024px) calc((100vw - 72px) / 2), 304px')"
             :alt="item.alt"
             :width="item.width"
             :height="item.height"
@@ -101,10 +101,15 @@ defineProps<ArticleDetailGalleryData>();
     display: flex;
     flex-direction: column;
     padding-block: 48px;
+    padding-inline: 0;
   }
 
   .article-image-gallery__column {
     display: contents;
+  }
+
+  .article-image-gallery__item {
+    border-radius: 0;
   }
 }
 
