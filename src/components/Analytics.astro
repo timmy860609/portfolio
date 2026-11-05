@@ -1,0 +1,33 @@
+---
+const isProductionBuild = import.meta.env.PROD;
+---
+
+{
+  isProductionBuild && (
+    <script is:inline>
+      (() => {
+        const containerId = 'GTM-WNH5WXJD';
+        const productionHostname = 'timmylee.io';
+
+        if (
+          window.location.hostname !== productionHostname ||
+          window.__timmyLeeGtmInitialized
+        ) {
+          return;
+        }
+
+        window.__timmyLeeGtmInitialized = true;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () {
+          window.dataLayer.push(arguments);
+        };
+        window.gtag('js', new Date());
+
+        const gtmScript = document.createElement('script');
+        gtmScript.async = true;
+        gtmScript.src = `https://www.googletagmanager.com/gtm.js?id=${containerId}`;
+        document.head.appendChild(gtmScript);
+      })();
+    </script>
+  )
+}
