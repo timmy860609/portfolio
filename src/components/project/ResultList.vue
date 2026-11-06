@@ -57,4 +57,10 @@ const listStyle = computed(() => ({
   line-height: 1.5;
   margin: 2px 0 0;
 }
+
+@media (max-width: 767px) {
+  .result-list {
+    gap: 12px;
+  }
+}
 </style>

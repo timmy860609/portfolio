@@ -125,7 +125,7 @@ const sectionStyle = computed(() => ({
   .project-content-section__body--with-media {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
   }
 }
 </style>

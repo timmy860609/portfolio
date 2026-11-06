@@ -45,20 +45,18 @@ import { withBase } from '../../utils/basePath';
           <LogoPathAnimation class="hero-kv__logo" :label="homeHero.logoAlt" />
           <h1 id="hero-tagline">{{ homeHero.tagline }}</h1>
         </div>
-
-        <a
-          class="hero-kv__scroll-cue"
-          href="#featured-projects"
-          aria-label="向下捲動至代表專案"
-        >
-          <span class="hero-kv__scroll-label">Scroll</span>
-          <span class="hero-kv__scroll-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" focusable="false">
-              <path d="M12 5v13M7.5 13.5 12 18l4.5-4.5" />
-            </svg>
-          </span>
-        </a>
       </div>
+
+      <a
+        class="hero-kv__scroll-cue"
+        href="#featured-projects"
+        aria-label="向下捲動至代表專案"
+      >
+        <span class="hero-kv__scroll-track" aria-hidden="true">
+          <span class="hero-kv__scroll-dot"></span>
+        </span>
+        <span class="hero-kv__scroll-label">Scroll</span>
+      </a>
     </div>
   </section>
 </template>
@@ -142,69 +140,69 @@ import { withBase } from '../../utils/basePath';
 }
 
 .hero-kv__scroll-cue {
-  -webkit-backdrop-filter: blur(14px);
   align-items: center;
-  backdrop-filter: blur(14px);
-  background: rgb(255 255 255 / 58%);
-  border: 1px solid rgb(50 50 50 / 6%);
-  border-radius: 999px;
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 78%),
-    0 10px 30px rgb(50 50 50 / 8%);
-  color: #323232;
+  bottom: clamp(36px, 4.5svh, 52px);
+  color: #1f1f1f;
   display: flex;
-  gap: clamp(12px, 1.15vmin, 16px);
-  margin-top: clamp(48px, 8vmin, 80px);
-  min-height: clamp(52px, 6.25vmin, 64px);
-  padding:
-    clamp(8px, 0.9vmin, 10px)
-    clamp(9px, 1vmin, 11px)
-    clamp(8px, 0.9vmin, 10px)
-    clamp(20px, 1.8vmin, 28px);
-  position: relative;
+  flex-direction: column;
+  gap: 0;
+  left: 50%;
+  padding: 8px 20px 4px;
+  position: absolute;
   text-decoration: none;
-  transition:
-    background-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+  transition: color 180ms ease;
+  transform: translateX(-50%);
   z-index: 3;
 }
 
 .hero-kv__scroll-label {
-  font-size: clamp(12px, 1vmin, 14px);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: 0.22em;
+  font-size: clamp(13px, 1.05vmin, 15px);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.28em;
   line-height: 1;
+  margin-top: clamp(12px, 1.4vmin, 16px);
+  padding-left: 0.28em;
   text-transform: uppercase;
 }
 
-.hero-kv__scroll-icon {
-  align-items: center;
-  background: var(--color-accent);
-  border-radius: 50%;
-  display: flex;
-  height: clamp(36px, 4.2vmin, 44px);
-  justify-content: center;
-  width: clamp(36px, 4.2vmin, 44px);
+.hero-kv__scroll-track {
+  background: linear-gradient(
+    to bottom,
+    rgb(31 31 31 / 72%) 0%,
+    rgb(31 31 31 / 72%) 70%,
+    rgb(31 31 31 / 0%) 100%
+  );
+  display: block;
+  height: clamp(64px, 8vmin, 82px);
+  position: relative;
+  width: 1px;
 }
 
-.hero-kv__scroll-icon svg {
-  animation: scroll-cue-arrow 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  fill: none;
-  height: clamp(20px, 2.4vmin, 24px);
-  stroke: #323232;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.8;
-  width: clamp(20px, 2.4vmin, 24px);
+.hero-kv__scroll-dot {
+  animation: scroll-cue-dot 2.8s cubic-bezier(0.49, -0.01, 0.46, 1) infinite;
+  background: #00d3f8;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgb(0 211 248 / 85%);
+  display: block;
+  height: 8px;
+  left: 50%;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: 8px;
 }
 
 .hero-kv__scroll-cue:hover {
-  background: rgb(255 255 255 / 76%);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 90%),
-    0 12px 32px rgb(50 50 50 / 12%);
-  transform: translateY(2px);
+  color: #000;
+}
+
+.hero-kv__scroll-cue:hover .hero-kv__scroll-track {
+  background: linear-gradient(
+    to bottom,
+    rgb(31 31 31 / 92%) 0%,
+    rgb(31 31 31 / 92%) 70%,
+    rgb(31 31 31 / 0%) 100%
+  );
 }
 
 .hero-kv__scroll-cue:focus-visible {
@@ -212,14 +210,38 @@ import { withBase } from '../../utils/basePath';
   outline-offset: 4px;
 }
 
-@keyframes scroll-cue-arrow {
-  0%,
-  100% {
-    transform: translateY(-1px);
+@keyframes scroll-cue-dot {
+  0% {
+    height: 0;
+    opacity: 0;
+    top: 0;
+    width: 0;
   }
 
-  50% {
-    transform: translateY(3px);
+  20% {
+    height: 8px;
+    opacity: 1;
+    top: 0;
+    width: 8px;
+  }
+
+  45% {
+    height: 10px;
+    opacity: 1;
+    width: 10px;
+  }
+
+  70% {
+    height: 8px;
+    opacity: 1;
+    width: 8px;
+  }
+
+  100% {
+    height: 0;
+    opacity: 0;
+    top: 100%;
+    width: 0;
   }
 }
 
@@ -266,34 +288,27 @@ import { withBase } from '../../utils/basePath';
   }
 
   .hero-kv__scroll-cue {
-    gap: clamp(10px, 2.8vw, 13px);
-    min-height: clamp(48px, 6.5svh, 56px);
-    padding:
-      clamp(7px, 1svh, 9px)
-      clamp(8px, 2vw, 10px)
-      clamp(7px, 1svh, 9px)
-      clamp(18px, 4.8vw, 22px);
+    bottom: clamp(26px, 3.6svh, 38px);
+    padding-inline: 18px;
   }
 
   .hero-kv__scroll-label {
-    font-size: clamp(12px, 3.2vw, 13px);
+    font-size: 12px;
   }
 
-  .hero-kv__scroll-icon {
-    height: clamp(34px, 4.8svh, 40px);
-    width: clamp(34px, 4.8svh, 40px);
-  }
-
-  .hero-kv__scroll-icon svg {
-    height: clamp(19px, 2.8svh, 22px);
-    width: clamp(19px, 2.8svh, 22px);
+  .hero-kv__scroll-track {
+    height: clamp(54px, 7svh, 68px);
   }
 
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-kv__scroll-icon svg {
+  .hero-kv__scroll-dot {
     animation: none;
+    height: 8px;
+    opacity: 1;
+    top: 42%;
+    width: 8px;
   }
 }
 </style>

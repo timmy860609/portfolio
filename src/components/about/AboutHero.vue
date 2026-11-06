@@ -15,6 +15,22 @@ const parseStat = (value: string) => {
     : null;
 };
 
+const getStatParts = (value: string) => {
+  const match = value.match(/^([\d.]+)(\+?)(?:\s*(.*))?$/);
+
+  return match
+    ? {
+        number: match[1],
+        hasPlus: match[2] === '+',
+        unit: match[3] ?? '',
+      }
+    : {
+        number: value,
+        hasPlus: false,
+        unit: '',
+      };
+};
+
 const displayedStats = ref(aboutHero.stats.map((stat) => stat.value));
 let animationFrame = 0;
 
@@ -84,7 +100,26 @@ onBeforeUnmount(() => {
           <template v-for="(stat, index) in aboutHero.stats" :key="stat.label">
             <div class="about-hero__stat">
               <dt>{{ stat.label }}</dt>
-              <dd>{{ displayedStats[index] }}</dd>
+              <dd :aria-label="displayedStats[index]">
+                <span
+                  class="about-hero__stat-value"
+                  :class="{
+                    'about-hero__stat-value--with-plus':
+                      getStatParts(displayedStats[index]).hasPlus,
+                  }"
+                  aria-hidden="true"
+                >
+                  <span>{{ getStatParts(displayedStats[index]).number }}</span>
+                  <sup v-if="getStatParts(displayedStats[index]).hasPlus">+</sup>
+                </span>
+                <span
+                  v-if="getStatParts(displayedStats[index]).unit"
+                  class="about-hero__stat-unit"
+                  aria-hidden="true"
+                >
+                  {{ getStatParts(displayedStats[index]).unit }}
+                </span>
+              </dd>
             </div>
             <img
               v-if="index < aboutHero.stats.length - 1"
@@ -192,6 +227,7 @@ onBeforeUnmount(() => {
   align-items: center;
   display: flex;
   flex-direction: column;
+  gap: 8px;
   min-width: 0;
 }
 
@@ -203,16 +239,42 @@ onBeforeUnmount(() => {
 }
 
 .about-hero__stat dd {
+  align-items: baseline;
+  display: inline-flex;
   font-feature-settings: 'tnum';
   font-size: 40px;
   font-weight: var(--font-weight-semibold);
   font-variant-numeric: tabular-nums;
+  justify-content: center;
   line-height: 1.5;
   margin: 0;
   min-width: 5ch;
   order: 1;
   text-align: center;
   white-space: nowrap;
+}
+
+.about-hero__stat-value {
+  display: inline-flex;
+  line-height: 1;
+  position: relative;
+}
+
+.about-hero__stat-value--with-plus {
+  padding-right: 0.5em;
+}
+
+.about-hero__stat-value sup {
+  font-size: 0.56em;
+  line-height: 1;
+  position: absolute;
+  right: 0;
+  top: -0.04em;
+}
+
+.about-hero__stat-unit {
+  line-height: 1;
+  margin-left: 0.02em;
 }
 
 .about-hero__stat-divider {

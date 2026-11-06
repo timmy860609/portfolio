@@ -442,7 +442,7 @@ const selectCategory = async (category: ProjectCategory, event: MouseEvent) => {
   .projects-gallery__mobile {
     display: flex;
     flex-direction: column;
-    gap: 56px;
+    gap: 64px;
     padding: 0 var(--page-gutter) 60px;
     position: relative;
   }

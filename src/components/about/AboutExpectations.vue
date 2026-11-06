@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppButton from '../AppButton.vue';
+import AppContentHeading from '../AppContentHeading.vue';
 import { aboutExpectations } from '../../data/about';
-import AppSectionHeading from '../AppSectionHeading.vue';
 </script>
 
 <template>
@@ -11,20 +11,18 @@ import AppSectionHeading from '../AppSectionHeading.vue';
     data-node-id="4391:25141"
   >
     <div class="about-expectations__inner">
-      <AppSectionHeading
+      <AppContentHeading
+        class="about-expectations__heading"
         :title="aboutExpectations.title"
         title-id="about-expectations-title"
-        :subtitle="aboutExpectations.quote"
-      >
-        <div class="about-expectations__copy">
-          <div class="about-expectations__paragraphs">
-            <p v-for="paragraph in aboutExpectations.paragraphs" :key="paragraph">
-              {{ paragraph }}
-            </p>
-          </div>
-          <strong>{{ aboutExpectations.callout }}</strong>
-        </div>
-      </AppSectionHeading>
+        :introduction="aboutExpectations.paragraphs"
+        spacing="compact"
+      />
+
+      <div class="about-expectations__card">
+        <p>{{ aboutExpectations.quote }}</p>
+        <strong>{{ aboutExpectations.callout }}</strong>
+      </div>
 
       <div class="about-expectations__actions">
         <AppButton
@@ -53,7 +51,7 @@ import AppSectionHeading from '../AppSectionHeading.vue';
 .about-expectations {
   background: #fff;
   color: #323232;
-  padding: 60px var(--layout-gutter) 0;
+  padding: 60px var(--layout-gutter) 56px;
   position: relative;
   z-index: 1;
 }
@@ -63,50 +61,67 @@ import AppSectionHeading from '../AppSectionHeading.vue';
   flex-direction: column;
   gap: 24px;
   margin-inline: auto;
-  max-width: 1220px;
+  max-width: 1840px;
   width: 100%;
 }
 
-.about-expectations :deep(.app-section-heading h2) {
+.about-expectations__heading :deep(.app-content-heading__title) {
+  font-size: var(--font-size-section-heading);
+  letter-spacing: 0.06em;
   line-height: 1.2;
+  margin-bottom: 32px;
 }
 
-.about-expectations__copy {
-  align-items: flex-start;
+.about-expectations__heading {
+  --content-copy-letter-spacing: 0;
+}
+
+.about-expectations__card {
+  background: #f3f3f3;
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  font-size: var(--content-body-font-size);
-  line-height: 1.5;
-  width: 100%;
+  gap: 16px;
+  padding: 28px 40px;
 }
 
-.about-expectations__paragraphs p {
+.about-expectations__card p {
+  color: #737373;
+  font-size: var(--font-size-body-small);
+  line-height: 1.6;
   margin: 0;
 }
 
-@media (max-width: 1024px) {
-  .about-expectations__paragraphs p {
-    display: inline;
-  }
-
-  .about-expectations__paragraphs p + p::before {
-    content: ' ';
-  }
-}
-
-.about-expectations__copy strong {
+.about-expectations__card strong {
+  font-size: 20px;
   font-weight: var(--font-weight-bold);
+  line-height: 1.5;
 }
 
 .about-expectations__actions {
   align-items: flex-start;
   display: flex;
   gap: 16px;
+  margin-top: 16px;
 }
 
 .about-expectations__button {
   padding: 11px 23px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .about-expectations__heading {
+    display: block;
+  }
+
+  .about-expectations__heading :deep(.app-content-heading__introduction) {
+    display: inline;
+  }
+
+  .about-expectations__heading
+    :deep(.app-content-heading__introduction + .app-content-heading__introduction)::before {
+    content: ' ';
+  }
 }
 
 @media (max-width: 767px) {
@@ -118,11 +133,18 @@ import AppSectionHeading from '../AppSectionHeading.vue';
     gap: 24px;
   }
 
-  .about-expectations__copy {
-    margin-top: 8px;
+  .about-expectations__heading :deep(.app-content-heading__title) {
+    margin-bottom: 32px;
+  }
+
+  .about-expectations__card {
+    border-radius: 24px;
+    gap: 16px;
+    padding: 28px 24px;
   }
 
   .about-expectations__actions {
+    margin-top: 16px;
     width: 100%;
   }
 

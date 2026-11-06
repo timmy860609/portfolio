@@ -4,12 +4,14 @@ import { computed } from 'vue';
 const props = withDefaults(
   defineProps<{
     title?: string;
+    titleId?: string;
     introduction?: string | string[];
     headingTag?: 'h2' | 'h3';
     spacing?: 'compact' | 'default';
   }>(),
   {
     title: undefined,
+    titleId: undefined,
     introduction: undefined,
     headingTag: 'h2',
     spacing: 'default',
@@ -32,6 +34,7 @@ const paragraphs = computed(() => {
     <component
       :is="headingTag"
       v-if="title"
+      :id="titleId"
       class="app-content-heading__title"
     >
       {{ title }}
@@ -55,7 +58,7 @@ const paragraphs = computed(() => {
 }
 
 .app-content-heading--compact {
-  --app-content-heading-gap: 8px;
+  --app-content-heading-gap: 0;
 }
 
 .app-content-heading__title {
