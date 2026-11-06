@@ -75,19 +75,19 @@ export const featuredProjects: FeaturedProjectContent[] = [
 
 export const skills: Skill[] = [
   {
-    title: '用戶體驗設計',
-    tags: ['User Flow', 'Maze'],
+    title: '數位產品設計',
+    tags: ['Figma', 'Adobe Suite'],
     description: '透過用戶研究、設計思維與互動設計，打造兼具美觀與高可用性的數位產品。',
   },
   {
-    title: '介面規劃與設計',
-    tags: ['Figma', 'Adobe Suite'],
-    description: '從需求與使用情境出發，規劃資訊架構與操作流程，設計清楚易用的介面，並維持視覺與互動的一致性。',
+    title: '前端介面開發',
+    tags: ['HTML / CSS / JS', 'Vue.js'],
+    description: '熟悉前端基礎語言，注重響應式網頁設計，確保網站在不同裝置上都能維持一致的視覺與操作體驗。',
   },
   {
-    title: '前端開發',
-    tags: ['HTML / CSS / JS', 'Vue.js'],
-    description: '熟悉前端語言，處理互動邏輯與資料呈現；理解前端架構與元件化設計概念，讓設計落實於產品中。',
+    title: 'AI 協作與流程優化',
+    tags: ['Skill', 'MCP'],
+    description: '以 AI Agent  將工作流程標準化，運用 Agent 整合設計與開發工具，輔助分析設計規範、產出程式碼與驗證成果。',
   },
 ];
 
