@@ -70,7 +70,7 @@ export const visualDesignGallery: ArticleDetailGalleryData = {
       image(8, '金融服務行動版 Banner'),
       image(10, '春節品牌賀卡 B 款'),
       image(5, '社群圖文視覺設計四'),
-      image(22, '官方網站手機版展示'),
+      image(22, '官方網站行動版展示'),
       image(3, '社群圖文視覺設計二'),
       image(15, '中秋佳節視覺設計'),
       image(6, '2026 年資訊人才招募視覺設計'),

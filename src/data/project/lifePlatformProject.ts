@@ -16,9 +16,7 @@ export const lifePlatformHero = {
   tags: lifePlatformProject.detailTags ?? lifePlatformProject.tags,
   title: lifePlatformProject.detailTitle ?? lifePlatformProject.title,
   year: '2024',
-  showAction: true,
-  actionLabel: '前往網站',
-  actionHref: 'https://pse.is/9mgr9f',
+  showAction: false,
 };
 
 export const lifePlatformGoals = {

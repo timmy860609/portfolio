@@ -6,7 +6,7 @@ const hiringProject = projectsBySlug['hiring-2026'];
 export const hiringCover = {
   src: '/Image/Project/hiring-web/project-cover.webp',
   mobileSrc: '/Image/Project/hiring-web/project-cover_m.webp',
-  alt: '2026 人才招募網站專案主視覺',
+  alt: '2026 人才招募網專案主視覺',
   width: 5760,
   height: 1440,
 };
@@ -67,7 +67,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-1.webp',
-      alt: '正職與實習招募網站首頁設計',
+      alt: '正職與實習人才招募網首頁設計',
       width: 2880,
       height: 1680,
     },
@@ -92,7 +92,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-2.webp',
-      alt: '2026 人才招募網站正職與實習資訊架構圖',
+      alt: '2026 人才招募網正職與實習資訊架構圖',
       width: 2880,
       height: 1680,
     },
@@ -122,7 +122,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-4.webp',
-      alt: '正職人才招募網站桌機與手機版介面',
+      alt: '正職人才招募網桌機與行動版介面',
       width: 2880,
       height: 1680,
     },
@@ -167,7 +167,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-6.webp',
-      alt: '人才招募活動資訊與地點導覽的桌機及手機版畫面',
+      alt: '人才招募活動資訊與地點導覽的桌機及行動版畫面',
       width: 2880,
       height: 1680,
     },
@@ -195,7 +195,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-9.webp',
-      alt: '實習學長姐心得分享的桌機與手機版頁面',
+      alt: '實習學長姐心得分享的桌機與行動版頁面',
       width: 2880,
       height: 1680,
     },
@@ -208,7 +208,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-10.webp',
-      alt: '正職與實習人才招募網站首頁成果',
+      alt: '正職與實習人才招募網首頁成果',
       width: 2880,
       height: 1680,
     },

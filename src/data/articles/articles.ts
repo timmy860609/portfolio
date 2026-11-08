@@ -49,9 +49,9 @@ export const articles: ArticleItem[] = [
       '整合賽事資訊、球隊介紹、最新消息與票務資訊，打造兼具品牌形象與球迷互動體驗的官方網站。',
     tags: ['設計顧問', '專案溝通', '需求訪談'],
     cover: '/Image/Articles/article-cover/tpvl-web.webp',
-    coverAlt: '臺灣職業排球聯盟官網主視覺',
+    coverAlt: '台灣職業排球聯盟官網主視覺',
     detailHero: {
-      heading: '臺灣職業排球聯盟官網',
+      heading: '台灣職業排球聯盟官網',
       subtitle: '台灣第一個職業排球聯盟開打！',
     },
     detailContent: tpvlWebsiteContent,

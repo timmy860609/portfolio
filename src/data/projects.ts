@@ -2,7 +2,7 @@ export const projectCategories = [
   '全部',
   '數位金融',
   'IoT 應用',
-  '品牌形象',
+  '品牌視覺',
   '會員服務',
 ] as const;
 
@@ -71,7 +71,7 @@ export const projects: Project[] = [
   {
     slug: 'hiring-2026',
     title: '2026 人才招募網',
-    category: '品牌形象',
+    category: '品牌視覺',
     tags: ['UI/UX', '前端開發'],
     image: '/Image/Project/project-cover/hiring-web.webp',
     imageSmall: '/Image/Optimized/project-covers/hiring-2026-960.webp',
@@ -92,7 +92,7 @@ export const projects: Project[] = [
   {
     slug: 'hr-official',
     title: '人力資源網',
-    category: '品牌形象',
+    category: '品牌視覺',
     tags: ['UI/UX', '前端開發'],
     image: '/Image/Project/project-cover/hr-offical.webp',
     imageSmall: '/Image/Optimized/project-covers/hr-official-960.webp',
@@ -103,7 +103,7 @@ export const projects: Project[] = [
   {
     slug: 'vip-platform',
     title: '保足感平台',
-    category: '數位金融',
+    category: '品牌視覺',
     tags: ['UI/UX', '視覺設計'],
     image: '/Image/Project/project-cover/life-platform.webp',
     imageSmall: '/Image/Optimized/project-covers/vip-platform-960.webp',
@@ -123,7 +123,7 @@ export const projects: Project[] = [
   {
     slug: 'insurance-marketing',
     title: '行銷網頁合輯',
-    category: '品牌形象',
+    category: '品牌視覺',
     tags: ['UI/UX', '前端開發', '視覺設計'],
     image: '/Image/Project/project-cover/marketing-page.webp',
     imageSmall: '/Image/Optimized/project-covers/insurance-marketing-960.webp',

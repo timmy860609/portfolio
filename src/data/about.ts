@@ -67,11 +67,11 @@ export const aboutExperienceSection = {
           imageAlt: '嘉立富財富管理 App 畫面',
         },
         {
-          title: 'TPVL 臺灣職排官網',
+          title: 'TPVL 台灣職排官網',
           year: '2025',
           tags: ['專案規劃'],
           image: '/Image/About/experience/tpvl.png',
-          imageAlt: 'TPVL 臺灣職業排球聯賽官網畫面',
+          imageAlt: 'TPVL 台灣職業排球聯盟官網畫面',
         },
         {
           title: '桃園飛將雲豹隊徽',
@@ -90,7 +90,7 @@ export const aboutExperienceSection = {
       role: '晶錡微電子',
       period: '2021/10–2022/08',
       description:
-        '參與各式裝置之使用者介面設計與專案規劃，協助不同產業運用物聯網系統提高空間營運效能，透過使用者研究，分析用戶的需求及痛點，規劃平台系統與架構。',
+        '參與各式裝置之用戶介面設計與專案規劃，協助不同產業運用物聯網系統提高空間營運效能，透過用戶研究，分析用戶的需求及痛點，規劃平台系統與架構。',
       projects: [
         {
           title: 'OSPACE App',
