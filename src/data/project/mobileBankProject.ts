@@ -6,8 +6,9 @@ export const mobileBankHero = {
   tags: mobileBankProject.detailTags ?? mobileBankProject.tags,
   title: mobileBankProject.detailTitle ?? mobileBankProject.title,
   showAction: true,
-  actionLabel: '前往下載',
-  actionHref: '#',
+  actionLabel: '前往網頁',
+  actionHref:
+    'https://www.yuantabank.com.tw/bankwebIMG/event/Bank_Act2025/MobileBankingAPP/',
 };
 
 export const mobileBankCover = {
@@ -166,8 +167,7 @@ export const mobileBankMembershipBenefits = [
   {
     title: '會員權益重整，讓複雜資訊更容易理解',
     introduction: [
-      '原本分散且複雜的客戶權益，藉由不同的視覺風格與元件樣式，整合為更清楚的層級與分類，讓用戶更清楚理解自己擁有哪些權益、還差多少條件，以及可以進一步使用哪些服務。',
-      '財管會員制度涵蓋交易優惠、等級條件、專屬權益與理財服務。不同會員等級對應的內容繁多，且使用情境各異；若缺乏清楚的整理方式，用戶難以快速了解目前擁有的權益，以及後續可達成的目標。',
+      '原本分散且複雜的客戶權益，藉由不同的視覺風格與元件樣式，整合為更清楚的層級與分類，讓用戶更清楚理解自己擁有哪些權益、還差多少條件，以及可以進一步使用哪些服務。財管會員制度涵蓋交易優惠、等級條件、專屬權益與理財服務。不同會員等級對應的內容繁多，且使用情境各異；若缺乏清楚的整理方式，用戶難以快速了解目前擁有的權益，以及後續可達成的目標。',
     ],
     image: {
       src: '/Image/Project/mobile-bank-detail/pc-7.webp',
@@ -191,9 +191,7 @@ export const mobileBankMembershipBenefits = [
   {
     title: '金融交易優惠、財管會員權益與理財會員服務',
     introduction: [
-      '金融交易優惠：清楚呈現各項優惠的適用條件、剩餘次數及引導入口，用戶能快速確認目前可使用的回饋。',
-      '財管會員權益：以富樂會員的成長機制為核心，除了呈現目前等級，也同步揭露下一階段條件，讓會員清楚掌握自身狀態與升級方向。',
-      '理財會員服務：依客戶的財管身分顯示對應的服務，並提供專人聯繫入口。',
+      '金融交易優惠：清楚呈現各項優惠的適用條件、剩餘次數及引導入口，用戶能快速確認目前可使用的回饋。財管會員權益：以富樂會員的成長機制為核心，除了呈現目前等級，也同步揭露下一階段條件，讓會員清楚掌握自身狀態與升級方向。理財會員服務：依客戶的財管身分顯示對應的服務，並提供專人聯繫入口。',
     ],
     image: {
       src: '/Image/Project/mobile-bank-detail/pc-9.webp',

@@ -9,7 +9,14 @@ defineProps<{
 
 <template>
   <div class="experience-summary">
-    <div class="experience-summary__company">
+    <div
+      class="experience-summary__company"
+      :class="{
+        'experience-summary__company--wide-mobile':
+          experience.company === '晶錡微電子' || experience.company === '金控',
+        'experience-summary__company--acs': experience.company === '晶錡微電子',
+      }"
+    >
       <img :src="withBase(experience.companyLogo)" alt="" aria-hidden="true" />
       <h3 v-if="experience.company === '方閣設計'">{{ experience.company }}</h3>
     </div>
@@ -87,6 +94,15 @@ defineProps<{
 }
 
 @media (max-width: 767px) {
+  .experience-summary__company--wide-mobile img {
+    height: auto;
+    width: 160px;
+  }
+
+  .experience-summary__company--acs img {
+    width: 120px;
+  }
+
   .experience-summary__role-image {
     height: 17px;
   }

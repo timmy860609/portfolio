@@ -20,7 +20,7 @@ import { mainNavigation } from '../data/site';
       />
     </picture>
 
-    <div class="site-footer__inner">
+    <div class="site-footer__inner" data-nosnippet>
       <div class="site-footer__identity">
         <a class="site-footer__logo" :href="withBase('/')" aria-label="Timmy Lee 首頁">
           <img :src="withBase('/WebCI/ci-logo.svg')" alt="Timmy Lee" width="362" height="28" />

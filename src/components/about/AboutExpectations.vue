@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppButton from '../AppButton.vue';
-import AppContentHeading from '../AppContentHeading.vue';
+import AppSectionHeading from '../AppSectionHeading.vue';
 import { aboutExpectations } from '../../data/about';
 </script>
 
@@ -11,12 +11,10 @@ import { aboutExpectations } from '../../data/about';
     data-node-id="4391:25141"
   >
     <div class="about-expectations__inner">
-      <AppContentHeading
-        class="about-expectations__heading"
+      <AppSectionHeading
         :title="aboutExpectations.title"
         title-id="about-expectations-title"
-        :introduction="aboutExpectations.paragraphs"
-        spacing="compact"
+        :subtitle="aboutExpectations.subtitle"
       />
 
       <div class="about-expectations__card">
@@ -61,19 +59,8 @@ import { aboutExpectations } from '../../data/about';
   flex-direction: column;
   gap: 24px;
   margin-inline: auto;
-  max-width: 1840px;
+  max-width: 1200px;
   width: 100%;
-}
-
-.about-expectations__heading :deep(.app-content-heading__title) {
-  font-size: var(--font-size-section-heading);
-  letter-spacing: 0.06em;
-  line-height: 1.2;
-  margin-bottom: 32px;
-}
-
-.about-expectations__heading {
-  --content-copy-letter-spacing: 0;
 }
 
 .about-expectations__card {
@@ -109,21 +96,6 @@ import { aboutExpectations } from '../../data/about';
   padding: 11px 23px;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-  .about-expectations__heading {
-    display: block;
-  }
-
-  .about-expectations__heading :deep(.app-content-heading__introduction) {
-    display: inline;
-  }
-
-  .about-expectations__heading
-    :deep(.app-content-heading__introduction + .app-content-heading__introduction)::before {
-    content: ' ';
-  }
-}
-
 @media (max-width: 767px) {
   .about-expectations {
     padding: 48px var(--layout-gutter);
@@ -133,10 +105,6 @@ import { aboutExpectations } from '../../data/about';
     gap: 24px;
   }
 
-  .about-expectations__heading :deep(.app-content-heading__title) {
-    margin-bottom: 32px;
-  }
-
   .about-expectations__card {
     border-radius: 24px;
     gap: 16px;
@@ -144,6 +112,7 @@ import { aboutExpectations } from '../../data/about';
   }
 
   .about-expectations__actions {
+    gap: 8px;
     margin-top: 16px;
     width: 100%;
   }

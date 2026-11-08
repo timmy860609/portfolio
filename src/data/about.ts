@@ -57,7 +57,7 @@ export const aboutExperienceSection = {
       role: '個人接案',
       period: '2021/02–2026/02',
       description:
-        '在學期間創立「方閣設計」並開始個人接案，從客戶溝通、需求分析到設計執行，累積跨領域的實戰經驗。過程中持續優化提案與合作方式，逐步拓展至金融服務與運動科技等產業，也更加確立投入數位產品設計的方向。',
+        '在學期間創立「方閣設計」進行接案，從需求溝通到設計執行累積跨領域經驗，並逐步拓展至金融與運動科技等產業，確立投入數位產品設計的方向。',
       projects: [
         {
           title: '嘉立富財富管理 App',
@@ -88,9 +88,9 @@ export const aboutExperienceSection = {
       company: '晶錡微電子',
       companyLogo: '/Image/About/experience/acs-logo.svg',
       role: '晶錡微電子',
-      period: '2021/09–2022/09',
+      period: '2021/10–2022/08',
       description:
-        '晶錡微電子（ACS）成立於 2016 年，協助不同產業運用物聯網系統提升空間營運效能。我在晶錡微電子擔任 UI/UX Designer，參與各式裝置的用戶介面設計，透過用戶研究分析需求與痛點、規劃平台系統與架構，並與研發團隊共同開發專案。',
+        '參與各式裝置之使用者介面設計與專案規劃，協助不同產業運用物聯網系統提高空間營運效能，透過使用者研究，分析用戶的需求及痛點，規劃平台系統與架構。',
       projects: [
         {
           title: 'OSPACE App',
@@ -103,7 +103,7 @@ export const aboutExperienceSection = {
           title: '智慧閘道器後台管理系統',
           year: '2021',
           tags: ['UI/UX'],
-          image: '/Image/About/experience/wealth.png',
+          image: '/Image/About/experience/iot-back.png',
           imageAlt: '智慧閘道器後台管理系統畫面',
         },
         {
@@ -121,9 +121,9 @@ export const aboutExperienceSection = {
       companyLogo: '/Image/About/experience/fintech-logo.svg',
       role: '金控',
       roleImage: '/Image/About/experience/company-name.webp',
-      period: '2022/09–至今',
+      period: '2022/09–Present',
       description:
-        '在金控任職期間，我負責旗下五大子公司的數位產品設計，依據業務需求規劃符合使用情境的操作介面，同時支援行銷視覺、動畫設計與前端切版。我也與團隊共同建立中心化設計元件庫，提升跨產品的一致性與設計效率。',
+        '負責金控旗下五大子公司的數位平台設計與開發，依業務需求規劃符合使用情境的操作介面，同時支援行銷視覺與前端開發。',
       projects: [
         {
           title: '行動銀行 2.0',
@@ -155,10 +155,8 @@ export const aboutExpectations = {
   title: '自我期許',
   quote:
     '《為真實的世界而設計》（Victor Papanek，2013）：「設計不像其他學科，需要垂直鑽研；而是要水平發展，接觸各種不同的領域。」',
-  paragraphs: [
-    '期望持續深化 UI/UX 與前端落地能力，讓設計不只停留在畫面，而能真正回應需求並推動產品前進。',
-    '未來也希望接觸更多不同產業的專案，透過跨領域合作累積更完整的產品思維，持續打造兼具體驗與價值的設計成果。',
-  ],
+  subtitle:
+    '期望持續深化 UI/UX 與前端落地能力，讓設計不只停留在畫面，而能真正回應需求並推動產品前進。未來也希望接觸更多不同產業的專案，透過跨領域合作累積更完整的產品思維，持續打造兼具體驗與價值的設計成果。',
   callout: '若你對我的經歷與作品感興趣，歡迎進一步聯繫交流。',
   contactHref: '/#contact',
   resumeHref: '/Image/About/portfolio.pdf',

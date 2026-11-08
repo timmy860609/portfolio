@@ -29,7 +29,7 @@ async function copyContact(value: string) {
 </script>
 
 <template>
-  <section id="contact" class="home-contact" aria-labelledby="home-contact-title" data-node-id="4288:47664">
+  <section id="contact" class="home-contact" aria-labelledby="home-contact-title" data-node-id="4288:47664" data-nosnippet>
     <div class="home-contact__inner">
       <AppSectionHeading
         class="home-contact__introduction"

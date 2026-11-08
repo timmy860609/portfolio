@@ -85,9 +85,9 @@ export const skills: Skill[] = [
     description: '熟悉前端基礎語言，注重響應式網頁設計，確保網站在不同裝置上都能維持一致的視覺與操作體驗。',
   },
   {
-    title: 'AI 協作與流程優化',
+    title: 'AI 協作與輔助開發',
     tags: ['Skill', 'MCP'],
-    description: '以 AI Agent  將工作流程標準化，運用 Agent 整合設計與開發工具，輔助分析設計規範、產出程式碼與驗證成果。',
+    description: '以 AI 將工作流程標準化，整合設計與開發，輔助分析設計規範、產出程式碼與驗證成果。',
   },
 ];
 

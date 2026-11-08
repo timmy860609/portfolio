@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://timmylee.io/sitemap-index.xml

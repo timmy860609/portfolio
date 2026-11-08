@@ -2,6 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { aboutHero } from '../../data/about';
 import { withBase } from '../../utils/basePath';
+import AppSectionHeading from '../AppSectionHeading.vue';
 
 const parseStat = (value: string) => {
   const match = value.match(/^(\d+(?:\.\d+)?)(.*)$/);
@@ -93,8 +94,12 @@ onBeforeUnmount(() => {
       </picture>
 
       <div class="about-hero__content">
-        <h1 id="about-hero-title">關於我</h1>
-        <p class="about-hero__introduction">{{ aboutHero.introduction }}</p>
+        <AppSectionHeading
+          title="關於我"
+          title-id="about-hero-title"
+          :subtitle="aboutHero.introduction"
+          heading-tag="h1"
+        />
 
         <dl class="about-hero__stats">
           <template v-for="(stat, index) in aboutHero.stats" :key="stat.label">
@@ -197,21 +202,6 @@ onBeforeUnmount(() => {
   z-index: 3;
 }
 
-.about-hero__content h1 {
-  font-size: 48px;
-  font-weight: var(--font-weight-bold);
-  line-height: 1.5;
-  margin: 0;
-}
-
-.about-hero__introduction {
-  font-size: 24px;
-  font-weight: var(--font-weight-regular);
-  line-height: 1.5;
-  margin: 0;
-  width: 100%;
-}
-
 .about-hero__stats {
   align-items: center;
   align-self: flex-start;
@@ -261,20 +251,20 @@ onBeforeUnmount(() => {
 }
 
 .about-hero__stat-value--with-plus {
-  padding-right: 0.5em;
+  align-items: flex-start;
 }
 
 .about-hero__stat-value sup {
   font-size: 0.56em;
   line-height: 1;
-  position: absolute;
-  right: 0;
+  margin-left: 0.04em;
+  position: relative;
   top: -0.04em;
 }
 
 .about-hero__stat-unit {
   line-height: 1;
-  margin-left: 0.02em;
+  margin-left: 0.18em;
 }
 
 .about-hero__stat-divider {
@@ -373,14 +363,6 @@ onBeforeUnmount(() => {
     transform: translateX(-50%);
     width: calc(100% - 32px);
     z-index: 3;
-  }
-
-  .about-hero__content h1 {
-    font-size: 24px;
-  }
-
-  .about-hero__introduction {
-    font-size: 18px;
   }
 
   .about-hero__stats {

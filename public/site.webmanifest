@@ -1,0 +1,16 @@
+{
+  "name": "Timmy Lee Portfolio",
+  "short_name": "Timmy Lee",
+  "description": "Timmy Lee（李柏廷）的 UI/UX 與數位產品設計作品集。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fcfcfc",
+  "theme_color": "#fcfcfc",
+  "icons": [
+    {
+      "src": "/WebCI/Favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

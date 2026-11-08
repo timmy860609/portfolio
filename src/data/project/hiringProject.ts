@@ -22,8 +22,7 @@ export const hiringHero = {
 export const hiringBackground = {
   title: '專案背景',
   introduction: [
-    '集團旗下包含多間子公司，人才計畫各自具有不同的專業條件與申請門檻。若以傳統職缺頁面呈現，求職者往往只能看到工作要求，難以理解集團環境、培育制度及未來發展。',
-    '因此，人才招募網依正職與實習兩種求職階段進行規劃，除了協助求職者精準判斷職涯方向，也讓招募網成為企業長期對外招攬人才的入口。',
+    '集團旗下包含多間子公司，人才計畫各自具有不同的專業條件與申請門檻。若以傳統職缺頁面呈現，求職者往往只能看到工作要求，難以理解集團環境、培育制度及未來發展。因此，人才招募網依正職與實習兩種求職階段進行規劃，除了協助求職者精準判斷職涯方向，也讓招募網成為企業長期對外招攬人才的入口。',
   ],
 };
 
@@ -104,8 +103,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
   {
     title: '同步設計稿與前端元件樣式',
     introduction: [
-      '正職與實習使用相同的結構與元件，但在品牌色彩與視覺氛圍上有所區別。為避免兩套頁面各自維護樣式，我將 Figma Variables 中的 Token 設定同步至前端，讓設計與程式使用同一套變數邏輯。',
-      '在 Figma 中將色彩區分為「正職」與「實習」兩種模式，再將 Variables 輸出為 JSON Token。前端匯入後轉換為 CSS Custom Properties，元件僅引用語意化變數，不直接寫入特定色碼。',
+      '正職與實習使用相同的結構與元件，但在品牌色彩與視覺氛圍上有所區別。為避免兩套頁面各自維護樣式，我將 Figma Variables 中的 Token 設定同步至前端，讓設計與程式使用同一套變數邏輯。在 Figma 中將色彩區分為「正職」與「實習」兩種模式，再將 Variables 輸出為 JSON Token。前端匯入後轉換為 CSS Custom Properties，元件僅引用語意化變數，不直接寫入特定色碼。',
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-3.webp',
