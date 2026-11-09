@@ -15,7 +15,7 @@ export const iotGatewayCover = {
 export const iotGatewayHero = {
   tags: iotGatewayProject.detailTags ?? iotGatewayProject.tags,
   title: iotGatewayProject.detailTitle ?? iotGatewayProject.title,
-  year: '2025',
+  year: '2021',
 };
 
 export const iotGatewayGoals = {

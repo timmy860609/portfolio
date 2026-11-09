@@ -11,6 +11,7 @@ const smartFitnessProject = projectsBySlug['smart-fitness'];
 export const smartFitnessHero = {
   tags: smartFitnessProject.detailTags ?? smartFitnessProject.tags,
   title: smartFitnessProject.detailTitle ?? smartFitnessProject.title,
+  year: '2022',
   showAction: false,
 };
 
