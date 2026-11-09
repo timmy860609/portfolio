@@ -39,5 +39,6 @@ withDefaults(
 
 @media (max-width: 767px) {
   .app-section-heading { gap: 0; }
+  .app-section-heading__subtitle { text-wrap: wrap; }
 }
 </style>

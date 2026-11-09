@@ -134,7 +134,7 @@ export const aboutExperienceSection = {
         },
         {
           title: '線上開戶平台',
-          year: '2023',
+          year: '2024',
           tags: ['UI/UX'],
           image: '/Image/About/experience/open-account.png',
           imageAlt: '線上開戶平台畫面',
