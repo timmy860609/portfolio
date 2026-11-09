@@ -65,13 +65,13 @@ export const jobPlatformContentSections: ProjectContentSectionData[] = [
     density: 'caption',
   },
   {
-    title: '技術落地：Web Component',
+    title: '技術落地：Web Components',
     introduction: [
       '履歷平台涵蓋大量功能與多種表單型態，為降低大型專案的重複開發與樣式衝突，採用 Custom Elements 封裝共通介面，並透過 Shadow DOM 隔離元件樣式，避免受全域 CSS 影響，確保設計一致性。',
     ],
     image: {
       src: `${assetPath}/pc-2.webp`,
-      alt: 'Web Component、Custom Element 與 Shadow DOM 架構示意',
+      alt: 'Web Components、Custom Elements 與 Shadow DOM 架構示意',
       width: 2880,
       height: 1680,
     },

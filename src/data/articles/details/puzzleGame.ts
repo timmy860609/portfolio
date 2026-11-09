@@ -29,7 +29,7 @@ export const puzzleGameContent: ArticleDetailContentData = {
         {
           number: '01',
           title: '降低操作門檻',
-          description: '透過滑動與按壓建立容易理解的操作邏輯',
+          description: '透過滑動與按壓建立容易理解的操作邏輯。',
         },
         {
           number: '02',

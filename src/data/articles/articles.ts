@@ -16,7 +16,7 @@ export const articles: ArticleItem[] = [
     slug: 'interactive-child-education',
     title: '不可忽視的幼兒教育，學習與成長不只是靠書本',
     description:
-      '以實體介面結合互動科技技術，把數位內容轉化成動手參與的學習體驗，提升幼兒學習時的趣味性！',
+      '以實體介面結合互動科技，把數位內容轉化成動手參與的學習體驗，提升幼兒學習時的趣味性！',
     tags: ['互動投影', '幼兒教育', '益智遊戲'],
     cover: '/Image/Articles/article-cover/child-education.webp',
     coverAlt: '幼兒圍繞互動投影桌進行益智學習遊戲',
@@ -44,15 +44,15 @@ export const articles: ArticleItem[] = [
   },
   {
     slug: 'tpvl-official-website',
-    title: '台灣第一個職業排球聯盟開打！',
+    title: '臺灣第一個職業排球聯盟開打！',
     description:
       '整合賽事資訊、球隊介紹、最新消息與票務資訊，打造兼具品牌形象與球迷互動體驗的官方網站。',
     tags: ['設計顧問', '專案溝通', '需求訪談'],
     cover: '/Image/Articles/article-cover/tpvl-web.webp',
-    coverAlt: '台灣職業排球聯盟官網主視覺',
+    coverAlt: '臺灣職業排球聯盟官網主視覺',
     detailHero: {
-      heading: '台灣職業排球聯盟官網',
-      subtitle: '台灣第一個職業排球聯盟開打！',
+      heading: '臺灣職業排球聯盟官網',
+      subtitle: '臺灣第一個職業排球聯盟開打！',
     },
     detailContent: tpvlWebsiteContent,
   },

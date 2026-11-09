@@ -167,7 +167,7 @@ export const iotGatewayContentSections: ProjectContentSectionData[] = [
       {
         title: '強化操作判斷的準確性',
         description:
-          '以明確的狀態、進度與結果回饋，降低資訊判讀落差，讓決策有依據地確認設備是否正常運作。',
+          '以明確的狀態、進度與結果回饋，降低資訊判讀落差，提供判斷依據，協助確認設備是否正常運作。',
       },
     ],
     detailMarkerColor: '#326fc8',

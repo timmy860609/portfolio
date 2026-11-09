@@ -67,11 +67,11 @@ export const aboutExperienceSection = {
           imageAlt: '嘉立富財富管理 App 畫面',
         },
         {
-          title: 'TPVL 台灣職排官網',
+          title: 'TPVL 臺灣職排官網',
           year: '2025',
           tags: ['專案規劃'],
           image: '/Image/About/experience/tpvl.png',
-          imageAlt: 'TPVL 台灣職業排球聯盟官網畫面',
+          imageAlt: 'TPVL 臺灣職業排球聯盟官網畫面',
         },
         {
           title: '桃園飛將雲豹隊徽',

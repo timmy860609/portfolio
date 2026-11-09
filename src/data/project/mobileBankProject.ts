@@ -44,7 +44,7 @@ export const mobileBankDesignGoals = {
     {
       number: '01',
       title: '快速掌握重要資訊',
-      description: '以元件區分資訊層級，快速查看重點資訊',
+      description: '以元件區分資訊層級，快速查看重點資訊。',
     },
     {
       number: '02',
@@ -54,7 +54,7 @@ export const mobileBankDesignGoals = {
     {
       number: '03',
       title: '資訊架構梳理',
-      description: '重新梳理資訊的分類及收納，明確定義出主次項目及功能',
+      description: '重新梳理資訊的分類及收納，明確定義出主次項目及功能。',
     },
   ],
 };

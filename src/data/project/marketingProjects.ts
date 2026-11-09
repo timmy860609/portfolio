@@ -14,7 +14,7 @@ export const marketingCollectionCover = {
   height: 1440,
 };
 
-export const marketingCollectionYear = '2022-2026';
+export const marketingCollectionYear = '2022–2026';
 
 export const marketingProjects: MarketingProject[] = [
   {
@@ -25,7 +25,7 @@ export const marketingProjects: MarketingProject[] = [
     href: 'https://pse.is/9mgrjs',
   },
   {
-    title: '智能客服｜24小時不打烊',
+    title: '智能客服｜24 小時不打烊',
     description: '藍色漸層結合數位圖形，傳達科技與信賴感；企業品牌角色則讓智能服務保有親民印象。',
     tags: ['UI/UX', '視覺設計'],
     image: '/Image/Project/marketing-page-detail/24h-service.webp',
@@ -46,7 +46,7 @@ export const marketingProjects: MarketingProject[] = [
     href: 'https://pse.is/9mgrql',
   },
   {
-    title: '小龍吐金｜１萬元享優惠利率',
+    title: '小龍吐金｜1 萬元享優惠利率',
     description: '從生肖與招財意象延伸活動主題，醒目題字結合金幣動態，讓優惠利率兼具節慶話題性與辨識度。',
     tags: ['前端開發'],
     image: '/Image/Project/marketing-page-detail/dragon-money.webp',

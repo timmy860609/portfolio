@@ -22,7 +22,7 @@ const appleTouchIconPath = withBase('/WebCI/apple-touch-icon.png');
 const manifestPath = withBase('/site.webmanifest');
 const siteUrl = new URL('/', Astro.site ?? Astro.url).href;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
-const socialTitle = 'Timmy Lee｜Product Designer';
+const socialTitle = title;
 const socialImageAlt = 'Timmy Lee Portfolio — 青白色背景上的作品集品牌標誌';
 const socialImages = [
   { path: '/Image/og-image/media-share_l.jpg', width: 2400, height: 1260 },
@@ -31,8 +31,7 @@ const socialImages = [
   ...image,
   url: new URL(withBase(image.path), Astro.site ?? Astro.url).href,
 }));
-const socialDescription =
-  '設計不像其他學科，需要垂直鑽研；而是要水平發展，接觸各種不同的領域';
+const socialDescription = description;
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [

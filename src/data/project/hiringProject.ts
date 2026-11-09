@@ -14,6 +14,7 @@ export const hiringCover = {
 export const hiringHero = {
   tags: hiringProject.detailTags ?? hiringProject.tags,
   title: hiringProject.detailTitle ?? hiringProject.title,
+  year: '2025',
   showAction: true,
   actionLabel: '前往網站',
   actionHref: 'https://pse.is/9mgr32',
@@ -118,7 +119,7 @@ export const hiringContentSections: ProjectContentSectionData[] = [
   {
     title: '正職：從多元招募計畫，找到適合自己的職涯入口',
     introduction: [
-      '正職招募以 MA、ITM 等核心計畫作為分群，再於計畫內呈現不同職能與發展方向。透過資訊層級化，求職者無須一次閱讀所有招募內容，即可快速切換計畫、相互比較。',
+      '正職招募以 MA、ITMT 等核心計畫作為分群，再於計畫內呈現不同職能與發展方向。透過資訊層級化，求職者無須一次閱讀所有招募內容，即可快速切換計畫、相互比較。',
     ],
     image: {
       src: '/Image/Project/hiring-web/pc-4.webp',

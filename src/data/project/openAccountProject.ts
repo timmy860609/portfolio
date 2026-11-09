@@ -120,7 +120,7 @@ export const openAccountContentSections: ProjectContentSectionData[] = [
   {
     title: '資料不漏填，申請進度清楚掌握',
     introduction: [
-      '基本資料依個人資訊的類型進行拆頁設計，降低長表單帶來的閱讀負擔。於送出前統一呈現所填寫的內容，並保留分頁修改入口，讓用戶能快速檢查資料與修改。',
+      '基本資料依個人資訊的類型進行拆頁設計，降低長表單帶來的閱讀負擔。於送出前統一呈現所填寫的內容，並保留分頁修改入口，讓用戶能快速檢查並修改資料。',
     ],
     image: {
       src: `${assetPath}/pc-5.webp`,
