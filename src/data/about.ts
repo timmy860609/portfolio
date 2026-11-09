@@ -32,11 +32,11 @@ export const aboutHero = {
     '專注數位產品體驗與視覺落地，從需求規劃、UI/UX 設計到前端實作，讓設計不只停留在畫面。',
   stats: [
     {
-      value: '40+',
+      value: '20+',
       label: '專案經驗',
     },
     {
-      value: '5+ yrs',
+      value: '5 yrs',
       label: '設計經驗',
     },
     {
@@ -49,7 +49,7 @@ export const aboutHero = {
 export const aboutExperienceSection = {
   title: '工作經驗',
   description:
-    '從接案累積多元專案經驗，歷經 IoT 產品規劃後進入金融產業，持續深化 UI/UX、視覺設計與前端落地能力。',
+    '累積多元專案經驗，持續深化產品規劃與程式開發能力。',
   experiences: [
     {
       company: '方閣設計',
