@@ -203,8 +203,10 @@ const imageAttributes = computed(() => {
   width: 0;
 }
 
-.project-media__video-cover:hover .project-media__play-button {
-  transform: translate(-50%, -50%) scale(1.02);
+@media (hover: hover) and (pointer: fine) {
+  .project-media__video-cover:hover .project-media__play-button {
+    transform: translate(-50%, -50%) scale(1.02);
+  }
 }
 
 .project-media__video-cover:focus-visible {

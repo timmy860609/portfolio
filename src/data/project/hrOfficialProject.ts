@@ -13,7 +13,7 @@ export const hrOfficialCover = {
 };
 
 export const hrOfficialHero = {
-  tags: hrOfficialProject.detailTags ?? hrOfficialProject.tags,
+  tags: hrOfficialProject.tags,
   title: hrOfficialProject.detailTitle ?? hrOfficialProject.title,
   year: '2025',
   showAction: true,

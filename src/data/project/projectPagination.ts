@@ -38,7 +38,7 @@ function createPaginationItem(slug: PublishedProjectSlug): ProjectPaginationItem
 
   return {
     title: project.title,
-    tags: project.detailTags ?? project.tags,
+    tags: project.tags,
     href: `/projects/${slug}`,
     image: paginationImages[slug],
     imageAlt: project.title,

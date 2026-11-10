@@ -3,7 +3,7 @@ import { projectsBySlug } from '../projects';
 const mobileBankProject = projectsBySlug['mobile-bank-2'];
 
 export const mobileBankHero = {
-  tags: mobileBankProject.detailTags ?? mobileBankProject.tags,
+  tags: mobileBankProject.tags,
   title: mobileBankProject.detailTitle ?? mobileBankProject.title,
   showAction: true,
   actionLabel: '前往網頁',

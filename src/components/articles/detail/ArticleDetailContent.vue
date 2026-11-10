@@ -105,9 +105,11 @@ defineProps<ArticleDetailContentData>();
   text-decoration: none;
 }
 
-.article-detail-content__external-link a:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+@media (hover: hover) and (pointer: fine) {
+  .article-detail-content__external-link a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 }
 
 @media (max-width: 767px) {

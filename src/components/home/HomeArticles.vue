@@ -125,8 +125,10 @@ import { withBase } from '../../utils/basePath';
   border-bottom: 1px solid #737373;
 }
 
-.home-articles__list a:hover {
-  color: #fff;
+@media (hover: hover) and (pointer: fine) {
+  .home-articles__list a:hover {
+    color: #fff;
+  }
 }
 
 .home-articles__list a:focus-visible {

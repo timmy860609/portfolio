@@ -102,9 +102,11 @@ const imageSizes = '(max-width: 767px) calc(100vw - 32px), (max-width: 1600px) c
   filter: grayscale(0);
 }
 
-.project-card a:hover img {
-  filter: grayscale(0);
-  transform: scale(1.025);
+@media (hover: hover) and (pointer: fine) {
+  .project-card a:hover img {
+    filter: grayscale(0);
+    transform: scale(1.025);
+  }
 }
 
 .project-card a:focus-visible {

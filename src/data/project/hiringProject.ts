@@ -12,7 +12,7 @@ export const hiringCover = {
 };
 
 export const hiringHero = {
-  tags: hiringProject.detailTags ?? hiringProject.tags,
+  tags: hiringProject.tags,
   title: hiringProject.detailTitle ?? hiringProject.title,
   year: '2025',
   showAction: true,

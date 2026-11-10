@@ -13,7 +13,7 @@ export const jobPlatformCover = {
 };
 
 export const jobPlatformHero = {
-  tags: jobPlatformProject.detailTags ?? jobPlatformProject.tags,
+  tags: jobPlatformProject.tags,
   title: jobPlatformProject.detailTitle ?? jobPlatformProject.title,
   year: '2025',
   showAction: false,

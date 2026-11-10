@@ -192,17 +192,19 @@ import { withBase } from '../../utils/basePath';
   width: 8px;
 }
 
-.hero-kv__scroll-cue:hover {
-  color: #000;
-}
+@media (hover: hover) and (pointer: fine) {
+  .hero-kv__scroll-cue:hover {
+    color: #000;
+  }
 
-.hero-kv__scroll-cue:hover .hero-kv__scroll-track {
-  background: linear-gradient(
-    to bottom,
-    rgb(31 31 31 / 92%) 0%,
-    rgb(31 31 31 / 92%) 70%,
-    rgb(31 31 31 / 0%) 100%
-  );
+  .hero-kv__scroll-cue:hover .hero-kv__scroll-track {
+    background: linear-gradient(
+      to bottom,
+      rgb(31 31 31 / 92%) 0%,
+      rgb(31 31 31 / 92%) 70%,
+      rgb(31 31 31 / 0%) 100%
+    );
+  }
 }
 
 .hero-kv__scroll-cue:focus-visible {

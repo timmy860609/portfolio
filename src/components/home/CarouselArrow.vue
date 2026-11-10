@@ -47,9 +47,11 @@ defineEmits<{
   width: auto;
 }
 
-.carousel-arrow:hover {
-  background: rgb(255 255 255 / 14%);
-  transform: scale(1.04);
+@media (hover: hover) and (pointer: fine) {
+  .carousel-arrow:hover {
+    background: rgb(255 255 255 / 14%);
+    transform: scale(1.04);
+  }
 }
 
 .carousel-arrow:focus-visible {

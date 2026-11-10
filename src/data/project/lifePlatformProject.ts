@@ -13,7 +13,7 @@ export const lifePlatformCover = {
 };
 
 export const lifePlatformHero = {
-  tags: lifePlatformProject.detailTags ?? lifePlatformProject.tags,
+  tags: lifePlatformProject.tags,
   title: lifePlatformProject.detailTitle ?? lifePlatformProject.title,
   year: '2024',
   showAction: false,

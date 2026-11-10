@@ -13,7 +13,7 @@ export const openAccountCover = {
 };
 
 export const openAccountHero = {
-  tags: openAccountProject.detailTags ?? openAccountProject.tags,
+  tags: openAccountProject.tags,
   title: openAccountProject.detailTitle ?? openAccountProject.title,
   year: '2024',
   showAction: true,

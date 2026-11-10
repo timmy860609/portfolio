@@ -319,9 +319,11 @@ const selectCategory = async (category: ProjectCategory, event: MouseEvent) => {
     transform 160ms ease;
 }
 
-.projects-gallery__tabs button:hover {
-  background: #cfcfcf;
-  color: #323232;
+@media (hover: hover) and (pointer: fine) {
+  .projects-gallery__tabs button:hover {
+    background: #cfcfcf;
+    color: #323232;
+  }
 }
 
 .projects-gallery__tabs button.active {

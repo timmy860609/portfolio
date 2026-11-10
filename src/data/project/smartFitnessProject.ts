@@ -9,7 +9,7 @@ export const smartFitnessAssetPath = '/Image/Project/smart-fitness-detail';
 const smartFitnessProject = projectsBySlug['smart-fitness'];
 
 export const smartFitnessHero = {
-  tags: smartFitnessProject.detailTags ?? smartFitnessProject.tags,
+  tags: smartFitnessProject.tags,
   title: smartFitnessProject.detailTitle ?? smartFitnessProject.title,
   year: '2022',
   showAction: false,

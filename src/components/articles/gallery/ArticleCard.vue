@@ -86,7 +86,7 @@ withDefaults(defineProps<ArticleItem & {
   outline-offset: 4px;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .article-card :deep(.article-thumbnail > img) {
     transition: transform 400ms cubic-bezier(.22, 1, .36, 1);
   }

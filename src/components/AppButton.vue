@@ -122,25 +122,27 @@ withDefaults(
   color: #fff;
 }
 
-.app-button:hover {
-  transform: translateY(-2px);
-}
+@media (hover: hover) and (pointer: fine) {
+  .app-button:hover {
+    transform: translateY(-2px);
+  }
 
-.app-button--outline:hover {
-  background: #323232;
-  color: #fff;
-  transform: none;
-}
+  .app-button--outline:hover {
+    background: #323232;
+    color: #fff;
+    transform: none;
+  }
 
-.app-button--primary:hover {
-  background: #00c4e7;
-  transform: none;
-}
+  .app-button--primary:hover {
+    background: #00c4e7;
+    transform: none;
+  }
 
-.app-button--light-outline:hover {
-  background: #fff;
-  color: #323232;
-  transform: none;
+  .app-button--light-outline:hover {
+    background: #fff;
+    color: #323232;
+    transform: none;
+  }
 }
 
 .app-button:focus-visible {

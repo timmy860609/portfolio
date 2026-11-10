@@ -504,8 +504,10 @@ nav.navigation--no-transition::before {
   z-index: 1;
 }
 
-.nav-link:hover {
-  color: #323232;
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover {
+    color: #323232;
+  }
 }
 
 .nav-link--active {

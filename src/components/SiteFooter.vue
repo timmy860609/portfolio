@@ -131,8 +131,10 @@ import { mainNavigation } from '../data/site';
     transform 180ms ease;
 }
 
-.site-footer nav a:hover {
-  opacity: 0.7;
+@media (hover: hover) and (pointer: fine) {
+  .site-footer nav a:hover {
+    opacity: 0.7;
+  }
 }
 
 .site-footer__meta {

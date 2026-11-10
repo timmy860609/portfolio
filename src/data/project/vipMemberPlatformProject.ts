@@ -13,8 +13,7 @@ export const vipMemberPlatformCover = {
 };
 
 export const vipMemberPlatformHero = {
-  tags:
-    vipMemberPlatformProject.detailTags ?? vipMemberPlatformProject.tags,
+  tags: vipMemberPlatformProject.tags,
   title:
     vipMemberPlatformProject.detailTitle ?? vipMemberPlatformProject.title,
   year: '2025',

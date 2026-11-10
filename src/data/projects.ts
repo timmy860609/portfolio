@@ -18,7 +18,6 @@ export type Project = {
   imageSmall?: string;
   description: string;
   detailTitle?: string;
-  detailTags?: string[];
   showInGallery?: boolean;
 };
 
@@ -32,7 +31,6 @@ export const projects: Project[] = [
     imageSmall: '/Image/Optimized/project-covers/smart-fitness-960.webp',
     description: '以智慧設備串聯健身服務，整合場館預約、訓練內容與會員體驗，打造直覺便利的運動平台。',
     detailTitle: 'OSPACE｜智慧健身膠囊 App',
-    detailTags: ['UI/UX', '視覺設計'],
   },
   {
     slug: 'mobile-bank-2',
@@ -43,18 +41,16 @@ export const projects: Project[] = [
     imageSmall: '/Image/Optimized/project-covers/mobile-bank-960.webp',
     description: '重新梳理行動金融服務與資訊架構，讓日常查詢、轉帳與理財操作更加清楚流暢。',
     detailTitle: '行動銀行 2.0｜為你多想一點',
-    detailTags: ['UI/UX', '視覺設計'],
   },
   {
     slug: 'open-account',
     title: '線上開戶平台',
     category: '數位金融',
-    tags: ['UI/UX', '視覺設計'],
+    tags: ['UI/UX'],
     image: '/Image/Project/project-cover/open-account.webp',
     description:
       '重新梳理線上開戶、預約開戶與帳戶升級流程，以清楚分流及一致的驗證架構降低金融申請負擔。',
     detailTitle: '線上開戶平台｜在家開戶免煩惱',
-    detailTags: ['UI/UX', '視覺設計'],
   },
   {
     slug: 'vip-member-platform',
@@ -66,7 +62,6 @@ export const projects: Project[] = [
     description:
       '新規劃會員服務流程與資訊架構，提供更直覺的權益查詢、活動管理與專屬服務體驗。',
     detailTitle: 'VIP 會員平台｜質感生活，為你所選',
-    detailTags: ['UI/UX', '視覺設計'],
   },
   {
     slug: 'hiring-2026',
@@ -87,7 +82,6 @@ export const projects: Project[] = [
     description:
       '重新整理職缺資訊、履歷建立與投遞流程，建立可跨裝置使用且能持續擴充的集團履歷平台。',
     detailTitle: '金控履歷平台｜求職一站搞定',
-    detailTags: ['UI/UX', '前端開發'],
   },
   {
     slug: 'hr-official',
@@ -98,7 +92,6 @@ export const projects: Project[] = [
     imageSmall: '/Image/Optimized/project-covers/hr-official-960.webp',
     description: '提升集團人才招募體驗，整合多項招募計畫，建立一致的品牌形象與資訊架構。',
     detailTitle: '人力資源網｜加入我們，一起強大',
-    detailTags: ['UI/UX', '前端開發'],
   },
   {
     slug: 'vip-platform',
@@ -114,7 +107,7 @@ export const projects: Project[] = [
     slug: 'iot-backend',
     title: '智慧閘道器後台系統',
     category: 'IoT 應用',
-    tags: ['UI/UX', '視覺設計'],
+    tags: ['UI/UX'],
     image: '/Image/Project/project-cover/iot-backend.webp',
     imageSmall: '/Image/Optimized/project-covers/iot-backend-960.webp',
     description: '建立集中化管理平台，整合設備資訊、系統設定與監控功能，提升設備維護效率。',

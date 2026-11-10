@@ -87,8 +87,10 @@ const toAvif = (source?: string) => source?.replace(/\.webp$/i, '.avif');
   width: 100%;
 }
 
-.overview-card:hover .overview-card__cover img {
-  transform: scale(1.025);
+@media (hover: hover) and (pointer: fine) {
+  .overview-card:hover .overview-card__cover img {
+    transform: scale(1.025);
+  }
 }
 
 .overview-card:focus-visible {

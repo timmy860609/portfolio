@@ -61,7 +61,7 @@ export const featuredProjects: FeaturedProjectContent[] = [
   },
   {
     title: '智慧閘道器後台系統',
-    tags: ['UI/UX', '視覺設計'],
+    tags: ['UI/UX'],
     imageKey: 'iot-backend',
     href: '/projects/iot-backend',
   },
